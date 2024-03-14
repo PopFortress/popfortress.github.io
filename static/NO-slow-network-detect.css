@@ -1,0 +1,17 @@
+
+/* 在 font-face 规则中添加下列属性 */
+/* @font-face {
+
+    为字体规则添加属性font-display
+    font-display: block;
+    默认值为： auto，为字体提供一个短暂的阻塞周期和无限的交换周期。
+  	font-display支持auto | block | swap | fallback | optional五种值
+    MDN Reference: https://developer.mozilla.org/zh-CN/docs/Web/CSS/@font-face/font-display
+    
+} */
+
+* {
+  font-display: block;
+  -webkit-font-display: block;
+  -moz-font-display: block;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS属性: aspect-ratio</title>
+    <style>
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        p {
+            font-size: 24px;
+        }
+
+        div#img {
+            width: 60%;
+            overflow: hidden;
+            background-image: url(../static/mc_snowing.png);
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            aspect-ratio: 16 / 9; /* 重要属性 */
+        }
+    </style>
+</head>
+
+<body>
+
+    <p>尝试改变视口尺寸，下方图片的宽高比将始终是16:9</p>
+    <div id="img"></div>
+
+</body>
+
+</html>

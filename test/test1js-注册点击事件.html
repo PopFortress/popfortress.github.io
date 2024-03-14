@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS初体验</title>
+</head>
+<body>
+    <p>显示玩家名字：default<p>
+    <script>
+        const para = document.querySelector("p");
+
+        para.addEventListener("click", updateName);
+
+        function updateName() {
+            const name = prompt("输入新名字");
+            if (name == null) {
+                para.textContent = `取消更新名字！`
+                console.log(`取消更新名字 ${name}`)
+            }else{
+                para.textContent = `显示玩家名字: ${name}`;
+                console.log(`更新了名字！${name}`)
+            }
+        }
+    </script>
+</body>
+</html>
