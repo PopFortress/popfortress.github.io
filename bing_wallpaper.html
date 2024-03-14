@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>必应随机壁纸</title>
+    <style>
+        body{
+            background-image: url("https://api.vvhan.com/api/bing?rand=sj");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        
+        a {
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            background-color: inherit;
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 5px;
+            max-width: calc(100% - 30px);
+            padding: 10px 15px;
+            position: fixed;
+            text-decoration: none;
+            color: white;
+            margin: 20px;
+            font-size: 10px;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://bing.shangzhenyang.com/" target="_blank">获取必应原图</a>
+    
+    <script>
+        fetch("https://api.vvhan.com/api/bing?rand=sj")
+            .then(response => {
+                return response;
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(() => {
+                alert('API 接口目前无法使用，请稍后再试。\n如有不便，敬请谅解');
+                history.back();
+            });
+    </script>
+</body>
+</html>

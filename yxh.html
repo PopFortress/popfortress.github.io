@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index of 营销号文案生成器</title>
+    <script src="static/yxh_script.js" defer></script>
+    <style>
+        h1,h2{
+            margin: 0;
+            user-select: none;
+        }
+
+        p.content {
+            background-color: whitesmoke;
+            padding: 5px;
+            user-select: text;
+        }
+
+        input {
+            font-size: 16px;
+            user-select: none;
+        }
+
+        p {
+            user-select: none;
+        }
+
+        input[type='button'] {
+            font-size: 20px;
+            user-select: none;
+            display: block;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>营销号文案生成器</h1>
+    <h2>Sand Sculpture Generator</h2>
+    <hr>
+    <p>名字：</p>
+    <input type="text" class="name">
+    <p>事件：</p>
+    <input type="text" class="event">
+    <p>原因：</p>
+    <input type="text" class="reason"><input type="button" class="generate" onclick="generate()" value="生成">
+    <p class="content">这里暂时是空的... 请先生成点内容吧！</p>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office 办公套件网页版</title>
+    <link rel="stylesheet" href="font-awesome/stylesheet/font-awesome.css">
+    <style>
+        *{
+            cursor: url(static/cursor.png), auto;
+        }
+        li::marker {
+            content: '→';
+            color: #1E90FF;
+        }
+        a {
+            margin-left: 10px;
+            color: #1E90FF;
+        }
+        ul {
+            font-size: 14pt;
+        }
+        i {
+            vertical-align: top;
+        }
+        a:hover, a:focus-visible{
+            color: royalblue;
+        }
+        a:active {
+            color: darkblue;
+            text-decoration: none;
+        }
+        :focus{
+            outline: .6px dashed #333;
+        }
+        li::marker {
+            content: '→';
+            color: #1E90FF;
+        }
+        a {
+            margin-left: 10px;
+        }
+        ul {
+            font-size: 14pt;
+        }
+        #navigate, h2 {
+            display: inline;
+        }
+        #navigate {
+            /* all: unset; */
+            margin: 15px;
+            font-size: 1.5em;
+            cursor: pointer;
+            vertical-align: initial;
+        }
+    </style>
+</head>
+<body>
+    <i id="navigate" class="fa fa-arrow-left no-external" onclick="history.go(-1)"></i>
+    <h2>选择一个选项</h2>
+    <ul>
+        <li>
+            <a href="https://www.office.com">
+                Microsoft 365/Office
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.microsoft365.com/">
+                Microsoft 365
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.onlyoffice.com/zh/">
+                ONLYOFFICE
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.microsoft365.com/launch/word">
+                Microsoft Word 文档
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.microsoft365.com/launch/powerpoint">
+                Microsoft PowerPoint 演示文稿
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.microsoft365.com/launch/excel">
+                Microsoft Excel 工作簿
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.onenote.com/">
+                OneNote
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://forms.office.com/">
+                Microsoft Forms 表单&测验
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://to-do.microsoft.com/">
+                Microsoft To Do 微软待办
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://designer.microsoft.com/">
+                Microsoft Designer 设计器*
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://lists.live.com/">
+                Microsoft Lists 列表
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://sway.office.com/">
+                Microsoft Sway 页面
+                <i></i>
+            </a>
+        </li>
+    </ul>
+
+    <span style="font-size: 12px;">* 环大陆供应</span>
+
+    <script>
+        const i = document.querySelectorAll('i');
+        i.forEach(element => {
+            element.className = 'fa fa-external-link';
+            element.style.fontSize = '12px';
+        });
+        navigate.className = "fa fa-arrow-left";
+        navigate.style.fontSize = '1.5em';
+    </script>
+    <script>
+        const anchor = document.querySelectorAll('a');
+        anchor.forEach(element => {
+            element.target = '_blank';
+        });
+    </script>
+</body>
+</html>

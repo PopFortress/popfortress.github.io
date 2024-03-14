@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>必应每日壁纸</title>
+    <style>
+        body {
+            background-image: url("https://bing.shangzhenyang.com/api/1080p");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        a {
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            background-color: inherit;
+            border: 1px solid rgba(255, 255, 255, .2);
+            border-radius: 5px;
+            max-width: calc(100% - 30px);
+            padding: 10px 15px;
+            position: fixed;
+            text-decoration: none;
+            color: white;
+            margin: 20px;
+            font-size: 10px;
+            user-select: none;
+        }
+
+        footer {
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            background-color: inherit;
+            border: 1px solid rgba(255, 255, 255, .2);
+            border-radius: 5px;
+            max-width: calc(100% - 30px);
+            padding: 10px 15px;
+            position: fixed;
+            text-decoration: none;
+            color: white;
+            margin: 20px;
+            font-size: 14px;
+            
+            bottom: 15px;
+            cursor: pointer;
+            right: 15px;
+            right: calc(env(safe-area-inset-right) + 15px);
+            text-align: right;
+            text-decoration: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none
+        }
+
+        #title {
+            font-weight: bold;
+            font-size: 20px;
+            padding: 5px 0 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="https://bing.shangzhenyang.com/" target="_blank">获取必应原图</a>
+    <footer id="footer" class="text-box">
+        <div id="title"></div>
+        <div id="copyright"></div>
+        <div>此图像的使用仅限于壁纸。</div>
+        <div>Bing 是微软的商标。 该网站不隶属于 Microsoft。</div>
+    </footer>
+
+    <script>
+        (function () {
+            const t = document.createElement("link").relList;
+            if (t && t.supports && t.supports("modulepreload"))
+                return;
+            for (const e of document.querySelectorAll('link[rel="modulepreload"]'))
+                i(e);
+            new MutationObserver(e => {
+                for (const r of e)
+                    if (r.type === "childList")
+                        for (const s of r.addedNodes)
+                            s.tagName === "LINK" && s.rel === "modulepreload" && i(s)
+            }
+            ).observe(document, {
+                childList: !0,
+                subtree: !0
+            });
+            function n(e) {
+                const r = {};
+                return e.integrity && (r.integrity = e.integrity),
+                    e.referrerPolicy && (r.referrerPolicy = e.referrerPolicy),
+                    e.crossOrigin === "use-credentials" ? r.credentials = "include" : e.crossOrigin === "anonymous" ? r.credentials = "omit" : r.credentials = "same-origin",
+                    r
+            }
+            function i(e) {
+                if (e.ep)
+                    return;
+                e.ep = !0;
+                const r = n(e);
+                fetch(e.href, r)
+            }
+        }
+        )();
+        const d = "https://bing.shangzhenyang.com/api";
+        function l() {
+            window.open(d + "/1080p")
+        }
+        window.addEventListener("keydown", o => {
+            (o.ctrlKey || o.metaKey) && o.key === "s" && (o.preventDefault(),
+                l())
+        }
+        );
+        window.addEventListener("load", async () => {
+            const o = document.getElementById("copyright");
+            const title = document.getElementById("title");
+            if (o)
+                try {
+                    const t = await fetch(d + "/json");
+                    if (!t.ok)
+                        throw new Error(t.status.toString());
+                    const n = await t.json();
+                    if (n) {
+                        const i = n.images[0];
+                        title.textContent = i.title
+                        o.textContent = i.copyright
+                    }
+                } catch (t) {
+                    console.error(t),
+                        t instanceof Error && (o.textContent = `Error: ${t.message}`)
+                }
+        }
+        );
+        var c;
+        (c = document.getElementById("bg-img")) == null || c.addEventListener("click", function () {
+            this.classList.toggle("blur")
+        });
+        var a;
+        (a = document.getElementById("footer")) == null || a.addEventListener("click", l);
+
+    </script>
+
+</body>
+
+</html>
