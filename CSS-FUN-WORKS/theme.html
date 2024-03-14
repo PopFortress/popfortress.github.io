@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>主题切换</title>
+    <style>
+        body {
+            --bg-color: whitesmoke;
+            background-color: var(--bg-color);
+            transition: all 0.6s ease-in-out;
+            text-align: center;
+        }
+        body.dark{
+            --bg-color: #000013;
+        }
+        #switch {
+            width: 80px;
+            margin: 40vh auto 0;
+        }
+        .switch-input {
+            display: none;
+        }
+        .switch-label {
+            display: block;
+            width: 80px;
+            height: 40px;
+            border: 2px solid #ccc;
+            border-radius: 20px;
+            padding: 2px;
+            box-sizing: border-box;
+        }
+        .switch-label::after {
+            display: block;
+            content: '';
+            width: 50%;
+            height: 100%;
+            position: relative;
+            left: 0;
+            background-color: gray;
+            border-radius: 30px;
+            transition: all 0.26s ease-in;
+        }
+        .switch-input:checked + .switch-label::after{
+            left: 50%;
+            background-color: firebrick;
+        }
+        i{
+            color: gold;
+            margin: 15px;
+            transition: all 0.3 ease-in;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="switch">
+        <input type="checkbox" class="switch-input" id="switch-input">
+        <label for="switch-input" class="switch-label" onclick="switchIco()"></label>
+    </div>
+
+    <i class="fas fa-sun" />
+
+    <script>
+        document.querySelector('#switch-input').addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+        });
+
+        const i = document.querySelector('i');
+        function switchIco(){
+            if (i.className == 'fas fa-sun'){
+                i.className = 'fas fa-moon';
+                i.style.color = 'white'
+            } else {
+                i.className = 'fas fa-sun';
+                i.style.color = 'gold'
+            };
+        };
+    </script>
+</body>
+</html>

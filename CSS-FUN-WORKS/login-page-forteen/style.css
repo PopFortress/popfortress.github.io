@@ -1,0 +1,206 @@
+@charset "UTF-8";
+@font-face {
+  font-family: Butler_Light;
+  font-weight: 700;
+  src: url(./asset/font/Butler_Light.otf) format("truetype");
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: Butler_Black;
+  font-weight: 700;
+  src: url(./asset/font/Butler_Black.otf) format("truetype");
+  text-rendering: optimizeLegibility;
+}
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Butler_Light;
+}
+
+body {
+  background-image: url(./asset/bg.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  color: #fff;
+}
+
+.content {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
+.content .introduce {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  position: relative;
+}
+.content .introduce .introduce-content .tips {
+  margin: 20px 0;
+  font-size: 25px;
+  position: absolute;
+  left: 20%;
+  top: 40%;
+  transform: translateY(-50%);
+  font-family: Butler_Black;
+}
+.content .form-wrapper {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20% 10%;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.content .form-wrapper .login-form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.content .form-wrapper .login-form h1 {
+  font-size: 55px;
+  margin-bottom: 20px;
+}
+.content .form-wrapper .login-form .login-tips {
+  font-size: 20px;
+}
+.content .form-wrapper .login-form .other-login {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  border: 1px solid #fff;
+  text-align: center;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin: 50px 0 10px 0;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.content .form-wrapper .login-form .other-login:hover {
+  border: 1px solid #9faff8;
+}
+.content .form-wrapper .login-form .other-login img {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+}
+.content .form-wrapper .login-form .other-login span {
+  vertical-align: middle;
+}
+.content .form-wrapper .login-form .divider {
+  width: 100%;
+  margin: 20px 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.content .form-wrapper .login-form .divider .line {
+  display: inline-block;
+  flex: 1;
+  height: 1px;
+  background-color: #fff;
+}
+.content .form-wrapper .login-form .divider .divider-text {
+  vertical-align: middle;
+  margin: 0 20px;
+  display: inline-block;
+  color: #fff;
+  white-space: normal;
+}
+.content .form-wrapper .login-form .form .input-wrapper {
+  width: 100%;
+  height: 60px;
+  color: #fff;
+  margin: 20px 0 50px 0;
+}
+.content .form-wrapper .login-form .form .input-wrapper span {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+.content .form-wrapper .login-form .form .input-wrapper .ipt {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  padding: 10px 0 10px 30px;
+  box-sizing: border-box;
+  background-color: transparent;
+  outline: none;
+  color: #fff;
+  font-size: 20px;
+  transition: 0.2s;
+}
+.content .form-wrapper .login-form .form .input-wrapper .ipt:focus {
+  border: 1px solid #9faff8;
+}
+.content .form-wrapper .login-form .form .input-wrapper .ipt::-webkit-input-placeholder {
+  /* 使用webkit内核的浏览器 */
+  color: #fff;
+}
+.content .form-wrapper .login-form .form .input-wrapper .ipt:-moz-placeholder {
+  /* Firefox版本4-18 */
+  color: #fff;
+}
+.content .form-wrapper .login-form .form .input-wrapper .ipt::-moz-placeholder {
+  /* Firefox版本19+ */
+  color: #fff;
+}
+.content .form-wrapper .login-form .form .input-wrapper .ipt:-ms-input-placeholder {
+  /* IE浏览器 */
+  color: #fff;
+}
+.content .form-wrapper .login-form .form .other-setting {
+  display: flex;
+  justify-content: space-between;
+}
+.content .form-wrapper .login-form .form .other-setting .rem-pwd {
+  cursor: pointer;
+}
+.content .form-wrapper .login-form .form .other-setting .forget-pwd {
+  cursor: pointer;
+}
+.content .form-wrapper .login-form .form .btn {
+  width: 100%;
+  height: 50px;
+  border: 0;
+  background-color: #fff;
+  border-radius: 5px;
+  color: #000;
+  text-align: center;
+  margin: 50px 0;
+  font-size: 20px;
+  cursor: pointer;
+}
+.content .form-wrapper .login-form .register {
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .content .introduce {
+    display: none;
+  }
+  .content .form-wrapper {
+    width: 100%;
+  }
+  .content .form-wrapper .login-form .divider {
+    margin: 10px 0;
+  }
+  .content .form-wrapper .login-form .other-login {
+    margin: 10px 0;
+  }
+  .content .form-wrapper .login-form .form .btn {
+    margin: 20px 0;
+  }
+}/*# sourceMappingURL=style.css.map */

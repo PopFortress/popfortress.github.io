@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文字颜色渐变效果</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #050108;
+        }
+        
+        .text {
+            background: #833ab4;    /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);   /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            
+            /* 重点是下面这几行属性 */
+            -moz-background-clip: text;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+
+            padding: 30px;
+            color: #fff;
+            font-size: 60px;
+            font-weight: bold;
+            -webkit-text-stroke: .6px white;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100svh;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <p class="text">你好，世界<br>Hello, World!</p>
+    </div>
+
+</body>
+
+</html>
