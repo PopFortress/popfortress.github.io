@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文字聚光灯效果</title>
+    <style>
+        .spotlight18 {
+            color: #e7e7e7;
+            font-size: 60px;
+            font-weight: 900;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .spotlight18:before {
+            width: inherit;
+            height: inherit;
+            content: attr(data-cont);
+            color: transparent;
+            background-image: linear-gradient(90deg, #4158D0 0%, #C850C0 30%, #FFCC70 66%, #56e28d 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: spotlight18 8s linear infinite;
+        }
+
+        @keyframes spotlight18 {
+            0% {
+                clip-path: ellipse(32px 32px at 0 50%);
+            }
+
+            50% {
+                clip-path: ellipse(32px 32px at 100% 50%);
+            }
+
+            100% {
+                clip-path: ellipse(32px 32px at 0 50%);
+            }
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            justify-content: center;
+            background: #242328;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="spotlight18" data-cont="spotlight">spotlight</div>
+
+</body>
+
+</html>

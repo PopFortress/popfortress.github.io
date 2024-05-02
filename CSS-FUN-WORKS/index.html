@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS-FUN-WORKS 索引页</title>
+    <style>
+        body {
+            background: url(login-form-main/image.webp) no-repeat;
+            min-height: 100vh;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        * {
+            margin: 0;
+            color: white;
+            font-family: '微软雅黑';
+            user-select: none;
+        }
+
+        .loading17 {
+            height: 48px;
+            font-size: 62pt;
+            font-weight: 700;
+            letter-spacing: 24px;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 960px;
+        }
+
+        .loading17 .load-span17 {
+            animation: text-load17 3.1s linear infinite;
+        }
+
+        .loading17 .load-span17:nth-of-type(1) {
+            color: #3185fa;
+            animation-delay: 0.4s;
+        }
+
+        .loading17 .load-span17:nth-of-type(2) {
+            color: #fc3621;
+            animation-delay: 0.8s;
+        }
+
+        .loading17 .load-span17:nth-of-type(3) {
+            color: #fcbb02;
+            animation-delay: 0.12s;
+        }
+
+        .loading17 .load-span17:nth-of-type(4) {
+            color: #3285ff;
+            animation-delay: 0.8s;
+        }
+
+        .loading17 .load-span17:nth-of-type(5) {
+            color: #2ab148;
+            animation-delay: 0.4s;
+        }
+
+        .loading17 .load-span17:nth-of-type(6) {
+            color: #fb3320;
+            animation-delay: 0.62s;
+        }
+        
+        .loading17 .load-span17:nth-of-type(7) {
+            color: #3185fa;
+            animation-delay: 0.39;
+        }
+
+        .loading17 .load-span17:nth-of-type(8) {
+            color: #fc3621;
+            animation-delay: 0.3s;
+        }
+
+        .loading17 .load-span17:nth-of-type(9) {
+            color: #fcbb02;
+            animation-delay: 0.68;
+        }
+
+        .loading17 .load-span17:nth-of-type(10) {
+            color: #3185fa;
+            animation-delay: 0.54s;
+        }
+
+        .loading17 .load-span17:nth-of-type(11) {
+            color: #2ab148;
+            animation-delay: 0.26s;
+        }
+
+        @keyframes text-load17 {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-40px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            /* font-weight: normal; */
+            margin: 10px;
+            -webkit-text-stroke: .6px rgb(33,53,56);
+            letter-spacing: 2px;
+            margin-top: 40px;
+            text-wrap: balance;
+            text-align: center;
+        }
+        div.start{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 300px 0 500px 0;
+        }
+        div.index{
+            padding: 0 0 260px 0;
+            font-size: 20pt;
+        }
+        li::marker{
+            content: '→';
+        }
+        a{
+            margin-left: 18px;
+            text-decoration: none;
+            opacity: 1;
+            color: white;
+            transition:
+                opacity 0.2s ease-in,
+                color 0.3s linear;
+        }
+        li{
+            margin: 8px 0 8px 0;
+        }
+        a:hover, a:focus-visible{
+            text-decoration: underline;
+            opacity: 0.6;
+            color: #f3ab12;
+        }
+        :focus{
+            outline: .6px dashed #fff;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #353330;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="start">
+        <div class="loading17">
+            <span class="load-span17">C</span>
+            <span class="load-span17">S</span>
+            <span class="load-span17">S</span>
+            <span class="load-span17">F</span>
+            <span class="load-span17">U</span>
+            <span class="load-span17">N</span>
+            <span class="load-span17">W</span>
+            <span class="load-span17">O</span>
+            <span class="load-span17">R</span>
+            <span class="load-span17">K</span>
+            <span class="load-span17">S</span>
+        </div>
+        <h2>这里有一些令人惊叹的艺术作品供您欣赏，向下滑动以开始！</h2>
+    </div>
+
+    <div class="index">
+        <ul>
+            <li>
+                <a href="homepage/">我的个人主页</a>
+            </li>
+            <li>
+                <a href="login-form-main/">毛玻璃登录框界面</a>
+            </li>
+            <li>
+                <a href="text-rain-animation/">云朵字符雨</a>
+            </li>
+            <li>
+                <a href="theme.html">白天黑夜主题切换按钮</a>
+            </li>
+            <li>
+                <a href="css-gradient.html">多彩的渐变</a>
+            </li>
+            <li>
+                <a href="gradient-main-btn.html">炫彩渐变主要按钮</a>
+            </li>
+            <li>
+                <a href="简约输入框.html">简约输入框</a>
+            </li>
+            <li>
+                <a href="login-page-forteen/">毛玻璃登录界面2</a>
+            </li>
+            <li>
+                <a href="login-page-forteen-zh-CN/">毛玻璃登录界面2-中文</a>
+            </li>
+            <li>
+                <a href="spotlight.html">文字聚光灯效果</a>
+            </li>
+            <li><a href="text-color-gradient.html">
+                文字颜色渐变效果</a>
+            </li>
+        </ul>
+    </div>
+
+</body>
+
+</html>
