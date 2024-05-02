@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外部网站收藏仓库</title>
+    <link rel="stylesheet" href="font-awesome/stylesheet/font-awesome.css">
+    <script src="static/jquery-1.8.3.min.js"></script>
+    <style>
+        *{
+            cursor: url(static/cursor.png), auto;
+        }
+        li::marker {
+            content: '→';
+            color: #1E90FF;
+        }
+        a {
+            margin-left: 10px;
+            color: #1E90FF;
+        }
+        ul {
+            font-size: 14pt;
+        }
+        i {
+            vertical-align: top;
+        }
+        a:hover, a:focus-visible{
+            color: royalblue;
+        }
+        a:active {
+            color: darkblue;
+            text-decoration: none;
+        }
+        :focus{
+            outline: .6px dashed #333;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>外部网站收藏仓库</h1>
+    <ul>
+        <li>
+            <a href="https://www.bilibili.com">
+                哔哩哔哩 (゜-゜)つロ 干杯~-bilibili
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://html5test.com/">
+                html5支持度检测 html5test.com
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://ie.icoa.cn">
+                浏览器内核检测 ie.icoa.cn
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="http://info.cern.ch">
+                万维网源头-世界上的第一个网站
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://worldwideweb.cern.ch/">
+                万维网源头2019重建项目-主页
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://像素点.cn">
+                像素点的小窝
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://googlechrome.github.io/devtools-samples/debug-js/get-started">
+                Demo: Get Started Debugging JavaScript with Chrome DevTools
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://superb-alpaca-bd830f.netlify.app/">
+                中小学生听写工具
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://github.com/sunzsh/cn-dictation">
+                中小学生听写工具 Home on GitHub
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://funcss.liujueyi.cn">
+                FUN CSS - 有趣的CSS
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="http://6ttt.top/a">
+                便携小空调
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="http://6ttt.top/b">
+                夏日清凉小风扇
+                <i></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://996.icu/#/zh_CN">
+                996.ICU
+                <i></i>
+            </a>
+        </li>
+    </ul>
+
+    <script>
+        const i = document.querySelectorAll('i');
+        i.forEach(element => {
+            element.className = 'fa fa-external-link';
+            element.style.fontSize = '10pt';
+        });
+    </script>
+    <script>
+        const anchor = document.querySelectorAll('a');
+        anchor.forEach(element => {
+            element.target = '_blank';
+        });
+    </script>
+
+</body>
+</html>

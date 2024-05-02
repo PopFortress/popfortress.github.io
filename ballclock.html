@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彩色小球时钟-BallClock</title>
+    <script type="text/javascript" src="static/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="static/ballclock.js"></script>
+    <link rel="stylesheet" href="font-awesome/stylesheet/font-awesome.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(26, 24, 24);
+            user-select: none;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        canvas {
+            margin-top: 5vh;
+            margin-bottom: 15vh;
+        }
+
+        i {
+            color: white;
+            margin-left: 10px;
+            opacity: 1;
+            padding: 10px;
+            transition: opacity .2s ease-out;
+        }
+
+        i:hover{
+            opacity: 0.3;
+        }
+
+        p.info {
+            display: block;
+            font-size: 12px;
+            color: gray;
+            opacity: 0.4;
+            text-align: center;
+        }
+
+        button {
+            all: unset;
+            color: white;
+            background: transparent;
+            outline: white solid 1px;
+            padding: 0 5px 0 5px;
+        }
+
+        button:active {
+            background-color: #979797;
+        }
+
+        .controls {
+            margin-bottom: 12vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas" width="920" height="400"></canvas>
+    <audio src="media/chicken.mp3" autoplay="autoplay" loop="loop">
+        Your browser dose not support this.
+        您的浏览器不支持html5
+    </audio>
+
+    <div class="controls">
+        <button onclick="switchTheme()">切换主题</button>
+        <i class="fa fa-pause" data-title="暂停/播放音乐" onclick="switchAudioStatus()"></i>
+    </div>
+    <p class="info">由第三方提供列表: Jquery, font-awesome</p>
+
+
+    <script>
+        var icon = document.querySelector('i')
+        var audio = document.querySelector('audio')
+        function switchAudioStatus(){
+            if (icon.className == 'fa fa-play'){
+                audio.play()
+                icon.className = 'fa fa-pause'
+            } else {
+                audio.pause()
+                icon.className = 'fa fa-play'
+            }
+        }
+    </script>
+    <script>
+        var bg = 'rgb(26, 24, 24)';
+        var body = document.querySelector('body');
+        var button = document.querySelector('button');
+        function switchTheme() {
+            if (bg == 'rgb(26, 24, 24)') {
+                // 修改背景颜色为白色
+                bg = 'whitesmoke';
+                body.style.backgroundColor = bg;
+                icon.style.color = 'black'
+                button.style.color = 'black'
+                button.style.outlineColor = 'black'
+            } else {
+                // 修改背景颜色为黑色 bg == 'whitesmoke'
+                bg = 'rgb(26, 24, 24)';
+                body.style.backgroundColor = bg;
+                icon.style.color = 'white'
+                button.style.color = 'white'
+                button.style.outlineColor = 'white'
+            }
+        }
+    </script>
+    <script>
+        const prefers = matchMedia('(prefers-color-scheme: dark)');
+        console.log(prefers.matches);
+
+        const colorMode = prefers.matches ?'dark' :'light';
+        if (colorMode == 'light') {
+            bg = 'rgb(26, 24, 24)';
+        } else {    // colorMode == 'dark'
+            bg = 'whitesmoke';
+        };
+
+        switchTheme();
+
+    </script>
+    
+</body>
+
+</html>
