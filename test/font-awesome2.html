@@ -1,0 +1,108 @@
+<html>
+<head>
+    <title>FA Colors</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <style>
+        .fav-colors {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 50px 20px;
+            border: #ccc solid 1px;
+            align-items: center;
+        }
+        
+        .colorbox{
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin: 5px 8px;
+        }
+
+        .section {
+            color: #1d1d1f;
+            background: #f5f5f7;
+            text-align: center;
+            padding: 20px;
+            margin: 5px 8px;
+        }
+        
+        div.light-bg{
+            color: #1d1d1f;
+        }
+        
+        div.ms{
+            --theme-em-gradient-pink: linear-gradient(90deg,#ed7077,#9a34e7 66%);
+            --theme-em-gradient: linear-gradient(90deg,#7209d4,#2832d4 33%,#00a5b2);
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            font-style: italic;
+            font-size: larger;
+            padding: 20px;
+            display: inline-block;
+            user-select: none;
+        }
+        
+        img {
+            user-select: none;
+        }
+
+        .section-end {
+            margin-right: 80px;
+        }
+
+        div {
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <i class="fa fa-external-link"></i>
+    <img src="../static/external-link.svg" alt="../static/external-link.svg" width="40px" height="40px">
+    <img src="../static/external-link-black.svg" alt="external-link-black" width="40px" height="40px">
+    <img src="../static/external-link-white.svg" alt="external-link-white" style="background: black;" width="40px" height="40px">
+
+
+    <div class="fav-colors">
+        <div class="colorbox">#1E90FF</div>
+        <div class="colorbox">burlywood</div>
+        <div class="colorbox">firebrick</div>
+        <div class="colorbox">#282c34</div>
+
+        <div class="section">谷歌主题色：</div>
+        <div class="colorbox">#3185fa</div>
+        <div class="colorbox">#fc3621</div>
+        <div class="colorbox">#fcbb02</div>
+        <div class="colorbox">#3285ff</div>
+        <div class="colorbox section-end">#2ab148</div>
+
+        <div class="colorbox">rgb(33,53,56)</div>
+        <div class="colorbox">#337ab7</div>
+        <div class="colorbox">rgb(36, 35, 40)</div>
+
+        <div class="section">苹果官网色：</div>
+        <div class="colorbox">#1d1d1f</div>
+        <div class="colorbox section-end light-bg">#f5f5f7</div>
+        
+        <div class="colorbox">#00A9FF</div>
+        <div class="colorbox">#e8685c</div>
+        <div class="colorbox">#f3be50</div>
+        <div class="colorbox">#61c354</div>
+        <div class="colorbox">#C20C0C</div>
+        <div class="colorbox">#D45E98</div>
+        <div class="colorbox">#00A8DF</div>
+    </div>
+    
+    <div class="ms" style="background: var(--theme-em-gradient);">Microsoft</div>
+    <div class="ms" style="background: var(--theme-em-gradient-pink);">Microsoft Pink!</div>
+
+    <script>
+        const colorboxes = document.querySelectorAll('div.colorbox');
+        colorboxes.forEach(element => {
+            element.style.backgroundColor = element.textContent
+        });
+    </script>
+</body>
+</html>

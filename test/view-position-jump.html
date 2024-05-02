@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视口位置跳转</title>
+    <style>
+        html{
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    
+    <p id="top">顶部</p>
+    <a href="#bottom">滚动到底部-改变地址</a>
+    <a href="javascript:window.scrollTo(0, 200);">滚动到底部-不改变地址</a>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <a href="javascript:window.scrollTo(0, 0);">滚动到顶部-不改变地址</a>
+    <a href="#top">滚动到顶部</a>
+    <p id="bottom">底部</p>
+
+</body>
+</html>

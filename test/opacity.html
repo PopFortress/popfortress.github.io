@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用:hover设置元素被光标进入时的opacity</title>
+    <style>
+        div.rawtext {
+            opacity: 1;
+            cursor: default;
+        }
+
+        div.link {
+            color: deepskyblue;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        div:hover, img:hover{
+            opacity: 0.6;
+        }
+
+        .break {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="rawtext">DIV BOX CONTENTS</div>
+    <div class="rawtext">DIV BOX CONTENTS</div>
+    <div class="rawtext">DIV BOX CONTENTS</div>
+    <div class="rawtext">DIV BOX CONTENTS</div>
+    <div class="rawtext">DIV BOX CONTENTS</div>
+    <div class="rawtext">DIV BOX CONTENTS</div>
+    <div class="rawtext">DIV BOX CONTENTS</div>
+
+    <div class="break"></div>
+    <div class="link" onclick="window.open('../index.html', '_self')">Go to Index</div>
+    <div class="break"></div>
+
+    <img src="../static/avater_logo2x.png" alt="avater_logo2x.png">
+
+</body>
+</html>

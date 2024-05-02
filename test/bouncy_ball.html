@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弹力球CSS动画测试 Bouncy_Ball</title>
+    <style>
+
+        div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: skyblue;
+            animation:
+                hor 3.6s infinite linear alternate,
+                ver 2.3s infinite linear alternate;
+        }
+
+        @keyframes hor {
+            to{
+                left: calc(100vw - 150px);
+            }
+        }
+        @keyframes ver {
+            to{
+                top: calc(100vh - 150px);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖拽留言板</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        #main {
+            position: absolute;
+            display: inline-block;
+        }
+        #resize {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            resize: both;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            max-width: calc(100vw - 380px);
+            max-height: calc(100vh - 480px);
+        }
+        #resize::-webkit-resizer {
+            background: transparent;
+            cursor: move;
+        }
+        #content {
+            box-sizing: border-box;
+            width: 400px;
+            height: 500px;
+            background-color: #f3be50;
+            resize: none;
+            padding: 30px;
+            font-size: 24px;
+            position: absolute;
+            right: -380px;
+            bottom: -480px;
+        }
+        #main::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #e70f0f;
+            position: absolute;
+            right: -5px;
+            bottom: -5px;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="main">
+        <div id="resize"></div>
+        <textarea id="content" placeholder="Type anything here..."></textarea>
+    </div>
+
+</body>
+</html>

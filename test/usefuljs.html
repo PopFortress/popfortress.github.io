@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>useful.js</title>
+    <script src="../static/usefulJS.js" defer></script>
+    <script src="../static/jquery-1.8.3.min.js" defer></script>
+    <noscript>你的浏览器不支持 JavaScript 或其已被禁用。</noscript>
+    <style>
+        a {
+            color: #3285ff;
+            word-break: break-all;
+            text-decoration: none;
+            transition: color 0.3s linear;
+        }
+
+        a:hover {
+            color: #337ab7;
+        }
+
+        p#msg {
+            position: fixed;
+            right: 42vw;
+            top: 40px;
+            background-color: rgba(42, 42, 42, 0.8);
+            padding: 8px;
+            color: white;
+            margin: 0;
+            
+            visibility: hidden;
+            opacity: 0;
+            
+            width: 246.8px;
+            font-family: 'HarmonyOS Sans SC', '微软雅黑 Light', Arial, sans-serif;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 20px;
+            transition: opacity 0.4s ease-in;
+            
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+
+            border-radius: 5px;
+            outline: #e8e8e8 solid 3px;
+        }
+
+        button#erase-clipboard {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+
+            background-color: whitesmoke;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    
+    <a href="javascript:copyToClipboard('Hello, World!💖🧡💛💚💙💜🤎')" title="单击复制" class="refcopy">Hello, World!💖🧡💛💚💙💜🤎</a>
+    <button onclick="getPlatformInfo()">获取客户端信息</button>
+    
+    <pre>
+        Hello, World! - 联系此服务器的维护者兼创建者——POPFORTRESS：
+        E-mail: popfortress@163.com
+        gbz2333@163.com **已不再使用
+        uwukanse@outlook.com
+    </pre>
+    <button type="button" onclick="copyConnect()">复制联系方式</button>
+    
+    <a href="mailto:popfortress@163.com">给POPFORT发邮件</a>
+    <a href="tel:+8618316561279">给 +86 0760-18316561279 打电话</a>
+    <a href="sms: +8618316561279?body=I%27m%20interested%20in%20your%20product.%20Please%20contact%20me.">给 +86 18316561279 发送短信</a>
+    <br>
+    <button onclick="getUserConfirm()">确认弹窗</button>
+    <button type="button" onclick="changeTitle()">更改页面标题</button>
+    <button type="button" onclick="window.print()">打印当前页面</button>
+    <br>
+
+
+    <hr>
+    <span>尝试使用 element.dataset</span>
+    <a href="https://blog.csdn.net/miaopasi_poi/article/details/115977245" target="_blank">参考文献</a>
+    <p id="dataset-test">测试元素</p>
+    <button onclick="addDataset()">给元素增加 dataset</button>
+    <button onclick="rmDataset()">删除元素的 dataset</button>
+    <button onclick="readDataset()">读取元素的 dataset</button>
+    <br>
+    <button onclick="addCustomDataset()">添加自定义属性值</button>
+    <button onclick="setContentDataset()">设置元素内容为 dataset 的值</button>
+    <hr>
+
+
+    <div id="box-to-add-element">
+        <button type="button" onclick="addElement()">在页面中增加一个元素</button>
+        <button type="button" onclick="rmElement()">移除元素</button>
+        <br>
+    </div>
+
+    <hr>
+    
+    <a href="javascript:location.reload();" onclick="location.reload();">
+        <img src="../static/refresh.svg" alt="刷新" title="刷新" style="vertical-align: bottom;">
+        刷新此页面
+    </a>
+
+    <button onclick="getPageAddress()">获取页面地址</button>
+    <button onclick="location.assign('https://www.example.com/');">跳转至新的页面（保留历史记录）</button>
+    <button onclick="location.replace('https://www.example.com/');">跳转至新的页面（不保留历史记录）</button>
+    
+    <hr>
+
+    <button onclick="getUA()">获取客户端 User-Agent</button>
+    <button onclick="copyUA()">复制UA</button><br>
+    <textarea name="User-Agent" id="User-Agent" cols="100" rows="5"></textarea>
+
+    <hr>
+
+    <p>测试使用 Notification API</p>
+    <button type="button" onclick="notific_permission()">向用户请求权限</button>
+    <button type="button" onclick="notific1()">测试#1</button>
+
+    <hr>
+    <p>dataURL-图片预览-input组件方法</p>
+    <iframe src="dataurl.html" frameborder="3"></iframe>
+    <hr>
+
+    <pre>
+        // 下面的函数是一个JS文档注释示例
+
+        /**
+        * 为 Nfunc 函数注册更新事件
+        * @author PopFortress <popfortress@163.com>
+        * @license Apache-2.0
+        * @param {Function} Nfunc 目标 Nfunc 函数
+        * @param {number} duration 间隔时间 default: 1000
+        * @param {number} exec_delay 延迟执行时间 unit：毫秒, default: 0
+        * @return {Function} 处理过的函数
+        */
+        function nfunc_updated(Nfunc, duration = 1000, exec_delay = 0) {
+            // do something
+        };
+    </pre>
+
+    
+    <button type="button" id="erase-clipboard">清空剪贴板</button>
+    <p id="msg"></p>
+</body>
+</html>

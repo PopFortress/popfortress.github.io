@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>文件大小</title>
+</head>
+
+<body>
+    <form name="uploadForm">
+        <div>
+            <input id="uploadInput" type="file" multiple />
+            <label for="fileNum">选择的文件数量：</label>
+            <output id="fileNum">0</output>；
+            <label for="fileSize">总大小：</label>
+            <output id="fileSize">0</output>
+        </div>
+    </form>
+
+    <script>
+        const uploadInput = document.getElementById("uploadInput");
+        uploadInput.addEventListener(
+            "change",
+            () => {
+                // Calculate total size
+                let numberOfBytes = 0;
+                for (const file of uploadInput.files) {
+                    numberOfBytes += file.size;
+                }
+                // Approximate to the closest prefixed unit
+                const units = [
+                    "B",
+                    "KiB",
+                    "MiB",
+                    "GiB",
+                    "TiB",
+                    "PiB",
+                    "EiB",
+                    "ZiB",
+                    "YiB",
+                ];
+                const exponent = Math.min(
+                    Math.floor(Math.log(numberOfBytes) / Math.log(1024)),
+                    units.length - 1,
+                );
+                const approx = numberOfBytes / 1024 ** exponent;
+                const output =
+                    exponent === 0
+                        ? `${numberOfBytes} bytes`
+                        : `${approx.toFixed(3)} ${units[exponent]
+                        } (${numberOfBytes} bytes)`;
+                document.getElementById("fileNum").textContent =
+                    uploadInput.files.length;
+                document.getElementById("fileSize").textContent = output;
+            },
+            false,
+        );
+    </script>
+</body>
+
+</html>
