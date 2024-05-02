@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+	<title>联系方式与反馈</title>
+	<link rel="stylesheet" href="../font-awesome/stylesheet/font-awesome.css">
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		a[href^='mailto']::before {
+			content: '📧 ';
+		}
+
+		a[href^='tel']::before {
+			content: '📞 ';
+		}
+
+		a[href^='sms']::before {
+			content: '💬 ';
+		}
+
+		address * {
+			text-decoration: underline solid .1px;
+		}
+
+		:focus {
+            outline: gray dashed .1px;
+        }
+
+		.send-email {
+			margin: 10px 0;
+		}
+
+		#subject {
+			font-size: 29px;
+			width: 420px;
+		}
+
+		#email_body {
+			font-size: 18px;
+			margin: 5px 0 0;
+			width: 420px;
+			height: 200px;
+			resize: none;
+		}
+	</style>
+</head>
+
+<body>
+	<dl>
+		<dt>联系站点作者：</dt>
+		<dd>
+			<address>
+				<a href="mailto:popfortress@163.com">popfortress@163.com</a>
+				<br>
+				<a href="mailto:uwukanse@outlook.com">uwukanse@outlook.com</a>
+				<br>
+				<a href="tel:+8618316561279">+(86) 183 1656 1279</a>
+				<a href="sms:+8618316561279">+(86) 183 1656 1279</a>
+				<br>
+				<a href="tel:+8618476013889">+(86) 184 7601 3889</a>
+				<a href="sms:+8618476013889">+(86) 184 7601 3889</a>
+				<br>
+				<a href="tel:+8617896561916">+(86) 178 9656 1916</a>
+				<a href="sms:+8617896561916">+(86) 178 9656 1916</a>
+			</address>
+		</dd>
+	</dl>
+
+	<dl>
+		<dt>广告投放商联系方式：</dt>
+		<dd>
+			<address>
+				<a href="tel:+86076088339168">+86 (0760) 8833-9168</a>
+				<a href="sms:+86076088339168">+86 (0760) 8833-9168</a>
+			</address>
+		</dd>
+	</dl>
+	
+	<dl>
+		<dt>
+			<span style="
+				font-size: 20px;
+				font-weight: 800;
+			">
+				<i class="fa fa-arrow-right"></i>
+				发送反馈
+			</span>
+		</dt>
+		<dd>
+			<div class="send-email">
+				<input placeholder="主题" autofocus id="subject"><br>
+				<textarea name="email-body" id="email_body" placeholder="邮件内容"></textarea>
+			</div>
+
+			<div class="email-address" style="margin: 10px 0;">
+				<span>发送至：</span>
+				<input type="text" name="address" id="address">
+				<button type="button" id="make-link">生成链接</button>
+			</div>
+
+			<a href="#" id="email-sending-anchor">打开邮件发送对话框</a>
+		
+			<div style="margin-top: 11px;">
+				<span style="font-weight: lighter; font-style: italic">
+					Fortress Software Shencheng, Co., Ltd.
+				</span>
+			</div>
+		</dd>
+	</dl>
+
+	<script>
+		const linkGenerateBtn = document.querySelector('#make-link');
+		const emailSendingAnchor = document.querySelector('#email-sending-anchor');
+		linkGenerateBtn.addEventListener('click', () => {
+			emailSendingAnchor.href = `mailto:${address.value}?subject=${subject.value}&body=${email_body.value}`;
+		});
+	</script>
+
+</body>
+
+</html>
