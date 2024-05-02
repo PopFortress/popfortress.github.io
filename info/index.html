@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隐私政策 & 条款 索引</title>
+    <link rel="stylesheet" href="../font-awesome/stylesheet/font-awesome.css">
+    <style>
+        #lang:active {
+            color: red !important;
+        }
+
+        a:active, a:focus {
+            outline: gray dashed .1px;
+        }
+
+        .title {
+            margin: 20px 0 20px 7px;
+        }
+
+        .title * {
+            margin: 0;
+        }
+
+        .title h2 {
+            font-weight: normal;
+            font-size: 16px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    
+    <a href="javascript:;" id="back">← 返回上级页面</a>
+    <span id="lang-switch" onclick="switchLang()" style="
+        cursor: pointer;
+        user-select: none; 
+        margin-left: 20px;">
+    
+        <span id="lang" style="
+        color: darkblue;
+        text-decoration: underline .3px;
+        ">切换到 English</span>
+        <i class="fa fa-globe" style="color: #2680D7; font-size: 1.4em; vertical-align: top;"></i>
+    </span>
+
+    <div class="title">
+        <h1>隐私政策 & 条款 索引</h1>
+        <h2>privacy policy & terms</h2>
+    </div>
+
+    <ul>
+        <li><a href="account-safety-zhCN.html" id="invoker">波普账户安全用户指南-简体中文</a></li>
+        <li><a href="www_project_index.html">万维网用户协议</a></li>
+        <li><a href="accept_free_declaretion.html">世界通用免责声明</a></li>
+        <li><a href="faq.html">常见问题解答</a></li>
+        <li><a href="contact-and-feedback.html">联系方式与反馈</a></li>
+    </ul>
+
+    <script>
+        const toggleLang = document.querySelector('#lang');
+        const invoker = document.querySelector('#invoker');
+        function switchLang(){
+            if (toggleLang.textContent == '切换到 English'){
+                invoker.href = 'account-safety.html';
+                invoker.textContent = '波普账户安全用户指南-英文';
+                toggleLang.style.color = 'firebrick';
+                toggleLang.textContent = '切换到 简体中文';
+            } else {
+                invoker.href = 'account-safety-zhCN.html';
+                invoker.textContent = '波普账户安全用户指南-简体中文';
+                toggleLang.style.color = 'darkblue';
+                toggleLang.textContent = '切换到 English';
+            };
+        };
+    </script>
+    <script>
+        back.addEventListener('click', () => {
+            window.open('about:blank','_self').close();
+        });
+    </script>
+
+</body>
+</html>
