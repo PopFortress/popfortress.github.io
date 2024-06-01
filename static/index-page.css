@@ -162,10 +162,18 @@ iframe {
 .badge img {
     width: 80px;
     height: 20px;
+    cursor: pointer;
 }
 
 .badge {
     user-select: none;
+}
+
+.badge {
+    display: flex;
+    width: fit-content;
+    flex-direction: row;
+    gap: 5px;
 }
 
 ul>li {
@@ -322,4 +330,15 @@ ul li a {
 .motto-author {
     font-size: 14px;
     text-indent: 24em;
+}
+
+.suspage-hl {
+    font-size: 12px;
+    color: #ccc;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.suspage-hl-wrapper {
+    margin-top: 0;
 }
