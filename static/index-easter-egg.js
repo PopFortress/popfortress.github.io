@@ -7,7 +7,7 @@ invoker.addEventListener('click', function() {
     if (counter === 8) {
         const suspage_hl = document.createElement('a');
         suspage_hl.className = 'suspage-hl';
-        suspage_hl.href = '__info/suspage.html';
+        suspage_hl.href = 'info/suspage.html';
         suspage_hl.textContent = '可疑的页面';
         container.appendChild(suspage_hl);
         container.style.marginTop = '50vh';
