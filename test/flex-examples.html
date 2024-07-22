@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex 布局</title>
+    <link rel="stylesheet" href="../static/flex.css">
+</head>
+<body>
+    
+    <div class="card">
+        <div class="avatar"></div>
+        <div class="info">
+            <div class="name">Fortress</div>
+            <div class="desc">我们花了两年学会说话，却要花上一生学会闭嘴</div>
+        </div>
+        <div class="subscribe">+&nbsp;关注</div>
+    </div>
+
+    <div class="separate"></div>
+
+    <div class="card">
+        <div class="avatar"></div>
+        <div class="info">
+            <div class="name">Fortress</div>
+            <div class="desc">一条超级长的个性签名，然而不能超出显示范围一条超级长的个性签名，然而不能超出显示范围</div>
+        </div>
+    </div>
+
+
+    <script>
+        const subscribe = document.querySelector('.subscribe');
+        var isSubscribed = false;
+        subscribe.addEventListener('click', () => {
+            subscribe.innerText = isSubscribed ? '+\u0020关注' : '已关注';
+            isSubscribed = !isSubscribed;
+        });
+    </script>
+
+</body>
+</html>
