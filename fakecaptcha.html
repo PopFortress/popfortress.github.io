@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帮助我们战胜机器人！</title>
+    <link rel="stylesheet" href="https://fakecaptcha.netlify.app/fakeCAPTCHA/fakeCAPTCHA.css">
+    <script src="https://fakecaptcha.netlify.app/fakeCAPTCHA/fakeCAPTCHA.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="captcha"></div>
+    <script>
+        var config = {
+            element: "#captcha",
+            textBefore: "确认您是人类",
+            textDuring: "请稍候...",
+            textAfter: "做得好，您是人类！",
+            duration: 2000,
+            success: true,
+            dark: false
+        };
+        const captcha = new CAPTCHA(config);
+    </script>
+    <script>
+        const params = new URLSearchParams(location.search)
+        const url = params.get('r')
+
+        const checkbox = document.querySelector(".captcha-clickable");
+        checkbox.addEventListener("click", () => {
+            setTimeout(() => {
+                if (url) {
+                    document.title = "正在跳转...";
+                    location.replace(url);
+                }
+            }, 3000);
+        });
+    </script>
+
+</body>
+</html>
