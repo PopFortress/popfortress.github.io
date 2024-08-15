@@ -149,7 +149,7 @@
     
     <body>
 		<div class="container">
-			<h2><span style="color: #fff;">春节倒计时</span><span id="year">NA</span></h2>
+			<h2><span style="color: #fff;">春节倒计时</span><span id="year">2025</span></h2>
 
 			<div class="Countdown">
 				<div id="day">NA</div>
@@ -166,15 +166,12 @@
 
 
     <script type="text/javascript">
-        const next_spring_festival = 'Feb 10,2024 00:00:00';
+        const next_spring_festival = 'Jan 29,2025 00:00:00';
 
 		//Date对象用于处理日期和时间。
 		//可以通过new关键词定义Date对象。
 		//new Date('月 日,年 时:分:秒')
 		//getTime()返回从1970年1月1日至今的毫秒数
-		//getFullYear获取四位数的年
-			var y = new Date().getFullYear();
-			console.log(y);
 		//字符串拼接，强制类型转换
 			var countDate= new Date(next_spring_festival).getTime();
 			function newYear(){
@@ -197,7 +194,6 @@
 				document.getElementById("hour").innerText=h;
 				document.getElementById("minute").innerText=m;
 				document.getElementById("second").innerText=s;
-				document.getElementById("year").innerText=y;
 			}
 			setInterval(function(){
 				newYear()
@@ -217,6 +213,8 @@
                 };
             });
         </script>
+
+        <script src="/static/firework.js"></script>
 
 </body>
 </html>
