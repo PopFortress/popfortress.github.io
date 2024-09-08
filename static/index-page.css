@@ -342,3 +342,65 @@ ul li a {
 .suspage-hl-wrapper {
     margin-top: 0;
 }
+
+.search-box-container {
+    margin: 36px 0 20px;
+    width: 300px;
+    position: relative;
+    display: flex;
+}
+
+#search {
+    width: 100%;
+    height: 30px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #333;
+    font-size: 20px;
+    padding: 0 5px 5px 5px;
+    background: none;
+    cursor: text;
+    &:focus {
+        outline: none;
+        background: #e4e4e4;
+    }
+}
+
+span.bar {
+    display: block;
+    width: 0%;
+    height: 2.5px;
+    background-color: #5264ae;
+    position: absolute;
+    transition: width 0.4s ease-in-out;
+    bottom: -1px;
+    transform: translate(-50%, -50%);
+    left: 50%;
+}
+
+.placeholder {
+    position: absolute;
+    bottom: 10px;
+    left: 5px;
+    font-size: 20px;
+    color: #8C8C8C;
+    user-select: none;
+    transition: .4s ease;
+    cursor: text;
+}
+
+#search:focus ~ span.bar {
+    width: 100%;
+}
+
+#search:valid ~ .placeholder,
+#search:focus ~ .placeholder {
+    color: #5264ae;
+    transform: translateY(-30px);
+    font-size: 14px;
+}
+
+#search::selection {
+    background: #5264ae;
+}
