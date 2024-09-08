@@ -27,9 +27,9 @@
     
         <!-- 在新年时去注释以下段 -->
         <div>
-        <!-- <h2>迎接2024！戳此处查看你的2023年度周报👉👉 <a href="info/year_report.html" target="_blank" style="margin: 0;">年度周报BILIBILI》》戳我《《</a> 👈👈</h2>
+        <!-- <h2>迎接2024！戳此处查看你的2023年度周报👉👉 <a href="__info/year_report.html" target="_blank" style="margin: 0;">年度周报BILIBILI》》戳我《《</a> 👈👈</h2>
         </div>
-        <iframe src="info/spring_festival_countdown.html" frameborder="0" width="800px" height="450px"></iframe>
+        <iframe src="__info/spring_festival_countdown.html" frameborder="0" width="800px" height="450px"></iframe>
         <br>
         <div class="new-year-wallpaper-wrapper">
             <img src="static/新年壁纸2.jpg" alt="新年壁纸2.jpg" width="400px" height="225" draggable="false">
@@ -54,6 +54,12 @@
             <span class="motto">我们花了两年学会说话，却要花上六十年来学会闭嘴。</span>
             <span class="motto-author">——海明威</span>
         </div>
+
+        <div class="search-box-container">
+            <input type="text" id="search" required>
+            <span class="bar"></span>
+            <label for="search" class="placeholder">Search...</label>
+        </div>
     
         <ul style="list-style-position: inside;">
             <li><a href="/fakecaptcha?r=/">索引</a></li>
@@ -74,8 +80,8 @@
             <br>
             <li><a href="/fakecaptcha?r=/CSS-FUN-WORKS/">CSS-FUN-WORKS</a></li>
             <li><a href="drawio/homework_mixer/">HOMEWORK MIXER!</a></li>
-            <li><a href="/fakecaptcha?r=/info/new_year_countdown.html">新年倒计时</a></li>
-            <li><a href="/fakecaptcha?r=/info/spring_festival_countdown.html">春节倒计时</a></li>
+            <li><a href="/fakecaptcha?r=/__info/new_year_countdown.html">新年倒计时</a></li>
+            <li><a href="/fakecaptcha?r=/__info/spring_festival_countdown.html">春节倒计时</a></li>
             <li><a href="/fakecaptcha?r=/test/" style="font-weight: normal; color: firebrick;" title="访问危险的测试页面">实验性的测试页面</a></li>
         </ul>
     
@@ -95,7 +101,7 @@
                 <img src="static/badge-996icu.svg" alt="996.icu" draggable="false">
             </a>
         </div>
-        <p>波普的温馨小阁 --Aug. 22, 2024</p>
+        <p>波普的温馨小阁 --Sep. 8, 2024</p>
         <p style="font-style: italic; font-size: 12px; margin-top: -2px">Latest Update.</p>
 
         <div class="suspage-hl-wrapper"></div>
@@ -112,16 +118,16 @@
                 <span>|</span>
                 <a href="https://space.bilibili.com/3461573418945245" class="bili-space" target="_blank">哔哩哔哩</a>
                 <span>|</span>
-                <a href="/fakecaptcha?r=/info/changelog.html" class="changelog" target="_blank">Changelog</a>
+                <a href="/fakecaptcha?r=/__info/changelog.html" class="changelog" target="_blank">Changelog</a>
                 <span>|</span>
-                <a href="/fakecaptcha?r=/info/" class="terms" target="_blank">隐私政策 & 条款</a>
+                <a href="/fakecaptcha?r=/__info/" class="terms" target="_blank">隐私政策 & 条款</a>
             </span>
         </div>
     </div>
 
     <div class="activity-container" onclick="triggerActivity();">
         <div class="cover-wrapper">
-            <img src="https://s21.ax1x.com/2024/05/02/pkkUBCQ.png" alt="cover" draggable="false">
+            <img src="static/activities-cover/cover.png" alt="cover" draggable="false">
             <span>活动#240430-中法建交60周年之紫禁城与凡尔赛宫</span>
         </div>
     </div>
@@ -145,6 +151,14 @@
     <script src="static/index-datetime-val.js"></script>
     <script src="static/index-set-iyan.js"></script>
     <script src="static/index-easter-egg.js"></script>
+    <script>
+        const inputEle = document.getElementById('search');
+        inputEle.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                window.open('/fakecaptcha?r=https://cn.bing.com/search?q=' + inputEle.value + ' site:popfortress.github.io', '_blank');
+            }
+        });
+    </script>
 
 </body>
 </html>
