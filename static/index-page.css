@@ -361,10 +361,11 @@ ul li a {
     padding: 0 5px 5px 5px;
     background: none;
     cursor: text;
-    &:focus {
-        outline: none;
-        background: #e4e4e4;
-    }
+}
+
+#search:focus {
+    outline: none;
+    background: #e4e4e4;
 }
 
 span.bar {
