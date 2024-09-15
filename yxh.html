@@ -1,36 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="mdui-theme-auto">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index of 营销号文案生成器</title>
+    <title>营销号文案生成器</title>
     <script src="static/yxh_script.js" defer></script>
+    <link rel="stylesheet" href="mdui/mdui.css">
+    <link rel="stylesheet" href="mdui/material-icons.css">
+    <script src="mdui/mdui.global.js"></script>
     <style>
+        * {
+            user-select: none;
+        }
+
         h1,h2{
             margin: 0;
-            user-select: none;
         }
 
         p.content {
-            background-color: whitesmoke;
+            background-color: #1d1d1f;
             padding: 5px;
             user-select: text;
+            color: #f5f5f5;
         }
 
-        input {
-            font-size: 16px;
-            user-select: none;
-        }
-
-        p {
-            user-select: none;
-        }
-
-        input[type='button'] {
-            font-size: 20px;
-            user-select: none;
-            display: block;
-            margin: 20px 0;
+        mdui-text-field {
+            margin: 10px 0;
         }
     </style>
 </head>
@@ -39,13 +34,13 @@
     <h1>营销号文案生成器</h1>
     <h2>Sand Sculpture Generator</h2>
     <hr>
-    <p>名字：</p>
-    <input type="text" class="name">
-    <p>事件：</p>
-    <input type="text" class="event">
-    <p>原因：</p>
-    <input type="text" class="reason"><input type="button" class="generate" onclick="generate()" value="生成">
+    <mdui-text-field label="名字" clearable maxlength="10" counter variant="outlined" class="name"></mdui-text-field>
+    <mdui-text-field label="事件" clearable maxlength="30" counter variant="outlined" class="event"></mdui-text-field>
+    <mdui-text-field label="原因" clearable maxlength="30" counter variant="outlined" class="reason"></mdui-text-field>
+    <mdui-button icon="arrow_forward" full-width onclick="generate()">生成</mdui-button>
     <p class="content">这里暂时是空的... 请先生成点内容吧！</p>
+
+    <mdui-snackbar auto-close-delay="1000" closeable class="info">请填写所有内容</mdui-snackbar>
 
 </body>
 </html>
