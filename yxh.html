@@ -11,21 +11,34 @@
     <style>
         * {
             user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         h1,h2{
             margin: 0;
         }
 
-        p.content {
-            background-color: #1d1d1f;
-            padding: 5px;
-            user-select: text;
+        .content {
+            padding: 10px;
             color: #f5f5f5;
+            width: 100%;
+            height: auto;
+            margin: 20px 0 0;
         }
 
         mdui-text-field {
             margin: 10px 0;
+        }
+
+        .copy-tip-wrapper {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .copy-tip-wrapper > span {
+            font-size: 12px;
         }
     </style>
 </head>
@@ -38,7 +51,11 @@
     <mdui-text-field label="事件" clearable maxlength="30" counter variant="outlined" class="event"></mdui-text-field>
     <mdui-text-field label="原因" clearable maxlength="30" counter variant="outlined" class="reason"></mdui-text-field>
     <mdui-button icon="arrow_forward" full-width onclick="generate()">生成</mdui-button>
-    <p class="content">这里暂时是空的... 请先生成点内容吧！</p>
+
+    <mdui-card class="content" clickable variant="filled">这里暂时是空的... 请先生成点内容吧！</mdui-card>
+    <div class="copy-tip-wrapper">
+        <span>(点击复制)</span>
+    </div>
 
     <mdui-snackbar auto-close-delay="1000" closeable class="info">请填写所有内容</mdui-snackbar>
 
