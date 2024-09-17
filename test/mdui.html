@@ -26,5 +26,18 @@
     <mdui-text-field label="Password Field" type="password" toggle-password></mdui-text-field>
     <mdui-linear-progress></mdui-linear-progress>
 
+    <mdui-card variant="outlined" clickable style="padding: 10px;">
+        <span>切换页面主题色</span>
+        <input type="color" name="color" id="color-scheme-chooser" value="#4B58B2">
+    </mdui-card>
+
+    
+    <script>
+        const colorSchemeChooser = document.getElementById('color-scheme-chooser');
+        colorSchemeChooser.addEventListener('change', function() {
+            mdui.setColorScheme(this.value);
+        });
+    </script>
+
 </body>
 </html>
