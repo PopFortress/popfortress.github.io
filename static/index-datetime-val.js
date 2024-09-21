@@ -1,15 +1,14 @@
 // JS script created by PopFortress (c) 2024 波普的温馨小阁
-// Latest Update: 2024/4/23 18:58
-
 
 // 常量定义
 const dateEle = document.querySelector('.date');
 const timeEle = document.querySelector('.time');
+const htmlEle = document.querySelector('html');
 const DateObj = new Date();
 const day_of_weekMap = { 0: '日', 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六' };
 const search_btn = document.querySelector('.search-btn');
 const body = document.querySelector('body');
-const blackDays = ["1/6", "1/8", "1/21", "1/27", "2/19", "3/12", "3/29", "4/29", "6/26", "7/6", "7/7", "8/5", "9/9", "9/18", "12/12", "12/13"];
+const blackDays = ["1/6", "1/8", "1/21", "1/27", "2/4", "2/19", "3/5", "3/12", "3/29", "4/29", "5/9", "5/12", "6/26", "7/6", "7/7", "7/14", "8/5", "9/9", "9/18", "10/10", "11/7", "12/12", "12/13"];
 
 // 节日对应表
 let festivalsMap; // 在全局作用域中声明 data 变量
@@ -25,13 +24,14 @@ var day_of_week_word = day_of_weekMap[day_of_week];
 const date_index = month.toString() + '/' + day_of_month.toString();
 
 
-// 辅助函数：方便调试
+// 辅助函数
 /**
- * 根据date_index查询今日节日
- * @returns 节日名字符串
+ * 根据index查询节日
+ * @param {string} index
+ * @returns {string}
  */
-function queryFestival() {
-    return festivalsMap[date_index];
+function queryFestival(index) {
+    return festivalsMap[index];
 }
 
 // 辅助函数：将数字转换为固定长度的字符串
@@ -42,9 +42,6 @@ function leftFillNum(num, targetLength) {
 
 /**
  * 获取节日列表并显示在页面上
- * @author PopFortress<popfortress@163.com>
- * @license Apache-2.0
- * @return {void}
  */
 async function fetchData() {
     try {
@@ -53,7 +50,7 @@ async function fetchData() {
 
         // 在这里处理获取到的 JSON 数据
         festivalsMap = data;
-        todays_festival = queryFestival();
+        todays_festival = queryFestival(date_index);
 
         // 设置节日部分
         if (todays_festival) {
@@ -66,7 +63,7 @@ async function fetchData() {
         // 判断哀悼日时给页面设置黑白滤镜
         blackDays.forEach(day => {
             if (date_index === day) {
-                body.style.filter = 'grayscale(1)';
+                htmlEle.style.filter = 'grayscale(1)';
             };
         });
 
