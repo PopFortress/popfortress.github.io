@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0">
+    <title>关于此站点</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        ::selection {
+            background: #eeeeee2f;
+        }
+        .app {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            flex-direction: column;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .title-box {
+            display: flex;
+            align-items: center;
+            height: fit-content;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-left: 12px;
+            color: #b39dd8;
+            letter-spacing: 1px;
+        }
+        .desc {
+            margin: 40px 0;
+            font-size: 16px;
+        }
+        .info {
+            font-size: 16px;
+        }
+        .links-card {
+            margin: 20px 0;
+            padding: 17px;
+            width: 100%;
+            max-width: 663px;
+            display: flex;
+            flex-direction: column;
+            min-height: fit-content;
+        }
+        .links-card > span {
+            font-size: 18px;
+            font-weight: 300;
+            text-align: left;
+            margin-bottom: 12px;
+        }
+        .links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="title-box">
+            <svg t="1710344405691" class="logo" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1852" width="75" height="75">
+                <path d="M365.714 576V448q0-9.143-9.143-9.143h-54.857q-9.143 0-9.143 9.143v128q0 9.143 9.143 9.143h54.857q9.143 0 9.143-9.143z m292.572 0V448q0-9.143-9.143-9.143h-54.857q-9.143 0-9.143 9.143v128q0 9.143 9.143 9.143h54.857q9.143 0 9.143-9.143z m292.571 18.286V1024H585.143V841.143q0-45.714-32-77.714t-77.714-32-77.715 32-32 77.714V1024H0V594.286q0-9.143 9.143-9.143H64q9.143 0 9.143 9.143v64h73.143V301.714q0-9.143 9.143-9.143h54.857q9.143 0 9.143 9.143v64h73.142v-64q0-9.143 9.143-9.143h54.857q9.143 0 9.143 9.143v64h73.143v-64q0-9.143 9.143-9.143h9.143V68q-18.286-10.857-18.286-31.429 0-14.857 10.857-25.714T475.43 0t25.714 10.857T512 36.571Q512 57.143 493.714 68v5.143h155.429q9.143 0 9.143 9.143v128q0 9.143-9.143 9.143H493.714v73.142h9.143q9.143 0 9.143 9.143v64h73.143v-64q0-9.143 9.143-9.143h54.857q9.143 0 9.143 9.143v64h73.143v-64q0-9.143 9.142-9.143h54.858q9.142 0 9.142 9.143v356.572h73.143v-64q0-9.143 9.143-9.143h54.857q9.143 0 9.143 9.143z" fill="#b39dd8" p-id="1853"></path>
+            </svg>
+            <h1>波普的温馨小阁</h1>
+        </div>
+        <span class="desc">Hello！欢迎光临！这里是波普的温馨小阁——我的前端学习基地QwQ<br>此站点使用 MIT 许可协议开源，请勿用于商业用途。</span>
+        <span class="info">
+            Fortress Software Shencheng, Co., Ltd.<br>
+            PopFortress (c) 2021-2024 保留所有权利<br>
+            此站点托管于 GitHub Pages。由<mdui-button variant="text" href="//github.com/popfortress" style="vertical-align: middle;" target="_blank">PopFortress</mdui-button>开发及维护
+        </span>
+        <mdui-card clickable class="links-card">
+            <span>社交媒体</span>
+            <div class="links">
+                <mdui-button href="//github.com/popfortress" target="_blank" icon="arrow_outward">GitHub</mdui-button>
+                <mdui-button href="//space.bilibili.com/3461573418945245" target="_blank" icon="arrow_outward">哔哩哔哩</mdui-button>
+                <mdui-button href="//weibo.com/popfortress" target="_blank" icon="arrow_outward">微博</mdui-button>
+                <mdui-button href="//zh-cn.namemc.com/profile/PopFortress.1" target="_blank" icon="arrow_outward">NameMC</mdui-button>
+                <mdui-button href="//bbs.mcutc.cn/members/popfortress.101/" target="_blank" icon="arrow_outward">MCUTC 论坛</mdui-button>
+            </div>
+        </mdui-card>
+        <mdui-card clickable class="links-card">
+            <span>联系方式</span>
+            <div class="links">
+                <mdui-button class="contacts" data-c="fortress_software">微信</mdui-button>
+                <mdui-button class="contacts" data-c="1077379835">QQ</mdui-button>
+                <mdui-button class="contacts" data-c="popfortress@outlook.com">E-mail</mdui-button>
+                <mdui-button class="contacts" data-c="live:.cid.ed8bfa72f2897e14">Skype</mdui-button>
+                <mdui-button class="contacts" data-c="FortNetease">中国版我的世界</mdui-button>
+                <mdui-button class="contacts" data-c="PopFortress">Minecraft</mdui-button>
+            </div>
+        </mdui-card>
+        <mdui-card clickable class="links-card">
+            <span>相关链接</span>
+            <div class="links">
+                <mdui-button href="//github.com" target="_blank" icon="arrow_outward" variant="tonal">GitHub</mdui-button>
+                <mdui-button href="//pages.github.com" target="_blank" icon="arrow_outward" variant="tonal">GitHubPages</mdui-button>
+                <mdui-button href="//github.com/popfortress/popfortress.github.io" target="_blank" icon="arrow_outward" variant="tonal">GitHub仓库</mdui-button>
+                <mdui-button href="./changelog.html" target="_blank" icon="arrow_outward" variant="tonal">更新日志</mdui-button>
+                <mdui-button href="//www.mdui.org/zh-cn/" target="_blank" icon="arrow_outward" variant="tonal">MDUI</mdui-button>
+                <mdui-button href="./" target="_blank" icon="arrow_outward" variant="tonal">隐私政策 & 条款</mdui-button>
+                <mdui-button href="//beian.miit.gov.cn" target="_blank" icon="arrow_outward" variant="tonal">闽ICP备17890714号-1</mdui-button>
+            </div>
+        </mdui-card>
+    </div>
+    
+    <script>
+        const contacts = document.querySelectorAll('.contacts');
+        contacts.forEach(contact => {
+            const c = contact.dataset.c;
+            contact.addEventListener('click', () => {
+                mdui.snackbar({
+                    message: c,
+                    action: '复制',
+                    onActionClick: () => navigator.clipboard.writeText(c),
+                    closeable: true
+                });
+            });
+        });
+    </script>
+</body>
+</html>
