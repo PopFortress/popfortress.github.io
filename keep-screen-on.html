@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <title>保持屏幕常亮</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <script src="/static/NoSleep.min.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <style>
+        .container {
+            position: absolute;
+            width: 80%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .icon {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 60px;
+        }
+        .title {
+            color: #b39dd8;
+            text-align: center;
+            font-size: 2.2em;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+        .desc {
+            color: #b39dd8;
+            text-align: center;
+            font-size: 1em;
+            font-weight: 500;
+        }
+        .switch-container {
+            margin-top: 80px;
+            display: flex;
+            justify-content: center;
+        }
+        .switch {
+            transform: scale(3);
+        }
+        .about {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+        ::selection {
+            background: #eeeeee2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="79" height="70" viewBox="0 0 79 70" fill="none" class="icon">
+            <g clip-path="url(#clip0_1489_2258)">
+              <path id="svgpath" d="M8.77778 0C3.93628 0 0 3.92383 0 8.75V48.125C0 52.9512 3.93628 56.875 8.77778 56.875H32.9167L31.4491 61.25H21.9444C19.5168 61.25 17.5556 63.2051 17.5556 65.625C17.5556 68.0449 19.5168 70 21.9444 70H57.0556C59.4832 70 61.4444 68.0449 61.4444 65.625C61.4444 63.2051 59.4832 61.25 57.0556 61.25H47.5509L46.0833 56.875H70.2222C75.0637 56.875 79 52.9512 79 48.125V8.75C79 3.92383 75.0637 0 70.2222 0H8.77778ZM70.2222 8.75V48.125H8.77778V8.75H70.2222Z" fill="#B39DDB" data-darkreader-inline-fill=""></path>
+            </g>
+            <defs>
+            <clipPath id="clip0_1489_2258">
+            <rect width="79" height="70" fill="white" data-darkreader-inline-fill=""></rect>
+            </clipPath>
+            </defs>
+        </svg>
+        <h1 class="title">保持屏幕常亮</h1>
+        <p class="desc">开启下方的开关，以阻止您的设备休眠</p>
+        <div class="switch-container">
+            <mdui-switch class="switch"></mdui-switch>
+        </div>
+    </div>
+    <mdui-button variant="text" class="about" icon="info--outlined">关于此页</mdui-button>
+
+    <script>
+        const switchEl = document.querySelector('.switch');
+        const descEl = document.querySelector('.desc');
+        const titleEl = document.querySelector('.title');
+        const iconEl = document.querySelector('.icon path');
+        const aboutBtn = document.querySelector('.about');
+        var noSleep = new NoSleep();
+
+        switchEl.addEventListener('change', function() {
+            if (switchEl.checked) {
+                descEl.textContent = '做得好！保持此标签页激活，您的屏幕将始终处于打开状态';
+                descEl.style.color = '#66BB6A';
+                titleEl.style.color = '#66BB6A';
+                iconEl.setAttribute('fill', '#66BB6A');
+                mdui.setColorScheme('#66BB6A');
+
+                noSleep.enable();
+            } else {
+                descEl.textContent = '开启下方的开关，以阻止您的设备休眠';
+                descEl.style.color = '#B39DDB';
+                titleEl.style.color = '#B39DDB';
+                iconEl.setAttribute('fill', '#B39DDB');
+                mdui.removeColorScheme();
+
+                noSleep.disable();
+            }});
+
+        aboutBtn.addEventListener('click', () => {
+            mdui.alert({
+                headline: '关于此页',
+                description: '此页面为 www.keepscreenon.com 站点的MDUI版本临摹。参考了其与 nosleep.page 源码。并共同使用了 NoSleep.js 库，其仓库为 https://github.com/richtr/NoSleep.js。此页面使用 MIT 许可证开源。兼容性：Edge 90+, Chrome 85+, Safari 16.4+, Firefox 126+, Opera 73+',
+                confirmText: '确定'
+            });
+        });
+    </script>
+</body>
+</html>

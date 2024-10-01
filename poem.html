@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" style="background: #eee;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="mdui/mdui.css">
+    <script src="mdui/mdui.global.js"></script>
     <title>波普小诗</title>
     <style>
-
-        body {
-            background-image: url(static/classical_background.jpg);
-            background-repeat: repeat-y;
-            background-size: contain;
-            margin-bottom: 300px;
+        * {
+            margin: 0;
         }
 
         ::selection {
@@ -19,12 +17,8 @@
             background-color: rgb(242, 173, 26);
         }
 
-        * {
+        body {
             text-align: center;
-        }
-
-        p:hover{
-            opacity: 0.5;
         }
 
         h1 {
@@ -33,7 +27,7 @@
         }
 
         p {
-            margin: 10px;
+            margin: 10px 0;
             padding: 0;
             opacity: 1;
             font-weight: normal;
@@ -42,10 +36,15 @@
 
         .author {
             font-weight: lighter;
-            text-indent: 240px;
-            margin: 10px;
+            font-size: 14px;
+            margin: 20px 0;
         }
 
+        .top {
+            position: fixed;
+            bottom: 30px;
+            right: 60px;
+        }
     </style>
 </head>
 <body>
@@ -173,20 +172,6 @@
     <p>这是好结局哦！</p>
     <p class="author">——波普小阁</p>
 
-    <h1>朱利安的改编版圣诞歌</h1>
-    <p>准备好电子琴，我要开始了！</p>
-    <p>大街闪亮亮，我觉得好漂亮~</p>
-    <p>各位猪们都来聚，嘿，大家高兴呀！</p>
-    <p>朱利安，朱利安，你真的非常棒~</p>
-    <p>解决一个又一个，嘿，经费问题呀！</p>
-    <p class="author">——朱利安国王《马达加斯加的企鹅》(波普小阁《圣诞节记事》)</p>
-
-    <h1>僵格有一张大嘴</h1>
-    <p>僵格有一张大嘴，</p>
-    <p>告一状就能让你倒霉。</p>
-    <p>一吃东西就漏一满地碎碎。</p>
-    <p>大大大大大臭嘴。</p>
-    <p class="author">——小苦力怕杰拉德《苦力怕上学记·新朋友》</p>
 
     <h1>荒诞蜻蜓诗</h1>
     <p>蜻蜓在天上飞</p>
@@ -200,49 +185,30 @@
     <p>不管是，谁都一样~</p>
     <p class="author">——从天上落下的纸牌《晴天有时哈哈哈》</p>
 
-    <h1>黄金朱利安的无意义字句</h1>
-    <p>玉米糖，小蜜蜂，从天而降~</p>
-    <p>小狗狗，小猫猫，满腿是泥~</p>
-    <p>独角兽，培根肥，额外喷嚏~</p>
-    <p>孩子哭，指甲长，什么意思~</p>
-    <p>这些字句~毫无意义~</p>
-    <p>漫无边际来键围篱~</p>
-    <p>来做馅饼~让小猪哭~</p>
-    <p>我不明白，也许它们害羞~</p>
-    <br>
-    <p>Candy corn, honeybees, falling from trees~</p>
-    <p>Puppy dog, kitty cat, dirt on my knees~</p>
-    <p>Unicorn, bacon fat, an extra sneeze~</p>
-    <p>Children cry, toenails grow, what does it mean?</p>
-    <p>These words, they don't make sense~</p>
-    <p>Just won't silent, let's build a fense~</p>
-    <p>Let's make some pie, the baby pigs cry~</p>
-    <p>I don't know why, maybe they are a bit shy~</p>
-    <p class="author">——浪子小毛《朱利安国王万岁》第三季</p>
+    <mdui-fab icon="arrow_upward" extended variant="secondary" class="top">返回顶部</mdui-fab>
 
-    <video width="600px" height="350px" controls poster="media/poster-nonsense-song.png" class="english-nonsense">
-        <source src="media/english-nonsense.mp4" type="video/mp4">
-    </video>
-    <p style="font-size: small; color: gray;">视频歌曲-原声大碟</p>
+    <script>
+        const winWidth = window.innerWidth;
+        const fab = document.querySelector('.top');
+        if (winWidth < 400) {
+            setTimeout(() => {
+                fab.extended = false;
+            }, 2000);
+        };
 
-    <video width="600px" height="350px" controls poster="media/poster-nonsense-song.png" class="chinese-nonsense">
-        <source src="media/chinese-nonsense.mp4" type="video/mp4">
-    </video>
-    <p style="font-size: small; color: gray;">视频歌曲-普通话</p>
+        fab.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior:'smooth'
+            });
+            setTimeout(() => {
+                fab.style.display = 'none';
+            }, 750);
+        });
 
-    <h1>圣诞猪猪的雪橇之旅</h1>
-    <p>圣诞猪猪和它的麋鹿，雪橇之旅一起去远足。</p>
-    <p>向世界各地寄去礼物，还有永生不变的心路。</p>
-    <p>天天吵着想要被放逐，就是小兵的猪生目录。</p>
-    <p>这来自仪仗队的学徒，为堕落小兵的心中猪。</p>
-    <p>圣诞公公的次次劝阻，都没挡它选择未来路。</p>
-    <p>为何我不能替那唱出，可怜小兵梦想的一步。</p>
-    <p>Doo, doo... doo, doo...</p>
-    <p class="author">——波普小阁《圣诞节记事》</p>
-
-    
-    <a href="#top" style="font-size: small; color: black;">返回顶部</a>
-    <a href="/" style="font-size: small; color: black;">返回索引页</a>
-
+        window.addEventListener('scroll', (event) => {
+            fab.style.display = 'block';
+        }, {passive: false});
+    </script>
 </body>
 </html>
