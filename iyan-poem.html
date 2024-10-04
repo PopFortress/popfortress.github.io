@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1.0">
     <title>每日「诗句」</title>
     <style>
         * {
-            cursor: url(static/cursor.png), auto;
             margin: 0;
-            color: white;
+            color: #fff;
 
             --vvhan-random: url("https://api.vvhan.com/api/bing?rand=sj");                  /* return IMG */
             --slow-daily: url("https://bing.shangzhenyang.com/api/1080p");                  /* return IMG */
@@ -18,18 +17,19 @@
         }
 
         body {
-            background-color: whitesmoke;
-            margin-left: 12vh;
-            margin-right: 12vh;
             background-image: var(--vvhan-random);
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
         }
 
         ::selection {
             color: whitesmoke;
-            background-color: rgb(242, 173, 26);
+            background-color: #eeeeee50;
         }
 
         .poem, .comefrom {
@@ -37,21 +37,21 @@
         }
 
         .poem {
-            font-weight: normal;
-            font-size: 32px;
+            font-weight: 500;
+            font-size: 2em;
             margin-bottom: 15px;
         }
 
         .comefrom {
             margin-bottom: 50px;
-            padding-left: 10vw;
-            font-size: large;
+            padding-left: 20%;
+            font-size: 18px;
+            text-align: right;
         }
 
         p {
             font-family: '微软雅黑';
-            font-weight: lighter;
-            font-size: medium;
+            font-weight: 200;
         }
 
         .container {
@@ -59,25 +59,20 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-
-            height: 97vh;
-            /* position: relative; */
+            height: 100%;
+            width: 100%;
         }
 
         .text {
             margin-bottom: 20px;
+            font-size: 16px;
         }
 
         .content-box {
             text-align: center;
             padding: 30px;
-            max-width: 50vw;
-            max-height: 40vh;
-            min-width: 20vw;
-            min-height: 20vh;
-            /* width: 50vw;
-            height: 40vh; */
-
+            max-width: 530px;
+            width: 100%;
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px) brightness(0.9);
             border: 2px solid rgba(255, 255, 255, 0.5);
@@ -94,7 +89,7 @@
             <p class="poem">正在获取...</p>
             <p class="comefrom"></p>
             <p class="text">每日「诗句」</p>
-            <img src="static/refresh-sim.svg" alt="刷新" aria-label="获取「诗句」" draggable="false" onclick="getPoem()">
+            <img src="static/refresh-sim.svg" alt="获取「诗句」" draggable="false" onclick="getPoem()">
         </div>
     </div>
 
