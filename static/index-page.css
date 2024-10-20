@@ -1,8 +1,8 @@
 :root {
-    --theme: rgb(242, 173, 26);
-    --new-year-theme: rgb(207, 30, 30);
+    --theme: #f2ad1a;
+    --new-year-theme: #cf1e1e;
     --theme-bg-new-year: #f4d796;
-    --theme-bg: rgb(236, 236, 236);
+    --theme-bg: #ececec;
     --theme-title: #C20C0C;
 }
 
@@ -13,8 +13,8 @@ html, body {
 }
 
 ::selection {
-    color: whitesmoke;
-    background-color: var(--theme);
+    color: #f5f5f5;
+    background-color: #cf1e1e;
 }
 
 body {

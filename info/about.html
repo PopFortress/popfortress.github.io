@@ -23,6 +23,7 @@
             flex-direction: column;
             text-align: center;
             margin: 30px 0;
+            overflow: hidden;
         }
         .title-box {
             display: flex;
@@ -64,6 +65,12 @@
             flex-wrap: wrap;
             gap: 7px;
         }
+        .sign {
+            background: url(/static/signed.png);
+            width: 377px;
+            margin: 40px 0;
+            height: 180px;
+        }
     </style>
 </head>
 <body>
@@ -74,7 +81,7 @@
             </svg>
             <h1>波普的温馨小阁</h1>
         </div>
-        <span class="desc">Hello！欢迎光临！这里是波普的温馨小阁——我的前端学习基地QwQ<br>此站点使用 MIT 许可协议开源，请勿用于商业用途。</span>
+        <span class="desc">Hello！欢迎光临！这里是波普的温馨小阁——我的前端学习基地QwQ<br>此站点使用 MIT 许可协议开源，地址请参见“相关链接”</span>
         <span class="info">
             Fortress Software Shencheng, Co., Ltd.<br>
             PopFortress (c) 2021-2024 保留所有权利<br>
@@ -88,6 +95,7 @@
                 <mdui-button href="//weibo.com/popfortress" target="_blank" icon="arrow_outward">微博</mdui-button>
                 <mdui-button href="//zh-cn.namemc.com/profile/PopFortress.1" target="_blank" icon="arrow_outward">NameMC</mdui-button>
                 <mdui-button href="//bbs.mcutc.cn/members/popfortress.101/" target="_blank" icon="arrow_outward">MCUTC 论坛</mdui-button>
+                <mdui-button href="//www.xbox.com/zh-CN/play/user/PopFortress" target="_blank" icon="arrow_outward">Xbox 档案</mdui-button>
             </div>
         </mdui-card>
         <mdui-card clickable class="links-card">
@@ -113,8 +121,10 @@
                 <mdui-button href="//beian.miit.gov.cn" target="_blank" icon="arrow_outward" variant="tonal">闽ICP备17890714号-1</mdui-button>
             </div>
         </mdui-card>
+
+        <div class="sign"></div>
     </div>
-    
+
     <script>
         const contacts = document.querySelectorAll('.contacts');
         contacts.forEach(contact => {
