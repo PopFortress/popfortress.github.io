@@ -361,6 +361,8 @@ ul li a {
     padding: 0 5px 5px 5px;
     background: none;
     cursor: text;
+    caret-color: #5264ae;
+    color: #5264ae;
 }
 
 #search:focus {

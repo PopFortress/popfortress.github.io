@@ -45,6 +45,10 @@
 			height: 200px;
 			resize: none;
 		}
+
+		.email-address * {
+			height: 24px;
+		}
 	</style>
 </head>
 
@@ -53,15 +57,11 @@
 		<dt>联系站点作者：</dt>
 		<dd>
 			<address>
-				<a href="mailto:popfortress@163.com">popfortress@163.com</a>
-				<br>
 				<a href="mailto:popfortress@outlook.com">popfortress@outlook.com</a>
 				<br>
-				<a href="tel:+12484345508">+(1) 248-434-5508</a>
-				<a href="sms:+12484345508">+(1) 248-434-5508</a>
+				<a href="mailto:popfortress@163.com">popfortress@163.com</a>
 				<br>
-				<a href="tel:+8617896561916">+(86) 178 9656 1916</a>
-				<a href="sms:+8617896561916">+(86) 178 9656 1916</a>
+				<a href="mailto:1077379835@qq.com">1077379835@qq.com</a>
 			</address>
 		</dd>
 	</dl>
@@ -70,20 +70,16 @@
 		<dt>广告投放商联系方式：</dt>
 		<dd>
 			<address>
-				<a href="tel:+86076088339168">+86 (0760) 8833-9168</a>
-				<a href="sms:+86076088339168">+86 (0760) 8833-9168</a>
+				<a href="tel:+12484345508">+(1) 248-434-5508</a>
+				<a href="sms:+12484345508">+(1) 248-434-5508</a>
 			</address>
 		</dd>
 	</dl>
 	
 	<dl>
 		<dt>
-			<span style="
-				font-size: 20px;
-				font-weight: 800;
-			">
-				<i class="fa fa-arrow-right"></i>
-				发送反馈
+			<span style="font-size: 20px; font-weight: 800;">
+				<i class="fa fa-arrow-right"></i>发送反馈
 			</span>
 		</dt>
 		<dd>
@@ -94,7 +90,11 @@
 
 			<div class="email-address" style="margin: 10px 0;">
 				<span>发送至：</span>
-				<input type="text" name="address" id="address">
+				<select id="sendto" id="address">
+					<option value="outlook">popfortress@outlook.com</option>
+					<option value="163">popfortress@163.com</option>
+					<option value="qq">1077379835@qq.com</option>
+				</select>
 				<button type="button" id="make-link">生成链接</button>
 			</div>
 
@@ -111,8 +111,11 @@
 	<script>
 		const linkGenerateBtn = document.querySelector('#make-link');
 		const emailSendingAnchor = document.querySelector('#email-sending-anchor');
+		const sendtoSelect = document.querySelector('#sendto');
 		linkGenerateBtn.addEventListener('click', () => {
-			emailSendingAnchor.href = `mailto:${address.value}?subject=${subject.value}&body=${email_body.value}`;
+			var index = sendtoSelect.selectedIndex;
+			var sendto = sendtoSelect.options[index].text;
+			emailSendingAnchor.href = `mailto:${sendto}?subject=${subject.value}&body=${email_body.value}`;
 		});
 	</script>
 
