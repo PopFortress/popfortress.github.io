@@ -40,7 +40,7 @@
         <span id="lang" style="
         color: darkblue;
         text-decoration: underline .3px;
-        ">切换到 English</span>
+        ">Switch to English</span>
         <i class="fa fa-globe" style="color: #2680D7; font-size: 1.4em; vertical-align: top;"></i>
     </span>
 
@@ -62,16 +62,16 @@
         const toggleLang = document.querySelector('#lang');
         const invoker = document.querySelector('#invoker');
         function switchLang(){
-            if (toggleLang.textContent == '切换到 English'){
+            if (toggleLang.textContent == 'Switch to English'){
                 invoker.href = 'account-safety.html';
-                invoker.textContent = '波普账户安全用户指南-英文';
+                invoker.textContent = 'PopFort Account Safety User Guide';
                 toggleLang.style.color = 'firebrick';
                 toggleLang.textContent = '切换到 简体中文';
             } else {
                 invoker.href = 'account-safety-zhCN.html';
                 invoker.textContent = '波普账户安全用户指南-简体中文';
                 toggleLang.style.color = 'darkblue';
-                toggleLang.textContent = '切换到 English';
+                toggleLang.textContent = 'Switch to English';
             };
         };
     </script>

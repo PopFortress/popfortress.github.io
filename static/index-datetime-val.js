@@ -1,5 +1,3 @@
-// JS script created by PopFortress (c) 2024 波普的温馨小阁
-
 // 常量定义
 const dateEle = document.querySelector('.date');
 const timeEle = document.querySelector('.time');
@@ -66,16 +64,6 @@ async function fetchData() {
                 htmlEle.style.filter = 'grayscale(1)';
             };
         });
-
-        // 调试打印
-        console.log(festivalsMap);
-        console.groupCollapsed('date-val');
-        console.log(year);
-        console.log(month);
-        console.log(day_of_month);
-        console.log(day_of_week_word);
-        console.log(date_format);
-        console.groupEnd('date-val');
 
     } catch (error) {
         console.error('Error:', error);

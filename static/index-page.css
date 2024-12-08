@@ -19,9 +19,7 @@ html, body {
 
 body {
     background-color: var(--theme-bg);
-    margin-bottom: 20vh;
     font-family: HarmonyOS Sans SC;
-    /* filter: grayscale(1); */
 }
 
 * {
@@ -207,10 +205,7 @@ ul>li {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    bottom: 14px;
-    margin: 0;
-    z-index: -1;
+    margin: 0 0 14px 0;
 }
 
 .main {

@@ -27,7 +27,6 @@ content_para.addEventListener('click', function() {
     navigator.clipboard.writeText(content_para.textContent)
     mdui.snackbar({
         message: '内容已复制到剪贴板',
-        closeable: true,
         autoCloseDelay: 1000
     })
 })

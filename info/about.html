@@ -14,7 +14,7 @@
             box-sizing: border-box;
         }
         ::selection {
-            background: #eeeeee2f;
+            background: #eeeeee96;
         }
         .app {
             display: flex;
@@ -71,6 +71,11 @@
             margin: 40px 0;
             height: 180px;
         }
+        .licenses {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -85,9 +90,9 @@
         <span class="info">
             Fortress Software Shencheng, Co., Ltd.<br>
             PopFortress (c) 2021-2024 保留所有权利<br>
-            此站点托管于 GitHub Pages。由<mdui-button variant="text" href="//github.com/popfortress" style="vertical-align: middle;" target="_blank">PopFortress</mdui-button>开发及维护
+            此站点托管于 GitHub Pages。由<mdui-button variant="text" href="//github.com/popfortress" style="vertical-align: middle;">PopFortress</mdui-button>开发及维护
         </span>
-        <mdui-card clickable class="links-card">
+        <mdui-card class="links-card">
             <span>社交网络</span>
             <div class="links">
                 <mdui-button href="//github.com/popfortress" target="_blank" icon="arrow_outward">GitHub</mdui-button>
@@ -98,7 +103,7 @@
                 <mdui-button href="//www.xbox.com/zh-CN/play/user/PopFortress" target="_blank" icon="arrow_outward">Xbox 档案</mdui-button>
             </div>
         </mdui-card>
-        <mdui-card clickable class="links-card">
+        <mdui-card class="links-card">
             <span>联系方式</span>
             <div class="links">
                 <mdui-button class="contacts" data-c="fortress_software">微信</mdui-button>
@@ -109,7 +114,7 @@
                 <mdui-button class="contacts" data-c="PopFortress">Minecraft</mdui-button>
             </div>
         </mdui-card>
-        <mdui-card clickable class="links-card">
+        <mdui-card class="links-card">
             <span>相关链接</span>
             <div class="links">
                 <mdui-button href="//github.com" target="_blank" icon="arrow_outward" variant="tonal">GitHub</mdui-button>
@@ -123,6 +128,11 @@
         </mdui-card>
 
         <div class="sign"></div>
+        
+        <div class="licenses">
+            <mdui-button href="//mit-license.org" variant="text" icon="arrow_outward" target="_blank">MIT License</mdui-button>
+            <mdui-button href="//creativecommons.org/licenses/by-nc-sa/4.0" variant="text" icon="arrow_outward" target="_blank">CC BY-NC-SA 4.0</mdui-button>
+        </div>
     </div>
 
     <script>
