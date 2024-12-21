@@ -1,7 +1,7 @@
 :root {
     --theme: #f2ad1a;
     --new-year-theme: #cf1e1e;
-    --theme-bg-new-year: #f4d796;
+    --theme-bg-new-year: #f5ebd4;
     --theme-bg: #ececec;
     --theme-title: #C20C0C;
 }
@@ -18,14 +18,13 @@ html, body {
 }
 
 body {
-    background-color: var(--theme-bg);
+    background-color: var(--theme-bg-new-year);
     font-family: HarmonyOS Sans SC;
 }
 
 * {
     padding: 0;
     margin: 0;
-    cursor: url(./cursor.png), auto;
 }
 
 .title-box {
