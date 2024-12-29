@@ -9,22 +9,13 @@
         * {
             margin: 0;
             padding: 0;
-            /* font-family最后加上sans-serif，
-            是为了保证能够调用这个字体族里面的字体，因为大多数计算机里都有这种字体。 */
             font-family: 'Poppins', sans-serif;
             user-select: none;
         }
 
         body {
-            background:#FFFFFF url(../static/mc_snowing.png);
-            /* background-attachment属性
-            设置背景图像是否固定或者随着页面的其余部分滚动。
-             fixed背景图片不会随着页面的滚动而滚动*/
+            background: url(//pic1.imgdb.cn/item/67715331d0e0a243d4ec2f9c.png);
             background-attachment: fixed;
-            /* background-blend-mode属性
-             background-blend-mode 属性定义了背景层的混合模式（图片与颜色）
-             hard-light强光
-             */
             background-blend-mode: darken;
         }
 
@@ -35,21 +26,10 @@
             right: 100px;
             bottom: 80px;
             background-attachment: fixed;
-            /* flex弹性布局 */
             display: flex;
-            /* justify-content
-            属性定义了项目在主轴上的对齐方式。
-             center： 居中*/
             justify-content: center;
-            /* align-items属性
-            定义项目在交叉轴上如何对齐。
-            center：交叉轴的中点对齐。*/
             align-items: center;
-            /* flex-direction属性
-            决定主轴的方向（即项目的排列方向）。
-             column：主轴为垂直方向，起点在上沿。*/
             flex-direction: column;
-            /* 阴影 */
             box-shadow: 0 50px 50px rgba(0, 0, 0, 0.5), 0 0 0 100px rgba(0, 0, 0, .1);
             backdrop-filter: blur(8px);
         }
@@ -65,7 +45,6 @@
         .container h2 span {
             display: block;
             font-weight: 300;
-            /* etter-spacing 属性增加或减少字符间的空白（字符间距）。 */
             letter-spacing: 6px;
             font-size: 0.2em;
         }
@@ -92,15 +71,6 @@
             font-size: 3em;
             font-weight: 500;
         }
-        /* 伪元素 */
-        /* ::before伪元素可用于在元素内容之前插入一些内容。 */
-        /* 小知识可以利用伪元素清除浮动 
-            .clearfix::after{
-                content: "";
-                display: block;
-                clear: both;
-            }
-        */
         .Countdown div::before{
             content:'' ;
             position: absolute;
@@ -159,36 +129,25 @@
 
         <i class="fa fa-volume-off"></i>
 
-        <audio src="../media/山水间的家.mp3" loop></audio>
+        <audio src="" loop></audio>
 	</body>
 
 
     <script type="text/javascript">
-		//Date对象用于处理日期和时间。
-		//可以通过new关键词定义Date对象。
-		//new Date('月 日,年 时:分:秒')
-		//getTime()返回从1970年1月1日至今的毫秒数
-		//getFullYear获取四位数的年
 			var y = new Date().getFullYear()+1;
 			console.log(y);
-		//字符串拼接，强制类型转换
 			var countDate= new Date('Jan 1,'+y+' 00:00:00').getTime();
 			function newYear(){
-		//new Date()为当前时间
 				var now =new Date().getTime();
 				var gap = countDate-now;
-		//时间格式化
 				var second =1000;
 				var minute = second*60;
 				var hour = minute*60;
 				var day= hour*24;
-		//Math.floor(x)返回小于x的最大整数
 				var d=Math.floor(gap/(day));
 				var h=Math.floor((gap%(day))/(hour));
 				var m=Math.floor((gap%(hour))/(minute));
 				var s=Math.floor((gap%(minute))/second);
-		//innerHTML返回的是标签内的 html内容，包含html标签。
-		//innerText返回的是标签内的文本值，不包含html标签。
 				document.getElementById("day").innerText=d;
 				document.getElementById("hour").innerText=h;
 				document.getElementById("minute").innerText=m;
