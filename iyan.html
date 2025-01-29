@@ -55,7 +55,8 @@
         </style>
         <script>
             const iyanElement = document.querySelector('.iyan');
-            const apis = ['http://api.52hyjs.com/api/yulu', 'https://api.vvhan.com/api/ian/wenxue', 'https://api.vvhan.com/api/ian/shici'];
+            const labelElement = document.querySelector('.label');
+            const apis = ['http://api.52hyjs.com/api/yulu', 'https://api.vvhan.com/api/ian/wenxue', 'https://api.vvhan.com/api/ian/shici', 'https://v1.hitokoto.cn/?c=i&encode=text'];
 
             function getIyan(){
                 var api = apis[Math.floor(Math.random() * apis.length)];
@@ -64,6 +65,7 @@
                 'font-weight: bold; color: darkred', 'font-weight: normal; color: black;');
 
                 iyanElement.textContent = "正在获取...";
+                labelElement.textContent = "每日「一言」";
                 fetch(api)
                     .then(response => {
                         return response.text();
@@ -73,7 +75,8 @@
                         console.log(data);
                     })
                     .catch(error => {
-                        iyanElement.textContent = 'API请求失败';
+                        iyanElement.textContent = '莫将闲事挂心头，便是人间好时节。我们都有不顺利的时候。';
+                        labelElement.textContent = '请坐和放宽，稍后再试。';
                         console.error('Error:', error);
                     });
             };

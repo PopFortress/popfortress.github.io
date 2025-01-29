@@ -48,3 +48,20 @@ header mdui-icon {
 .content {
     padding-bottom: 60px;
 }
+
+.search-bar-wrapper {
+    display: flex;
+    margin-bottom: 40px;
+    gap: 10px;
+}
+
+.search-btn {
+    height: 100%;
+}
+
+.bottom-text {
+    text-align: center;
+    font-size: 14px;
+    color: #c2c2c2;
+    padding-bottom: 60px;
+}

@@ -42,13 +42,14 @@ a {
     color: var(--theme);
     text-decoration: none;
     font-weight: bold;
-    transition: color 500ms ease;
-    font-size: larger;
+    transition: color .1s ease;
+    font-size: 21px;
 }
 
 a:hover, a:focus-visible {
     text-decoration: underline;
-    color: orangered;
+    text-decoration-thickness: 1px;
+    color: #ff6d38;
 }
 
 .fav {
@@ -58,11 +59,11 @@ a:hover, a:focus-visible {
 
 li::marker {
     color: var(--theme);
-    content: '\2192';  /* Unicode转义 */
+    content: '\2192';
 }
 
 br {
-    visibility: hidden; /* 为了使用户无法选中此元素，但元素依然占用一行空间 */
+    visibility: hidden;
 }
 
 :focus {
@@ -176,13 +177,13 @@ iframe {
 ul>li {
     margin-left: 28px;
     user-select: none;
-    line-height: 1.6em;
+    line-height: 1.7em;
     font-size: 17px;
 }
 
 .copyright span{
     font-size: 12px;
-    color: #ccc;
+    color: #c5c5c5;
     text-align: center;
     width: 100%;
     margin: 0;
@@ -212,11 +213,15 @@ ul>li {
     margin-top: 30px;
 }
 
-.beian, .changelog, .bili-space, .terms {
+.footer-links-wrapper a {
     color: inherit;
     font-weight: inherit;
     font-size: inherit;
     margin: inherit;
+}
+
+.footer-links-wrapper a:hover {
+    color: var(--theme);
 }
 
 .activity-container {
