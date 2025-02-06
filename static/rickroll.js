@@ -7,7 +7,7 @@ const comments = $('.comments')[0];
 const danmaku = $('.danmaku')[0];
 const updateBtn = $('.update-btn')[0];
 const autoUpdateChip = $('.auto-update')[0];
-const apiURL = 'http://www.whateverorigin.org/get?url=https://coco.codemao.cn/http-widget-proxy/https@SEP@api.bilibili.com/x/web-interface/view?bvid=BV1GJ411x7h7';
+const apiURL = 'https://www.whateverorigin.org/get?url=https://coco.codemao.cn/http-widget-proxy/https@SEP@api.bilibili.com/x/web-interface/view?bvid=BV1GJ411x7h7';
 
 footnoteIndicator.onclick = () => {
     mdui.alert({
