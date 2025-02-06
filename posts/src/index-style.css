@@ -65,3 +65,7 @@ header mdui-icon {
     color: #c2c2c2;
     padding-bottom: 60px;
 }
+
+mdui-list-subheader {
+    height: auto;
+}

@@ -105,3 +105,22 @@ img {
 .para {
     margin: 10px 0;
 }
+
+code {
+    display: block;
+    background-color: #411a31;
+    color: #c6c6c6;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+}

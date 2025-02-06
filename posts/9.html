@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>帖文 | #9 这个问题让我大为震撼！</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="./src/template.css">
+</head>
+<body>
+    
+    <div class="app">
+        <header>
+            <div class="title">这个问题让我大为震撼！</div>
+            <div class="info">
+                <mdui-avatar src="/static/avater_logo2x.png"></mdui-avatar>
+                <div class="primary">
+                    <span class="author">PopFortress</span>
+                    <time>2025.2.6</time>
+                </div>
+                <div class="secondary">
+                    <mdui-icon name="access_time"></mdui-icon>
+                    <span>预计 3 分钟阅读</span>
+                </div>
+            </div>
+        </header>
+
+        <mdui-divider></mdui-divider>
+
+        <div class="content">
+            <div class="para">
+                最近网站更新了一个页面：<a href="/rickroll-100million">《你被骗了》视频数据追踪器</a>。做这个页面本来是为了追踪rickroll视频破亿的过程，
+                刚开始我还很天真地想，只要有B站的API就行了嘛(●'◡'●)。结果代码撸到一半，界面都写好了，没想到它来了！
+            </div>
+            <div class="para">没错，就是跨域！</div>
+            <code class="para">
+                Access to fetch at 'https://api.bilibili.com/x/web-interface/view?bvid=BV1GJ411x7h7' from origin 'http://localhost' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
+            </code>
+            <div class="para">
+                按理来说，B站的API应该是开放的，但我并没有太过焦虑，因为那时的我天真地以为跨域的解决方案随便搜一下就有，没想到的是故事才刚刚开始。
+            </div>
+            <div class="para">
+                我在网上找了一会，立马发现一个适用的解决方案，那就是用跨域代理服务器。我顺着这条路一下找到了好几个代理网站，先筛掉根本访问不了的，然后尝试了一个。
+                就在我兴奋地以为问题就要被轻松解决时，戏剧性的一幕发生了：用了代理后返回的数据显示视频不存在(⊙_⊙)？，我不敢相信自己的眼睛，反复刷新了几次，又把代理服务器的网址前缀删了，发现地址明明没有写错，直接访问原API就能拿到数据！
+            </div>
+            <div class="para">
+                我震惊了，但更加戏剧性的是，我换了几个视频尝试，发现就只有rickroll视频会出现这个问题，真的是见鬼了！X﹏X
+            </div>
+            <div class="para">
+                我怀疑是这个代理服务器的问题，于是想换一个试试，但更换了几个都无济于事 =( 这使当时的我暂且放弃去睡觉了，因为当时解决这个问题已经到半夜了zzz
+            </div>
+            <div class="para">第二天，我因为不甘心放弃这个项目，想着去用CoCo编辑器把这个页面写成一个安卓app，这样也不会出现跨域，从根本上解决问题！</div>
+            <div class="para">
+                那个App是顺利完成了，这让我并未丧失全部信心。所以第二天，我突然想到Coco编辑器在网页调试时是怎么实现跨域的？我心血来潮又在Coco打开了昨天那个项目，
+                用F12一看，立马锁定了一个请求。经过一番探索，我发现Coco为了方便网页调试中发送跨域请求，自建了一个代理，当然这个代理本身返回的数据并不能跨域，因为这个代理就是在Coco域名下，是和调试页面同源的，只能被调试页面调用。
+            </div>
+            <div class="para">
+                到这里，我不知如何是好了，在网上又进行了各种搜索，但都没有找到答案。就在这时，我突然想到了一个天才点子！
+            </div>
+            <div class="para">虽然Coco的这个代理它不能跨域，但是它能正常返回数据呀！那我用前天找到的那些能跨域的代理套上Coco的代理不就行了吗？</div>
+            <div class="para">我被自己的天才点子惊呆了！立马兴冲冲地尝试起来。终于，在我的不懈努力下，“奇迹”真的发生了。</div>
+            <div class="para">于是请求地址也就变成了你们现在看到的这个“套娃”样子：</div>
+            <code class="para">https://api.allorigins.win/get?url=https://coco.codemao.cn/http-widget-proxy/https@SEP@api.bilibili.com/x/web-interface/view?bvid=BV1GJ411x7h7</code>
+            <div class="para">（套了两层代理）o_o ....</div>
+            <div class="para">总结一下，这个问题真的算是我解决花时间最长的bug了（足足3天！）不过好在最后是成功解决了，并且我还学到了更多跨域相关的知识！o(￣▽￣)ｄ</div>
+            <div class="para"><small>PS. 不知道为什么，现在的这个请求地址时不时会又会报跨域错误，刷新一下又好了，我真的要红温了！=(</small></div>
+        </div>
+    </div>
+
+</body>
+</html>
