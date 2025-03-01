@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.5;
+    font-family: sans-serif;
+}
+
+::selection {
+    background: #333;
+    color: #fff;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+    max-width: 700px;
+}
+
+.title-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    color: #E53935;
+    margin: 40px;
+}
+
+.titles {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+} 
+
+h1 {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 14px;
+    font-weight: 100;
+}
+
+a {
+    text-decoration: none;
+    color: #E53935;
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+}
+
+a:active {
+    color: #EF9A9A;
+}
+
+.switch-ver {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 14px;
+}
+
+mdui-card {
+    display: block;
+    margin: 20px 0;
+}
+
+.sayings {
+    padding: 10px 10px 10px 50px;
+    color: #db4f4f;
+}
+
+.search-box-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.search-btn {
+    height: auto;
+}
+
+.footer {
+    padding: 10px;
+    color: #db4f4f;
+    font-size: 14px;
+}
+
+.info {
+    padding: 20px 0;
+}
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+}
+
+mdui-list {
+    margin: 20px 0;
+}
+
+mdui-list-subheader {
+    height: auto;
+}
+
+.activity-container {
+    margin: 20px 0;
+}
+
+.activity-card {
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 400px;
+    margin: 0;
+}
+
+.activity-desc {
+    margin: 0;
+    padding: 10px;
+    color: #db4f4f;
+    display: flex;
+    justify-content: center;
+}
+
+.info-btn {
+    height: auto;
+    font-size: 20px;
+}

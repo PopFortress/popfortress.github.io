@@ -1,6 +1,7 @@
 const listItems = document.querySelectorAll('.content mdui-list-item');
 const searchInput = document.querySelector('.search-bar');
 const searchBtn = document.querySelector('.search-btn');
+const subheaders = document.querySelectorAll('.content mdui-list-subheader');
 
 function addListItemIcon() {
     listItems.forEach(element => {
@@ -9,6 +10,9 @@ function addListItemIcon() {
 }
 
 function searchPosts() {
+    subheaders.forEach(element => {
+        element.style.display = 'none';
+    });
     const searchText = searchInput.value.toLowerCase();
     listItems.forEach(element => {
         const title = element.textContent.toLowerCase();
@@ -18,7 +22,12 @@ function searchPosts() {
             element.style.display = 'none';
         }
     });
-}
+    if (!searchText) {
+        subheaders.forEach(element => {
+            element.style.display = 'block';
+        });
+    };
+};
 
 searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
@@ -27,6 +36,9 @@ searchInput.addEventListener('keydown', (e) => {
 });
 searchBtn.addEventListener('click', searchPosts);
 searchInput.addEventListener('clear', () => {
+    subheaders.forEach(element => {
+        element.style.display = 'block';
+    });
     listItems.forEach(element => {
         element.style.display = 'block';
     });

@@ -43,6 +43,7 @@
         }
         .info {
             font-size: 16px;
+            margin: 10px;
         }
         .links-card {
             margin: 20px 0;
@@ -76,6 +77,16 @@
             flex-wrap: wrap;
             justify-content: center;
         }
+        a {
+            text-decoration: none;
+            color: #4b4b92;
+            padding: 0 10px;
+        }
+        a:hover {
+            text-decoration: underline;
+            text-decoration-thickness: 1px;;
+            text-underline-offset: 4px;
+        }
     </style>
 </head>
 <body>
@@ -90,7 +101,7 @@
         <span class="info">
             Fortress Software Enterprise 波普的温馨小阁<br>
             PopFortress (c) 2021-2025 保留所有权利<br>
-            此站点托管于 GitHub Pages。由<mdui-button variant="text" href="//github.com/popfortress" style="vertical-align: middle;">PopFortress</mdui-button>开发及维护
+            此站点托管于 GitHub Pages。由<a href="//github.com/popfortress">PopFortress</a>开发及维护
         </span>
         <div><mdui-chip elevated href="/" end-icon="arrow_forward">popfortress.github.io</mdui-chip></div>
         <mdui-card class="links-card">
@@ -102,6 +113,7 @@
                 <mdui-button href="//zh-cn.namemc.com/profile/PopFortress.1" target="_blank" icon="arrow_outward">NameMC</mdui-button>
                 <mdui-button href="//bbs.mcutc.cn/members/popfortress.101/" target="_blank" icon="arrow_outward">MCUTC 论坛</mdui-button>
                 <mdui-button href="//www.xbox.com/zh-CN/play/user/PopFortress" target="_blank" icon="arrow_outward">Xbox 档案</mdui-button>
+                <mdui-button href="//sn.solsynth.dev/account/popfortress" target="_blank" icon="arrow_outward">Solar Network</mdui-button>
             </div>
         </mdui-card>
         <mdui-card class="links-card">
@@ -119,9 +131,9 @@
             <span>相关链接</span>
             <div class="links">
                 <mdui-button href="//github.com" target="_blank" icon="arrow_outward" variant="tonal">GitHub</mdui-button>
-                <mdui-button href="//pages.github.com" target="_blank" icon="arrow_outward" variant="tonal">GitHubPages</mdui-button>
-                <mdui-button href="//github.com/popfortress/popfortress.github.io" target="_blank" icon="arrow_outward" variant="tonal">GitHub仓库</mdui-button>
-                <mdui-button href="./changelog.html" target="_blank" icon="arrow_outward" variant="tonal">更新日志</mdui-button>
+                <mdui-button href="//pages.github.com" target="_blank" icon="arrow_outward" variant="tonal">GitHub Pages</mdui-button>
+                <mdui-button href="//github.com/popfortress/popfortress.github.io" target="_blank" icon="arrow_outward" variant="tonal">GitHub 仓库</mdui-button>
+                <mdui-button href="./changelog" target="_blank" icon="arrow_outward" variant="tonal">更新日志</mdui-button>
                 <mdui-button href="//www.mdui.org/zh-cn/" target="_blank" icon="arrow_outward" variant="tonal">MDUI</mdui-button>
                 <mdui-button href="./" target="_blank" icon="arrow_outward" variant="tonal">隐私政策 & 条款</mdui-button>
                 <mdui-button href="//icp.gov.moe/?keyword=20241789" target="_blank" icon="arrow_outward" variant="tonal">萌ICP备20241789号</mdui-button>
