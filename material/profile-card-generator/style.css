@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.5;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: 100%;
+    max-width: 700px;
+}
+
+mdui-card {
+    margin: 30px 0;
+    padding: 17px;
+    display: block;
+}
+
+.preview-card {
+    height: 256px;
+    overflow: auto;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.editing-panel mdui-card {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    gap: 20px;
+}
+
+.label {
+    font-size: 20px;
+    min-width: 64px;
+}
+
+.avatar-box {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+}
+
+#avatar-input {
+    display: none;
+}
+
+.avatar-intro {
+    font-size: 14px;
+}
+
+.height-value {
+    text-wrap: nowrap;
+}
+
+.apply-btn {
+    margin-bottom: 40px;
+}
+
+.prv-avatar {
+    width: 100px;
+    height: 100px;
+}
+
+.prv-name {
+    font-size: 26px;
+}
+
+.prv-fourth mdui-icon {
+    vertical-align: sub;
+}

@@ -20,6 +20,8 @@ async function fetchSrc() {
     latestUpdateLabel.innerHTML = `最后更新时间　${data.latest_update}`;
     activityImg.style.backgroundImage = `url(${data.activity_imgurl})`;
     activityTitleLabel.innerHTML = data.activity_title;
+    activityImg.href = data.activity_target_url;
+    activityImg.target = '_blank';
 }
 
 function showSayingsDesc() {
@@ -74,7 +76,6 @@ listItems.forEach(element => {
     element.addEventListener('focus', lstItemAnimate);
     element.addEventListener('blur', lstItemAnimate);
 });
-activityImg.addEventListener('click', () => {
-    window.open(data.activity_target_url, '_blank');
-});
 helpInfoBtn.addEventListener('click', showActivityHelpDialog);
+mdui.loadLocale((locale) => import(`https://unpkg.com/mdui@2/locales/${locale}.js`));
+mdui.setLocale('zh-cn');

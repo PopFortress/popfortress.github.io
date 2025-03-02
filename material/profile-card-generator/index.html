@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <title>个人名片生成器</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+</head>
+<body>
+    
+    <div class="app">
+        <mdui-card class="preview-card">
+            <mdui-avatar class="prv-avatar"></mdui-avatar>
+            <div class="prv-intro">
+                <div class="prv-name"></div>
+                <div class="prv-secondary"></div>
+                <div class="prv-third"></div>
+                <div class="prv-fourth">
+                    <mdui-icon name='cake'></mdui-icon>
+                    <span class="prv-birthday"></span>
+                    <mdui-icon name='location_on'></mdui-icon>
+                    <span class="prv-location"></span>
+                </div>
+            </div>
+        </mdui-card>
+        <div class="editing-panel">
+            <mdui-card class="avatar">
+                <div class="label">Avatar</div>
+                <label for="avatar-input">
+                    <mdui-avatar class="avatar-box" title="upload avatar" icon="add"></mdui-avatar>
+                </label>
+                <input type="file" id="avatar-input" accept="image/*">
+                <div class="avatar-intro">建议尺寸：128 x 128<br>宽高比：1:1</div>
+            </mdui-card>
+            <mdui-card class="name-tag">
+                <div class="label">名字</div>
+                <mdui-text-field variant="outlined" label="在此键入您的名字..." clearable maxlength="16" counter class="name-field"></mdui-text-field>
+            </mdui-card>
+            <mdui-card class="age">
+                <div class="label">年龄</div>
+                <div class="age-value"></div>
+                <mdui-slider max="122" class="age-slider"></mdui-slider>
+            </mdui-card>
+            <mdui-card class="gender">
+                <div class="label">性别</div>
+                <mdui-radio-group class="gender-radio-group">
+                    <mdui-radio value="女性">女性</mdui-radio>
+                    <mdui-radio value="男性">男性</mdui-radio>
+                    <mdui-radio value="武装直升机">武装直升机</mdui-radio>
+                    <mdui-radio value="沃尔玛购物袋">沃尔玛购物袋</mdui-radio>
+                    <mdui-radio value="Non Binary">Non Binary</mdui-radio>
+                </mdui-radio-group>
+            </mdui-card>
+            <mdui-card class="height">
+                <div class="label">身高</div>
+                <div class="height-value"></div>
+                <mdui-slider min="50" max="256" class="height-slider"></mdui-slider>
+            </mdui-card>
+            <mdui-card class="weight">
+                <div class="label">体重</div>
+                <mdui-text-field variant="outlined" type="number" label="在此键入您的体重..." class="weight-field"></mdui-text-field>
+                <div>/kg</div>
+            </mdui-card>
+            <mdui-card class="birthday">
+                <div class="label">生日</div>
+                <mdui-text-field variant="outlined" type="date" label="在此键入您的生日..." class="birthday-field"></mdui-text-field>
+            </mdui-card>
+            <mdui-card class="location">
+                <div class="label">地区</div>
+                <mdui-radio-group class="location-radio-group">
+                    <mdui-radio value="中国大陆">中国大陆</mdui-radio>
+                    <mdui-radio value="亚洲">亚洲（除中国大陆）</mdui-radio>
+                    <mdui-radio value="欧洲">欧洲</mdui-radio>
+                    <mdui-radio value="美洲">美洲</mdui-radio>
+                    <mdui-radio value="南极洲">南极洲</mdui-radio>
+                    <mdui-radio value="北极">北极</mdui-radio>
+                    <mdui-radio value="宇宙公民">不在地球上</mdui-radio>
+                </mdui-radio-group>
+            </mdui-card>
+            <mdui-button full-width icon="save" class="apply-btn">Apply Settings</mdui-button>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>

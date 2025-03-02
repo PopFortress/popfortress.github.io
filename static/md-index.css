@@ -105,12 +105,8 @@ mdui-card {
     column-gap: 10px;
 }
 
-mdui-list {
+mdui-tabs {
     margin: 20px 0;
-}
-
-mdui-list-subheader {
-    height: auto;
 }
 
 .activity-container {

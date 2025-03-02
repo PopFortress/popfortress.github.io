@@ -32,27 +32,41 @@
             <mdui-text-field variant="outlined" label="搜索 popfortress.github.io" type="search" clearable icon="search" class="search-box"></mdui-text-field>
             <mdui-button variant="tonal" end-icon="arrow_forward" class="search-btn">搜索</mdui-button>
         </div>
-        <mdui-list>
-            <mdui-list-subheader>精选页面</mdui-list-subheader>
-            <mdui-list-item href="/fakecaptcha?r=/CSS-FUN-WORKS/homepage/">我的个人主页</mdui-list-item>
-            <mdui-list-item href="/ballclock">彩色小球时钟</mdui-list-item>
-            <mdui-list-item href="/iyan">每日一言</mdui-list-item>
-            <mdui-list-item href="/iyan-poem">每日诗句</mdui-list-item>
-            <mdui-list-item href="/poem">诗集便笺</mdui-list-item>
-            <mdui-list-item href="/yxh">营销号文案生成器</mdui-list-item>
-            <mdui-list-item href="/bing_wallpaper">必应随机壁纸</mdui-list-item>
-            <mdui-list-item href="/bing_wallpaper_daily">必应每日壁纸</mdui-list-item>
-            <mdui-list-item href="/essay">随笔收藏集</mdui-list-item>
-            <mdui-list-item href="/encyclopedia">人物与名词</mdui-list-item>
-            <mdui-list-item href="/keep-screen-on">保持屏幕常亮</mdui-list-item>
-            <mdui-list-item href="/rickroll-100million">瑞克摇B站视频数据显示</mdui-list-item>
-            <mdui-list-subheader>特别页面</mdui-list-subheader>
-            <mdui-list-item href="/posts/">帖文收集目录</mdui-list-item>
-            <mdui-list-item href="/CSS-FUN-WORKS/">CSS-FUN-WORKS 系列</mdui-list-item>
-            <mdui-list-item href="/info/new_year_countdown">新年倒计时</mdui-list-item>
-            <mdui-list-item href="/info/spring_festival_countdown">春节倒计时</mdui-list-item>
-            <mdui-list-item href="/test/" icon="warning">实验性测试页面</mdui-list-item>
-        </mdui-list>
+        <mdui-tabs value="featured" variant="secondary" full-width>
+            <mdui-tab value="featured">精选页面</mdui-tab>
+            <mdui-tab value="special">特别页面</mdui-tab>
+            <mdui-tab value="material">Material Design</mdui-tab>
+            <mdui-tab-panel slot="panel" value="featured">
+                <mdui-list>
+                    <mdui-list-item href="/fakecaptcha?r=/CSS-FUN-WORKS/homepage/">我的个人主页</mdui-list-item>
+                    <mdui-list-item href="/ballclock">彩色小球时钟</mdui-list-item>
+                    <mdui-list-item href="/iyan">每日一言</mdui-list-item>
+                    <mdui-list-item href="/iyan-poem">每日诗句</mdui-list-item>
+                    <mdui-list-item href="/poem">诗集便笺</mdui-list-item>
+                    <mdui-list-item href="/yxh">营销号文案生成器</mdui-list-item>
+                    <mdui-list-item href="/bing_wallpaper">必应随机壁纸</mdui-list-item>
+                    <mdui-list-item href="/bing_wallpaper_daily">必应每日壁纸</mdui-list-item>
+                    <mdui-list-item href="/essay">随笔收藏集</mdui-list-item>
+                    <mdui-list-item href="/encyclopedia">人物与名词</mdui-list-item>
+                    <mdui-list-item href="/keep-screen-on">保持屏幕常亮</mdui-list-item>
+                    <mdui-list-item href="/rickroll-100million">瑞克摇B站视频数据显示</mdui-list-item>
+                </mdui-list>
+            </mdui-tab-panel>
+            <mdui-tab-panel slot="panel" value="special">
+                <mdui-list>
+                    <mdui-list-item href="/posts/">帖文收集目录</mdui-list-item>
+                    <mdui-list-item href="/CSS-FUN-WORKS/">CSS-FUN-WORKS 系列</mdui-list-item>
+                    <mdui-list-item href="/info/new_year_countdown">新年倒计时</mdui-list-item>
+                    <mdui-list-item href="/info/spring_festival_countdown">春节倒计时</mdui-list-item>
+                    <mdui-list-item href="/test/" icon="warning">实验性测试页面</mdui-list-item>
+                </mdui-list>
+            </mdui-tab-panel>
+            <mdui-tab-panel slot="panel" value="material">
+                <mdui-list>
+                    <mdui-list-item href="/material/profile-card-generator/">个人名片生成器</mdui-list-item>
+                </mdui-list>
+            </mdui-tab-panel>
+        </mdui-tabs>
         <div class="activity-container">
             <mdui-card clickable class="activity-card"></mdui-card>
             <mdui-card class="activity-desc">
@@ -71,11 +85,13 @@
             <div class="links">
                 <a href="//icp.gov.moe/?keyword=20241789" target="_blank" >萌ICP备20241789号</a>
                 <a href="//space.bilibili.com/3461573418945245" target="_blank">哔哩哔哩</a>
+                <a href="//github.com/PopFortress/popfortress.github.io" target="_blank">Help contributing this site on GitHub</a>
                 <a href="/fakecaptcha?r=/info/changelog" target="_blank">更新日志</a>
                 <a href="/fakecaptcha?r=/info/" target="_blank">隐私政策 & 条款</a>
                 <a href="//creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
                 <a href="/info/suspage" target="_blank">可疑的页面</a>
                 <a href="//travel.moe/" target="_blank">异次元之旅</a>
+                <a href="//www.travellings.cn/go.html" target="_blank">开往</a>
             </div>
         </mdui-card>
     </div>
