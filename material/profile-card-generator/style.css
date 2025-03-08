@@ -28,6 +28,7 @@ mdui-card {
     gap: 20px;
     justify-content: center;
     align-items: center;
+    margin-bottom: 6px;
 }
 
 .editing-panel mdui-card {
@@ -75,4 +76,9 @@ mdui-card {
 
 .prv-fourth mdui-icon {
     vertical-align: sub;
+}
+
+.prv-card-desc {
+    text-align: center;
+    font-size: 14px;
 }

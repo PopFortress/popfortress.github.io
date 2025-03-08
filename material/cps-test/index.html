@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>CPS 检测器</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <script src="/mdui/mdui.global.js"></script>
+</head>
+<body>
+    
+    <div class="app">
+        <mdui-top-app-bar>
+            <mdui-top-app-bar-title>每秒点击次数 检测器</mdui-top-app-bar-title>
+        </mdui-top-app-bar>
+        <div class="area-frame">
+            <div class="info">
+                <mdui-card>
+                    <div class="time-value values">10</div>
+                    <div class="info-label">剩余时间</div>
+                </mdui-card>
+                <mdui-card>
+                    <div class="clicks-value values">0</div>
+                    <div class="info-label">点击次数</div>
+                </mdui-card>
+            </div>
+            <mdui-card class="clicking-pad" clickable variant="filled">点击任意处以开始</mdui-card>
+        </div>
+        <div class="score-board">
+            <div>
+                <div class="latest-cps-value score-values">0</div>
+                <div class="info-label">每秒点击次数</div>
+            </div>
+            <div>
+                <div class="highest-cps-value score-values">0</div>
+                <div class="info-label">最高分数</div>
+            </div>
+        </div>
+        <div class="timeset">
+            <mdui-radio-group value="10" class="duration-radio-group">
+                <mdui-radio value="1">1秒</mdui-radio>
+                <mdui-radio value="5">5秒</mdui-radio>
+                <mdui-radio value="10">10秒</mdui-radio>
+                <mdui-radio value="20">20秒</mdui-radio>
+                <mdui-radio value="30">30秒</mdui-radio>
+            </mdui-radio-group>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>

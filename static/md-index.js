@@ -20,7 +20,7 @@ async function fetchSrc() {
     latestUpdateLabel.innerHTML = `最后更新时间　${data.latest_update}`;
     activityImg.style.backgroundImage = `url(${data.activity_imgurl})`;
     activityTitleLabel.innerHTML = data.activity_title;
-    activityImg.href = data.activity_target_url;
+    activityImg.href = `/fakecaptcha?r=${data.activity_target_url}`;
     activityImg.target = '_blank';
 }
 

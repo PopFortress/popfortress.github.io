@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.5;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+    max-width: 700px;
+}
+
+mdui-top-app-bar {
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.area-frame {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.info mdui-card {
+    padding: 16px;
+    margin: 12px;
+    width: 104px;
+    height: 104px;
+    text-align: center;
+}
+
+.values {
+    font-size: 30px;
+}
+
+.time-value {
+    color: rgb(var(--mdui-color-secondary));
+}
+
+.clicks-value {
+    color: rgb(var(--mdui-color-primary));
+}
+
+.info-label {
+    font-size: 12px;
+}
+
+.clicking-pad {
+    width: 232px;
+    height: 232px;
+    margin: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.score-board {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    text-align: center;
+}
+
+.score-values {
+    font-size: 24px;
+    color: rgb(var(--mdui-color-secondary));
+}
+
+.timeset {
+    text-align: center;
+    padding: 27px;
+}
