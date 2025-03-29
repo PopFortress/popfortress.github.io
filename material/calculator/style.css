@@ -1,0 +1,74 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 620px;
+    height: 100%;
+    border-radius: 30px;
+}
+
+.expression-wrapper {
+    width: 100%;
+    height: 30%;
+    padding: 10px;
+}
+
+.expression {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    padding: 23px;
+    text-align: right;
+    font-size: 3rem;
+    overflow-x: auto;
+}
+
+.actions {
+    width: 100%;
+    height: calc(100% - 30%);
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+.actions > mdui-button {
+    font-size: 2rem;
+    width: auto;
+    height: auto;
+}
+
+.secondary-btn {
+    background: #c3e7ff;
+    color: #03233c;
+}
+
+.numpad-btn {
+    color: rgb(var(--mdui-color-secondary));
+}
+
+.more {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+}
+
+.theme-radio-group *{
+    min-width: 100%;
+}

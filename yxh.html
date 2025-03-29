@@ -16,6 +16,24 @@
             -ms-user-select: none;
         }
 
+        body {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        @media screen and (min-width: 700px) {
+            body {
+                align-items: center;
+                margin: 0;
+            }
+        }
+
+        .app {
+            width: 100%;
+            max-width: 700px;
+        }
+
         h1,h2{
             margin: 0;
             color: #b39dd8;
@@ -44,17 +62,19 @@
 </head>
 <body>
     
-    <h1>营销号文案生成器</h1>
-    <h2>Sand Sculpture Generator</h2>
-    <mdui-divider style="margin: 6px 0;"></mdui-divider>
-    <mdui-text-field label="名字" clearable maxlength="10" counter variant="outlined" class="name"></mdui-text-field>
-    <mdui-text-field label="事件" clearable maxlength="30" counter variant="outlined" class="event"></mdui-text-field>
-    <mdui-text-field label="原因" clearable maxlength="30" counter variant="outlined" class="reason"></mdui-text-field>
-    <mdui-button icon="arrow_forward" full-width onclick="generate()">生成</mdui-button>
-
-    <mdui-card class="content" clickable>这里暂时是空的... 请先生成点内容吧！</mdui-card>
-    <div class="copy-tip-wrapper">
-        <span>(点击复制)</span>
+    <div class="app">
+        <h1>营销号文案生成器</h1>
+        <h2>Sand Sculpture Generator</h2>
+        <mdui-divider style="margin: 6px 0;"></mdui-divider>
+        <mdui-text-field label="名字" clearable maxlength="10" counter variant="outlined" class="name"></mdui-text-field>
+        <mdui-text-field label="事件" clearable maxlength="30" counter variant="outlined" class="event"></mdui-text-field>
+        <mdui-text-field label="原因" clearable maxlength="30" counter variant="outlined" class="reason"></mdui-text-field>
+        <mdui-button icon="arrow_forward" full-width onclick="generate()">生成</mdui-button>
+    
+        <mdui-card class="content" clickable>这里暂时是空的... 请先生成点内容吧！</mdui-card>
+        <div class="copy-tip-wrapper">
+            <span>(点击复制)</span>
+        </div>
     </div>
 
     <mdui-snackbar auto-close-delay="1000" class="info">请填写所有字段</mdui-snackbar>

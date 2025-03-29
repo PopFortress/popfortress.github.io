@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Caculator Example</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <script src="./script.js" defer></script>
+</head>
+<body>
+    
+    <mdui-card class="app" variant="elevated">
+        <div class="expression-wrapper">
+            <mdui-dropdown trigger="contextmenu" open-on-pointer>
+                <mdui-card class="expression" variant="filled" slot="trigger"></mdui-card>
+                <mdui-menu dense>
+                    <mdui-menu-item icon="content_copy" class="copy">复制</mdui-menu-item>
+                    <mdui-menu-item icon="content_cut" class="cut">剪切</mdui-menu-item>
+                    <mdui-menu-item icon="content_paste" class="paste">粘贴</mdui-menu-item>
+                </mdui-menu>
+            </mdui-dropdown>
+        </div>
+        <div class="actions">
+            <mdui-button style="background: #C8E6C9; color: #4c7056;" variant="elevated" id="ac">AC</mdui-button>
+            <mdui-button class="secondary-btn input-btn" variant="elevated" id="(">(</mdui-button>
+            <mdui-button class="secondary-btn input-btn" variant="elevated" id=")">)</mdui-button>
+            <mdui-button class="secondary-btn input-btn" variant="elevated" id="/">÷</mdui-button>
+            <mdui-button class="numpad-btn input-btn" variant="elevated" id="7">7</mdui-button>
+            <mdui-button class="numpad-btn input-btn" variant="elevated" id="8">8</mdui-button>
+            <mdui-button class="numpad-btn input-btn" variant="elevated" id="9">9</mdui-button>
+            <mdui-button class="secondary-btn input-btn" variant="elevated" id="*">×</mdui-button>
+            <mdui-button class="numpad-btn input-btn" variant="elevated" id="4">4</mdui-button>
+            <mdui-button class="numpad-btn input-btn" variant="elevated" id="5">5</mdui-button>
+            <mdui-button class="numpad-btn input-btn" variant="elevated" id="6">6</mdui-button>
+            <mdui-button class="secondary-btn input-btn" variant="elevated" id="-">－</mdui-button>
+            <mdui-button class="numpad-btn input-btn" variant="elevated" id="1">1</mdui-button>
+            <mdui-button class="numpad-btn input-btn" variant="elevated" id="2">2</mdui-button>
+            <mdui-button class="numpad-btn input-btn" variant="elevated" id="3">3</mdui-button>
+            <mdui-button class="secondary-btn input-btn" variant="elevated" id="+">+</mdui-button>
+            <mdui-button class="numpad-btn input-btn" variant="elevated" id="0">0</mdui-button>
+            <mdui-button class="numpad-btn input-btn" variant="elevated" id=".">.</mdui-button>
+            <mdui-button class="numpad-btn" variant="elevated" id="backspace">
+                <mdui-icon name='backspace' style="font-size: 5vh;"></mdui-icon>
+            </mdui-button>
+            <mdui-button style="background: #d3e3fd; color: #11274b;" variant="elevated" id="equal">＝</mdui-button>
+        </div>
+        <mdui-dropdown placement="left-start">
+            <mdui-button-icon icon="more_vert" class="more" slot="trigger"></mdui-button-icon>
+            <mdui-menu>
+                <mdui-menu-item class="history-btn">历史记录</mdui-menu-item>
+                <mdui-menu-item class="theme-btn">选择主题</mdui-menu-item>
+                <mdui-menu-item href="//policies.google.cn/privacy" target="_blank">隐私权政策</mdui-menu-item>
+                <mdui-menu-item href="//github.com/popfortress/popfortress.github.io/issues/" target="_blank">发送反馈</mdui-menu-item>
+                <mdui-menu-item href="//policies.google.cn/faq" target="_blank">帮助</mdui-menu-item>
+            </mdui-menu>
+        </mdui-dropdown>
+    </mdui-card>
+
+    <mdui-dialog headline="选择主题" class="theme-dialog">
+        <mdui-radio-group value="auto" class="theme-radio-group">
+            <mdui-radio value="light">浅色</mdui-radio>
+            <mdui-radio value="dark">深色</mdui-radio>
+            <mdui-radio value="auto">系统默认设置</mdui-radio>
+        </mdui-radio-group>
+        <mdui-button slot="action" variant="text" class="theme-dlg-cancel-btn">取消</mdui-button>
+        <mdui-button slot="action" variant="text" class="theme-dlg-confirm-btn">确定</mdui-button>
+    </mdui-dialog>
+
+</body>
+</html>
