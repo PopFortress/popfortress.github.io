@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>番茄钟</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <script src="/static/NoSleep.min.js"></script>
+</head>
+<body>
+    
+    <div class="app">
+        <mdui-tabs value="focus" full-width>
+            <mdui-tab value="focus" icon="timer" inline>Focus</mdui-tab>
+            <mdui-tab value="todos" icon="check" inline>Todo</mdui-tab>
+
+            <mdui-tab-panel slot="panel" value="focus">
+                <div class="animation">
+                    <label class="dot-static"></label>
+                    <label class="dot"></label>
+                </div>
+                <div class="timer-frame">
+                    <div class="timer">25:00</div>
+                    <div class="status-indicator">Ready to start.</div>
+                </div>
+                <div class="duration-settings">
+                    <mdui-text-field variant="outlined" type="number" label="work duration" helper="minutes" value="25" class="work-duration-input"></mdui-text-field>
+                    <mdui-text-field variant="outlined" type="number" label="break duration" helper="minutes" value="5" class="break-duration-input"></mdui-text-field>
+                </div>
+                <div class="actions">
+                    <mdui-fab extended icon="play_arrow" class="status-toggle">Start</mdui-fab>
+                    <mdui-checkbox class="wake-lock-checkbox">Keep screen on</mdui-checkbox>
+                    <mdui-button-icon icon="fullscreen" class="toggle-fullscreen"></mdui-button-icon>
+                </div>
+            </mdui-tab-panel>
+
+            <mdui-tab-panel slot="panel" value="todos">
+                <div class="todos-title">To Do Items</div>
+                <mdui-list class="todo-items-list"></mdui-list>
+                <mdui-fab extended icon="clear_all" class="clear-todos-btn" variant="secondary">Clear All</mdui-fab>
+                <mdui-fab extended icon="add" class="add-todo-btn">Add</mdui-fab>
+            </mdui-tab-panel>
+        </mdui-tabs>
+    </div>
+
+</body>
+</html>

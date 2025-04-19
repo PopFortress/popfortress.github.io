@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+    max-width: 660px;
+}
+
+mdui-tab::part(icon) {
+    padding-right: 10px;
+}
+
+.animation {
+    display: flex;
+    margin: 70px 0;
+    justify-content: center;
+}
+
+.dot, .dot-static {
+    width:32px;
+    height:32px;
+    display:block;
+    position:relative;
+    border-radius:50%;
+    background-color: rgb(var(--mdui-color-primary));
+    z-index:1;
+}
+
+.dot {
+    display: none;
+}
+
+.dot::after{
+    width:100%;
+    height:100%;
+    content:"";
+    border-radius:50%;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:-2;
+    background-color: rgb(var(--mdui-color-primary));
+    animation:dot-play 4s linear 400ms infinite;
+}
+
+.dot::before{
+    width:100%;
+    height:100%;
+    content:"";
+    border-radius:50%;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:-1;
+    background-color: rgb(var(--mdui-color-primary));
+    animation:dot-play 4s linear 200ms infinite;
+    animation-delay:2s;
+}
+
+@keyframes dot-play{
+    from{
+        transform:scale(1);
+        opacity:.2;
+    }
+    to{
+        transform:scale(4);
+        opacity:0;
+    }
+}
+
+.timer-frame {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.timer {
+    font-size: 2.1rem;
+    padding: 20px 0;
+}
+
+.status-indicator {
+    font-size: 14px;
+}
+
+.duration-settings {
+    display: flex;
+    margin: 40px 0;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.work-duration-input, .break-duration-input {
+    width: fit-content;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+mdui-tabs {
+    height: 100%;
+}
+
+.todos-title {
+    padding: 30px 30px 30px 10px;
+    font-size: 2rem;
+}
+
+.add-todo-btn, .clear-todos-btn {
+    width: fit-content !important;
+    position: absolute;
+}
+
+.add-todo-btn {
+    bottom: 46px;
+    right: 46px;
+}
+
+.clear-todos-btn {
+    bottom: 46px;
+    right: 156px;
+}
