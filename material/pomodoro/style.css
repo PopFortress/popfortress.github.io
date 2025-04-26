@@ -134,3 +134,18 @@ mdui-tabs {
     bottom: 46px;
     right: 156px;
 }
+
+.stats-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.reset-stats-btn {
+    position: absolute;
+    bottom: 12px;
+}

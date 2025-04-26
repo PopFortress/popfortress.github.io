@@ -15,6 +15,10 @@ const fullscreenBtn = $('.toggle-fullscreen');
 const todoItemsLst = $('.todo-items-list');
 const addTodoBtn = $('.add-todo-btn');
 const clearTodosBtn = $('.clear-todos-btn');
+const focusingTimeText = $('.stats-focusing-time');
+const completedTasksText = $('.stats-completed-tasks');
+const tabs = $('mdui-tabs');
+const resetStatsBtn = $('.reset-stats-btn');
 var _status = 'stopped';
 var _remainMin = 0;
 var _remainSec = 0;
@@ -24,6 +28,12 @@ var workTimeout;
 var breakTimeout;
 var newLstItem;
 var newLstItemCheckbox;
+if (!localStorage.totalFocusingTime) {
+    localStorage.totalFocusingTime = 0;
+};
+if (!localStorage.completedTasks) {
+    localStorage.completedTasks = 0;
+};
 
 wakeLockCheckbox.onchange = (e) => {
     if (e.target.checked) {
@@ -53,26 +63,59 @@ function countdown() {
 };
 
 function working() {
-    if (breakCountdownInterval) {
-        clearInterval(breakCountdownInterval);
-    };
     _status = 'working';
     statusText.textContent = 'Focusing.';
     mdui.setColorScheme('#66BB6A');
     _remainMin = parseInt(workInput.value);
     _remainSec = 0;
-    workTimeout = setTimeout(breaking, _remainMin * 60 * 1000);
+    workTimeout = setTimeout(() => {
+        clearInterval(workCountdownInterval);
+        localStorage.setItem('totalFocusingTime', parseInt(localStorage.totalFocusingTime) + parseInt(workInput.value));
+        mdui.dialog({
+            headline: 'Time\'s up!',
+            description: 'Working finished, what would you like to do next?',
+            actions: [
+                {text: 'End session', onClick: stopPomodoro},
+                {text: 'Start break', onClick: breaking},
+            ]
+        });
+    }, _remainMin * 60 * 1000);
     workCountdownInterval = setInterval(countdown, 1000);
 };
 
 function breaking() {
-    clearInterval(workCountdownInterval);
     statusText.textContent = 'Take a break now. zZ';
     mdui.setColorScheme('#2196F3');
     _remainMin = parseInt(breakInput.value);
     _remainSec = 0;
-    breakTimeout = setTimeout(working, _remainMin * 60 * 1000);
+    breakTimeout = setTimeout(() => {
+        clearInterval(breakCountdownInterval);
+        mdui.dialog({
+            headline: 'Time\'s up!',
+            description: 'Break finished, what would you like to do next?',
+            actions: [
+                {text: 'End session', onClick: stopPomodoro},
+                {text: 'Start working', onClick: working},
+            ]
+        });
+    }, _remainMin * 60 * 1000);
     breakCountdownInterval = setInterval(countdown, 1000);
+};
+
+function stopPomodoro() {
+    _status ='stopped';
+    clearInterval(workCountdownInterval);
+    clearInterval(breakCountdownInterval);
+    clearTimeout(workTimeout);
+    clearTimeout(breakTimeout);
+    statusToggleFab.textContent = 'Start';
+    statusToggleFab.icon = 'play_arrow';
+    workInput.disabled = false;
+    breakInput.disabled = false;
+    statusText.textContent = 'Ready to start.';
+    dotStatic.style.display = 'block';
+    dot.style.display = 'none';
+    mdui.removeColorScheme();
 };
 
 
@@ -94,19 +137,7 @@ statusToggleFab.onclick = () => {
             };
             break;
         case 'working':
-            _status ='stopped';
-            clearInterval(workCountdownInterval);
-            clearInterval(breakCountdownInterval);
-            clearTimeout(workTimeout);
-            clearTimeout(breakTimeout);
-            statusToggleFab.textContent = 'Start';
-            statusToggleFab.icon = 'play_arrow';
-            workInput.disabled = false;
-            breakInput.disabled = false;
-            statusText.textContent = 'Ready to start.';
-            dotStatic.style.display = 'block';
-            dot.style.display = 'none';
-            mdui.removeColorScheme();
+            stopPomodoro();
             break;
     };
 };
@@ -126,6 +157,13 @@ addTodoBtn.onclick = () => {
         newLstItemCheckbox.slot = 'icon';
         newLstItem.appendChild(newLstItemCheckbox);
         todoItemsLst.appendChild(newLstItem);
+        newLstItemCheckbox.onchange = (e) => {
+            if (e.target.checked) {
+                localStorage.completedTasks++; 
+            } else {
+                localStorage.completedTasks--;
+            };
+        };
     });
 };
 
@@ -133,4 +171,24 @@ clearTodosBtn.onclick = () => {
     while (todoItemsLst.firstChild) {
         todoItemsLst.removeChild(todoItemsLst.firstChild);
     };
+};
+
+tabs.onchange = (e) => {
+    if (e.target.value === 'statistics') {
+        focusingTimeText.textContent = Math.floor(parseInt(localStorage.totalFocusingTime) / 60) + 'h ' + localStorage.totalFocusingTime % 60 + 'm';
+        completedTasksText.textContent = localStorage.completedTasks;
+    };
+};
+
+resetStatsBtn.onclick = () => {
+    mdui.confirm({
+        headline: 'Reset Statistics',
+        description: 'All your statistcs will be reset. Are you sure?',
+        confirmText: 'Proceed',
+    }).then(() => {
+        localStorage.totalFocusingTime = 0;
+        localStorage.completedTasks = 0;
+        focusingTimeText.textContent = '0h 0m';
+        completedTasksText.textContent = '0';
+    });
 };

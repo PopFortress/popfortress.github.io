@@ -63,6 +63,10 @@ a:active {
     color: #EF9A9A;
 }
 
+a:focus {
+    outline: dashed .1px;
+}
+
 .switch-ver {
     position: absolute;
     top: 10px;

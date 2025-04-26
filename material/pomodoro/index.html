@@ -17,6 +17,7 @@
         <mdui-tabs value="focus" full-width>
             <mdui-tab value="focus" icon="timer" inline>Focus</mdui-tab>
             <mdui-tab value="todos" icon="check" inline>Todo</mdui-tab>
+            <mdui-tab value="statistics" icon="bar_chart" inline>Statistics</mdui-tab>
 
             <mdui-tab-panel slot="panel" value="focus">
                 <div class="animation">
@@ -43,6 +44,16 @@
                 <mdui-list class="todo-items-list"></mdui-list>
                 <mdui-fab extended icon="clear_all" class="clear-todos-btn" variant="secondary">Clear All</mdui-fab>
                 <mdui-fab extended icon="add" class="add-todo-btn">Add</mdui-fab>
+            </mdui-tab-panel>
+
+            <mdui-tab-panel slot="panel" value="statistics">
+                <div class="stats-wrapper">
+                    <div class="stats-subtitles">Total Focusing Time</div>
+                    <div class="stats-focusing-time">0h 0m</div>
+                    <div class="stats-subtitles">Completed Tasks</div>
+                    <div class="stats-completed-tasks">0</div>
+                    <mdui-chip class="reset-stats-btn" icon="clear">Reset Stats</mdui-chip>
+                </div>
             </mdui-tab-panel>
         </mdui-tabs>
     </div>
