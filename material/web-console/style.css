@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+.app {
+    width: 100%;
+    padding: 30px;
+}
+
+.options-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+    align-items: baseline;
+}
+
+@media screen and (max-width: 400px) {
+    .options-container {
+        align-items: inherit;
+        flex-direction: column;
+    }
+    .send-btn {
+        width: 100% !important;
+    }
+}
+
+.methods-select {
+    width: auto;
+}
+
+.response-view {
+    margin: 40px 0;
+}
+
+.modal-loading-dlg {
+    border: none;
+    overflow: hidden;
+    background: none;
+    margin: auto;
+}
+
+.modal-loading-dlg::backdrop {
+    backdrop-filter: blur(5px);
+}
+
+.modal-loading-dlg:focus {
+    outline: none;
+}
+
+.bottom-bar {
+    padding-top: 14px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.status-code {
+    font-size: 14px;
+    color: rgb(var(--mdui-color-secondary));
+    margin-right: auto;
+}
+
+.payload-input {
+    display: none;
+    margin-bottom: 14px;
+}
+
+.switch-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}

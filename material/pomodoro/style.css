@@ -109,6 +109,11 @@ mdui-tab::part(icon) {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10px;
+}
+
+.status-toggle {
+    width: fit-content !important;
 }
 
 mdui-tabs {

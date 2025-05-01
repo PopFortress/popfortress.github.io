@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Console</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link href="/mdui/material-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <div class="app">
+        <div class="settings">
+            <div class="options-container">
+                <mdui-select value="get" class="methods-select" label="Method" variant="outlined">
+                    <mdui-menu-item value="get">GET</mdui-menu-item>
+                    <mdui-menu-item value="post">POST</mdui-menu-item>
+                </mdui-select>
+                <mdui-text-field label="Enter the URL to be requested here." clearable variant="outlined" class="url-input" type="url"></mdui-text-field>
+                <mdui-fab extended icon="send" class="send-btn">Send</mdui-fab>
+            </div>
+            <mdui-text-field autosize label="Payload" variant="outlined" class="payload-input" clearable></mdui-text-field>
+            <mdui-text-field autosize label="User-Agent" variant="outlined" class="ua-input" helper="Leave blank for default." helper-on-focus clearable></mdui-text-field>
+        </div>
+        <div class="response-view">
+            <mdui-text-field autosize label="Response body" readonly variant="outlined" class="response-body" max-rows="10"></mdui-text-field>
+            <div class="bottom-bar">
+                <div class="status-code">Status:</div>
+                <div class="switch-wrapper">
+                    <mdui-switch checked class="cors-proxy-switch"></mdui-switch>
+                    <div>Enable CORS Proxy</div>
+                </div>
+                <mdui-chip class="decode-btn" variant="assist" icon="code">Decode</mdui-chip>
+            </div>
+        </div>
+
+        <dialog class="modal-loading-dlg">
+            <mdui-circular-progress></mdui-circular-progress>
+        </dialog>
+    </div>
+    
+    <script src="./script.js"></script>
+
+</body>
+</html>
