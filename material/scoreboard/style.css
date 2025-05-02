@@ -1,0 +1,119 @@
+::selection {
+    background: #000;
+    color: #eee;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.5;
+}
+
+body {
+    height: 100vh;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.page {
+    width: 100%;
+    max-width: 560px;
+}
+
+.player-names-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+mdui-top-app-bar-title {
+    font-size: 27px;
+    padding: 8px;
+    color: rgb(var(--mdui-color-primary));
+}
+
+mdui-top-app-bar {
+    background: rgb(var(--mdui-color-on-secondary-container-light));
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.edit-icon {
+    font-size: 27px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    margin-right: 20px;
+}
+
+.title-wrapper {
+    padding: 27px;
+    font-size: 27px;
+    display: flex;
+    justify-content: center;
+}
+
+.player-cfg-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+input[name='color'] {
+    height: auto;
+}
+
+.score-steps-cfg-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.score-steps-input {
+    height: fit-content;
+}
+
+.page-scoreboard {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+}
+
+.player-card {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-tag {
+    font-size: 23px;
+}
+
+.player-score {
+    font-size: 72px;
+    font-weight: bold;
+}
+
+.scoring-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.back-btn {
+    display: none;
+}
+
+.reset-scores-btn {
+    text-align: center;
+}

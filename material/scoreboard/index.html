@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>记分板</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <div class="app">
+        <mdui-top-app-bar>
+            <mdui-button-icon icon="arrow_back" class="back-btn"></mdui-button-icon>
+            <mdui-top-app-bar-title>Scoreboard</mdui-top-app-bar-title>
+        </mdui-top-app-bar>
+
+        <div class="page-profiles-cfg page">
+            <div class="title-wrapper">
+                <mdui-icon name="edit" class="edit-icon"></mdui-icon>
+                <div>Enter player profiles</div>
+            </div>
+            <div class="player-names-wrapper">
+                <div class="player-cfg-wrapper">
+                    <mdui-text-field label="Player 1" class="player" id="p1" clearable variant="outlined" icon="person"></mdui-text-field>
+                    <input type="color" name="color" id="p1-color" value="#6750a4">
+                </div>
+                <div class="player-cfg-wrapper">
+                    <mdui-text-field label="Player 2" class="player" id="p2" clearable variant="outlined" icon="person"></mdui-text-field>
+                    <input type="color" name="color" id="p2-color" value="#7d5260">
+                </div>
+                <div class="score-steps-cfg-wrapper">
+                    <mdui-text-field label="Score Increasement" class="score-steps-input" id="increasement-input" variant="outlined" type="number" value="1"></mdui-text-field>
+                    <mdui-text-field label="Score Decreasement" class="score-steps-input" id="decreasement-input" variant="outlined" type="number" value="1"></mdui-text-field>
+                </div>
+                <mdui-button full-width icon="arrow_forward" class="confirm-btn">Continue</mdui-button>
+                <mdui-chip icon="clear" class="reset-scores-btn" elevated>Reset Scores</mdui-chip>
+            </div>
+        </div>
+
+        <div class="page-scoreboard page">
+            <mdui-card class="player-card" id="p1-card">
+                <div class="player-tag" id="p1-tag"></div>
+                <div class="player-score" id="p1-score">0</div>
+                <div class="scoring-wrapper">
+                    <mdui-fab icon="add" id="p1-add"></mdui-fab>
+                    <mdui-fab icon="remove" id="p1-remove"></mdui-fab>
+                </div>
+            </mdui-card>
+            <mdui-card class="player-card" id="p2-card">
+                <div class="player-tag" id="p2-tag"></div>
+                <div class="player-score" id="p2-score">0</div>
+                <div class="scoring-wrapper">
+                    <mdui-fab icon="add" id="p2-add" variant="tertiary"></mdui-fab>
+                    <mdui-fab icon="remove" id="p2-remove" variant="tertiary"></mdui-fab>
+                </div>
+            </mdui-card>
+        </div>
+    </div>
+    
+    <script src="./script.js"></script>
+
+</body>
+</html>

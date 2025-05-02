@@ -2,7 +2,8 @@
 <html lang="zh-CN" class="mdui-theme-auto">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Web Console</title>
     <link rel="stylesheet" href="/mdui/mdui.css">
     <script src="/mdui/mdui.global.js"></script>
@@ -37,7 +38,10 @@
         </div>
 
         <dialog class="modal-loading-dlg">
-            <mdui-circular-progress></mdui-circular-progress>
+            <div class="dlg-wrapper">
+                <mdui-circular-progress></mdui-circular-progress>
+                <mdui-chip class="cancel-req-btn" icon="clear" elevated>Cancel Request</mdui-chip>
+            </div>
         </dialog>
     </div>
     

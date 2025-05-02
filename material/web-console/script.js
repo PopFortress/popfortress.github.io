@@ -8,9 +8,11 @@ const uaInput = document.querySelector('.ua-input');
 const payloadInput = document.querySelector('.payload-input');
 const decodeBtn = document.querySelector('.decode-btn');
 const corsSwitch = document.querySelector('.cors-proxy-switch');
+const cancelReqBtn = document.querySelector('.cancel-req-btn');
 var response;
 var res;
 var request = new XMLHttpRequest();
+var timer;
 
 
 methodSelect.addEventListener('change', (e) => {
@@ -40,8 +42,22 @@ function handleRequest(url, method, payload) {
     };
 };
 
+function cancelRequest() {
+    request.abort();
+    mdui.snackbar({
+        message: 'Request has been cancelled.',
+        autoCloseDelay: 1000,
+        closeOnOutsideClick: true
+    });
+    loadingDlg.close();
+};
+
 function sendRequest() {
     loadingDlg.showModal();
+    cancelReqBtn.style.display = 'none';
+    timer = setTimeout(() => {
+        cancelReqBtn.style.display = 'block';
+    }, 2000);
     handleRequest(urlInput.value, methodSelect.value, payloadInput.value);
 };
 
@@ -69,3 +85,8 @@ decodeBtn.onclick = () => {
 };
 
 uaInput.value = navigator.userAgent;
+loadingDlg.oncancel = cancelRequest;
+cancelReqBtn.onclick = cancelRequest;
+loadingDlg.onclose = () => {
+    clearTimeout(timer);
+};

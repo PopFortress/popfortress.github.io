@@ -19,6 +19,7 @@ const focusingTimeText = $('.stats-focusing-time');
 const completedTasksText = $('.stats-completed-tasks');
 const tabs = $('mdui-tabs');
 const resetStatsBtn = $('.reset-stats-btn');
+const overlayBtn = $('.toggle-overlay');
 var _status = 'stopped';
 var latestStatus;
 var _remainMin = 0;
@@ -30,6 +31,13 @@ var breakTimeout;
 var newLstItem;
 var newLstItemCheckbox;
 var notify = false;
+var isOverlay = false;
+var overlayWindow;
+const frame = document.createElement('iframe');
+frame.src = location.href;
+frame.style.resize = 'both';
+frame.style.width = '100vw';
+frame.style.height = '100vh';
 if (!localStorage.totalFocusingTime) {
     localStorage.totalFocusingTime = 0;
 };
@@ -135,6 +143,7 @@ function stopPomodoro() {
 };
 
 function pausePomodoro() {
+    latestStatus = _status;
     _status = 'paused';
     clearInterval(workCountdownInterval);
     clearInterval(breakCountdownInterval);
@@ -169,11 +178,9 @@ statusToggleFab.onclick = () => {
             break;
         case 'working':
             pausePomodoro();
-            latestStatus = 'working';
             break;
         case 'breaking':
             pausePomodoro();
-            latestStatus = 'breaking';
             break;
         case 'paused':
             statusToggleFab.textContent = 'Pause';
@@ -240,4 +247,25 @@ resetStatsBtn.onclick = () => {
         focusingTimeText.textContent = '0h 0m';
         completedTasksText.textContent = '0';
     });
+};
+
+window.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        if (_status === 'working' || _status === 'breaking') {
+            pausePomodoro();
+        };
+    };
+});
+
+overlayBtn.onclick = async () => {
+    if (isOverlay) {
+        isOverlay = false;
+        overlayWindow.close();
+    } else {
+        isOverlay = true;
+        overlayWindow = await window.documentPictureInPicture.requestWindow();
+        overlayWindow.document.body.style.margin = '0';
+        overlayWindow.document.body.style.overflow = 'hidden';
+        overlayWindow.document.body.append(frame);
+    };
 };

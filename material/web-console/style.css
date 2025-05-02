@@ -81,3 +81,16 @@ body {
     gap: 10px;
     font-size: 14px;
 }
+
+.cancel-req-btn {
+    font-size: 12px;
+    transform: scale(.8);
+    display: none;
+}
+
+.dlg-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    align-items: center;
+}
