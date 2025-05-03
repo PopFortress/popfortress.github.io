@@ -7,7 +7,12 @@ const comments = $('.comments')[0];
 const danmaku = $('.danmaku')[0];
 const updateBtn = $('.update-btn')[0];
 const autoUpdateChip = $('.auto-update')[0];
-const apiURL = 'https://www.whateverorigin.org/get?url=https://coco.codemao.cn/http-widget-proxy/https@SEP@api.bilibili.com/x/web-interface/view?bvid=BV1GJ411x7h7';
+const addedViewsText = $('.added-views')[0];
+const apiURL = 'https://api.allorigins.win/get?url=https://coco.codemao.cn/http-widget-proxy/https@SEP@api.bilibili.com/x/web-interface/view?bvid=BV1GJ411x7h7';
+var latestView = 0;
+if (localStorage.latestView) {
+    latestView = localStorage.latestView;
+};
 
 footnoteIndicator.onclick = () => {
     mdui.alert({
@@ -39,16 +44,18 @@ function updateStats() {
                 updateBtn.disabled = false;
                 updateBtn.loading = false;
                 updateBtn.textContent = '更新数据';
+                addedViewsText.textContent = `+${stats['view'] - latestView}`;
+                latestView = stats['view'];
+                localStorage.latestView = latestView;
                 mdui.snackbar({
                     message: '更新成功',
                     autoCloseDelay: 2000
                 });
             })
-            .catch(error => {
-                mdui.alert({
-                    headline: '发生错误',
-                    description: '当前无法连接到服务器：' + error,
-                    confirmText: '确定'
+            .catch(e => {
+                mdui.snackbar({
+                    message: '更新失败：' + e.message,
+                    autoCloseDelay: 2000
                 });
                 updateBtn.disabled = false;
                 updateBtn.loading = false;

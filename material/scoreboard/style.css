@@ -40,7 +40,6 @@ mdui-top-app-bar-title {
 }
 
 mdui-top-app-bar {
-    background: rgb(var(--mdui-color-on-secondary-container-light));
     display: flex;
     align-items: center;
     padding-left: 10px;
@@ -98,11 +97,13 @@ input[name='color'] {
 
 .player-tag {
     font-size: 23px;
+    color: #fff;
 }
 
 .player-score {
     font-size: 72px;
     font-weight: bold;
+    color: #fff;
 }
 
 .scoring-wrapper {

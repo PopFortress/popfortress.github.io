@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>一周年庆典</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            color: #fff;
+            background: #333;
+        }
+
+        .app {
+            width: 100%;
+            max-width: 700px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .iframe-wrapper {
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            font-size: 2rem;
+            color: rgb(var(--mdui-color-primary));
+            line-height: 1.5;
+            gap: 22px;
+        }
+
+        .section span {
+            font-weight: bold;
+            font-size: 2.3rem;
+        }
+        
+        .continue-btn {
+            width: 160px;
+        }
+
+        #s2, #s4, #s6 {
+            text-align: right;
+            align-items: flex-end;
+        }
+        
+        #s7 {
+            text-align: center;
+            align-items: center;
+        }
+
+        .footnote {
+            font-size: 12px;
+            text-align: right;
+            margin-bottom: 40px;
+        }
+
+        img {
+            width: 70%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+        }
+
+        #s2, #s3, #s4, #s5, #s6, #s7 {
+            display: none;
+        }
+
+        @keyframes show {
+            from {
+                opacity: .1;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app">
+        <div class="iframe-wrapper">
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=456373011&auto=1&height=66"></iframe>
+        </div>
+        <div class="section" id="s1">
+            <div>✨ Hi,</div>
+            <div>这是网站上线的第 <span>365</span> 天</div>
+            <mdui-button icon="arrow_forward" class="continue-btn">继续</mdui-button>
+        </div>
+        <div class="section" id="s2">
+            <div>这一年，</div>
+            <div>网站累计新增 <span>10041</span> 行代码 🐱‍💻</div>
+            <div><span>577</span> 个 bug</div>
+            <mdui-button icon="arrow_forward" class="continue-btn">继续</mdui-button>
+        </div>
+        <div class="section" id="s3">
+            <div>总访问量 <span>480+</span> 次 👀</div>
+            <div>网站稳定运行率 <span>100%</span>！🌐</div>
+            <mdui-button icon="arrow_forward" class="continue-btn">继续</mdui-button>
+        </div>
+        <div class="section" id="s4">
+            <div>来看看今年的网站代码语言成分吧！📚</div>
+            <div>HTML <span>64.0%</span></div>
+            <div>CSS <span>17.1%</span></div>
+            <div>JavaScript <span>16.2%</span></div>
+            <div>SCSS <span>2.7%</span></div>
+            <mdui-button icon="arrow_forward" class="continue-btn">继续</mdui-button>
+        </div>
+        <div class="section" id="s5">
+            <div>今年，网站共更新 <span>92</span> 次，</div>
+            <div>发布帖文 <span>9</span> 篇 👏</div>
+            <div>新增页面 <span>47</span> 个</div>
+            <mdui-button icon="arrow_forward" class="continue-btn">继续</mdui-button>
+        </div>
+        <div class="section" id="s6">
+            <div>🎈 今年，网站陪伴大家走过了</div>
+            <div><span>12</span> 个月，<span>52</span> 周</div>
+            <div><span>365</span> 天</div>
+            <div><span>8760</span> 小时</div>
+            <div><span>52 5600</span> 分钟</div>
+            <div><span>3153 6000</span> 秒</div>
+            <div><span>1</span> 年 🎉</div>
+            <mdui-button icon="arrow_forward" class="continue-btn">继续</mdui-button>
+        </div>
+        <div class="section" id="s7">
+            <div>波普的温馨小阁</div>
+            <div>一周年　·　感谢有你</div>
+            <img src="https://img.picui.cn/free/2025/05/03/6815e65f04506.png" alt="一周年">
+            <mdui-button icon="arrow_back" class="continue-btn" href="/">返回首页</mdui-button>
+        </div>
+        <div class="footnote">
+            <div>—— 2025.5.3</div>
+            <div>*部分数据来自 GitHub</div>
+        </div>
+    </div>
+
+    <script>
+        mdui.setColorScheme('#EF9A9A');
+        const $ = (query) => {
+            return mdui.$(query)[0];
+        };
+        const s1 = $('#s1');
+        const s2 = $('#s2');
+        const s3 = $('#s3');
+        const s4 = $('#s4');
+        const s5 = $('#s5');
+        const s6 = $('#s6');
+        const s7 = $('#s7');
+        const continueBtns = document.querySelectorAll('.continue-btn');
+        var currentSection = 2;
+        continueBtns.forEach(element => {
+            element.onclick = () => {
+                eval(`s${currentSection}.style.display = 'flex';`);
+                eval(`s${currentSection}.style.animation = 'show .7s forwards ease-out';`)
+                currentSection++;
+                window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+                element.style.display = 'none';
+            };
+        });
+    </script>
+
+</body>
+</html>
