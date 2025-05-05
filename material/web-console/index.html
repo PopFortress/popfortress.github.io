@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="pragma" content="no-cache">
     <title>Web Console</title>
     <link rel="stylesheet" href="/mdui/mdui.css">
     <script src="/mdui/mdui.global.js"></script>
@@ -26,7 +28,7 @@
             <mdui-text-field autosize label="User-Agent" variant="outlined" class="ua-input" helper="Leave blank for default." helper-on-focus clearable></mdui-text-field>
         </div>
         <div class="response-view">
-            <mdui-text-field autosize label="Response body" readonly variant="outlined" class="response-body" max-rows="10"></mdui-text-field>
+            <mdui-text-field label="Response body" readonly variant="outlined" class="response-body" rows="10"></mdui-text-field>
             <div class="bottom-bar">
                 <div class="status-code">Status:</div>
                 <div class="switch-wrapper">
@@ -34,6 +36,10 @@
                     <div>Enable CORS Proxy</div>
                 </div>
                 <mdui-chip class="decode-btn" variant="assist" icon="code">Decode</mdui-chip>
+            </div>
+            <div class="prop-reader-wrapper">
+                <mdui-text-field label="key path" variant="outlined" class="prop-input"></mdui-text-field>
+                <mdui-button class="read-prop-btn">Read</mdui-button>
             </div>
         </div>
 

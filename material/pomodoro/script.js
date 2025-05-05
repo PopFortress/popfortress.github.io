@@ -87,9 +87,6 @@ function working() {
         _remainMin = parseInt(breakInput.value);
         _remainSec = 0;
         navigator.vibrate(1000);
-        if (notify) {
-            new Notification('Pomodoro Timer', {body: 'Focusing time is up.'});
-        };
         mdui.dialog({
             headline: 'Time\'s up!',
             description: 'Working finished, what would you like to do next?',
@@ -98,6 +95,9 @@ function working() {
                 {text: 'Start break', onClick: breaking},
             ]
         });
+        if (notify) {
+            new Notification('Pomodoro Timer', {body: 'Focusing time is up.'});
+        };
     }, (_remainMin * 60 + _remainSec) * 1000);
     workCountdownInterval = setInterval(countdown, 1000);
 };
@@ -111,9 +111,6 @@ function breaking() {
         _remainMin = parseInt(workInput.value);
         _remainSec = 0;
         navigator.vibrate(1000);
-        if (notify) {
-            new Notification('Pomodoro Timer', {body: 'Breaking time is up.'});
-        };
         mdui.dialog({
             headline: 'Time\'s up!',
             description: 'Break finished, what would you like to do next?',
@@ -122,6 +119,9 @@ function breaking() {
                 {text: 'Start working', onClick: working},
             ]
         });
+        if (notify) {
+            new Notification('Pomodoro Timer', {body: 'Breaking time is up.'});
+        };
     }, (_remainMin * 60 + _remainSec) * 1000);
     breakCountdownInterval = setInterval(countdown, 1000);
 };

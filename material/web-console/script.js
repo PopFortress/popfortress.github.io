@@ -9,10 +9,13 @@ const payloadInput = document.querySelector('.payload-input');
 const decodeBtn = document.querySelector('.decode-btn');
 const corsSwitch = document.querySelector('.cors-proxy-switch');
 const cancelReqBtn = document.querySelector('.cancel-req-btn');
+const propInput = document.querySelector('.prop-input');
+const readPropBtn = document.querySelector('.read-prop-btn');
 var response;
 var res;
 var request = new XMLHttpRequest();
 var timer;
+var propValue;
 
 
 methodSelect.addEventListener('change', (e) => {
@@ -89,4 +92,19 @@ loadingDlg.oncancel = cancelRequest;
 cancelReqBtn.onclick = cancelRequest;
 loadingDlg.onclose = () => {
     clearTimeout(timer);
+};
+
+readPropBtn.onclick = () => {
+    try {
+        propValue = eval(`JSON.parse(request.response).${propInput.value};`);
+        mdui.snackbar({
+            message: propValue,
+            closeOnOutsideClick: true
+        });
+    } catch (e) {
+        mdui.snackbar({
+            message: e.message,
+            closeOnOutsideClick: true
+        });
+    };
 };
