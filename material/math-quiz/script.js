@@ -11,8 +11,8 @@ var digit2;
 var operator;
 
 function loadQuiz() {
-    digit1 = Math.floor(Math.random() * 20);
-    digit2 = Math.floor(Math.random() * 20);
+    digit1 = Math.floor(Math.random() * 21);
+    digit2 = Math.floor(Math.random() * 21);
     operator = operators[Math.floor(Math.random() * operators.length)];
     quiz = `${digit1} ${operator} ${digit2}`;
     answer = eval(quiz);
