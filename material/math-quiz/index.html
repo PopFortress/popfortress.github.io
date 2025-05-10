@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Math Quiz</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <div class="app">
+        <mdui-top-app-bar>
+            <mdui-top-app-bar-title>Math Quiz</mdui-top-app-bar-title>
+        </mdui-top-app-bar>
+        <div class="quiz-wrapper">
+            <mdui-card class="quiz-header">
+                <mdui-icon name="question_mark"></mdui-icon>
+                <div class="header-text">Question 1</div>
+            </mdui-card>
+            <mdui-card class="quiz-field">
+                <div class="question-wrapper">
+                    <div class="quiz-text">1 + 1 = </div>
+                    <mdui-text-field variant="outlined" type="number" class="quiz-input" autofocus></mdui-text-field>
+                </div>
+                <div>
+                    <mdui-button variant="elevated" full-width class="check-btn">Check</mdui-button>
+                </div>
+            </mdui-card>
+        </div>
+    </div>
+    
+    <script src="./script.js"></script>
+    
+</body>
+</html>

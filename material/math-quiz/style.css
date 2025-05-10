@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: 100%;
+    max-width: 620px;
+}
+
+mdui-top-app-bar {
+    padding: 20px;
+}
+
+mdui-top-app-bar-title {
+    font-size: 26px;
+}
+
+.quiz-wrapper {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.quiz-header {
+    display: flex;
+    gap: 10px;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.quiz-field {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.question-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.quiz-text {
+    font-size: 30px;
+}
+
+.quiz-input {
+    width: 76px;
+}
