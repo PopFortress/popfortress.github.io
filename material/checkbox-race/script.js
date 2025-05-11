@@ -36,15 +36,15 @@ for (let i = 0; i < 100; i++) {
 
 checkboxes.forEach(element => {
     element.onchange = (e) => {
-        currentIndex++;
-        e.target.nextElementSibling.disabled = false;
-        e.target.nextElementSibling.style.transform = `translateY(${randomPosOrNeg(5 + currentIndex)}px)`;
         if (e.target.checked) {
+            currentIndex++;
             checkboxWrapper.style.transform = `translateX(${-40 * currentIndex}px)`;
         } else {
             currentIndex--;
             checkboxWrapper.style.transform = `translateX(${-40 * (currentIndex - 2)}px)`;
         };
+        e.target.nextElementSibling.disabled = false;
+        e.target.nextElementSibling.style.transform = `translateY(${randomPosOrNeg(5 + currentIndex)}px)`;
     };
 });
 
