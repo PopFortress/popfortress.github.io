@@ -52,8 +52,20 @@ mdui-top-app-bar-title {
 
 .quiz-text {
     font-size: 30px;
+    text-align: right;
 }
 
 .quiz-input {
     width: 76px;
+}
+
+@media screen and (max-width: 400px) {
+    .quiz-text {
+        font-size: 18px;
+        text-align: center;
+    }
+    .question-wrapper {
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
 }

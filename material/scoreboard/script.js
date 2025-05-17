@@ -55,21 +55,40 @@ backBtn.onclick = () => {
 
 p1AddFab.onclick = () => {
     p1Score.textContent = parseInt(p1Score.textContent) + scoreIncreasement;
+    if (p1Score.textContent - scoreDecreasement >= 0) {
+        p1RemoveFab.disabled = false;
+    };
 };
 
 p1RemoveFab.onclick = () => {
     p1Score.textContent = parseInt(p1Score.textContent) - scoreDecreasement;
+    if (p1Score.textContent - scoreDecreasement < 0) {
+        p1RemoveFab.disabled = true;
+    };
 };
 
 p2AddFab.onclick = () => {
     p2Score.textContent = parseInt(p2Score.textContent) + scoreIncreasement;
+    if (p2Score.textContent - scoreDecreasement >= 0) {
+        p2RemoveFab.disabled = false;
+    };
 };
 
 p2RemoveFab.onclick = () => {
     p2Score.textContent = parseInt(p2Score.textContent) - scoreDecreasement;
+    if (p2Score.textContent - scoreDecreasement < 0) {
+        p2RemoveFab.disabled = true;
+    };
 };
 
 rstScoresBtn.onclick = () => {
     p1Score.textContent = 0;
     p2Score.textContent = 0;
+    resetBtns();
 };
+
+function resetBtns() {
+    p1RemoveFab.disabled = true;
+    p2RemoveFab.disabled = true;
+};
+resetBtns();

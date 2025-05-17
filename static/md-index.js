@@ -7,8 +7,18 @@ const listItems = document.querySelectorAll('mdui-list-item');
 const activityImg = document.querySelector('.activity-card');
 const activityTitleLabel =document.querySelector('.activity-title');
 const helpInfoBtn = document.querySelector('.info-btn');
+const optionsBtn = document.querySelector('.options-btn');
+const optionsDialog = document.querySelector('.options-dialog');
+const dlgCloseBtn = document.querySelector('.options-dlg-close-btn');
+const changelogWrapper = document.querySelector('.changelog-wrapper');
+const changelogSwitch = document.querySelector('#changelog-box-switch');
 var sayingsDesc;
 var data;
+if (localStorage.showChangelog) {
+    var showChangelog = localStorage.showChangelog;
+} else {
+    var showChangelog = 'true';
+};
 
 
 async function fetchSrc() {
@@ -79,3 +89,27 @@ listItems.forEach(element => {
 helpInfoBtn.addEventListener('click', showActivityHelpDialog);
 mdui.loadLocale((locale) => import(`https://unpkg.com/mdui@2/locales/${locale}.js`));
 mdui.setLocale('zh-cn');
+
+optionsBtn.onclick = () => {
+    optionsDialog.open = true;
+};
+
+dlgCloseBtn.onclick = () => {
+    optionsDialog.open = false;
+};
+
+if (showChangelog === 'true') {
+    changelogSwitch.checked = true;
+} else {
+    changelogWrapper.style.display = 'none';
+}
+
+changelogSwitch.onchange = (e) => {
+    if (e.target.checked) {
+        localStorage.showChangelog = true;
+        changelogWrapper.style.display = 'block';
+    } else {
+        localStorage.showChangelog = false;
+        changelogWrapper.style.display = 'none';
+    };
+};

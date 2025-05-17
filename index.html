@@ -102,11 +102,27 @@
                 <a href="//travel.moe/" target="_blank">异次元之旅</a>
                 <a href="//www.travellings.cn/go.html" target="_blank">开往</a>
                 <a href="https://www.foreverblog.cn/go.html" target="_blank">十年之约</a>
+                <a href="javascript:;" class="options-btn">您的偏好选项</a>
             </div>
         </mdui-card>
     </div>
 
     <a href="/index-vanilla" class="switch-ver">旧版主页</a>
+    <div class="changelog-wrapper">
+        <fieldset class="changelog-box">
+            <legend>更新日志</legend>
+            <iframe src="/info/changelog?frame=true" frameborder="0" title="更新日志" class="changelog-frame"></iframe>
+        </fieldset>
+        <mdui-chip elevated href="/fakecaptcha?r=/info/changelog" target="_blank" icon="arrow_forward" class="changelog-view-all">展开全部</mdui-chip>
+    </div>
+
+    <mdui-dialog headline="您的偏好选项" class="options-dialog">
+        <div class="options-wrapper">
+            <mdui-switch id="changelog-box-switch"></mdui-switch>
+            <label for="changelog-box-switch">显示更新日志</label>
+        </div>
+        <mdui-button slot="action" variant="text" class="options-dlg-close-btn">应用</mdui-button>
+    </mdui-dialog>
 
 </body>
 </html>

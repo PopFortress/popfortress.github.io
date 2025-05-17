@@ -71,7 +71,7 @@ request.onload = () => {
 };
 
 request.onerror = () => {
-    responseBodyText.value = 'Something went wrong while sending the request.';
+    responseBodyText.value = 'Something went wrong while sending the request.\nCheck the console log for details.';
     statusCodeLabel.textContent = 'Status: -1';
     loadingDlg.close();
 };
