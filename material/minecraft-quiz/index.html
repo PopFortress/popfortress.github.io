@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Minecraft Quiz</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+</head>
+<body>
+    
+    <div class="app">
+        <mdui-top-app-bar>
+            <mdui-top-app-bar-title>Minecraft Quiz</mdui-top-app-bar-title>
+        </mdui-top-app-bar>
+        <div class="quiz-wrapper">
+            <mdui-card class="quiz-card">
+                <div class="quiz-header">Weekly Minecraft Quiz · #1</div>
+                <div class="quiz-title">Quiz Title</div>
+                <mdui-radio-group class="options-group">
+                    <mdui-radio value="a" id="option-a">A. Option 1</mdui-radio>
+                    <mdui-radio value="b" id="option-b">B. Option 2</mdui-radio>
+                    <mdui-radio value="c" id="option-c">C. Option 3</mdui-radio>
+                    <mdui-radio value="d" id="option-d">D. Option 4</mdui-radio>
+                </mdui-radio-group>
+            </mdui-card>
+            <div class="action-bar">
+                <mdui-button variant="elevated" class="check-btn" disabled>Check Answer</mdui-button>
+                <mdui-button variant="text" icon="forward_to_inbox" href="//github.com/popfortress/popfortress.github.io/issues/new" target="_blank" class="feedback-btn">Ask for update</mdui-button>
+            </div>
+            <mdui-card class="result-card">
+                <div class="result-header">Answer</div>
+                <div><abbr title="Explanation" class="answer-text">A</abbr></div>
+                <div class="result-header">Explanation</div>
+                <div class="explanation-text"></div>
+            </mdui-card>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>
