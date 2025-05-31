@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查找网易云音乐歌词</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <div class="app">
+        <mdui-tabs value="lyrics" full-width>
+            <mdui-tab value="lyrics" icon="lyrics" inline>歌词</mdui-tab>
+            <mdui-tab value="id" icon="numbers" inline>查找 ID</mdui-tab>
+
+            <mdui-tab-panel slot="panel" value="lyrics">
+                <div class="input-wrapper">
+                    <mdui-text-field variant="outlined" label="键入歌曲网页链接或 ID" class="input"></mdui-text-field>
+                    <div class="api-wrapper">
+                        <mdui-select variant="outlined" value="api-1" placeholder="官方 API" class="api-select">
+                            <mdui-menu-item value="api-1" data-url="https://api.allorigins.win/get?url=https://music.163.com/api/song/media?id=" data-lrc-path="lyric" data-cors="true">官方 API</mdui-menu-item>
+                            <mdui-menu-item value="api-2" data-url="https://apis.netstart.cn/music/lyric?id=" data-lrc-path="data.lrc.lyric">第三方 API</mdui-menu-item>
+                            <mdui-menu-item value="api-3" data-url="https://163api.qijieya.cn/lyric?id=" data-lrc-path="data.lrc.lyric">社区 API</mdui-menu-item>
+                        </mdui-select>
+                        <mdui-fab extended icon="send" class="find-lyrics-btn">查找歌词</mdui-fab>
+                    </div>
+                </div>
+                <div class="result-wrapper">
+                    <mdui-text-field variant="outlined" readonly label="歌词" rows="10" class="result-text"></mdui-text-field>
+                </div>
+            </mdui-tab-panel>
+            <mdui-tab-panel slot="panel" value="id">
+                <div class="input-wrapper search-wrapper">
+                    <mdui-text-field variant="outlined" label="键入关键字" class="search-input"></mdui-text-field>
+                    <mdui-fab extended icon="search" class="search-btn">搜索</mdui-fab>
+                </div>
+                <div class="info-wrapper">
+                    <div class="count"></div>
+                    <div class="page-controls">
+                        <mdui-chip elevated icon="arrow_back" class="pre-page">Previous</mdui-chip>
+                        <mdui-chip elevated icon="arrow_forward" class="next-page">Next</mdui-chip>
+                    </div>
+                </div>
+                <table class="search-result-table mdui-table">
+                    <thead>
+                        <th>歌曲</th>
+                        <th>歌手</th>
+                        <th>ID</th>
+                    </thead>
+                    <tbody class="search-result-list"></tbody>
+                </table>
+            </mdui-tab-panel>
+        </mdui-tabs>
+    </div>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>

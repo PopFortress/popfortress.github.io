@@ -1,19 +1,24 @@
-const appContainer = document.querySelector('.app');
-const sayingsCard = document.querySelector('.sayings');
-const searchInput = document.querySelector('.search-box');
-const searchBtn = document.querySelector('.search-btn');
-const latestUpdateLabel = document.querySelector('.latest-update');
+const $ = (query) => mdui.$(query)[0];
+
+const appContainer = $('.app');
+const sayingsCard = $('.sayings');
+const searchInput = $('.search-box');
+const searchBtn = $('.search-btn');
+const latestUpdateLabel = $('.latest-update');
 const listItems = document.querySelectorAll('mdui-list-item');
-const activityImg = document.querySelector('.activity-card');
-const activityTitleLabel =document.querySelector('.activity-title');
-const helpInfoBtn = document.querySelector('.info-btn');
-const optionsBtn = document.querySelector('.options-btn');
-const optionsDialog = document.querySelector('.options-dialog');
-const dlgCloseBtn = document.querySelector('.options-dlg-close-btn');
-const changelogWrapper = document.querySelector('.changelog-wrapper');
-const changelogSwitch = document.querySelector('#changelog-box-switch');
+const activityImg = $('.activity-card');
+const activityTitleLabel =$('.activity-title');
+const helpInfoBtn = $('.info-btn');
+const optionsBtn = $('.options-btn');
+const optionsDialog = $('.options-dialog');
+const dlgCloseBtn = $('.options-dlg-close-btn');
+const changelogWrapper = $('.changelog-wrapper');
+const changelogSwitch = $('#changelog-box-switch');
+const commitLabel = $('.commit-label');
+const clearStorage = $('.clear-storage');
 var sayingsDesc;
-var data;
+var sha;
+const ghApiUrl = 'https://api.github.com/repos/PopFortress/popfortress.github.io';
 if (localStorage.showChangelog) {
     var showChangelog = localStorage.showChangelog;
 } else {
@@ -23,7 +28,7 @@ if (localStorage.showChangelog) {
 
 async function fetchSrc() {
     var response = await fetch('/static/index-src.json');
-    data = await response.json();
+    var data = await response.json();
 
     sayingsCard.innerHTML = data.saying;
     sayingsDesc = data.saying_desc;
@@ -37,16 +42,17 @@ async function fetchSrc() {
 function showSayingsDesc() {
     mdui.snackbar({
         message: sayingsDesc,
-        closeable: true
+        closeable: true,
+        closeOnOutsideClick: true,
     });
-}
+};
 
 function searchSite() {
     if (searchInput.value) {
         window.open(`/fakecaptcha?r=//cn.bing.com/search?q=${searchInput.value} site:popfortress.github.io`, '_blank');
         searchInput.value = '';
     }
-}
+};
 
 function addListItemIcon() {
     listItems.forEach(element => {
@@ -55,7 +61,7 @@ function addListItemIcon() {
             element.icon = 'auto_awesome';
         };
     });
-}
+};
 
 function lstItemAnimate(e) {
     if (e.target.active) {
@@ -70,7 +76,7 @@ function showActivityHelpDialog() {
         headline: '主页活动',
         description: '不定期更新的主页活动，紧跟时事~ 点击图片可查看详细信息。'
     });
-}
+};
 
 searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
@@ -112,4 +118,35 @@ changelogSwitch.onchange = (e) => {
         localStorage.showChangelog = false;
         changelogWrapper.style.display = 'none';
     };
+};
+
+async function fetchCommitVersion() {
+    commitLabel.removeEventListener('click', fetchCommitVersion);
+    var responseCommit = await fetch(`${ghApiUrl}/commits?per_page=1&page=1`);
+    var dataCommit = await responseCommit.json();
+    var responseCount = await fetch(`${ghApiUrl}/stats/contributors`);
+    var dataCount = await responseCount.json();
+    
+    if (!responseCommit.status === 200 && !responseCount.status === 200) {
+        commitLabel.textContent = 'Failed to fetch. Retry.';
+        commitLabel.onclick = fetchCommitVersion;
+        return;
+    };
+
+    sha = dataCommit[0].sha;
+    if (responseCount.status === 200) {
+        commitLabel.textContent = `${sha.slice(0, 7)} (${dataCount[0].total} commits, +${dataCount[0].weeks[0].a}, -${dataCount[0].weeks[0].d})`;
+    } else {
+        commitLabel.textContent = sha.slice(0, 7);
+    };
+    commitLabel.title = sha;
+    commitLabel.href = '//github.com/PopFortress/popfortress.github.io/commits/main/';
+    commitLabel.target = '_blank';
+};
+
+commitLabel.onclick = fetchCommitVersion;
+
+clearStorage.onclick = () => {
+    localStorage.clear();
+    location.reload();
 };

@@ -194,7 +194,27 @@ mdui-tabs {
 
 .options-wrapper {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 20px;
     overflow-y: hidden;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.latest-update-wrapper {
+    display: flex;
+    column-gap: 20px;
+    font-family: inherit;
+    flex-wrap: wrap;
+}
+
+.commit-icon {
+    font-family: 'Material Icons';
+    vertical-align: middle;
+    font-size: 18px;
+    margin-top: -10px;
 }

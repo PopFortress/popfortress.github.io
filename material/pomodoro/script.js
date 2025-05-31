@@ -20,6 +20,7 @@ const completedTasksText = $('.stats-completed-tasks');
 const tabs = $('mdui-tabs');
 const resetStatsBtn = $('.reset-stats-btn');
 const overlayBtn = $('.toggle-overlay');
+const todosTitle = $('.todos-title');
 var _status = 'stopped';
 var latestStatus;
 var _remainMin = 0;
@@ -33,6 +34,9 @@ var newLstItemCheckbox;
 var notify = false;
 var isOverlay = false;
 var overlayWindow;
+var tasksRemaining = 0;
+var tempArray;
+var tempItem;
 const frame = document.createElement('iframe');
 frame.src = location.href;
 frame.style.resize = 'both';
@@ -43,6 +47,9 @@ if (!localStorage.totalFocusingTime) {
 };
 if (!localStorage.completedTasks) {
     localStorage.completedTasks = 0;
+};
+if (!localStorage.todos) {
+    localStorage.todos = '[]';
 };
 Notification.requestPermission((result) => {
     if (result === 'granted') {
@@ -198,6 +205,36 @@ statusToggleFab.onclick = () => {
     };
 };
 
+function addTodoItem(item) {
+    newLstItem = document.createElement('mdui-list-item');
+    newLstItem.textContent = item;
+    newLstItem.nonclickable = true;
+    newLstItemCheckbox = document.createElement('mdui-checkbox');
+    newLstItemCheckbox.slot = 'icon';
+    newLstItem.appendChild(newLstItemCheckbox);
+    todoItemsLst.appendChild(newLstItem);
+    newLstItemCheckbox.dataset.tempItem = item;
+    newLstItemCheckbox.onchange = (e) => {
+        if (e.target.checked) {
+            localStorage.completedTasks++;
+            tasksRemaining--;
+            updateTodoTitle();
+            tempArray.splice(tempArray.indexOf(e.target.dataset.tempItem), 1);
+            updateTodos();
+        } else {
+            if (localStorage.completedTasks > 0) {
+                localStorage.completedTasks--;
+            };
+            tasksRemaining++;
+            updateTodoTitle();
+            tempArray.push(e.target.dataset.tempItem);
+            updateTodos();
+        };
+    };
+    tasksRemaining++;
+    updateTodoTitle();
+};
+
 addTodoBtn.onclick = () => {
     mdui.prompt({
         headline: 'Add a New Item',
@@ -206,27 +243,32 @@ addTodoBtn.onclick = () => {
             variant: 'outlined',
         },
     }).then((value) => {
-        newLstItem = document.createElement('mdui-list-item');
-        newLstItem.textContent = value;
-        newLstItem.nonclickable = true;
-        newLstItemCheckbox = document.createElement('mdui-checkbox');
-        newLstItemCheckbox.slot = 'icon';
-        newLstItem.appendChild(newLstItemCheckbox);
-        todoItemsLst.appendChild(newLstItem);
-        newLstItemCheckbox.onchange = (e) => {
-            if (e.target.checked) {
-                localStorage.completedTasks++; 
-            } else {
-                localStorage.completedTasks--;
-            };
-        };
+        addTodoItem(value);
+        tempArray.push(value);
+        updateTodos();
     });
+};
+
+function updateTodoTitle() {
+    if (tasksRemaining < 1) {
+        todosTitle.textContent = `To Do Items`;
+    } else {
+        todosTitle.textContent = `To Do Items (${tasksRemaining})`;
+    };
+};
+
+function updateTodos() {
+    localStorage.todos = JSON.stringify(tempArray);
 };
 
 clearTodosBtn.onclick = () => {
     while (todoItemsLst.firstChild) {
         todoItemsLst.removeChild(todoItemsLst.firstChild);
     };
+    tasksRemaining = 0;
+    updateTodoTitle();
+    tempArray = [];
+    updateTodos();
 };
 
 tabs.onchange = (e) => {
@@ -269,3 +311,6 @@ overlayBtn.onclick = async () => {
         overlayWindow.document.body.append(frame);
     };
 };
+
+tempArray = JSON.parse(localStorage.todos);
+tempArray.forEach(addTodoItem);

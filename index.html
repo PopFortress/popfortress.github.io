@@ -6,7 +6,7 @@
     <title>波普的温馨小阁</title>
     <meta name="description" content="Hello! 欢迎光临! 这里是波普的温馨小阁——我的前端学习基地QwQ">
     <meta name="keywords" content="博客,个人主页,学习,前端,作品展示,网页设计">
-    <meta name="author" content="PopFOrtress">
+    <meta name="author" content="PopFortress">
     <link rel="stylesheet" href="/mdui/mdui.css">
     <script src="/mdui/mdui.global.js" defer></script>
     <link rel="stylesheet" href="/mdui/material-icons.css">
@@ -73,6 +73,7 @@
                     <mdui-list-item href="/material/math-quiz/">Math Quiz</mdui-list-item>
                     <mdui-list-item href="/material/checkbox-race/">Checkbox Race</mdui-list-item>
                     <mdui-list-item href="/material/minecraft-quiz/">Minecraft Quiz</mdui-list-item>
+                    <mdui-list-item href="/material/ncm-lyrics/">查找网易云音乐歌词</mdui-list-item>
                 </mdui-list>
             </mdui-tab-panel>
         </mdui-tabs>
@@ -84,7 +85,13 @@
             </mdui-card>
         </div>
         <mdui-card class="footer">
-            <div class="latest-update">最后更新时间</div>
+            <div class="latest-update-wrapper">
+                <div class="latest-update">最后更新时间</div>
+                <div class="commit-version" title="当前 Commit 版本">
+                    <mdui-icon name="commit" class="commit-icon"></mdui-icon>
+                    <a href="javascript:;" class="commit-label">Click to reveal</a>
+                </div>
+            </div>
             <div class="info">
                 <div>Fortress Software Enterprise</div>
                 <div>波普的温馨小阁 (c) 2021-2025 保留所有权利</div>
@@ -98,6 +105,7 @@
                 <a href="/fakecaptcha?r=/info/changelog" target="_blank">更新日志</a>
                 <a href="/fakecaptcha?r=/info/" target="_blank">隐私政策 & 条款</a>
                 <a href="//creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+                <a href="//mit-license.org/" target="_blank">MIT License</a>
                 <a href="//github.com/PopFortress/popfortress.github.io/issues/new" target="_blank">发送反馈</a>
                 <a href="/info/suspage" target="_blank">可疑的页面</a>
                 <a href="//travel.moe/" target="_blank">异次元之旅</a>
@@ -119,8 +127,11 @@
 
     <mdui-dialog headline="您的偏好选项" class="options-dialog">
         <div class="options-wrapper">
-            <mdui-switch id="changelog-box-switch"></mdui-switch>
-            <label for="changelog-box-switch">显示更新日志</label>
+            <div class="option">
+                <mdui-switch id="changelog-box-switch"></mdui-switch>
+                <label for="changelog-box-switch">显示更新日志</label>
+            </div>
+            <div class="option"><a href="javascript:;" class="clear-storage">清空本地存储（无法恢复）</a></div>
         </div>
         <mdui-button slot="action" variant="text" class="options-dlg-close-btn">应用</mdui-button>
     </mdui-dialog>

@@ -12,6 +12,7 @@ var digit3;
 var operator;
 var randomQuizToken;
 var randomEquationToken;
+var randomCircleToken;
 var quizType;
 var answeredEquation;
 
@@ -90,14 +91,53 @@ function quizEquation() {
     };
 };
 
+function quizCircle() {
+    digit1 = getRandomInt(1, 33);
+    randomCircleToken = Math.random();
+    if (randomCircleToken < 0.25) {
+        if (digit1 % 2 != 0) {
+            digit1 += 1;
+        };
+        quiz = `Circle diameter = ${digit1}<br>Area = `;
+        quizInput.suffix = 'π';
+        answer = Math.pow(digit1 / 2, 2);
+    } else if (randomCircleToken >= 0.25 && randomCircleToken < 0.5) {
+        if (digit1 % 2 != 0) {
+            digit1 += 1;
+        };
+        quiz = `Circle area = ${digit1}π<br>Diameter = `
+        answer = Math.sqrt(digit1) * 2;
+    } else if (randomCircleToken >= 0.5 && randomCircleToken < 0.75) {
+        quiz = `Circle radius = ${digit1}<br>Circumference = `
+        answer = 2 * digit1;
+        quizInput.suffix = 'π';
+    } else {
+        if (digit1 % 2 != 0) {
+            digit1 += 1;
+        };
+        quiz = `Circle circumference = ${digit1}π<br>Radius = `
+        answer = digit1 / 2;
+    };
+    if (Number.isInteger(answer)) {
+        quizText.innerHTML = quiz;
+        updateQuizNum();
+    } else {
+        quizCircle();
+    };
+};
+
 function loadQuiz() {
+    quizInput.removeAttribute('suffix');
     randomQuizToken = Math.random();
-    if (randomQuizToken < 0.46) {
+    if (randomQuizToken < 0.36) {
         quizSimple();
         quizType = 'simple';
-    } else if (randomQuizToken >= 0.46 && randomQuizToken < 0.61) {
+    } else if (randomQuizToken >= 0.36 && randomQuizToken < 0.49) {
         quizSquareRoot();
         quizType ='square_root';
+    } else if (randomQuizToken >= 0.49 && randomQuizToken < 0.62) {
+        quizCircle();
+        quizType = 'circle';
     } else {
         quizEquation();
         quizType = 'equation';
@@ -105,29 +145,10 @@ function loadQuiz() {
 };
 
 function checkAnswer() {
-    switch (quizType) {
-        case 'simple':
-            if (parseInt(quizInput.value) === answer) {
-                correctAnswer();
-            } else {
-                incorrectAnswer();
-            };
-            break;
-        case 'square_root':
-            if (parseInt(quizInput.value) === answer) {
-                correctAnswer();
-            } else {
-                incorrectAnswer();
-            };
-            break;
-        case 'equation':
-            answeredEquation = quiz.replaceAll('x', quizInput.value).replace('=', '==');
-            if (eval(answeredEquation)) {
-                correctAnswer();
-            } else {
-                incorrectAnswer();
-            };
-            break;
+    if (quizInput.valueAsNumber === answer) {
+        correctAnswer();
+    } else {
+        incorrectAnswer();
     };
     checkBtn.disabled = true;
     quizInput.value = '';

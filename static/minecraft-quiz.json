@@ -1,10 +1,10 @@
 {
-    "title": "The correct theory of the followings about command blocks is:",
-    "option_a": "Players can only see output logs in bedrock edition.",
-    "option_b": "You must type \"/\" at the start of a command.",
-    "option_c": "Commands can only be executed in cheets.",
-    "option_d": "You can adjust the maximum number of commands that chain command blocks execute by modifying the gamerule maxCommandChainLength.",
-    "answer": "d",
-    "explanation": "You can adjust it by typing /gamerule maxCommandChainLength <number>.\nNote: It's default value is 65536.",
+    "title": "Which weapon of the followings can't be used to kill endermen?",
+    "option_a": "The End Crystals",
+    "option_b": "Swords",
+    "option_c": "Crossbows",
+    "option_d": "Axes",
+    "answer": "c",
+    "explanation": "Projectiles can't deal damage to endermen.",
     "number": "1"
 }
