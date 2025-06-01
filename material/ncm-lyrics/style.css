@@ -20,8 +20,8 @@ mdui-tab::part(icon) {
     padding-right: 10px;
 }
 
-.input-wrapper {
-    padding: 40px 0;
+.input-wrapper, .result-wrapper {
+    margin: 40px 0;
 }
 
 .api-wrapper {
@@ -54,4 +54,17 @@ mdui-tab::part(icon) {
 .page-controls {
     display: none;
     gap: 12px;
+}
+
+.player-wrapper {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.player {
+    display: none;
 }

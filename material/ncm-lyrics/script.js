@@ -10,6 +10,8 @@ const songCountText = $('.count');
 const prePageBtn = $('.pre-page');
 const nextPageBtn = $('.next-page');
 const pageControls = $('.page-controls');
+const showPlayerBtn = $('.show-player');
+const player = $('.player');
 var respnse;
 var data;
 var songsList;
@@ -19,6 +21,9 @@ var pageIndex;
 var apiURL;
 var apiInfo;
 var id;
+var showPlayer = false;
+var playerURL;
+var playerCached = false;
 
 searchBtn.onclick = () => {
     if (searchInput.value) {
@@ -120,8 +125,43 @@ lyricsBtn.onclick = async () => {
             };
             lyricsBtn.loading = false;
             lyricsBtn.disabled = false;
+            playerCached = false;
         } else {
             mdui.snackbar({message: '无效输入'});
+        };
+    };
+};
+
+showPlayerBtn.onclick = async (e) => {
+    if (showPlayer) {
+        showPlayer = false;
+        player.style.display = 'none';
+        e.target.textContent = '显示播放控件';
+        e.target.icon = 'play_arrow';
+    } else {
+        showPlayer = true;
+        player.style.display = 'block';
+        e.target.textContent = '隐藏播放控件';
+        e.target.removeAttribute('icon');
+
+        if (!playerCached && id) {
+            player.removeAttribute('src');
+            response = await fetch(`https://apis.netstart.cn/music/song/download/url?id=${id}`);
+            data = await response.json();
+            if (data.data.url) {
+                playerURL = data.data.url;
+                player.src = playerURL;
+                player.play();
+                playerCached = true;
+            } else {
+                response = await fetch(`https://apis.netstart.cn/music/check/music?id=${id}`);
+                data = await response.json();
+                if (data.success) {
+                    mdui.snackbar({message: '因为未知原因，无法播放。'});
+                } else {
+                    mdui.snackbar({message: data.message});
+                };
+            };
         };
     };
 };

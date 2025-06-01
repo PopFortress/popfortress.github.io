@@ -16,13 +16,21 @@ const changelogWrapper = $('.changelog-wrapper');
 const changelogSwitch = $('#changelog-box-switch');
 const commitLabel = $('.commit-label');
 const clearStorage = $('.clear-storage');
+const vanillaSwitch = $('#vanilla-switch');
 var sayingsDesc;
 var sha;
+var responseCommit;
+var dataCommit;
+var responseCount;
+var dataCount;
 const ghApiUrl = 'https://api.github.com/repos/PopFortress/popfortress.github.io';
 if (localStorage.showChangelog) {
     var showChangelog = localStorage.showChangelog;
 } else {
     var showChangelog = 'true';
+};
+if (localStorage.vanilla === 'true') {
+    location.href = '/index-vanilla';
 };
 
 
@@ -120,12 +128,19 @@ changelogSwitch.onchange = (e) => {
     };
 };
 
+vanillaSwitch.onchange = (e) => {
+    if (e.target.checked) {
+        localStorage.vanilla = true;
+        location.href = '/index-vanilla';
+    };
+};
+
 async function fetchCommitVersion() {
     commitLabel.removeEventListener('click', fetchCommitVersion);
-    var responseCommit = await fetch(`${ghApiUrl}/commits?per_page=1&page=1`);
-    var dataCommit = await responseCommit.json();
-    var responseCount = await fetch(`${ghApiUrl}/stats/contributors`);
-    var dataCount = await responseCount.json();
+    responseCommit = await fetch(`${ghApiUrl}/commits?per_page=1&page=1`);
+    dataCommit = await responseCommit.json();
+    responseCount = await fetch(`${ghApiUrl}/stats/contributors`);
+    dataCount = await responseCount.json();
     
     if (!responseCommit.status === 200 && !responseCount.status === 200) {
         commitLabel.textContent = 'Failed to fetch. Retry.';

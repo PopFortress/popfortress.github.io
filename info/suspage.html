@@ -6,32 +6,36 @@
     <meta http-equiv="refresh" content="3; url=https://www.bilibili.com/video/BV1GJ411x7h7">
     <title>可疑的页面</title>
     <style>
-        #dlg {
-            border: #333 solid 1px;
-            border-radius: 10px;
-            padding: 30px;
-        }
-
         #dlg * {
-            text-align: center;
-            line-height: 1;
-            margin: 7px 5px;
+            margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            color: #333;
+            font-weight: inherit;
         }
 
-        #dlg h2 {
-            font-weight: 500;
+        #dlg {
+            border: none;
+            padding: 30px;
+            outline: none;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            gap: 11px;
         }
 
-        #dlg p {
-            margin: 20px 0 0 0;
+        #dlg::backdrop {
+            background: #fff;
+        }
+
+        #dlg img {
+            width: 64px;
+            height: 64px;
         }
     </style>
 </head>
 <body>
     <dialog id="dlg">
+        <img src="//pic1.imgdb.cn/item/683bd98158cb8da5c81f6d9a.png" alt="rickroll">
         <h1>你被骗了!</h1>
         <h2>You've been rickrolled!</h2>
         <p>准备好迎接瑞克摇吧</p>

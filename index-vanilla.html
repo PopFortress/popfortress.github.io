@@ -104,6 +104,8 @@
             <span>This website was hosted by GitHub Pages.</span>
             <span>本站所有内容均遵循 CC BY-NC-SA 4.0 协议，切勿将本站任何内容用于违法行为，所造成的任何纷争与本站无关</span>
             <span class="footer-links-wrapper">
+                <a href="javascript:;" class="toggle-vanilla">切换偏好旧版首页</a>
+                <span>|</span>
                 <a href="/">新版主页</a>
                 <span>|</span>
                 <a href="//icp.gov.moe/?keyword=20241789" target="_blank" >萌ICP备20241789号</a>
@@ -139,7 +141,20 @@
     <script>
         function triggerActivity() {
             window.open('/fakecaptcha?r=//space.bilibili.com/501554611', '_blank');
-        }
+        };
+        const toggleVanilla = document.querySelector('.toggle-vanilla');
+        var isVanilla = localStorage.vanilla === 'true';
+        toggleVanilla.onclick = () => {
+            if (isVanilla) {
+                localStorage.vanilla = 'false';
+                location.href = '/';
+            } else {
+                localStorage.vanilla = 'true';
+                isVanilla = true;
+                toggleVanilla.textContent = '关闭偏好旧版首页';
+            };
+        };
+        toggleVanilla.textContent = isVanilla ? '关闭偏好旧版首页' : '打开偏好旧版首页';
     </script>
 
     <script src="static/index-datetime-val.js"></script>
@@ -151,7 +166,7 @@
             if (e.key === 'Enter') {
                 window.open('/fakecaptcha?r=https://cn.bing.com/search?q=' + inputEle.value + ' site:popfortress.github.io', '_blank');
                 inputEle.value = '';
-            }
+            };
         });
     </script>
 
