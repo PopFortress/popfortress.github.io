@@ -17,12 +17,19 @@ const changelogSwitch = $('#changelog-box-switch');
 const commitLabel = $('.commit-label');
 const clearStorage = $('.clear-storage');
 const vanillaSwitch = $('#vanilla-switch');
+const notifySwitch = $('#notify-switch');
+const notify = $('.notify-wrapper');
+const notifyList = $('.notify-list');
+const notifyBadge = $('.notify-badge');
 var sayingsDesc;
 var sha;
 var responseCommit;
 var dataCommit;
 var responseCount;
 var dataCount;
+var notifyTitle;
+var notifyLink;
+var notifyWrapper;
 const ghApiUrl = 'https://api.github.com/repos/PopFortress/popfortress.github.io';
 if (localStorage.showChangelog) {
     var showChangelog = localStorage.showChangelog;
@@ -31,6 +38,11 @@ if (localStorage.showChangelog) {
 };
 if (localStorage.vanilla === 'true') {
     location.href = '/index-vanilla';
+};
+if (localStorage.showNotify) {
+    var showNotify = localStorage.showNotify;
+} else {
+    var showNotify = 'true';
 };
 
 
@@ -45,7 +57,32 @@ async function fetchSrc() {
     activityTitleLabel.innerHTML = data.activity_title;
     activityImg.href = `/fakecaptcha?r=${data.activity_target_url}`;
     activityImg.target = '_blank';
-}
+
+    if (data.notifications.length > 0) {
+        notifyBadge.style.display = 'inline-flex';
+        notifyList.innerHTML = '';
+        notify.placement = 'bottom-end';
+        data.notifications.forEach(notify => {
+            notifyWrapper = document.createElement('div');
+            notifyTitle = document.createElement('span');
+            notifyTitle.innerHTML = notify.title;
+            notifyWrapper.appendChild(notifyTitle);
+            if (notify.link) {
+                notifyLink = document.createElement('a');
+                notifyLink.href = notify.link;
+                notifyLink.target = '_blank';
+                notifyLink.innerHTML = '打开链接';
+                notifyLink.style.marginLeft = '10px';
+                notifyWrapper.appendChild(notifyLink);
+            };
+            notifyList.appendChild(notifyWrapper);
+        });
+    };
+};
+
+notify.addEventListener('opened', () => {
+    notifyBadge.style.display = 'none';
+});
 
 function showSayingsDesc() {
     mdui.snackbar({
@@ -116,7 +153,7 @@ if (showChangelog === 'true') {
     changelogSwitch.checked = true;
 } else {
     changelogWrapper.style.display = 'none';
-}
+};
 
 changelogSwitch.onchange = (e) => {
     if (e.target.checked) {
@@ -132,6 +169,22 @@ vanillaSwitch.onchange = (e) => {
     if (e.target.checked) {
         localStorage.vanilla = true;
         location.href = '/index-vanilla';
+    };
+};
+
+if (showNotify === 'true') {
+    notifySwitch.checked = true;
+} else {
+    notify.style.display = 'none';
+};
+
+notifySwitch.onchange = (e) => {
+    if (e.target.checked) {
+        localStorage.showNotify = true;
+        notify.style.display = 'block';
+    } else {
+        localStorage.showNotify = false;
+        notify.style.display = 'none';
     };
 };
 

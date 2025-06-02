@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="3; url=https://www.bilibili.com/video/BV1GJ411x7h7">
+    <!-- <meta http-equiv="refresh" content="3; url=https://www.bilibili.com/video/BV1GJ411x7h7"> -->
     <title>可疑的页面</title>
     <style>
         #dlg * {
@@ -24,7 +24,7 @@
         }
 
         #dlg::backdrop {
-            background: #fff;
+            background: transparent;
         }
 
         #dlg img {
@@ -42,6 +42,14 @@
     </dialog>
 
     <script>
+        const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const dlg = document.querySelector('#dlg');
+        const body = document.querySelector('body');
+        if (isSystemDark) {
+            dlg.style.background = '#1d1d1f';
+            dlg.style.color = '#fff';
+            body.style.background = '#1d1d1f';
+        };
         dlg.showModal();
     </script>
 </body>

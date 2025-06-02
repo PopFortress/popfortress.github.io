@@ -117,6 +117,13 @@
     </div>
 
     <a href="/index-vanilla" class="switch-ver">旧版主页</a>
+    <mdui-tooltip trigger="click focus" class="notify-wrapper">
+        <a href="javascript:;" class="notify">
+            <mdui-icon name="mail_outline" class="notify-icon"></mdui-icon>
+            <mdui-badge class="notify-badge"></mdui-badge>
+        </a>
+        <div slot="content" class="notify-list">没有新通知</div>
+    </mdui-tooltip>
     <div class="changelog-wrapper">
         <fieldset class="changelog-box">
             <legend>更新日志</legend>
@@ -130,6 +137,10 @@
             <div class="option">
                 <mdui-switch id="changelog-box-switch"></mdui-switch>
                 <label for="changelog-box-switch">显示更新日志</label>
+            </div>
+            <div class="option">
+                <mdui-switch id="notify-switch"></mdui-switch>
+                <label for="notify-switch">显示通知</label>
             </div>
             <div class="option">
                 <mdui-switch id="vanilla-switch"></mdui-switch>
