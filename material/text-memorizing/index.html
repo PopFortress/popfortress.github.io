@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>记忆文本</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+</head>
+<body>
+    
+    <div class="app">
+        <mdui-top-app-bar>
+            <mdui-button-icon icon="arrow_back" class="back-btn"></mdui-button-icon>
+            <mdui-top-app-bar-title>记忆文本</mdui-top-app-bar-title>
+        </mdui-top-app-bar>
+        <div class="settings-page page">
+            <mdui-card>
+                <div class="preset-title">道德与法治知识点</div>
+                <div>
+                    <div class="config">
+                        <div>选择课本</div>
+                        <mdui-select class="textbooks-select"></mdui-select>
+                    </div>
+                    <div class="config">
+                        <div>选择章节</div>
+                        <mdui-select class="chapters-select"></mdui-select>
+                    </div>
+                    <div class="config">
+                        <div>选择课时</div>
+                        <mdui-select class="sections-select"></mdui-select>
+                    </div>
+                </div>
+                <mdui-button class="textbook-start" variant="tonal" icon="arrow_forward">开始记忆</mdui-button>
+            </mdui-card>
+            <mdui-card>
+                <div class="preset-title">自定义文本</div>
+                <mdui-button class="custom-start" variant="tonal" icon="arrow_forward">开始记忆</mdui-button>
+            </mdui-card>
+        </div>
+        <div class="textbook-page page"></div>
+        <div class="custom-page page">
+            <mdui-text-field label="自定义文本" autosize class="custom-text"></mdui-text-field>
+            <mdui-button class="custom-generate">生成</mdui-button>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>

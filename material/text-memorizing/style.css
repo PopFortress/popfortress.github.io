@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: 100%;
+    max-width: 700px;
+}
+
+mdui-top-app-bar {
+    padding: 22px;
+    font-size: 24px;
+}
+
+mdui-top-app-bar-title {
+    padding-left: 12px;
+}
+
+.back-btn {
+    display: none;
+}
+
+mdui-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px 0 10px;
+    gap: 20px;
+}
+
+.preset-title, .part-title {
+    font-size: 18px;
+}
+
+.config {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.config div {
+    min-width: fit-content;
+}
+
+.memorize-frame {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.custom-page {
+    display: none;
+}

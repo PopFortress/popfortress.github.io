@@ -155,3 +155,8 @@ mdui-tabs {
     position: absolute;
     bottom: 12px;
 }
+
+.todo-items-list {
+    max-height: 64%;
+    overflow-y: scroll;
+}
