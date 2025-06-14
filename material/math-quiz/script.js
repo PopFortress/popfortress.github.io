@@ -3,16 +3,20 @@ const quizText = document.querySelector('.quiz-text');
 const quizInput = document.querySelector('.quiz-input');
 const checkBtn = document.querySelector('.check-btn');
 const operators = ['+', '-', '*', '/'];
+const percentages = [.1, .2, .3, .4, .5, .6, .7, .8, .9];
+const random = (array) => array[Math.floor(Math.random() * array.length)];
 var questionNum = 0;
 var quiz;
 var answer;
 var digit1;
 var digit2;
 var digit3;
+var percentage;
 var operator;
 var randomQuizToken;
 var randomEquationToken;
 var randomCircleToken;
+var randomStatisticsToken;
 var quizType;
 var answeredEquation;
 
@@ -36,7 +40,7 @@ function incorrectAnswer() {
 function quizSimple() {
     digit1 = Math.floor(Math.random() * (21 + questionNum));
     digit2 = Math.floor(Math.random() * (21 + questionNum));
-    operator = operators[Math.floor(Math.random() * operators.length)];
+    operator = random(operators);
     quiz = `${digit1} ${operator} ${digit2}`;
     answer = eval(quiz);
     if (Number.isInteger(answer)) {
@@ -126,18 +130,40 @@ function quizCircle() {
     };
 };
 
+function quizStatistics() {
+    randomStatisticsToken = Math.random();
+    digit1 = getRandomInt(1, 1001);
+    percentage = random(percentages);
+    operator = random(operators);
+    if (operator === '+' || operator === '-') {
+        answer = eval(`${digit1} * (1 ${operator} ${percentage})`);
+    } else {
+        answer = eval(`${digit1} ${operator} ${percentage}`);
+    };
+    quiz = `${digit1} ${operator} ${percentage * 100}%`;
+    if (Number.isInteger(answer)) {
+        quizText.innerHTML = `${quiz} = `;
+        updateQuizNum();
+    } else {
+        quizStatistics();
+    };
+};
+
 function loadQuiz() {
     quizInput.removeAttribute('suffix');
     randomQuizToken = Math.random();
-    if (randomQuizToken < 0.36) {
+    if (randomQuizToken < 0.3) {
         quizSimple();
         quizType = 'simple';
-    } else if (randomQuizToken >= 0.36 && randomQuizToken < 0.49) {
+    } else if (randomQuizToken >= 0.3 && randomQuizToken < 0.39) {
         quizSquareRoot();
         quizType ='square_root';
-    } else if (randomQuizToken >= 0.49 && randomQuizToken < 0.62) {
+    } else if (randomQuizToken >= 0.39 && randomQuizToken < 0.53) {
         quizCircle();
         quizType = 'circle';
+    } else if (randomQuizToken >= 0.53 && randomQuizToken < 0.75) {
+        quizStatistics();
+        quizType ='statistics';
     } else {
         quizEquation();
         quizType = 'equation';
