@@ -177,6 +177,7 @@ mdui-tabs {
         position: inherit;
         width: 100%;
         max-width: 700px;
+        padding: 0 14px;
     }
     body {
         flex-direction: column;
@@ -244,4 +245,8 @@ mdui-tabs {
     flex-direction: column;
     gap: 20px;
     font-size: 14px;
+}
+
+.giscus {
+    padding: 14px;
 }

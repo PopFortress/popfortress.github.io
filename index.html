@@ -118,14 +118,16 @@
                 <a href="javascript:;" class="options-btn">您的偏好选项</a>
             </div>
         </mdui-card>
+        <mdui-card class="giscus">
+            <script src="https://giscus.app/client.js" data-repo="PopFortress/popfortress.github.io" data-repo-id="R_kgDOL2BQ4Q" data-category="Announcements" data-category-id="DIC_kwDOL2BQ4c4Crfzk" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" async></script>
+        </mdui-card>
     </div>
 
     <a href="/index-vanilla" class="switch-ver">旧版主页</a>
     <mdui-tooltip trigger="click focus" class="notify-wrapper">
         <a href="javascript:;" class="notify">
             <mdui-icon name="mail_outline" class="notify-icon"></mdui-icon>
-            <mdui-badge class="notify-badge"></mdui-badge>
-            通知
+            <mdui-badge class="notify-badge"></mdui-badge>通知
         </a>
         <div slot="content" class="notify-list">没有新通知</div>
     </mdui-tooltip>
@@ -146,6 +148,10 @@
             <div class="option">
                 <mdui-switch id="notify-switch"></mdui-switch>
                 <label for="notify-switch">显示通知</label>
+            </div>
+            <div class="option">
+                <mdui-switch id="comments-switch"></mdui-switch>
+                <label for="comments-switch">显示留言</label>
             </div>
             <div class="option">
                 <mdui-switch id="vanilla-switch"></mdui-switch>

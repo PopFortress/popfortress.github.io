@@ -21,6 +21,8 @@ const notifySwitch = $('#notify-switch');
 const notify = $('.notify-wrapper');
 const notifyList = $('.notify-list');
 const notifyBadge = $('.notify-badge');
+const commentsSwitch = $('#comments-switch');
+const giscus = $('.giscus');
 var sayingsDesc;
 var sha;
 var responseCommit;
@@ -43,6 +45,11 @@ if (localStorage.showNotify) {
     var showNotify = localStorage.showNotify;
 } else {
     var showNotify = 'true';
+};
+if (localStorage.showComments) {
+    var showComments = localStorage.showComments;
+} else {
+    var showComments = 'true';
 };
 
 
@@ -185,6 +192,22 @@ notifySwitch.onchange = (e) => {
     } else {
         localStorage.showNotify = false;
         notify.style.display = 'none';
+    };
+};
+
+if (showComments === 'true') {
+    commentsSwitch.checked = true;
+} else {
+    giscus.style.display = 'none';
+};
+
+commentsSwitch.onchange = (e) => {
+    if (e.target.checked) {
+        localStorage.showComments = true;
+        giscus.style.display = 'block';
+    } else {
+        localStorage.showComments = false;
+        giscus.style.display = 'none';
     };
 };
 
