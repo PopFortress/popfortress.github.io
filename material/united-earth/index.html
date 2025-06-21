@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>地下城居住权抽签</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="/mdui/mdui.global.js"></script>
+</head>
+<body>
+    
+    <div class="app">
+        <div class="lang-wrapper">
+            <mdui-dropdown>
+                <a href="javascript:;" slot="trigger">Language</a>
+                <mdui-menu dense id="lang-menu" value="zh" selects="single">
+                    <mdui-menu-item value="zh">中文</mdui-menu-item>
+                    <mdui-menu-item value="en">English</mdui-menu-item>
+                </mdui-menu>
+            </mdui-dropdown>
+        </div>
+        <form action="javascipt:;">
+            <mdui-card>
+                <div class="form-element">
+                    <div class="label">姓名</div>
+                    <mdui-text-field required id="name-input"></mdui-text-field>
+                </div>
+                <div class="form-element">
+                    <div class="label">年龄</div>
+                    <mdui-text-field required type="number" id="age-input"></mdui-text-field>
+                </div>
+                <div class="form-element">
+                    <div class="label">国家或地区</div>
+                    <mdui-select required id="region-select" placement="bottom" placeholder="选择地区"></mdui-select>
+                </div>
+                <div class="form-element">
+                    <div class="label">性别</div>
+                    <mdui-radio-group required id="gender-radio-group">
+                        <mdui-radio value="male" id="male">男性</mdui-radio>
+                        <mdui-radio value="female" id="female">女性</mdui-radio>
+                    </mdui-radio-group>
+                </div>
+            </mdui-card>
+            <div class="info">抽签结果具有法律效益，请严格遵守<br>PLEASE ABIDE BY THE LOTTERY RESULTS</div>
+            <img src="https://pic1.imgdb.cn/item/6856562058cb8da5c85f938e.svg" alt="united-earth">
+            <mdui-button full-width type="submit" disabled id="submit-btn">提交</mdui-button>
+        </form>
+    </div>
+    
+    <script src="./script.js"></script>
+
+</body>
+</html>

@@ -19,6 +19,8 @@ var randomCircleToken;
 var randomStatisticsToken;
 var quizType;
 var answeredEquation;
+var subjects;
+var subjectDigits = [];
 
 function updateQuizNum() {
     questionNum++;
@@ -149,21 +151,40 @@ function quizStatistics() {
     };
 };
 
+function quizMean() {
+    subjectDigits = [];
+    subjects = getRandomInt(2, 5);
+    for (let i = 0; i < subjects; i++) {
+        subjectDigits[i] = getRandomInt(1, 101);
+    };
+    answer = subjectDigits.reduce((a, b) => a + b) / subjects;
+    if (Number.isInteger(answer)) {
+        quiz = `mean(${subjectDigits.join(', ')})`;
+        quizText.innerHTML = `${quiz} = `;
+        updateQuizNum();
+    } else {
+        quizMean();
+    };
+};
+
 function loadQuiz() {
     quizInput.removeAttribute('suffix');
     randomQuizToken = Math.random();
-    if (randomQuizToken < 0.3) {
+    if (randomQuizToken < 0.25) {
         quizSimple();
         quizType = 'simple';
-    } else if (randomQuizToken >= 0.3 && randomQuizToken < 0.39) {
+    } else if (randomQuizToken >= 0.25 && randomQuizToken < 0.34) {
         quizSquareRoot();
         quizType ='square_root';
-    } else if (randomQuizToken >= 0.39 && randomQuizToken < 0.53) {
+    } else if (randomQuizToken >= 0.34 && randomQuizToken < 0.47) {
         quizCircle();
         quizType = 'circle';
-    } else if (randomQuizToken >= 0.53 && randomQuizToken < 0.75) {
+    } else if (randomQuizToken >= 0.47 && randomQuizToken < 0.62) {
         quizStatistics();
         quizType ='statistics';
+    } else if (randomQuizToken >= 0.62 && randomQuizToken < 0.81) {
+        quizMean();
+        quizType = 'mean';
     } else {
         quizEquation();
         quizType = 'equation';

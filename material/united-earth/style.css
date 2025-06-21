@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.app {
+    display: flex;
+    width: 100%;
+    max-width: 500px;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+}
+
+mdui-card {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-element {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.label {
+    min-width: fit-content;
+    color: rgb(var(--mdui-color-primary));
+}
+
+.lang-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    color: rgb(var(--mdui-color-primary));
+}
+
+#region-select::part(menu) {
+    max-height: 312px;
+    overflow: auto;
+}
+
+.info {
+    font-size: 12px;
+    color: rgb(var(--mdui-color-secondary));
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}

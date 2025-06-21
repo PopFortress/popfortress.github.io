@@ -249,4 +249,6 @@ mdui-tabs {
 
 .giscus {
     padding: 14px;
+    color: rgb(var(--mdui-color-primary));
+    font-size: 12px;
 }
