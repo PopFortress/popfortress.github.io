@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: 100%;
+    max-width: 620px;
+}
+
+mdui-tab::part(icon) {
+    padding-right: 10px;
+}
+
+mdui-tab-panel {
+    padding: 20px;
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+mdui-range-slider {
+    padding: 0 16px;
+}
+
+.range-input-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.range-text, .average-text {
+    padding-left: 18px;
+}
+
+.generate-panel {
+    padding: 100px;
+    align-items: center;
+    gap: 24px;
+}
+
+mdui-fab {
+    width: auto !important;
+}
+
+.random-number {
+    font-size: 49px;
+    text-align: center;
+}
+
+.average-text-wrapper {
+    text-align: center;
+    font-size: 14px;
+}

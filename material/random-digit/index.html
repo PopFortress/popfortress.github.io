@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>随机数字生成器</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+</head>
+<body>
+
+    <div class="app">
+        <mdui-tabs value="settings" full-width>
+            <mdui-tab value="settings" icon="settings" inline>设置</mdui-tab>
+            <mdui-tab value="generate" icon="123" inline>生成</mdui-tab>
+    
+            <mdui-tab-panel slot="panel" value="settings">
+                <div class="panel">
+                    <div>选择范围</div>
+                    <mdui-range-slider tickmarks class="range-slider"></mdui-range-slider>
+                    <div class="range-input-wrapper">
+                        <mdui-text-field label="最小值" type="number" class="min-input" min="0" max="100"></mdui-text-field>
+                        <mdui-text-field label="最大值" type="number" class="max-input" min="0" max="100"></mdui-text-field>
+                    </div>
+                    <div>范围<span class="range-text"></span></div>
+                    <mdui-checkbox checked class="animation-toggle">显示动画</mdui-checkbox>
+                </div>
+            </mdui-tab-panel>
+            <mdui-tab-panel slot="panel" value="generate">
+                <div class="panel generate-panel">
+                    <div class="random-number"></div>
+                    <mdui-fab extended icon="auto_awesome" class="generate-btn">生成</mdui-fab>
+                    <div class="average-text-wrapper">平均<span class="average-text"></span></div>
+                    <mdui-menu dense class="numbers-list"></mdui-menu>
+                </div>
+            </mdui-tab-panel>
+        </mdui-tabs>
+    </div>
+
+
+    <script src="./script.js"></script>
+
+</body>
+</html>

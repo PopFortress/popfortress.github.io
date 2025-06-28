@@ -47,7 +47,10 @@
 	<header>404 NOT FOUND</header>
 	<p>The requested URL was not found on this server.</p>
 	<p>无法在此服务器上找到请求的 URL</p>
-	<code>error:pagenotexists</code>
+	<code id="code"></code>
+	<script>
+		code.innerHTML = `error:pagenotexists ${location.pathname}`;
+	</script>
 </body>
 
 </html>

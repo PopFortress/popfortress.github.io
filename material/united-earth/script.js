@@ -49,7 +49,8 @@ async function fetchRegions() {
     });
 };
 
-function submit() {
+function submit(e) {
+    e.preventDefault();
     if (checkForm()) {
         submitBtn.disabled = true;
         setTimeout(() => {
