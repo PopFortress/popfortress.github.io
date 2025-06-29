@@ -4,10 +4,26 @@
     box-sizing: border-box;
 }
 
+html {
+    background-position: center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+}
+
+mdui-text-field::part(label) {
+    background: transparent;
+}
+
+mdui-tabs::part(container) {
+    background: transparent;
+}
+
 body {
     display: flex;
     justify-content: center;
     height: 100vh;
+    backdrop-filter: none;
 }
 
 .app {
@@ -159,4 +175,8 @@ mdui-tabs {
 .todo-items-list {
     max-height: 64%;
     overflow-y: scroll;
+}
+
+#bg-input {
+    display: none;
 }

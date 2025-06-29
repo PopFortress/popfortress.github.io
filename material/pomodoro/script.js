@@ -21,6 +21,8 @@ const tabs = $('mdui-tabs');
 const resetStatsBtn = $('.reset-stats-btn');
 const overlayBtn = $('.toggle-overlay');
 const todosTitle = $('.todos-title');
+const bgInput = $('#bg-input');
+const body = $('html');
 var _status = 'stopped';
 var latestStatus;
 var _remainMin = 0;
@@ -314,3 +316,19 @@ overlayBtn.onclick = async () => {
 
 tempArray = JSON.parse(localStorage.todos);
 tempArray.forEach(addTodoItem);
+
+bgInput.onchange = function () {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        body.style.background = `url(${e.target.result})`;
+        document.body.style.backdropFilter = 'brightness(.7)';
+        body.className = 'mdui-theme-dark';
+    };
+    if (this.files[0]) {
+        reader.readAsDataURL(this.files[0]);
+    } else {
+        body.style.background = `revert-layer`;
+        document.body.style.backdropFilter = 'none';
+        body.className = 'mdui-theme-auto';
+    };
+};
