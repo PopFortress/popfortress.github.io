@@ -23,6 +23,7 @@ const overlayBtn = $('.toggle-overlay');
 const todosTitle = $('.todos-title');
 const bgInput = $('#bg-input');
 const body = $('html');
+const actions = document.querySelectorAll('.actions *');
 var _status = 'stopped';
 var latestStatus;
 var _remainMin = 0;
@@ -184,12 +185,15 @@ statusToggleFab.onclick = () => {
                     mdui.snackbar({message: 'value out of range.',});
                 };
             };
+            hideActions();
             break;
         case 'working':
             pausePomodoro();
+            showActions();
             break;
         case 'breaking':
             pausePomodoro();
+            showActions();
             break;
         case 'paused':
             statusToggleFab.textContent = 'Pause';
@@ -204,6 +208,8 @@ statusToggleFab.onclick = () => {
                     breaking();
                     break;
             };
+            hideActions();
+            break;
     };
 };
 
@@ -331,4 +337,25 @@ bgInput.onchange = function () {
         document.body.style.backdropFilter = 'none';
         body.className = 'mdui-theme-auto';
     };
+};
+
+function hideActions() {
+    actions.forEach((e) => {
+        if (e != statusToggleFab) {
+            e.style.display = 'none';
+        } else {
+            e.style.opacity = 0.6;
+        }
+    });
+};
+
+function showActions() {
+    actions.forEach((e) => {
+        if (e != bgInput) {
+            e.style.display = 'block';
+        };
+        if (e === statusToggleFab) {
+            e.style.opacity = 1;
+        };
+    });
 };
