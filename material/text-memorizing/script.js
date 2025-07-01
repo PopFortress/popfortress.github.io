@@ -10,6 +10,7 @@ const customPage = $('.custom-page');
 const backBtn = $('.back-btn');
 const customText = $('.custom-text');
 const customGenerate = $('.custom-generate');
+const progress = $('mdui-circular-progress');
 var textbooks;
 var currentPage = settingsPage;
 var textbookIndex = 0;
@@ -37,6 +38,7 @@ function switchPage(to) {
 async function fetchTextbooks() {
     const response = await fetch('/static/textbooks.json');
     textbooks = await response.json();
+    progress.style.display = 'none';
     textbooks.forEach(textbook => {
         var textbookOption = document.createElement('mdui-menu-item');
         textbookOption.textContent = textbook.title;
