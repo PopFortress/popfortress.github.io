@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: 100%;
+    max-width: 600px;
+}
+
+.cube-box48{
+  position:relative;
+  transform-style:preserve-3d;
+  animation:cube48-eff 3s linear infinite;
+}
+.cube48{
+  width:44px;
+  height:44px;
+  transform-style:preserve-3d;
+  transform:rotateX(35deg) rotateY(0deg) rotateZ(45deg);
+}
+.cube48 > div{
+  height:100%;
+  position:absolute;
+  width:100%;
+  border:1px solid rgba(255,255,255,0.7);
+}
+.cube48 div:nth-of-type(1){
+  background-color:rgba(55,175,202,0.4);
+  transform:translateZ(-22px) rotateY(180deg);
+}
+.cube48 div:nth-of-type(2){
+  background-color:rgba(222,116,204,0.4);
+  transform:rotateY(-270deg) translateX(50%);
+  transform-origin:top right;
+}
+.cube48 div:nth-of-type(3){
+  background-color:rgba(222,116,204,0.4);
+  transform:rotateY(270deg) translateX(-50%);
+  transform-origin:center left;
+}
+.cube48 div:nth-of-type(4){
+  background-color:rgba(248,156,108,0.4);
+  transform:rotateX(90deg) translateY(-50%);
+  transform-origin:top center;
+}
+.cube48 div:nth-of-type(5){
+  background-color:rgba(248,156,108,0.4);
+  transform:rotateX(-90deg) translateY(50%);
+  transform-origin:bottom center;
+}
+.cube48 div:nth-of-type(6){
+  background-color:rgba(55,175,202,0.4);
+  transform:translateZ(22px);
+}
+@keyframes cube48-eff{
+  100%{
+  transform:rotateY(360deg);
+}
+}
+
+.animate-wrapper {
+    width: fit-content;
+    height: fit-content;
+}
+
+.animation-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    opacity: .1;
+}
+
+mdui-text-field {
+    transform: scale(.8);
+    height: 32px;
+    width: 87px;
+}
+
+.countdown, .subtitles {
+    text-align: center;
+    margin: 16px 0;
+}
+
+.countdown {
+    font-size: 2.2rem;
+}
+
+.config {
+    font-size: 0.9rem;
+    color: rgb(var(--mdui-color-secondary));
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    line-height: 2.2;
+    margin: 40px 0;
+}
+
+.entry {
+    display: flex;
+    gap: 10px;
+}
+
+mdui-text-field::part(suffix) {
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+mdui-text-field::part(container) {
+    box-shadow: none;
+}
+
+mdui-text-field::part(container):focus-within {
+    box-shadow: revert-layer;
+}
+
+mdui-text-field::part(container):hover {
+    box-shadow: revert-layer;
+}
+
+.start {
+    display: flex;
+    justify-content: center;
+}
+
+.reset-btn {
+    display: none;
+    width: fit-content !important;
+}

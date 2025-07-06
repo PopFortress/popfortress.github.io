@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>模拟考试</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+</head>
+<body>
+    
+    <div class="app">
+        <div class="animation-box">
+            <div class="animate-wrapper">
+                <div class="cube-box48">
+                    <div class="cube48">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="countdown">10:00</div>
+        <div class="subtitles">请设定考试科目</div>
+        <div class="config">
+            <div class="entry">
+                <div class="label" data-name="subject">科目</div>
+                <mdui-text-field variant="outlined" data-index="0" class="subject-input"></mdui-text-field>
+            </div>
+            <div class="entry">
+                <div class="label" data-name="duration">时长</div>
+                <mdui-text-field variant="outlined" type="number" suffix="分钟" class="duration-input" data-index="1" min="1"></mdui-text-field>
+            </div>
+        </div>
+        <div class="start">
+            <mdui-fab extended variant="surface" size="small" icon="timer--outlined" class="start-btn">开始考试</mdui-fab>
+            <mdui-fab extended variant="surface" size="small" icon="refresh--outlined" class="reset-btn">新考试</mdui-fab>
+        </div>
+    </div>
+
+    
+    <audio src=""></audio>
+    <script src="./script.js"></script>
+
+</body>
+</html>
