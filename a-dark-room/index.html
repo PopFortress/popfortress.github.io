@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Dark Room 主页</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .app {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            border: rgb(var(--mdui-color-on-primary-container)) solid 1px;
+            height: 300px;
+            padding: 20px;
+            align-items: safe center;
+            gap: 30px;
+            white-space: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        h1 {
+            font-weight: 400;
+            color: rgb(var(--mdui-color-primary));
+        }
+
+        header {
+            text-align: center;
+        }
+
+        header div {
+            font-size: .9rem;
+            letter-spacing: 1px;
+            line-height: 2;
+        }
+
+        .label, .link, .desc {
+            font-size: .8rem;
+        }
+
+        .game-box-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .game-box, .links-box, .description-box {
+            display: flex;
+            gap: 20px;
+            line-height: 2.5;
+        }
+
+        mdui-text-field {
+            transform: scale(.8);
+            height: 32px;
+            width: 177px;
+        }
+
+        .start-btn {
+            height: auto;
+        }
+
+        footer {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        footer a {
+            justify-self: center;
+            font-size: .8rem;
+            color: rgb(var(--mdui-color-primary));
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
+
+        a:active {
+            color: rgb(var(--mdui-color-secondary));
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app">
+        <div class="container">
+            <header>
+                <h1>A Dark Room</h1>
+                <div>适用于您的浏览器的极简文字冒险游戏</div>
+            </header>
+            <div class="game-box-wrapper">
+                <div class="game-box">
+                    <div class="label">选择游戏版本</div>
+                    <mdui-dropdown trigger="click focus">
+                        <mdui-text-field slot="trigger" id="version"></mdui-text-field>
+                        <mdui-menu dense selects="single" value="sitehosted" id="version-menu">
+                            <mdui-menu-item value="sitehosted" end-text="(1.4 Latest)" data-url="./adarkroom-1.4/" data-desc="简化版本，以便部署在服务器上。语言仅有简体中文和英语。无音效。">站内 Light 版本</mdui-menu-item>
+                            <mdui-menu-item value="official" end-text="(1.4 Latest)" data-url="https://adarkroom.doublespeakgames.com/" data-desc="您所在的区域可能无法访问此链接。">官方版本</mdui-menu-item>
+                            <mdui-menu-item value="official-ghpages" end-text="(1.4 Latest)" data-url="https://doublespeakgames.github.io/adarkroom/">官方 Github Pages 版本</mdui-menu-item>
+                            <mdui-menu-item value="community" data-url="https://638.creaconception.dpdns.org/adarkroom-1.4/">社区版本</mdui-menu-item>
+                            <mdui-menu-item value="thirdparty" data-url="https://game.ur1.fun/adarkroom/">第三方版本</mdui-menu-item>
+                            <mdui-menu-item value="search" data-url="https://cn.bing.com/search?q=A%20Dark%20Room">联机查找更多版本...</mdui-menu-item>
+                        </mdui-menu>
+                    </mdui-dropdown>
+                    <mdui-button class="start-btn" end-icon="arrow_forward">开始游戏</mdui-button>
+                </div>
+                <div class="links-box">
+                    <div class="label">链接地址</div>
+                    <div class="link"></div>
+                </div>
+                <div class="description-box">
+                    <div class="label">附加说明</div>
+                    <div class="desc"></div>
+                </div>
+            </div>
+            <footer>
+                <a href="https://github.com/doublespeakgames/adarkroom" target="_blank">原作 GitHub</a>
+                <a href="javascript:;" id="support">支持信息</a>
+                <a href="http://doublespeakgames.com/" target="_blank">原作 网站</a>
+            </footer>
+        </div>
+    </div>
+    
+    <script>
+        mdui.setColorScheme('#272823');
+        const $ =(query) => mdui.$(query)[0];
+        const versionMenu = $('#version-menu');
+        const link = $('.link');
+        const startBtn = $('.start-btn');
+        const descText = $('.desc');
+        const descriptionBox = $('.description-box');
+        function updateLinks() {
+            const selectedItem = document.querySelector(`#version-menu mdui-menu-item[value=${versionMenu.value}]`);
+            const url = selectedItem.dataset.url;
+            const label = selectedItem.textContent;
+            const desc = selectedItem.dataset.desc;
+            if (selectedItem.value === 'search') {
+                startBtn.textContent = '前往';
+                startBtn.target = '_blank';
+            } else {
+                startBtn.textContent = '开始游戏';
+                startBtn.target = '_self';
+            };
+            version.value = label;
+            link.innerHTML = url;
+            startBtn.href = url;
+            
+            if (desc) {
+                descText.textContent = desc;
+                descriptionBox.style.display = 'flex';
+            } else {
+                descriptionBox.style.display = 'none';
+            };
+        };
+
+        versionMenu.onchange = () =>  {
+            if (versionMenu.value) {
+                updateLinks();
+            } else {
+                versionMenu.value = 'sitehosted';
+                updateLinks();
+            };
+        };
+        updateLinks();
+
+        support.onclick = () => {
+            mdui.alert({
+                headline: '支持信息',
+                description: '· A Dark Room 不适合移动设备，并且需要箭头键。但你仍可从原作 GitHub 仓库中下载原生移动应用！· A Dark Room 需要较新的浏览器支持来运行，因为它使用了 HTML5 和 CSS3',
+                confirmText: '确定',
+            });
+        };
+    </script>
+
+</body>
+</html>

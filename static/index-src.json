@@ -4,10 +4,11 @@
     "activity_title": "波普的温馨小阁 一周年庆典",
     "activity_target_url": "/info/1st-anniversary",
     "activity_imgurl": "https://pic1.imgdb.cn/item/682845ab58cb8da5c8f8e339.png",
-    "latest_update": "Jul. 6, 2025",
+    "latest_update": "Jul. 7, 2025",
     "notifications": [
         {"title": "帖文 #10 已发布，前往查看紫马岭公园的观光日记 →", "link": "/posts/10"},
         {"title": "听说 90% 的访客访问了页注中的“可疑的页面”"},
-        {"title": "快速复习期末道法", "link": "/material/text-memorizing/"}
+        {"title": "快速复习期末道法", "link": "/material/text-memorizing/"},
+        {"title": "A Dark Room Light 轻量级经典极简文字游戏现已部署在本站，前往体验 →", "link": "/fakecaptcha?r=/a-dark-room/"}
     ]
 }
