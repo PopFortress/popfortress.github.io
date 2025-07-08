@@ -10,12 +10,23 @@ const animateWrapper = $('.animate-wrapper');
 const broadcastAudio = $('audio');
 const timerText = $('.countdown');
 const resetBtn = $('.reset-btn');
+const wakeLockCheckbox = $('.wake-lock-toggle');
 var _remainMin = 0;
 var _remainSec = 0;
 var preExamInterval;
 var ExamInterval;
 var afterExamInterval;
 var broadcastIndex = 0;
+const noSleep = new NoSleep();
+noSleep.enable();
+wakeLockCheckbox.onchange = (e) => {
+    if (e.target.checked) {
+        noSleep.enable();
+    } else {
+        noSleep.disable();
+    };
+};
+
 const signals = ['请监考员迅速到考务办公室领卷 Preparing Exam Papers.mp3',
     '预备上课铃 pre-class mention.mp3',
     '请监考员分发试卷 Monitor Distributing Papers.mp3',
@@ -88,6 +99,7 @@ function start() {
     animationBox.style.opacity = .6;
     subjectInput.readonly = true;
     durationInput.readonly = true;
+    wakeLockCheckbox.style.display = 'inline-flex';
     for (let i = 0; i <= 3; i++) {
         _remainMin += intervalDurations[i];
     };
@@ -114,7 +126,7 @@ function start() {
         { action: () => { subtitle('待监考员将答题卡、试卷、草稿纸清点完毕，'); }, delay: 3000 },
         { action: () => { subtitle('宣布离开，方可离开考场。'); }, delay: 5000 },
         { action: () => { broadcast(signals[6]);}, delay: intervalDurations[5] },
-        { action: () => { resetBtn.style.display = 'block'; }, delay: 23000},
+        { action: () => { resetBtn.style.display = 'block'; wakeLockCheckbox.style.display = 'none';}, delay: 23000},
     ];
 
     let index = 0;

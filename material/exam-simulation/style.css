@@ -131,6 +131,9 @@ mdui-text-field::part(container):hover {
 }
 
 .reset-btn {
-    display: none;
     width: fit-content !important;
+}
+
+.wake-lock-toggle, .reset-btn {
+    display: none;
 }
