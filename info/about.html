@@ -106,17 +106,19 @@
         <div><mdui-chip elevated href="/" end-icon="arrow_forward">popfortress.github.io</mdui-chip></div>
         <mdui-card class="links-card">
             <span>社交网络</span>
-            <div class="links">
-                <mdui-button href="//github.com/popfortress" target="_blank" icon="arrow_outward">GitHub</mdui-button>
-                <mdui-button href="//space.bilibili.com/3461573418945245" target="_blank" icon="arrow_outward">哔哩哔哩</mdui-button>
-                <mdui-button href="//weibo.com/popfortress" target="_blank" icon="arrow_outward">微博</mdui-button>
-                <mdui-button href="//zh-cn.namemc.com/profile/PopFortress.1" target="_blank" icon="arrow_outward">NameMC</mdui-button>
-                <mdui-button href="//bbs.mcutc.cn/members/popfortress.101/" target="_blank" icon="arrow_outward">MCUTC 论坛</mdui-button>
-                <mdui-button href="//www.xbox.com/zh-CN/play/user/PopFortress" target="_blank" icon="arrow_outward">Xbox 档案</mdui-button>
-                <mdui-button href="//solian.app/#/account/popfortress" target="_blank" icon="arrow_outward">Solar Network</mdui-button>
-                <mdui-button href="//www.twitch.tv/popfortress" target="_blank" icon="arrow_outward">Twitch</mdui-button>
-                <mdui-button href="//yandex.ru/chat#/@/user/7eac2903-0150-9ae1-4645-6e519d9bf5aa" target="_blank" icon="arrow_outward">Yandex Messenger</mdui-button>
-                <mdui-button href="//link3.cc/fortress" target="_blank" icon="arrow_outward">Link3.cc</mdui-button>
+            <div class="links social">
+                <mdui-button href="//github.com/popfortress">GitHub</mdui-button>
+                <mdui-button href="//space.bilibili.com/3461573418945245">哔哩哔哩</mdui-button>
+                <mdui-button href="//weibo.com/popfortress">微博</mdui-button>
+                <mdui-button href="//zh-cn.namemc.com/profile/PopFortress.1">NameMC</mdui-button>
+                <mdui-button href="//bbs.mcutc.cn/members/popfortress.101/">MCUTC 论坛</mdui-button>
+                <mdui-button href="//www.xbox.com/zh-CN/play/user/PopFortress">Xbox 档案</mdui-button>
+                <mdui-button href="//solian.app/#/account/popfortress">Solar Network</mdui-button>
+                <mdui-button href="//www.twitch.tv/popfortress">Twitch</mdui-button>
+                <mdui-button href="//yandex.ru/chat#/@/user/7eac2903-0150-9ae1-4645-6e519d9bf5aa">Yandex Messenger</mdui-button>
+                <mdui-button href="//link3.cc/fortress">Link3.cc</mdui-button>
+                <mdui-button href="//www.taptap.cn/user/429898598">TapTap</mdui-button>
+                <mdui-button href="//steamcommunity.com/id/popfortress/">steamcommunity</mdui-button>
             </div>
         </mdui-card>
         <mdui-card class="links-card">
@@ -164,6 +166,12 @@
                     closeable: true
                 });
             });
+        });
+
+        const socialLinks = document.querySelectorAll('.social mdui-button');
+        socialLinks.forEach(link => {
+            link.target = '_blank';
+            link.icon = 'arrow_outward';
         });
     </script>
 </body>

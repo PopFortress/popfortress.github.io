@@ -1,10 +1,10 @@
 {
-    "title": "Which weapon of the followings can't be used to kill endermen?",
-    "option_a": "The End Crystals",
-    "option_b": "Swords",
-    "option_c": "Crossbows",
-    "option_d": "Axes",
+    "title": "Which ingredient of the followings you needn't use to craft a beacon?",
+    "option_a": "Glass",
+    "option_b": "Obsidian",
+    "option_c": "End stone",
+    "option_d": "Nether Star",
     "answer": "c",
-    "explanation": "Projectiles can't deal damage to endermen.",
-    "number": "2"
+    "explanation": "The recipe of beacons is: 3 Obsidians in the bottom, the nether star in the center, and 5 glass blocks around it. This doesn't require any end stones.",
+    "number": "3"
 }
