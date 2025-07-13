@@ -1,0 +1,268 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-api-vvhan: url(https://api.vvhan.com/api/bing);
+    --bg-api-lime: url(https://bing.shangzhenyang.com/api/1080p);
+}
+
+html {
+    background-image: var(--bg-api-vvhan);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    min-height: 100vh;
+    backdrop-filter: blur(4px) brightness(0.8);
+}
+
+::selection {
+    background: #333;
+    color: #fff;
+}
+
+.app {
+    width: 100%;
+    max-width: 800px;
+    margin: 14px;
+    position: relative;
+}
+
+.app mdui-card {
+    position: absolute;
+    transition: 0.3s;
+    width: 340px;
+    padding: 14px;
+    opacity: .8;
+    line-height: 1.5;
+    overflow: inherit;
+}
+
+.headline {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.hitokoto {
+    font-size: .9rem;
+    color: rgb(var(--mdui-color-secondary));
+}
+
+@media screen and (max-width: 367px) {
+    .app {
+        position: inherit;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .app mdui-card {
+        position: relative;
+        width: 100%;
+    }
+}
+
+.date-header {
+    font-size: 1.5rem;
+}
+
+.datetime {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.time {
+    font-size: 1.3rem;
+    display: flex;
+    gap: 3px;
+}
+
+.sep {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: .2;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: .2;
+    }
+}
+
+.title {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+}
+
+.error-frame {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.8rem;
+}
+
+.weather .content {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.temperature {
+    gap: 15px;
+}
+
+.highest, .lowest, .average {
+    gap: 11px;
+}
+
+.location {
+    font-size: .8rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.air-quality {
+    gap: 10px;
+}
+
+.exit-btn {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+}
+
+mdui-list-subheader {
+    height: auto;
+    line-height: inherit;
+    font-size: .8rem;
+    white-space: inherit;
+}
+
+.zhihu-daily-list img {
+    width: 50px;
+    object-fit: cover;
+}
+
+.history .content {
+    flex-direction: column;
+    gap: 10px;
+}
+
+a {
+    color: rgb(var(--mdui-color-tertiary));
+    text-decoration-thickness: 1px !important;
+    text-underline-offset: 5px;
+    text-decoration: none;
+}
+
+a:active {
+    color : rgb(var(--mdui-color-secondary));
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.zhihu-daily a, .om .links, .stock a, .wallpaper .links {
+    font-size: .8rem;
+    display: block;
+    text-align: center;
+}
+
+.english .content {
+    flex-direction: column;
+    gap: 14px;
+}
+
+.english img {
+    border-radius: var(--mdui-shape-corner-medium);
+}
+
+.om .content {
+    flex-direction: column;
+    gap: 20px;
+}
+
+.update-time {
+    font-size: .8rem;
+}
+
+.price {
+    text-decoration: line-through;
+}
+
+.epic-list img {
+    width: 100px;
+    object-fit: cover;
+}
+
+.answer .content {
+    flex-direction: column;
+    gap: 17px;
+    align-items: center;
+}
+
+.answer .answer-text {
+    transition: .3s;
+    text-align: center;
+}
+
+.answer .en {
+    font-size: .8rem;
+}
+
+.wallpaper .content {
+    flex-direction: column;
+    gap: 19px;
+}
+.wallpaper .img-title {
+    font-size: 1.2rem;
+}
+.wallpaper .desc {
+    font-size: .9rem;
+}
+.wallpaper .img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: var(--mdui-shape-corner-medium);
+}
+
+.horoscope .content {
+    flex-direction: column;
+    gap: 20px;
+    transition: .3s;
+}
+
+.horoscope .label {
+    text-align: center;
+    font-size: .8rem;
+}
+
+.horoscope-input {
+    transform: scale(.8);
+    height: 32px;
+    width: 100px;
+}
+
+.select-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}

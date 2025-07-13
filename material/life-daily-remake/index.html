@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>生活主页 | Life Daily Remake</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+</head>
+<body>
+    
+    <div class="app">
+        <mdui-card class="datetime">
+            <div class="date-header"></div>
+            <div class="datetime-wrapper">
+                <div class="time">
+                    <div class="hr"></div>
+                    <div class="sep">:</div>
+                    <div class="min"></div>
+                </div>
+                <div class="date"></div>
+            </div>
+        </mdui-card>
+        <mdui-card class="headline-wrapper">
+            <div class="headline"></div>
+            <div class="hitokoto"></div>
+        </mdui-card>
+        <mdui-card class="weather" clickable>
+            <div class="title">本地天气</div>
+            <div class="content flex">
+                <div class="location flex">
+                    <div class="city" style="margin-left: auto;"></div>
+                    <mdui-icon name="location_on" style="font-size: 1rem;"></mdui-icon>
+                </div>
+                <div class="temperature flex">
+                    <div class="highest flex" title="最高温度">
+                        <mdui-icon name="arrow_upward"></mdui-icon>
+                        <div class="highest-text"></div>
+                    </div>
+                    <div class="lowest flex" title="最低温度">
+                        <mdui-icon name="arrow_downward"></mdui-icon>
+                        <div class="lowest-text"></div>
+                    </div>
+                    <div class="average flex" title="平均气温">
+                        <mdui-icon name="wb_sunny"></mdui-icon>
+                        <div class="average-text"></div>
+                    </div>
+                </div>
+                <div class="wind"></div>
+                <div class="air-quality flex">
+                    <mdui-icon name="air"></mdui-icon>
+                    <div class="text"></div>
+                </div>
+            </div>
+        </mdui-card>
+        <mdui-card class="zhihu-daily" clickable>
+            <div class="title">知乎日报</div>
+            <div class="content">
+                <mdui-list class="zhihu-daily-list"></mdui-list>
+            </div>
+        </mdui-card>
+        <mdui-card class="history" clickable>
+            <div class="title">历史上的今天</div>
+            <div class="content flex"></div>
+        </mdui-card>
+        <mdui-card class="english" clickable>
+            <div class="title">今日励志英语</div>
+            <div class="content flex">
+                <div class="date"></div>
+                <div class="saying">
+                    <div class="chinese"></div>
+                    <div class="original"></div>
+                </div>
+                <img class="img">
+            </div>
+        </mdui-card>
+        <mdui-card class="om" clickable>
+            <div class="title">一分钟看世界</div>
+            <div class="content flex">
+                <div class="date"></div>
+                <mdui-list class="news-list"></mdui-list>
+                <div class="sayings"></div>
+                <div class="links">
+                    <a target="_blank" class="details">查看更多内容</a>
+                    <a href="https://60s.coom.cn/" target="_blank">未来日报</a>
+                </div>
+            </div>
+        </mdui-card>
+        <mdui-card class="currency" clickable>
+            <div class="title">货币汇率</div>
+            <div class="content">
+                <div class="update-time"></div>
+                <div>1 人民币 = </div>
+                <mdui-list class="currency-list"></mdui-list>
+            </div>
+        </mdui-card>
+        <mdui-card class="stock" clickable>
+            <div class="title">股市行情</div>
+            <div class="content">
+                <div class="update-time"></div>
+                <mdui-list class="stock-list"></mdui-list>
+                <a href="https://www.msn.cn/zh-cn/money" target="_blank">前往 MSN</a>
+            </div>
+        </mdui-card>
+        <mdui-card class="bilibili" clickable>
+            <div class="title">哔哩哔哩热榜</div>
+            <div class="content">
+                <mdui-list class="bilibili-list"></mdui-list>
+            </div>
+        </mdui-card>
+        <mdui-card class="zhihu" clickable>
+            <div class="title">知乎热榜</div>
+            <div class="content">
+                <mdui-list class="zhihu-list"></mdui-list>
+            </div>
+        </mdui-card>
+        <mdui-card class="maoyan" clickable>
+            <div class="title">猫眼票房排行</div>
+            <div class="content">
+                <div class="update-time"></div>
+                <div class="maoyan-list"></div>
+            </div>
+        </mdui-card>
+        <mdui-card class="epic">
+            <div class="title">本周 Epic Games 免费游戏</div>
+            <div class="content">
+                <mdui-list class="epic-list"></mdui-list>
+            </div>
+        </mdui-card>
+        <mdui-card class="answer">
+            <div class="title">答案之书</div>
+            <div class="content flex">
+                <div class="answer-text">
+                    <div class="zh"></div>
+                    <div class="en"></div>
+                </div>
+                <mdui-chip class="new-answer" icon="menu_book" elevated>翻开另一页</mdui-chip>
+            </div>
+        </mdui-card>
+        <mdui-card class="horoscope">
+            <div class="title">星座运势</div>
+            <div class="content flex">
+                <div class="select-wrapper">
+                    <div class="label">键入星座名称</div>
+                    <mdui-text-field class="horoscope-input" value="天秤座" variant="outlined"></mdui-text-field>
+                </div>
+                <div class="yi-ji"></div>
+                <div class="luck-index-wrapper">
+                    <div class="luck-index"></div>
+                    <div class="label">幸运指数</div>
+                </div>
+                <mdui-divider></mdui-divider>
+                <div class="short"></div>
+                <div class="summary"></div>
+                <mdui-divider></mdui-divider>
+                <div class="lucky-things-wrapper">
+                    <div class="luck-things"></div>
+                    <div class="label">幸运星</div>
+                </div>
+            </div>
+        </mdui-card>
+        <mdui-card class="wallpaper">
+            <div class="title">今日必应</div>
+            <div class="content flex">
+                <img class="img">
+                <div class="texts">
+                    <div class="img-title"></div>
+                    <div class="desc"></div>
+                </div>
+                <div class="links">
+                    <a target="_blank" class="quiz">小测验</a>
+                    <a target="_blank" class="more">了解更多</a>
+                </div>
+            </div>
+        </mdui-card>
+    </div>
+
+    <script src="./script.mjs" type="module"></script>
+    <script src="./normal-script.js"></script>
+    <script src="./bg-control.mjs" type="module"></script>
+    <script src="https://hq.stock.sohu.com/zs/006/zs_399006-1.html"></script>
+
+</body>
+</html>

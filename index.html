@@ -65,6 +65,7 @@
             </mdui-tab-panel>
             <mdui-tab-panel slot="panel" value="material">
                 <mdui-list>
+                    <mdui-list-item href="/material/life-daily-remake/">生活主页</mdui-list-item>
                     <mdui-list-item href="/material/profile-card-generator/">个人名片生成器</mdui-list-item>
                     <mdui-list-item href="/material/cps-test/">CPS 测试</mdui-list-item>
                     <mdui-list-item href="/material/calculator/">Google 计算器</mdui-list-item>
@@ -166,8 +167,16 @@
                 <label for="vanilla-switch">偏好旧版主页</label>
             </div>
             <div class="option"><a href="javascript:;" class="clear-storage">清空本地存储（无法恢复）</a></div>
+            <div class="option"><a href="javascript:;" class="clear-cache">清除缓存</a></div>
         </div>
         <mdui-button slot="action" variant="text" class="options-dlg-close-btn">应用</mdui-button>
+    </mdui-dialog>
+
+    <mdui-dialog headline="更新通知" class="notify-dialog" close-on-overlay-click>
+        <div class="notify-dlg-desc" slot="description"></div>
+        <mdui-checkbox class="ignore-notify-checkbox">不再显示此通知</mdui-checkbox>
+        <mdui-button slot="action" variant="text" class="open-link-btn">打开链接</mdui-button>
+        <mdui-button slot="action" variant="text" class="notify-dlg-close-btn">关闭</mdui-button>
     </mdui-dialog>
 
 </body>

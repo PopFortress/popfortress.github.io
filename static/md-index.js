@@ -23,6 +23,12 @@ const notifyList = $('.notify-list');
 const notifyBadge = $('.notify-badge');
 const commentsSwitch = $('#comments-switch');
 const giscus = $('.giscus');
+const notifyDialog = $('.notify-dialog');
+const ignoreNotifyCheckbox = $('.ignore-notify-checkbox');
+const openlinkBtn = $('.open-link-btn');
+const notifyDlgCloseBtn = $('.notify-dlg-close-btn');
+const notifyDlgDesc = $('.notify-dlg-desc');
+const clearCache = $('.clear-cache');
 var sayingsDesc;
 var sha;
 var responseCommit;
@@ -50,6 +56,15 @@ if (localStorage.showComments) {
     var showComments = localStorage.showComments;
 } else {
     var showComments = 'true';
+};
+
+notifyDlgCloseBtn.onclick = () => {
+    notifyDialog.open = false;
+};
+
+clearCache.onclick = () => {
+    localStorage.removeItem('ignoreNotifyID');
+    mdui.snackbar({message: '已清除缓存',});
 };
 
 
@@ -83,7 +98,24 @@ async function fetchSrc() {
                 notifyWrapper.appendChild(notifyLink);
             };
             notifyList.appendChild(notifyWrapper);
+
+            if (notify.alert && +localStorage.ignoreNotifyID !== notify.id) {
+                notifyDlgDesc.innerHTML = notify.title;
+                if (notify.link) {
+                    openlinkBtn.href = notify.link;
+                };
+                notifyDialog.open = true;
+                notifyDialog.dataset.notifyId = notify.id;
+            };
         });
+    };
+};
+
+ignoreNotifyCheckbox.onchange = (e) => {
+    if (e.target.checked) {
+        localStorage.ignoreNotifyID = notifyDialog.dataset.notifyId;
+    } else {
+        localStorage.removeItem('ignoreNotifyID');
     };
 };
 
