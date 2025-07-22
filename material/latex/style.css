@@ -36,8 +36,9 @@ body {
 
 .result-card {
     display: flex;
-    justify-content: center;
+    justify-content: safe center;
     background-color: #fff !important;
+    overflow: auto;
 }
 
 .latex-input {
