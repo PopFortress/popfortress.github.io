@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: 100%;
+    max-width: 540px;
+    padding: 10px;
+}
+
+.result {
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.input {
+    width: 100%;
+}
+
+.preview-btn {
+    height: 100%;
+}
+
+.result-card {
+    display: flex;
+    justify-content: center;
+    background-color: #fff !important;
+}
+
+.latex-input {
+    cursor: text !important;
+}
+
+.download, .copyright {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.download-btn, .result-container {
+    display: none;
+}
+
+.copyright {
+    font-size: .8rem;
+}

@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.searchbar {
+    width: 100%;
+    max-width: 600px;
+    margin-right: auto;
+}
+
+.app {
+    padding: 30px;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 41px;
+    row-gap: 19px;
+}
+
+.balance {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.title {
+    font-size: 1.3rem;
+}
