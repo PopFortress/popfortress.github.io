@@ -7,6 +7,7 @@
     <title>LaTeX Editor</title>
     <link rel="stylesheet" href="/mdui/mdui1/mdui.min.css">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
 </head>
 
 <body class="mdui-theme-layout-auto mdui-theme-accent-pink">
@@ -23,6 +24,27 @@
             <div class="mdui-card result mdui-hoverable result-card">
                 <img class="latex-img">
             </div>
+        </div>
+
+        <div class="expand-wrapper">
+            <div class="mdui-ripple">
+                <a href="javascript:;" class="mdui-text-color-theme-accent expand-btn">
+                    <i class="mdui-icon material-icons expand-icon">keyboard_arrow_down</i>
+                </a>
+            </div>
+        </div>
+
+        <div class="view-settings">
+            <label class="mdui-checkbox">
+                <input type="checkbox" class="center-checkbox" checked/>
+                <i class="mdui-checkbox-icon"></i>
+                强制居中显示
+            </label>
+            <label class="mdui-checkbox">
+                <input type="checkbox" class="white-checkbox"/>
+                <i class="mdui-checkbox-icon"></i>
+                使用白色背景
+            </label>
         </div>
 
         <div class="download">
