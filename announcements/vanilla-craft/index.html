@@ -27,8 +27,9 @@
             </div>
             <div class="balance">
                 <i class="mdui-icon material-icons">receipt</i>
-                <div>Tokens: 0</div>
-                <div class="mdui-ripple"><a href="javascript:;" class="mdui-text-color-theme-accent">查看余额</a></div>
+                <div class="balance-num"></div>
+                <div class="mdui-ripple"><a href="javascript:;" class="mdui-text-color-theme-accent show-balance">查看余额</a></div>
+                <div class="mdui-ripple"><a href="javascript:;" class="mdui-text-color-theme-accent recharge">购买余额</a></div>
             </div>
         </header>
 
@@ -37,7 +38,31 @@
         </main>
     </div>
 
+    <div class="mdui-dialog" id="passcode-dialog">
+        <div class="mdui-dialog-title">Enter your account & passcode.</div>
+        <div class="mdui-dialog-content">
+            <div class="mdui-textfield">
+                <input class="mdui-textfield-input" type="text" placeholder="Account Name" id="account-input"/>
+            </div>
+            <div class="mdui-textfield">
+                <input class="mdui-textfield-input" type="password" placeholder="Passcode"/>
+            </div>
+        </div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn mdui-ripple" mdui-dialog-cancel>cancel</button>
+            <button class="mdui-btn mdui-ripple" id="submit-recharge" mdui-dialog-confirm>submit</button>
+        </div>
+    </div>
+
+    <div class="mdui-dialog" id="loading-dialog">
+        <div class="mdui-dialog-title">Just a sec.</div>
+        <div class="mdui-dialog-content">
+            <div class="mdui-spinner mdui-spinner-colorful"></div>
+        </div>
+    </div>
+
     <script src="/mdui/mdui1/mdui.min.js"></script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
