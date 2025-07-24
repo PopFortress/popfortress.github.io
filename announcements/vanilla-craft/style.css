@@ -19,9 +19,10 @@ header {
     flex-wrap: wrap;
     margin-bottom: 41px;
     row-gap: 19px;
+    column-gap: 32px;
 }
 
-.balance {
+.balance, .account {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -29,4 +30,31 @@ header {
 
 .title {
     font-size: 1.3rem;
+    margin-bottom: 24px;
+}
+
+main {
+    margin: 41px 0;
+}
+
+.logout {
+    display: none;
+}
+
+.services-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.services-container .mdui-card {
+    width: 300px;
+    text-wrap: wrap;
+    height: fit-content;
+}
+
+@media screen and (max-width: 690px) {
+    .services-container .mdui-card {
+        width: 100%;
+    }
 }

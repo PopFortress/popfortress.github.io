@@ -61,10 +61,16 @@ body {
 .view-settings {
     margin-top: 5px;
     justify-content: center;
-    gap: 20px;
+    column-gap: 20px;
     display: none;
+    flex-wrap: wrap;
 }
 
 .expand-btn {
     display: none;
+}
+
+.loading {
+    display: none;
+    justify-content: center;
 }

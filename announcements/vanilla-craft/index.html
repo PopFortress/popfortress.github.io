@@ -10,16 +10,16 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 
-<body class="mdui-theme-layout-auto mdui-theme-accent-pink">
+<body class="mdui-theme-layout-auto mdui-theme-accent-pink mdui-theme-primary-indigo">
 
     <div class="app">
         <header>
             <div class="searchbar">
                 <div class="mdui-textfield mdui-textfield-expandable">
-                    <button class="mdui-textfield-icon mdui-btn mdui-btn-icon">
+                    <button class="mdui-textfield-icon mdui-btn mdui-btn-icon search-btn">
                         <i class="mdui-icon material-icons">search</i>
                     </button>
-                    <input class="mdui-textfield-input" type="text" placeholder="查找商品或服务" autofocus/>
+                    <input class="mdui-textfield-input search-input" type="text" placeholder="查找商品或服务" autofocus/>
                     <button class="mdui-textfield-close mdui-btn mdui-btn-icon">
                         <i class="mdui-icon material-icons">close</i>
                     </button>
@@ -31,10 +31,20 @@
                 <div class="mdui-ripple"><a href="javascript:;" class="mdui-text-color-theme-accent show-balance">查看余额</a></div>
                 <div class="mdui-ripple"><a href="javascript:;" class="mdui-text-color-theme-accent recharge">购买余额</a></div>
             </div>
+            <div class="account">
+                <img class="mdui-card-header-avatar account-avatar" src="https://mineatar.io/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fface.71809c7a.png&w=640&q=75">
+                <div class="account-name">未登录</div>
+                <div class="mdui-ripple"><a href="javascript:;" class="mdui-text-color-theme-accent login">登录</a></div>
+                <div class="mdui-ripple"><a href="javascript:;" class="mdui-text-color-theme-accent logout">注销</a></div>
+
+            </div>
         </header>
+
+        <div class="mdui-divider"></div>
 
         <main>
             <div class="title">服务列表</div>
+            <div class="services-container"></div>
         </main>
     </div>
 
