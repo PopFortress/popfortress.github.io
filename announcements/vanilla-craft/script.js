@@ -149,7 +149,7 @@ async function fetchStoreItems() {
     const data = await resp.json();
     data.forEach(item => {
         const itemCard = document.createElement('div');
-        itemCard.className = 'mdui-card';
+        itemCard.className = 'mdui-card mdui-hoverable';
         if (item.image) {
             itemCard.innerHTML += `<div class="mdui-card-media"><img src="${item.image}"/></div>`;
         };

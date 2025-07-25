@@ -10,5 +10,17 @@
         "description": "Buy diamonds for your vanilla craft profile. As a kind of currency, diamonds can be used to purchase items and services from the store or trade with other players.",
         "price": 1000,
         "image": "https://rewards.bing.com/rewardscdn/images/rewards/rc/large/large_image_310x216_Minecraft_China.jpg"
+    },
+    {
+        "title": "KFC discount ticket",
+        "description": "With this universal KFC discount ticket, You are able to feel free to get 10% off for all your orders at the KFC. <br><br> * Available for stores excluding airports, train stations and other restricted areas.",
+        "price": 32767,
+        "image": "https://rewards.bing.com/rewardscdn/images/rewards/rc/large/KFC_EN_310x216.png"
+    },
+    {
+        "title": "Rough stones for Genshin Impact",
+        "description": "Giftcode to redeem 100 rough stones for Genshin Impact. <br><br>* Each code can only be used once. Limited time offer.",
+        "price": "3000",
+        "image": "https://rewards.bing.com/rewardscdn/images/rewards/rc/large/GenshinImpact_V5.7_320x216.jpg"
     }
 ]
