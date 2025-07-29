@@ -42,9 +42,10 @@ main {
 }
 
 .services-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+    grid-template-rows: masonry;
 }
 
 .services-container .mdui-card {
@@ -57,4 +58,23 @@ main {
     .services-container .mdui-card {
         width: 100%;
     }
+    .services-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+}
+
+@supports not (grid-template-rows: masonry) {
+    .services-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+}
+
+footer {
+    text-align: center;
+    opacity: .54;
+    font-size: .8rem;
 }

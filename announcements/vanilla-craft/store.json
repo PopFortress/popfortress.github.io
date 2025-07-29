@@ -20,7 +20,17 @@
     {
         "title": "Rough stones for Genshin Impact",
         "description": "Giftcode to redeem 100 rough stones for Genshin Impact. <br><br>* Each code can only be used once. Limited time offer.",
-        "price": "3000",
+        "price": 3000,
         "image": "https://rewards.bing.com/rewardscdn/images/rewards/rc/large/GenshinImpact_V5.7_320x216.jpg"
+    },
+    {
+        "title": "VIP Rank Coupon",
+        "description": "Get your coupon to redeem the exclusive VIP rank with 50% off. <br><br>* Only once per account.",
+        "price": 299
+    },
+    {
+        "title": "Queue Priority",
+        "description": "Speed up your process queuing with priority access.",
+        "price": 1200
     }
 ]
