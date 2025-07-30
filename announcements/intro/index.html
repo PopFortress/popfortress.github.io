@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>介绍</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+</head>
+<body>
+    
+    <header>
+        <nav>
+            <div class="title">
+                <mdui-icon name="code" style="font-size: 32px;"></mdui-icon>
+                <div class="name">PopFortress</div>
+            </div>
+            <div class="nav">
+                <mdui-tabs value="intro" variant="secondary">
+                    <mdui-tab value="intro">介绍</mdui-tab>
+                    <mdui-tab value="about">关于我</mdui-tab>
+                    <mdui-tab value="tech-stack">技术栈</mdui-tab>
+                    <mdui-tab value="works">作品</mdui-tab>
+                    <mdui-tab value="contact">联系我</mdui-tab>
+                </mdui-tabs>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex">
+        <mdui-card variant="filled" class="flex" id="intro">
+            <div class="avatar">
+                <mdui-avatar label="PopFortress" src="https://avatars.githubusercontent.com/u/124672853?v=4&s=100" class="main-avatar"></mdui-avatar>
+            </div>
+            <div class="name-tag">PopFortress</div>
+            <div class="desc">前端爱好者 & Minecraft 玩家</div>
+            <div class="links">
+                <mdui-button icon="email">联系我</mdui-button>
+                <mdui-button variant="tonal" icon="dashboard">查看作品</mdui-button>
+            </div>
+        </mdui-card>
+
+        <mdui-card variant="filled" id="about">
+            <div class="section-header">
+                <div class="title-wrapper">
+                    <mdui-icon name='info'></mdui-icon>
+                    <div class="section-title">关于我</div>
+                </div>
+                <div class="section-indicator"></div>
+            </div>
+            <div class="section-content">
+                <div class="greetings">你好，我是 PopFortress. 👋</div>
+                <div class="intro-text">
+                    <p>我是一名热爱 Python 和 Web 前端的编程爱好者，爱上编程超过 3 年，致力于为开源事业作贡献。</p>
+                    <p>本人目前是初中生，喜欢英语和信息技术，但擅长用语文和数学提高分数。体育仍需努力，虽然不会社交，但喜欢和志同道合的朋友一起 <s>打篮球</s> 交流。</p>
+                    <p>我曾开发过一些虽然不怎么实用但十分有趣的小工具，你可以在我的 <a href="//space.bilibili.com/3461573418945245" target="_blank">哔哩哔哩频道</a> 上浏览它们。因为目前学业繁忙，不会经常更新视频。</p>
+                    <p>同时也是一名普通的 Minecraft 玩家，对各种玩法都感兴趣，尤其喜爱起床战争和 <a href="http://42.192.208.124/圣符传说" target="_blank"> 圣符传说 (Rune Legend)</a>.</p>
+                </div>
+                <mdui-button href="//github.com/popfortress" target="_blank" icon="commit" variant="outlined">GitHub</mdui-button>
+            </div>
+            <mdui-divider></mdui-divider>
+            <div class="subtitle">个人信息</div>
+            <ul class="info-list flex">
+                <li><mdui-icon name="person"></mdui-icon><span class="label">姓名</span>(不愿透露)</li>
+                <li><mdui-icon name="cake"></mdui-icon><span class="label">年龄</span>14 岁</li>
+                <li><mdui-icon name="school"></mdui-icon><span class="label">职业</span>初中生</li>
+                <li><mdui-icon name="mail"></mdui-icon><span class="label">邮箱</span>popfortress1024@gmail.com</li>
+                <li><mdui-icon name="location_on"></mdui-icon><span class="label">地址</span>咸宁市咸安区</li>
+            </ul>
+        </mdui-card>
+
+        <mdui-card variant="filled" id="tech-stack">
+            <div class="section-header">
+                <div class="title-wrapper">
+                    <mdui-icon name='menu_book'></mdui-icon>
+                    <div class="section-title">技术栈</div>
+                </div>
+                <div class="section-indicator"></div>
+            </div>
+            <div class="subheader">
+                <mdui-icon name="language"></mdui-icon>
+                <div class="subtitle">编程语言</div>
+            </div>
+            <div class="item-box-grid">
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">Python</div>
+                        <div class="progress">75%</div>
+                    </div>
+                    <mdui-linear-progress value="0.75"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">HTML/CSS</div>
+                        <div class="progress">97%</div>
+                    </div>
+                    <mdui-linear-progress value="0.97"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">JavaScript</div>
+                        <div class="progress">60%</div>
+                    </div>
+                    <mdui-linear-progress value="0.6"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">C/C++</div>
+                        <div class="progress">10%</div>
+                    </div>
+                    <mdui-linear-progress value="0.1"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">.NET</div>
+                        <div class="progress">16%</div>
+                    </div>
+                    <mdui-linear-progress value="0.16"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">Dart</div>
+                        <div class="progress">9%</div>
+                    </div>
+                    <mdui-linear-progress value="0.09"></mdui-linear-progress>
+                </div>
+            </div>
+            <div class="subheader">
+                <mdui-icon name="share"></mdui-icon>
+                <div class="subtitle">跨平台开发框架</div>
+            </div>
+            <div class="item-box-grid">
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">pywebview</div>
+                        <div class="progress">65%</div>
+                    </div>
+                    <mdui-linear-progress value="0.65"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">Flutter</div>
+                        <div class="progress">2%</div>
+                    </div>
+                    <mdui-linear-progress value="0.02"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">UniApp</div>
+                        <div class="progress">25%</div>
+                    </div>
+                    <mdui-linear-progress value="0.25"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">低代码平台 (如 Coco)</div>
+                        <div class="progress">98%</div>
+                    </div>
+                    <mdui-linear-progress value="0.98"></mdui-linear-progress>
+                </div>
+            </div>
+            <div class="subheader">
+                <mdui-icon name="code"></mdui-icon>
+                <div class="subtitle">应用平台</div>
+            </div>
+            <div class="item-box-grid">
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">win32 程序 (Tkinter, etc.)</div>
+                        <div class="progress">87%</div>
+                    </div>
+                    <mdui-linear-progress value="0.87"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">UWP / Win UI</div>
+                        <div class="progress">10%</div>
+                    </div>
+                    <mdui-linear-progress value="0.1"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">安卓 H5 混合应用</div>
+                        <div class="progress">90%</div>
+                    </div>
+                    <mdui-linear-progress value="0.9"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">Web 网页应用</div>
+                        <div class="progress">96%</div>
+                    </div>
+                    <mdui-linear-progress value="0.96"></mdui-linear-progress>
+                </div>
+            </div>
+            <div class="subheader">
+                <mdui-icon name="book"></mdui-icon>
+                <div class="subtitle">学科</div>
+            </div>
+            <div class="item-box-grid">
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">语文</div>
+                        <div class="progress">80%</div>
+                    </div>
+                    <mdui-linear-progress value="0.8"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">数学</div>
+                        <div class="progress">76%</div>
+                    </div>
+                    <mdui-linear-progress value="0.76"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">英语</div>
+                        <div class="progress">97%</div>
+                    </div>
+                    <mdui-linear-progress value="0.97"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">政治</div>
+                        <div class="progress">91%</div>
+                    </div>
+                    <mdui-linear-progress value="0.91"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">历史</div>
+                        <div class="progress">93%</div>
+                    </div>
+                    <mdui-linear-progress value="0.93"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">地理</div>
+                        <div class="progress">89%</div>
+                    </div>
+                    <mdui-linear-progress value="0.89"></mdui-linear-progress>
+                </div>
+                <div class="item-box">
+                    <div class="item-title">
+                        <div class="name">生物学</div>
+                        <div class="progress">97%</div>
+                    </div>
+                    <mdui-linear-progress value="0.97"></mdui-linear-progress>
+                </div>
+            </div>
+        </mdui-card>
+    </main>
+
+    <footer>
+        <div class="original-work">Inspired & designed by <a href="https://guyang17.github.io/">GuYang17's Homepage</a>.</div>
+        <div class="copyright">&copy; 2025 PopFortress. All rights reserved.</div>
+        <div class="text-small">Made with <mdui-icon name="favorite" style="color: #f44336;"></mdui-icon> and <mdui-icon name="code"></mdui-icon>.</div>
+    </footer>
+
+
+    <script src="./script.js"></script>
+
+</body>
+</html>
