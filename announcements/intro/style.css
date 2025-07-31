@@ -30,6 +30,12 @@ nav {
     nav, .title {
         margin: 0 !important;
     }
+}
+
+@media (max-width: 522px) {
+    .nav {
+        overflow: auto;
+    }
     main {
         margin-top: 178px !important;
     }
@@ -46,10 +52,6 @@ nav {
 mdui-tabs::part(container) {
     white-space: nowrap;
     background: transparent;
-}
-
-.nav {
-    overflow: auto;
 }
 
 main {
@@ -78,7 +80,7 @@ mdui-card {
     padding: 30px 0 22px 0;
 }
 
-.main-avatar {
+.main-avatar, .main-avatar-alt {
     width: 100px;
     height: 100px;
     border: 3px solid #fff;
@@ -86,8 +88,16 @@ mdui-card {
     transition: .3s;
 }
 
-.main-avatar:hover {
+.main-avatar {
+    display: none;
+}
+
+.main-avatar:hover, .main-avatar-alt:hover {
     transform: scale(1.05);
+}
+
+.main-avatar-alt {
+    font-size: 2rem;
 }
 
 .flex {
@@ -162,11 +172,12 @@ footer {
 }
 
 a {
-    color: rgb(var(--mdui-color-primary))
+    color: rgb(var(--mdui-color-primary));
 }
 
 a:active {
-    color: rgb(var(--mdui-color-secondary))
+    color: rgb(var(--mdui-color-secondary));
+    text-decoration: none;
 }
 
 .title-wrapper {
@@ -191,10 +202,23 @@ a:active {
 
 mdui-divider {
     margin: 24px 0;
+    background-color: rgb(var(--mdui-color-on-surface-variant));
+    opacity: .17;
 }
 
 .subtitle {
     font-size: 1.2rem;
+}
+
+.personal-info {
+    display: flex;
+    gap: 10px;
+}
+
+.personal-info mdui-avatar {
+    width: 25.6px;
+    height: 25.6px;
+    font-size: .9rem;
 }
 
 .info-list {
@@ -212,6 +236,10 @@ mdui-divider {
     gap: 8px;
 }
 
+.info-list .label {
+    font-weight: 700;
+}
+
 .subheader {
     display: flex;
     gap: 10px;
@@ -226,6 +254,7 @@ mdui-divider {
 
 .item-title {
     display: flex;
+    font-size: .9rem;
 }
 
 .item-title .name {
@@ -234,4 +263,91 @@ mdui-divider {
 
 mdui-linear-progress {
     background-color: rgb(var(--mdui-color-surface-container));
+}
+
+::selection {
+    background-color: rgb(var(--mdui-color-primary));
+    color: #fff;
+}
+
+.works-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon-wrapper mdui-icon {
+    font-size: 3.2rem;
+    color: rgb(var(--mdui-color-primary));
+}
+
+.work-info {
+    text-align: center;
+    line-height: 1.5;
+    font-size: .9rem;
+}
+
+.work-name {
+    font-size: 1.1rem;
+}
+
+.work-desc {
+    font-weight: 200;
+}
+
+.works-box-wrapper {
+    display: flex;
+    column-gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 32px;
+}
+
+mdui-divider[vertical] {
+    height: auto;
+}
+
+@media (max-width: 493px) {
+    mdui-divider[vertical] {
+        display: none;
+    }
+}
+
+.contact-method-wrapper {
+    gap: 14px;
+    align-items: center;
+}
+
+.contact-method {
+    display: flex;
+    width: 255px;
+    gap: 20px;
+}
+
+a:focus {
+    outline: 1px dashed;
+}
+
+.more-info {
+    margin-top: 21px;
+    text-align: center;
+    font-size: .8rem;
+}
+
+.extra-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: .9rem;
+}
+
+.extra-actions mdui-icon {
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+:root {
+    scroll-behavior: smooth;
 }
