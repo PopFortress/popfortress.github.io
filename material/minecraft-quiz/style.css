@@ -11,12 +11,13 @@ body {
 
 ::selection {
     color: #fff;
-    background: #222;
+    background: #333;
 }
 
 .app {
     width: 100%;
     max-width: 710px;
+    padding: 10px;
 }
 
 mdui-top-app-bar {
@@ -31,7 +32,7 @@ mdui-top-app-bar-title {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin-top: 30px;
+    margin: 30px 0;
 }
 
 .quiz-card, .result-card {
@@ -40,7 +41,16 @@ mdui-top-app-bar-title {
     flex-direction: column;
 }
 
+.quiz-card-content, .stats-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 .quiz-card {
+    align-items: center;
+}
+
+.quiz-card-content {
     gap: 20px;
 }
 
@@ -59,6 +69,7 @@ mdui-top-app-bar-title {
 
 .action-bar {
     display: flex;
+    gap: 10px;
 }
 
 .check-btn {
@@ -76,4 +87,95 @@ mdui-top-app-bar-title {
 
 .answer-text {
     text-transform: uppercase;
+}
+
+.quiz-card-content, .finished-wrapper, .finished-actions, .exeplanation-header {
+    display: none;
+}
+
+.finished-wrapper {
+    flex-direction: column;
+    gap: 23px;
+    padding: 25px;
+}
+
+.finished-text {
+    text-align: center;
+    padding: 0 30px;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.stats-wrapper {
+    gap: 8px;
+    align-items: center;
+    font-size: 14px;
+}
+
+.stats-item {
+    display: flex;
+    gap: 21px;
+}
+
+.stats-label {
+    font-weight: 700;
+    width: 140px;
+}
+
+.correct-count, .incorrect-count, .skipped-count, .time-spent {
+    width: 84px;
+    text-align: right;
+}
+
+.finished-actions {
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media screen and (max-width: 435px) {
+    .finished-text {
+        padding: 0;
+    }
+    .finished-wrapper {
+        padding: 0;
+    }
+}
+
+.reference-links-wrapper {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 12px;
+}
+
+.reference-links {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    justify-content: center;
+}
+
+a {
+    color: rgb(var(--mdui-color-secondary));
+}
+
+a:active {
+    text-decoration: none;
+}
+
+a:focus {
+    outline: 1px dashed rgb(var(--mdui-color-secondary));
+}
+
+.correct-indicator {
+    color: rgb(var(--mdui-color-primary));
+}
+
+.incorrect-indicator {
+    color: rgb(var(--mdui-color-error));
+}
+
+.correct-indicator, .incorrect-indicator {
+    display: none;
+    gap: 10px;
+    font-size: 20px;
 }

@@ -17,25 +17,79 @@
         </mdui-top-app-bar>
         <div class="quiz-wrapper">
             <mdui-card class="quiz-card">
-                <div class="quiz-header">Weekly Minecraft Quiz · #1</div>
-                <div class="quiz-title">Quiz Title</div>
-                <mdui-radio-group class="options-group">
-                    <mdui-radio value="a" id="option-a">A. Option 1</mdui-radio>
-                    <mdui-radio value="b" id="option-b">B. Option 2</mdui-radio>
-                    <mdui-radio value="c" id="option-c">C. Option 3</mdui-radio>
-                    <mdui-radio value="d" id="option-d">D. Option 4</mdui-radio>
-                </mdui-radio-group>
+                <mdui-circular-progress class="loading"></mdui-circular-progress>
+
+                <div class="quiz-card-content">
+                    <div class="quiz-header">Minecraft Quiz · Question 1 / 10</div>
+                    <div class="quiz-title">Quiz Title</div>
+                    <mdui-radio-group class="options-group">
+                        <mdui-radio value="a" id="option-a">A. Option 1</mdui-radio>
+                        <mdui-radio value="b" id="option-b">B. Option 2</mdui-radio>
+                        <mdui-radio value="c" id="option-c">C. Option 3</mdui-radio>
+                        <mdui-radio value="d" id="option-d">D. Option 4</mdui-radio>
+                    </mdui-radio-group>
+                </div>
+
+                <div class="finished-wrapper">
+                    <div class="finished-text">Congratulations! 🎉 You have accomplished all quizs in the current database. Wait until it's updated.</div>
+                    <div class="stats-wrapper">
+                        <div class="stats-item" style="color: rgb(var(--mdui-color-primary));">
+                            <div class="stats-label">Correct Answers</div>
+                            <div class="correct-count"></div>
+                        </div>
+                        <div class="stats-item" style="color: rgb(var(--mdui-color-error));">
+                            <div class="stats-label">Incorrect / Skipped</div>
+                            <div class="incorrect-count"></div>
+                        </div>
+                        <div class="stats-item" style="color: #9e9e9e;">
+                            <div class="stats-label">Skipped</div>
+                            <div class="skipped-count"></div>
+                        </div>
+                        <div class="stats-item">
+                            <div class="stats-label">Time Spent</div>
+                            <div class="time-spent"></div>
+                        </div>
+                    </div>
+                </div>
             </mdui-card>
+
             <div class="action-bar">
                 <mdui-button variant="elevated" class="check-btn" disabled>Check Answer</mdui-button>
-                <mdui-button variant="text" icon="forward_to_inbox" href="//github.com/popfortress/popfortress.github.io/issues/new" target="_blank" class="feedback-btn">Ask for update</mdui-button>
+                <mdui-button variant="outlined" class="skip-btn" icon="arrow_forward">Next</mdui-button>
+                <mdui-tooltip content="Send Feedback" trigger="hover focus click">
+                    <mdui-button-icon icon="outlined_flag" href="//github.com/popfortress/popfortress.github.io/issues/new" target="_blank" class="feedback-btn"></mdui-button-icon>
+                </mdui-tooltip>
             </div>
+
+            <div class="finished-actions">
+                <mdui-button class="ask-for-update-btn" icon="forward_to_inbox" variant="tonal" full-width>Ask for Update</mdui-button>
+                <mdui-button class="retry-btn" icon="refresh" variant="outlined" full-width>Play Again</mdui-button>
+            </div>
+
             <mdui-card class="result-card">
+                <div class="result-indicator">
+                    <div class="correct-indicator">
+                        <mdui-icon name='check'></mdui-icon>
+                        <div>Correct!</div>
+                    </div>
+                    <div class="incorrect-indicator">
+                        <mdui-icon name='close'></mdui-icon>
+                        <div>Incorrect</div>
+                    </div>
+                </div>
                 <div class="result-header">Answer</div>
                 <div><abbr title="Explanation" class="answer-text">A</abbr></div>
-                <div class="result-header">Explanation</div>
+                <div class="result-header explanation-header">Explanation</div>
                 <div class="explanation-text"></div>
             </mdui-card>
+
+            <div class="reference-links-wrapper">
+                <div>Some of the questions and answers are from these websites:</div>
+                <div class="reference-links">
+                    <a href="https://www.arealme.com/minecraft-quiz/en/" target="_blank">Minecraft Quiz - A Real Me</a>
+                    <a href="https://www.arealme.com/minecraft-quiz-hard/en/" target="_blank">Minecraft Quiz (Hard) - A Real Me</a>
+                </div>
+            </div>
         </div>
     </div>
 

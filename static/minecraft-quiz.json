@@ -1,10 +1,293 @@
-{
-    "title": "Which ingredient of the followings you needn't use to craft a beacon?",
-    "option_a": "Glass",
-    "option_b": "Obsidian",
-    "option_c": "End stone",
-    "option_d": "Nether Star",
-    "answer": "c",
-    "explanation": "The recipe of beacons is: 3 Obsidians in the bottom, the nether star in the center, and 5 glass blocks around it. This doesn't require any end stones.",
-    "number": "3"
-}
+[
+    {
+        "title": "Which ingredient of the followings you needn't use to craft a beacon?",
+        "a": "Glass",
+        "b": "Obsidian",
+        "c": "End stone",
+        "d": "Nether Star",
+        "answer": "c",
+        "explanation": "The recipe of beacons is: 3 Obsidians in the bottom, the nether star in the center, and 5 glass blocks around it. This doesn't require any end stones."
+    },
+    {
+        "title": "Which weapon of the followings can't be used to kill endermen?",
+        "a": "The End Crystals",
+        "b": "Swords",
+        "c": "Crossbows",
+        "d": "Axes",
+        "answer": "c",
+        "explanation": "Projectiles can't deal damage to endermen."
+    },
+    {
+        "title": "The correct theory of the followings about command blocks is:",
+        "a": "Players can only see output logs in bedrock edition.",
+        "b": "You must type \"/\" at the start of a command.",
+        "c": "Commands can only be executed in cheets.",
+        "d": "You can adjust the maximum number of commands that chain command blocks execute by modifying the gamerule maxCommandChainLength.",
+        "answer": "d",
+        "explanation": "You can adjust it by typing /gamerule maxCommandChainLength <number>.\nNote: It's default value is 65536."
+    },
+    {
+        "title": "Which tool is best for digging stone and bricks?",
+        "a": "Shovel",
+        "b": "Pickaxe",
+        "c": "Axe",
+        "d": "Sword",
+        "answer": "b"
+    },
+    {
+        "title": "How many cobblestone blocks are needed in total to craft a furnace?",
+        "a": "6 Cobblestone",
+        "b": "9 Cobblestone",
+        "c": "10 Cobblestone",
+        "d": "8 Cobblestone",
+        "answer": "d"
+    },
+    {
+        "title": "What is the weakest Minecraft armor made with?",
+        "a": "Iron",
+        "b": "Chainmail",
+        "c": "Leather",
+        "d": "Gold",
+        "answer": "c"
+    },
+    {
+        "title": "What is the nickname of Minecraft creator?",
+        "a": "Zizot",
+        "b": "Apple",
+        "c": "Dinnerbone",
+        "d": "Notch",
+        "answer": "d"
+    },
+    {
+        "title": "What was the original name of Minecraft when it was first published?",
+        "a": "Mine-Crafter",
+        "b": "Cave Game",
+        "c": "Procedural Game",
+        "d": "Minicraft",
+        "answer": "b"
+    },
+    {
+        "title": "Which one of these animals can be ridden with saddle along with horses and mules?",
+        "a": "Pig",
+        "b": "Bee",
+        "c": "Cow",
+        "d": "Goat",
+        "answer": "a"
+    },
+    {
+        "title": "What is a disadvantage of golden armor and tools/weapons compared to iron?",
+        "a": "They are too shiny",
+        "b": "They have lower durability than iron and break sooner",
+        "c": "They give you more arrow and projectile damage compared to other armor.",
+        "d": "No disadvantages, They are identical",
+        "answer": "b"
+    },
+    {
+        "title": "Which material creates the strongest armor or weapons?",
+        "a": "Iron",
+        "b": "Netherite",
+        "c": "Diamonds",
+        "d": "Emeralds",
+        "answer": "b"
+    },
+    {
+        "title": "What happens when a creeper gets struck by lightning?",
+        "a": "It becomes charged, and explodes more powerfully",
+        "b": "It becomes charged, and hits you with lightning when it explodes",
+        "c": "It explodes instantly",
+        "d": "It dies instantly",
+        "answer": "a"
+    },
+    {
+        "title": "Which one of these items do not exist in vanilla Minecraft?",
+        "a": "Golden Carrot",
+        "b": "Snow Bucket",
+        "c": "Silver Ingot",
+        "d": "Clock",
+        "answer": "c"
+    },
+    {
+        "title": "What does Ender Dragon drop when defeated?",
+        "a": "XP and Dragon egg",
+        "b": "XP, stack of diamonds and ender pearls",
+        "c": "XP and elytra",
+        "d": "Gunpowder and iron blocks",
+        "answer": "a"
+    },
+    {
+        "title": "Which block takes the longest time to mine?",
+        "a": "Ancient Debris",
+        "b": "Diamond Ore",
+        "c": "Obsidian",
+        "d": "Diamond Block",
+        "answer": "c"
+    },
+    {
+        "title": "How long are Minecraft's day and night combined in real-time?",
+        "a": "20 Minutes",
+        "b": "4 Hours",
+        "c": "12 Hours",
+        "d": "5 Minutes",
+        "answer": "a"
+    },
+    {
+        "title": "What is Minecraft developers studio called?",
+        "a": "Electronic Arts",
+        "b": "Mojang",
+        "c": "Activision",
+        "d": "Bethesda Softworks",
+        "answer": "b"
+    },
+    {
+        "title": "What happens if flowing water touches a lava source?",
+        "a": "Obsidian is created",
+        "b": "Water disappears",
+        "c": "Cobblestone is generated",
+        "d": "Nothing happens",
+        "answer": "a"
+    },
+    {
+        "title": "What is the name of the first main character in Minecraft?",
+        "a": "Toast",
+        "b": "Steve",
+        "c": "Eric",
+        "d": "Richard",
+        "answer": "b"
+    },
+    {
+        "title": "How is apple found?",
+        "a": "From tree leaves being destroyed",
+        "b": "From killing pigs and skeletons",
+        "c": "They are randomly found on grass blocks",
+        "d": "As rewards for completing achievements",
+        "answer": "a"
+    },
+    {
+        "title": "Which one of these is found in the end dimension only?",
+        "a": "Diamonds",
+        "b": "Netherite",
+        "c": "Golden Apple",
+        "d": "Elytra",
+        "answer": "d"
+    },
+    {
+        "title": "Which one of these is found in the nether dimension only?",
+        "a": "Ancient Debris",
+        "b": "Red Mushroom",
+        "c": "Regular Skeleton",
+        "d": "Gold Ore",
+        "answer": "a"
+    },
+    {
+        "title": "What happens when you place a bed in the Nether dimension and then right-click on it to try and sleep?",
+        "a": "It explodes",
+        "b": "It does not place down",
+        "c": "It disappears",
+        "d": "Nothing, it works as usual",
+        "answer": "a"
+    },
+    {
+        "title": "What year was Minecraft officially released as 1.0?",
+        "a": "2011",
+        "b": "2012",
+        "c": "2016",
+        "d": "2017",
+        "answer": "a"
+    },
+    {
+        "title": "How many dirt blocks around the water source get hydrated if you use a hoe on dirt?",
+        "a": "4 blocks in all directions",
+        "b": "2 blocks in all directions",
+        "c": "3 blocks sideways only",
+        "d": "1 block in all directions",
+        "answer": "a"
+    },
+    {
+        "title": "What happens if you die in a hardcore Minecraft world?",
+        "a": "You respawn, with all items lost",
+        "b": "Your world gets locked and you are unable to continue playing in the same world",
+        "c": "Your Minecraft account gets premium status revoked",
+        "d": "You respawn, all items are kept",
+        "answer": "b"
+    },
+    {
+        "title": "What is the lowest possible Minecraft depth that you can dig down to as of 1.18?",
+        "a": "12",
+        "b": "0",
+        "c": "-64",
+        "d": "48",
+        "answer": "c"
+    },
+    {
+        "title": "What do you need to use as an ingredient for the awkward potion?",
+        "a": "Nether Wart",
+        "b": "Glowstone",
+        "c": "Fish",
+        "d": "Glistering Melon Slice",
+        "answer": "a"
+    },
+    {
+        "title": "What is the required material for enchanting items other than the item itself and XP?",
+        "a": "Nether Wart",
+        "b": "Gold Ingot",
+        "c": "Lapis Lazuli",
+        "d": "Iron Ingot",
+        "answer": "c"
+    },
+    {
+        "title": "Which one of these cannot be enchanted on from the enchanting table?",
+        "a": "Sword",
+        "b": "Axe",
+        "c": "Book",
+        "d": "Spyglass",
+        "answer": "d"
+    },
+    {
+        "title": "What happens if you put on an item with Curse of Binding enchant?",
+        "a": "You bind your powers to it",
+        "b": "You cannot take it off until its broken or until you die",
+        "c": "You cause villages to be attacked if you go near them",
+        "d": "It acts as extra protection value against mobs and players",
+        "answer": "b"
+    },
+    {
+        "title": "What does fire aspect enchant cause if used via a sword?",
+        "a": "You set fire to your opponent upon attack",
+        "b": "You are protected from fire attacks for 5 seconds",
+        "c": "You can extinguish players or mobs if they are on fire",
+        "d": "It melts the snow around you upon use",
+        "answer": "a"
+    },
+    {
+        "title": "What does loyalty trident enchant cause to happen?",
+        "a": "You can only use a trident as a melee weapon, but its more powerful",
+        "b": "Trident returns after being thrown",
+        "c": "Trident deals more damage",
+        "d": "Loyalty cannot be applied to a trident",
+        "answer": "b"
+    },
+    {
+        "title": "What does mending enchant do on an item?",
+        "a": "It makes it break instantly upon use",
+        "b": "It repairs that specific item from gained XP orbs",
+        "c": "It deals more damage to mobs if used on a weapon",
+        "d": "It increases the ore drop rate",
+        "answer": "b"
+    },
+    {
+        "title": "Which one of these zombies do not drop after death as a rare drop?",
+        "a": "Carrot",
+        "b": "Potato",
+        "c": "Iron Ingot",
+        "d": "Beetroot",
+        "answer": "d"
+    },
+    {
+        "title": "What will happen if you feed parrot with cookies?",
+        "a": "It will get poisoned and die",
+        "b": "It will heal any damage and dance to the music.",
+        "c": "You cannot feed parrot with cookies",
+        "d": "Parrot will fly higher",
+        "answer": "a"
+    }
+]
