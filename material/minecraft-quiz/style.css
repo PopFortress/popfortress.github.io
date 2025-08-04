@@ -179,3 +179,8 @@ a:focus {
     gap: 10px;
     font-size: 20px;
 }
+
+.cheat-links-wrapper {
+    text-align: center;
+    font-size: 12px;
+}

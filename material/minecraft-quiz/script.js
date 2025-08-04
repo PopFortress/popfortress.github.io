@@ -30,6 +30,7 @@ const correctIndicator = $('.correct-indicator');
 const incorrectIndicator = $('.incorrect-indicator');
 const skippedCount = $('.skipped-count');
 const timeSpent = $('.time-spent');
+const endGameLink = $('.end-game-link');
 let quizData; // all quiz data fetched
 let answeredQuiz = []; // array[single quiz object]
 let quiz; // current quiz object
@@ -38,6 +39,7 @@ let correctAmount = 0;
 let incorrectAmount = 0;
 let st = Date.now();
 let et;
+let dblclickTimeStack = [];
 
 function random(array) {
      return array[Math.floor(Math.random() * array.length)];
@@ -82,6 +84,7 @@ async function loadQuiz() {
         explanationText.textContent = '';
         answerText.title = 'No explanations available.';
     };
+    nextBtn.disabled = false;
 };
 
 checkBtn.onclick = () => {
@@ -99,27 +102,20 @@ checkBtn.onclick = () => {
     resultCard.style.display = 'flex';
     checkBtn.disabled = true;
     optionsGroup.disabled = true;
+    nextBtn.disabled = false;
 };
 
 optionsGroup.onchange = () => {
     checkBtn.disabled = false;
+    if (optionsGroup.value) {
+        nextBtn.disabled =  true;
+    };
 };
 
 nextBtn.onclick = () => {
     answeredQuiz.push(quiz);
     if (answeredQuiz.length === quizzsAmount) {
-        resultCard.style.display = 'none';
-        quizCardContent.style.display = 'none';
-        actionbar.style.display = 'none';
-        askForUpdateBtn.href = feedbackBtn.href;
-        askForUpdateBtn.target = '_blank';
-        finishedActions.style.display = 'flex';
-        finishedWrapper.style.display = 'flex';
-        correctCount.textContent = `${correctAmount} / ${quizzsAmount}`;
-        incorrectCount.textContent = incorrectAmount;
-        skippedCount.textContent = quizzsAmount - correctAmount - incorrectAmount;
-        et = Date.now();
-        timeSpent.textContent = `${(et - st) / 1000}s`;
+        endGame();
         return;
     };
     loadQuiz();
@@ -129,4 +125,32 @@ fetchQuizsSrc();
 
 retryBtn.onclick = () => {
     location.reload();
+};
+
+function endGame() {
+    resultCard.style.display = 'none';
+    quizCardContent.style.display = 'none';
+    actionbar.style.display = 'none';
+    askForUpdateBtn.href = feedbackBtn.href;
+    askForUpdateBtn.target = '_blank';
+    finishedActions.style.display = 'flex';
+    finishedWrapper.style.display = 'flex';
+    correctCount.textContent = `${correctAmount} / ${quizzsAmount}`;
+    incorrectCount.textContent = incorrectAmount;
+    skippedCount.textContent = quizzsAmount - correctAmount - incorrectAmount;
+    et = Date.now();
+    timeSpent.textContent = `${(et - st) / 1000}s`;
+    endGameLink.style.display = 'none';
+};
+
+endGameLink.ondblclick = endGame;
+endGameLink.onclick = () => {
+    dblclickTimeStack.push(Date.now());
+    if (dblclickTimeStack.length === 2) {
+        if (dblclickTimeStack[1] - dblclickTimeStack[0] < 1000) {
+            endGame();
+        } else {
+            dblclickTimeStack = [];
+        };
+    };
 };
