@@ -11,14 +11,27 @@
 </head>
 <body>
     
-    <div class="app">
+    <div style="width: 100%; height: 20px;"></div>
+    <div class="app" style="position: relative; overflow: hidden;">
         <mdui-top-app-bar>
             <mdui-top-app-bar-title>Math Quiz</mdui-top-app-bar-title>
+            <mdui-tooltip content="Settings" trigger="hover focus click">
+                <mdui-button-icon icon="settings" variant="outlined" class="settings-btn"></mdui-button-icon>
+            </mdui-tooltip>
         </mdui-top-app-bar>
         <div class="quiz-wrapper">
             <mdui-card class="quiz-header">
-                <mdui-icon name="question_mark"></mdui-icon>
+                <mdui-icon name="question_mark" class="question-icon"></mdui-icon>
                 <div class="header-text">Question 1</div>
+                <div class="stats-wrapper">
+                    <div class="accuracy-wrapper">
+                        <div class="acc-label">Accuracy:</div>
+                        <div class="accuracy">0 / 0</div>
+                        <div class="accuracy-percentage">0.00%</div>
+                    </div>
+                    <div class="time-elapsed">00:00.000</div>
+                    <mdui-button-icon icon="stop" class="stop-timing-btn"></mdui-button-icon>
+                </div>
             </mdui-card>
             <mdui-card class="quiz-field">
                 <div class="question-wrapper">
@@ -30,8 +43,35 @@
                 </div>
             </mdui-card>
         </div>
+
+        <mdui-navigation-drawer placement="right" modal close-on-esc close-on-overlay-click contained class="settings-panel">
+            <div class="settings-entry">
+                <div class="settings-label">Question Types</div>
+                <div class="question-types-list">
+                    <mdui-checkbox id="all">All</mdui-checkbox>
+                    <div class="basic-arithmetic-wrapper" style="display: flex; flex-direction: column;">
+                        <mdui-checkbox id="basic-arithmetic">Basic Arithmetic</mdui-checkbox>
+                        <mdui-checkbox id="fixed-max-digits">Fixed Max Digits</mdui-checkbox>
+                        <div class="max-digits-input-wrapper">
+                            <div style="font-size: .8rem;">Max Digits</div>
+                            <mdui-text-field placeholder="Max Digits..." class="max-digits-input" value="20"></mdui-text-field>
+                        </div>
+                    </div>
+                    <mdui-checkbox id="equations">Equations</mdui-checkbox>
+                    <mdui-checkbox id="square-roots">Square Roots</mdui-checkbox>
+                    <mdui-checkbox id="geometry">Geometry</mdui-checkbox>
+                    <mdui-checkbox id="statistics">Statistics</mdui-checkbox>
+                    <mdui-checkbox id="averages">Averages</mdui-checkbox>
+                </div>
+            </div>
+            <div class="settings-actions">
+                <mdui-button class="cancel-btn" variant="elevated">Discard Changs</mdui-button>
+                <mdui-button class="save-btn" variant="tonal">Apply Changes</mdui-button>
+            </div>
+        </mdui-navigation-drawer>
     </div>
     
+    <script src="/static/libs/utilities.js"></script>
     <script src="./script.js"></script>
     
 </body>

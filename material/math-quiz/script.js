@@ -1,11 +1,33 @@
-const headerText = document.querySelector('.header-text');
-const quizText = document.querySelector('.quiz-text');
-const quizInput = document.querySelector('.quiz-input');
-const checkBtn = document.querySelector('.check-btn');
+const headerText = get('.header-text');
+const quizText = get('.quiz-text');
+const quizInput = get('.quiz-input');
+const checkBtn = get('.check-btn');
 const operators = ['+', '-', '*', '/'];
 const percentages = [.1, .2, .3, .4, .5, .6, .7, .8, .9];
 const random = (array) => array[Math.floor(Math.random() * array.length)];
+const settingsBtn = get('.settings-btn');
+const settingsPanel = get('.settings-panel');
+const discardBtn = get('.cancel-btn');
+const saveBtn = get('.save-btn');
+
+const all = get('#all');
+const basicArithmetic = get('#basic-arithmetic');
+const fixedMaxDigits = get('#fixed-max-digits');
+const equations = get('#equations');
+const squareRoots = get('#square-roots');
+const geometry = get('#geometry');
+const statistics = get('#statistics');
+const averages = get('#averages');
+const allCheckboxes = getAll('.question-types-list mdui-checkbox');
+const maxDigitsInput = get('.max-digits-input');
+const maxDigitsInputWrapper = get('.max-digits-input-wrapper');
+const timeElapsed = get('.time-elapsed');
+const stopTimingBtn = get('.stop-timing-btn');
+const accuracy = get('.accuracy');
+const accuracyPercentage = get('.accuracy-percentage');
 var questionNum = 0;
+var corrcetAnswers = 0;
+var totalTrys = 0;
 var quiz;
 var answer;
 var digit1;
@@ -21,9 +43,145 @@ var quizType;
 var answeredEquation;
 var subjects;
 var subjectDigits = [];
+var settings;
+const defaultCheckboxesStates = {};
+
+allCheckboxes.forEach(checkbox => {
+    if (checkbox.id !== 'fixed-max-digits') {
+        defaultCheckboxesStates[checkbox.id] = true;
+    } else {
+        defaultCheckboxesStates[checkbox.id] = false;
+    };
+});
+
+if (localStorage.mathquiz_maxDigits) {
+    maxDigitsInput.value = localStorage.mathquiz_maxDigits;
+} else {
+    localStorage.mathquiz_maxDigits = 20;
+};
+
+if (!localStorage.mathquiz_data) {
+    localStorage.mathquiz_data = JSON.stringify(defaultCheckboxesStates);
+};
+
+settingsPanel.addEventListener('open', () => {
+    allCheckboxes.forEach(checkbox => {
+        checkbox.checked = JSON.parse(localStorage.mathquiz_data)[checkbox.id];
+    });
+    checkBasicArithmetic();
+    checkFixedMaxDigitsState();
+    checkQuestionTypesState();
+});
+
+saveBtn.onclick = () => {
+    let checkedBoxes = 0;
+    allCheckboxes.forEach(checkbox => {
+        if (checkbox.id !== 'fixed-max-digits' && checkbox.id !== 'all' && checkbox.checked) {
+            checkedBoxes++;
+        };
+    });
+    if (checkedBoxes >= 1) {
+        const checkboxesStates = {};
+        allCheckboxes.forEach(checkbox => {
+            checkboxesStates[checkbox.id] = checkbox.checked;
+        });
+        localStorage.mathquiz_data = JSON.stringify(checkboxesStates);
+        settingsPanel.open = false;
+        mdui.snackbar({ message: 'All settings have been applied successfully.'});
+    } else {
+        mdui.snackbar({ message: 'Error: Please select at least an item.'});
+    };
+    localStorage.mathquiz_maxDigits = maxDigitsInput.value;
+};
+
+settingsBtn.onclick = discardBtn.onclick = () => {
+    settingsPanel.open ? settingsPanel.open = false : settingsPanel.open = true;
+};
+
+basicArithmetic.addEventListener('change', checkBasicArithmetic);
+
+function checkBasicArithmetic() {
+    if (basicArithmetic.checked) {
+        fixedMaxDigits.disabled = false;
+        maxDigitsInput.disabled = false;
+    } else {
+        fixedMaxDigits.disabled = true;
+        maxDigitsInput.disabled = true;
+    };
+};
+
+fixedMaxDigits.onchange = checkFixedMaxDigitsState;
+
+function checkFixedMaxDigitsState() {
+    if (fixedMaxDigits.checked) {
+        show(maxDigitsInputWrapper, 'flex');
+    } else {
+        hide(maxDigitsInputWrapper);
+    };
+};
+
+maxDigitsInput.onchange = () => {
+    if (+maxDigitsInput.value < 10 || !Number.isInteger(+maxDigitsInput.value)) {
+        maxDigitsInput.value = 20;
+    };
+};
+
+function checkQuestionTypesState() {
+    let checkedItems = 0;
+    Object.values(JSON.parse(localStorage.mathquiz_data)).forEach(item => {
+        if (item) {
+            checkedItems++;
+        };
+    });
+    if (checkedItems >= 7) {
+        all.checked = true;
+    } else if (checkedItems <= 0) {
+        all.checked = false;
+    } else {
+        all.indeterminate = true;
+    };
+};
+
+allCheckboxes.forEach(checkbox => {
+    if (checkbox.id !== 'fixed-max-digits' && checkbox.id !== 'all') {
+        checkbox.addEventListener('change', () => {
+            let checkedCheckboxes = 0;
+            allCheckboxes.forEach(checkbox => {
+                if (checkbox.id !== 'fixed-max-digits' && checkbox.id !== 'all') {
+                    if (checkbox.checked) {
+                        checkedCheckboxes++;
+                    };
+                };
+            });
+            if (checkedCheckboxes >= 6) {
+                all.checked = true;
+            } else if (checkedCheckboxes <= 0) {
+                all.checked = false;
+            } else {
+                all.indeterminate = true;
+            };
+            checkedCheckboxes = 0;
+        });
+    };
+});
+
+all.onclick = () => {
+    allCheckboxes.forEach(checkbox => {
+        if (checkbox.id !== 'fixed-max-digits' && checkbox.id !== 'all') {
+            if (all.checked) {
+                checkbox.checked = false;
+            } else {
+                checkbox.checked = true;
+            };
+        };
+    });
+    checkBasicArithmetic();
+};
 
 function updateQuizNum() {
     questionNum++;
+    // totalTrys++;
+    updateAccuracy();
     headerText.innerHTML = `Question ${questionNum}`;
 };
 
@@ -40,8 +198,13 @@ function incorrectAnswer() {
 };
 
 function quizSimple() {
-    digit1 = Math.floor(Math.random() * (21 + questionNum));
-    digit2 = Math.floor(Math.random() * (21 + questionNum));
+    if (settings['fixed-max-digits']) {
+        digit1 = Math.floor(Math.random() * +maxDigitsInput.value + 1);
+        digit2 = Math.floor(Math.random() * +maxDigitsInput.value + 1);
+    } else {
+        digit1 = Math.floor(Math.random() * (21 + questionNum));
+        digit2 = Math.floor(Math.random() * (21 + questionNum));
+    };
     operator = random(operators);
     quiz = `${digit1} ${operator} ${digit2}`;
     answer = eval(quiz);
@@ -170,23 +333,24 @@ function quizMean() {
 function loadQuiz() {
     quizInput.removeAttribute('suffix');
     randomQuizToken = Math.random();
+    settings = JSON.parse(localStorage.mathquiz_data);
     if (randomQuizToken < 0.25) {
-        quizSimple();
+        settings['basic-arithmetic'] ? quizSimple() : loadQuiz();
         quizType = 'simple';
     } else if (randomQuizToken >= 0.25 && randomQuizToken < 0.34) {
-        quizSquareRoot();
+        settings['square-roots'] ? quizSquareRoot() : loadQuiz();
         quizType ='square_root';
     } else if (randomQuizToken >= 0.34 && randomQuizToken < 0.47) {
-        quizCircle();
+        settings.geometry ? quizCircle() : loadQuiz();
         quizType = 'circle';
     } else if (randomQuizToken >= 0.47 && randomQuizToken < 0.62) {
-        quizStatistics();
+        settings['statistics'] ? quizStatistics() : loadQuiz();
         quizType ='statistics';
     } else if (randomQuizToken >= 0.62 && randomQuizToken < 0.81) {
-        quizMean();
+        settings.averages ? quizMean() : loadQuiz();
         quizType = 'mean';
     } else {
-        quizEquation();
+        settings.equations ? quizEquation() : loadQuiz();
         quizType = 'equation';
     };
 };
@@ -194,12 +358,23 @@ function loadQuiz() {
 function checkAnswer() {
     if (quizInput.valueAsNumber === answer) {
         correctAnswer();
+        corrcetAnswers++;
     } else {
         incorrectAnswer();
     };
+    totalTrys++;
+    updateAccuracy();
     checkBtn.disabled = true;
     quizInput.value = '';
     quizInput.focus();
+};
+
+function updateAccuracy() {
+    accuracy.textContent = `${corrcetAnswers} / ${totalTrys}`;
+    accuracyPercentage.textContent = `${(corrcetAnswers / totalTrys * 100).toFixed(2)}%`;
+    if (accuracyPercentage.textContent === 'NaN%') {
+        accuracyPercentage.textContent = '0.00%';
+    };
 };
 
 quizInput.oninput = () => {
@@ -216,3 +391,16 @@ quizInput.onkeydown = (e) => {
 
 checkBtn.onclick = checkAnswer;
 loadQuiz();
+
+const stopwatch = new Stopwatch();
+stopwatch.start();
+
+var timeInterval = setInterval(() => {
+    const time = stopwatch.getCurrentTime();
+    timeElapsed.textContent = `${Math.floor(time/60).toString().padStart(2, '0')}:${Math.floor(time%60).toString().padStart(2, '0')}.${(time - Math.floor(time)).toFixed(3).toString().split('.')[1]}`;
+}, 100);
+
+stopTimingBtn.onclick = () => {
+    clearInterval(timeInterval);
+    hide(stopTimingBtn);
+};
