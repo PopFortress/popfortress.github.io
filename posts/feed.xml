@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+ 
+<channel>
+  <title>波普的温馨小阁</title>
+  <link>http://popfortress.github.io/posts/</link>
+  <description>个人博客·随机分享点各种各样的日常或技术文章</description>
+  <item>
+    <title>#1 这是博客中的第一条帖文！🎉🎉🎉</title>
+    <link>http://popfortress.github.io/posts/1</link>
+    <description></description>
+  </item>
+  <item>
+    <title>#2 终于获得了眼眸花披风！</title>
+    <link>https://popfortress.github.io/posts/2</link>
+    <description></description>
+  </item>
+  <item>
+    <title>#11 推荐几首我喜欢的歌曲</title>
+    <link>https://popfortress.github.io/posts/11</link>
+    <description></description>
+  </item>
+</channel>
+ 
+</rss>

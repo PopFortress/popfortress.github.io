@@ -80,8 +80,27 @@ mdui-card {
 }
 
 .sayings {
-    padding: 10px 10px 10px 50px;
+    padding: 4px 4px 4px 50px;
     color: #db4f4f;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+@media screen and (max-width: 420px) {
+    .sayings {
+        font-size: .9rem;
+        padding: 4px 4px 4px 40px;
+    }
+}
+
+.sayings-text {
+    margin-right: auto;
+}
+
+.history-wrapper {
+    display: flex;
+    align-items: center;
 }
 
 .search-box-wrapper {
@@ -137,9 +156,17 @@ mdui-tabs {
     color: #db4f4f;
     display: flex;
     justify-content: center;
+    align-items: center;
+    column-gap: 30px;
+    flex-wrap: wrap;
 }
 
-.info-btn {
+.activity-actions {
+    display: flex;
+    align-items: center;
+}
+
+.activity-actions * {
     height: auto;
     font-size: 20px;
 }

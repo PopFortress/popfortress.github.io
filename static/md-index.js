@@ -2,6 +2,11 @@ const $ = (query) => mdui.$(query)[0];
 
 const appContainer = $('.app');
 const sayingsCard = $('.sayings');
+const sayingsText = $('.sayings-text');
+const prevSayings = $('.prev-sayings');
+const nextSayings = $('.next-sayings');
+const prevActivity = $('.prev-activity');
+const nextActivity = $('.next-activity');
 const searchInput = $('.search-box');
 const searchBtn = $('.search-btn');
 const latestUpdateLabel = $('.latest-update');
@@ -38,6 +43,9 @@ var dataCount;
 var notifyTitle;
 var notifyLink;
 var notifyWrapper;
+var currSayingsIndex = 0;
+var currActivityIndex = 0;
+var data;
 const ghApiUrl = 'https://api.github.com/repos/PopFortress/popfortress.github.io';
 if (localStorage.showChangelog) {
     var showChangelog = localStorage.showChangelog;
@@ -67,17 +75,70 @@ clearCache.onclick = () => {
     mdui.snackbar({message: '已清除缓存',});
 };
 
+prevSayings.onclick = () => {
+    if (currSayingsIndex > 0) {
+        prevSayings.disabled = false;
+        nextSayings.disabled = false;
+        currSayingsIndex--;
+        sayingsText.innerHTML = data.sayings[currSayingsIndex].title;
+        sayingsDesc = data.sayings[currSayingsIndex].desc;
+    };
+    checkSayingsIndex();
+};
+
+nextSayings.onclick = () => {
+    if (currSayingsIndex < data.sayings.length - 1) {
+        nextSayings.disabled = false;
+        prevSayings.disabled = false;
+        currSayingsIndex++;
+        sayingsText.innerHTML = data.sayings[currSayingsIndex].title;
+        sayingsDesc = data.sayings[currSayingsIndex].desc;
+    };
+    checkSayingsIndex();
+};
+
+function checkSayingsIndex() {
+    if (currSayingsIndex <= 0) {
+        prevSayings.disabled = true;
+    } else {
+        prevSayings.disabled = false;
+    };
+    if (currSayingsIndex >= data.sayings.length - 1) {
+        nextSayings.disabled = true;
+    } else {
+        nextSayings.disabled = false;
+    };
+};
+
+prevActivity.onclick = () => {
+    if (currActivityIndex > 0) {
+        currActivityIndex--;
+        activityImg.style.backgroundImage = `url(${data.activities[currActivityIndex].imgurl})`;
+        activityTitleLabel.innerHTML = data.activities[currActivityIndex].title;
+        activityImg.href = `/fakecaptcha?r=${data.activities[currActivityIndex].target_url}`;
+    };
+};
+
+nextActivity.onclick = () => {
+    if (currActivityIndex < data.activities.length - 1) {
+        currActivityIndex++;
+        activityImg.style.backgroundImage = `url(${data.activities[currActivityIndex].imgurl})`;
+        activityTitleLabel.innerHTML = data.activities[currActivityIndex].title;
+        activityImg.href = `/fakecaptcha?r=${data.activities[currActivityIndex].target_url}`;
+    };
+};
+
 
 async function fetchSrc() {
     var response = await fetch('/static/index-src.json');
-    var data = await response.json();
+    data = await response.json();
 
-    sayingsCard.innerHTML = data.saying;
-    sayingsDesc = data.saying_desc;
+    sayingsText.innerHTML = data.sayings[0].title;
+    sayingsDesc = data.sayings[0].desc;
     latestUpdateLabel.innerHTML = `最后更新时间　${data.latest_update}`;
-    activityImg.style.backgroundImage = `url(${data.activity_imgurl})`;
-    activityTitleLabel.innerHTML = data.activity_title;
-    activityImg.href = `/fakecaptcha?r=${data.activity_target_url}`;
+    activityImg.style.backgroundImage = `url(${data.activities[0].imgurl})`;
+    activityTitleLabel.innerHTML = data.activities[0].title;
+    activityImg.href = `/fakecaptcha?r=${data.activities[0].target_url}`;
     activityImg.target = '_blank';
 
     if (data.notifications.length > 0) {
@@ -168,7 +229,7 @@ searchInput.addEventListener('keydown', (e) => {
     };
 });
 searchBtn.addEventListener('click', searchSite);
-sayingsCard.addEventListener('click', showSayingsDesc);
+sayingsText.addEventListener('click', showSayingsDesc);
 fetchSrc();
 mdui.setColorScheme('#EF9A9A');
 addListItemIcon();

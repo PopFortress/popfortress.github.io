@@ -27,7 +27,13 @@
                 </div>
             </div>
         </mdui-card>
-        <mdui-card class="sayings" clickable>咕噜咕噜···</mdui-card>
+        <mdui-card class="sayings" clickable>
+            <div class="sayings-text">咕噜咕噜···</div>
+            <div class="history-wrapper">
+                <mdui-button-icon icon="keyboard_arrow_left" class="prev-sayings"></mdui-button-icon>
+                <mdui-button-icon icon="keyboard_arrow_right" class="next-sayings"></mdui-button-icon>
+            </div>
+        </mdui-card>
         <div class="search-box-wrapper">
             <mdui-text-field variant="outlined" label="搜索 popfortress.github.io" type="search" clearable icon="search" class="search-box"></mdui-text-field>
             <mdui-button variant="tonal" end-icon="arrow_forward" class="search-btn">搜索</mdui-button>
@@ -56,7 +62,7 @@
             </mdui-tab-panel>
             <mdui-tab-panel slot="panel" value="special">
                 <mdui-list>
-                    <mdui-list-item href="/fakecaptcha?r=/posts/">帖文收集目录</mdui-list-item>
+                    <mdui-list-item href="/fakecaptcha?r=/posts/" icon="feed">帖文收集目录</mdui-list-item>
                     <mdui-list-item href="/CSS-FUN-WORKS/">CSS-FUN-WORKS 系列</mdui-list-item>
                     <mdui-list-item href="/info/new_year_countdown" icon="event">新年倒计时</mdui-list-item>
                     <mdui-list-item href="/info/spring_festival_countdown" icon="event">春节倒计时</mdui-list-item>
@@ -95,7 +101,11 @@
             <mdui-card clickable class="activity-card"></mdui-card>
             <mdui-card class="activity-desc">
                 <span class="activity-title">咕噜咕噜···</span>
-                <mdui-button-icon icon="info" class="info-btn"></mdui-button-icon>
+                <div class="activity-actions">
+                    <mdui-button-icon icon="info" class="info-btn"></mdui-button-icon>
+                    <mdui-button-icon icon="keyboard_arrow_left" class="prev-activity"></mdui-button-icon>
+                    <mdui-button-icon icon="keyboard_arrow_right" class="next-activity"></mdui-button-icon>
+                </div>
             </mdui-card>
         </div>
         <mdui-card class="footer">

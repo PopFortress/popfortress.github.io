@@ -38,6 +38,11 @@ header {
     font-size: 17px;
     letter-spacing: 4px;
     text-align: center;
+    flex-wrap: wrap;
+}
+
+.rss-feed {
+    transform: scale(.6);
 }
 
 header mdui-icon {
