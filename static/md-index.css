@@ -90,7 +90,7 @@ mdui-card {
 @media screen and (max-width: 420px) {
     .sayings {
         font-size: .9rem;
-        padding: 4px 4px 4px 40px;
+        padding: 4px 4px 4px 32px;
     }
 }
 

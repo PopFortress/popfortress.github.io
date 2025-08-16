@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>即刻短文 | Moments</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+</head>
+<body>
+
+    <div class="app">
+        <header>
+            <mdui-button-icon icon="arrow_back" id="back-btn" href="/"></mdui-button-icon>
+            <div class="title">
+                <div style="color: rgb(var(--mdui-color-primary));">即刻短文</div>
+                <div style="color: rgba(var(--mdui-color-secondary), .7)">|</div>
+                <div style="color: rgba(var(--mdui-color-secondary), .7)">Moments</div>
+            </div>
+            <mdui-button-icon icon="share" id="share-btn"></mdui-button-icon>
+        </header>
+
+        <div class="banner">
+            <img src="https://bing.shangzhenyang.com/api/1080p">
+            <div class="personal-card">
+                <mdui-avatar src="/static/avater_logo2x.png"></mdui-avatar>
+                <div class="intro">
+                    <div class="name">PopFortress</div>
+                    <div class="desc">我们花了两年学会说话，却要花上一生学会闭嘴。</div>
+                </div>
+            </div>
+            <mdui-button class="subscribe-btn" icon="add">订阅</mdui-button>
+        </div>
+
+        <main>
+            <div class="sort-bar">
+                <mdui-chip id="sort-latest" elevated selected selectable>最新</mdui-chip>
+                <mdui-chip id="sort-oldest" elevated selectable>最早</mdui-chip>
+            </div>
+            <div class="moments-list"></div>
+        </main>
+
+        <footer>
+            <mdui-chip icon="keyboard_arrow_down" elevated class="show-comment-btn" id="toggle-giscus">显示留言板</mdui-chip>
+            <div class="giscus-wrapper">
+                <script src="https://giscus.app/client.js" data-repo="PopFortress/popfortress.github.io" data-repo-id="R_kgDOL2BQ4Q" data-category="Announcements" data-category-id="DIC_kwDOL2BQ4c4Crfzk" data-mapping="pathname" data-strict="0" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" async></script>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="./script.js"></script>
+
+</body>
+</html>
