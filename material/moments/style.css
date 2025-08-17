@@ -126,6 +126,23 @@ main {
     line-height: 2;
 }
 
+.moment-text img {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.moment-text a {
+    color: rgb(var(--mdui-color-primary));
+}
+
+.moment-text a:active {
+    text-decoration: none;
+}
+
+.moment-text a:focus {
+    outline: 1px dashed rgb(var(--mdui-color-primary));
+}
+
 main mdui-card {
     width: 100%;
     padding: 20px;

@@ -8,6 +8,7 @@ const sortLatest = $('#sort-latest');
 const sortOldest = $('#sort-oldest');
 const toggleGiscus = $('#toggle-giscus');
 const giscusWrapper = $('.giscus-wrapper');
+const loading = $('mdui-circular-progress');
 let rawMomentsData;
 let momentsData;
 let giscusEnabled = false;
@@ -46,6 +47,11 @@ async function fetchMoments() {
     rawMomentsData = await response.json();
     momentsData = [...rawMomentsData].reverse();
     displayMoments(momentsData);
+
+    document.querySelectorAll('a').forEach(link => {
+    link.target = '_blank';
+    loading.style.display = 'none';
+});
 };
 
 function displayMoments(moments) {
@@ -108,3 +114,4 @@ fetchMoments();
 
 mdui.loadLocale((locale) => import(`https://unpkg.com/mdui@2/locales/${locale}.js`));
 mdui.setLocale('zh-cn');
+
