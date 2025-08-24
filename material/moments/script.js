@@ -12,6 +12,8 @@ const loading = $('mdui-circular-progress');
 let rawMomentsData;
 let momentsData;
 let giscusEnabled = false;
+const pin = Math.floor(Math.random() * 1000000);
+const emailCfg = `title=Moments Subscription&text=<font color="DimGray">Greetings!</font>  <br><br> <font color="DimGray">You're now performing </font> <font color="red"> a subscription to the Moments</font> <font color="DimGray">, please enter the following code:</font>  <font color="Orange "size="5">${pin}</font> <font color="Gray "> in the text field to confirm your subscription.</font> <br>  <br><font color="Gray">Please note that your password or email may be modified accidentally by processing unauthorized activities. If you have not required this subscription, please simply ignore this email.</font> <br><font color="Gray">Our staff won't ask for your passcode, please keep this code secret.</font><br> <br> <font color="Gray">This email was sent automatically, please do not reply to it straightly.</font><br><font color="Gray">You received this email because you subscribed to the Moments on popfortress.github.io.</font><br><br><font color="Gray">popfortress.github.io</font>`;
 
 shareBtn.onclick = () => {
     if (navigator.share) {
@@ -29,7 +31,34 @@ subscribeBtn.onclick = () => {
     mdui.prompt({
         headline: '订阅动态',
         description: '请键入您的邮箱地址。',
-        onConfirm: () => {
+        onConfirm: async (value, dialog) => {
+            if (value.trim()) {
+                subscribeBtn.loading = true;
+                try {
+                    await fetch(`https://api.mmp.cc/api/mail?email=1077379835%40qq.com&key=prdjcdaiifnlhjeg&mail=${value.trim()}&name=noreply%40popfortress.github.io&${emailCfg}`);
+                } catch (e) {};
+                dialog.open = false;
+                mdui.prompt({
+                    headline: '动态订阅确认',
+                    description: '我们已向您发送了一封验证邮件，请在此输入验证码以完成订阅。',
+                    textFieldOptions: {
+                        type: 'number',
+                        icon: 'password',
+                        variant: 'outlined',
+                        maxlength: 6,
+                    },
+                    onConfirm: (value) => {
+                        if (value.trim() === pin.toString()) {
+                            mdui.snackbar({ message: '动态订阅成功！' });
+                        } else {
+                            return false;
+                        };
+                    },
+                });
+            } else {
+                return false;
+            };
+            subscribeBtn.loading = false;
             subscribeBtn.icon = 'check';
             subscribeBtn.textContent = '已订阅';
             subscribeBtn.disabled = true;
