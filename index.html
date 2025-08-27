@@ -27,8 +27,8 @@
                 </div>
             </div>
         </mdui-card>
-        <mdui-card class="sayings" clickable>
-            <div class="sayings-text">咕噜咕噜···</div>
+        <mdui-card class="sayings">
+            <div class="sayings-text" style="cursor: help;">咕噜咕噜···</div>
             <div class="history-wrapper">
                 <mdui-button-icon icon="keyboard_arrow_left" class="prev-sayings"></mdui-button-icon>
                 <mdui-button-icon icon="keyboard_arrow_right" class="next-sayings"></mdui-button-icon>
@@ -89,12 +89,14 @@
                     <mdui-list-item href="/material/random-digit/">随机数字生成器</mdui-list-item>
                     <mdui-list-item href="/material/exam-simulation/">模拟考试</mdui-list-item>
                     <mdui-list-item href="/material/latex/">LaTeX 公式编辑器</mdui-list-item>
+                    <mdui-list-item href="/fakecaptcha?r=/graphical-verification?r=/material/modern-library/">现代图书馆数据库</mdui-list-item>
                 </mdui-list>
             </mdui-tab-panel>
             <mdui-tab-panel slot="panel" value="announcements">
                 <mdui-list>
                     <mdui-list-item href="/fakecaptcha?r=/announcements/vanilla-craft/">服务商店</mdui-list-item>
                     <mdui-list-item href="/announcements/intro/" icon="info">介绍</mdui-list-item>
+                    <mdui-list-item href="/info/certificates" icon="verified">证书与奖项</mdui-list-item>
                 </mdui-list>
             </mdui-tab-panel>
         </mdui-tabs>
@@ -123,27 +125,40 @@
                 <div>This website was hosted by GitHub Pages.</div>
                 <div>本站所有内容均遵循 CC BY-NC-SA 4.0 协议，切勿将本站任何内容用于违法行为，任何纷争与本站无关</div>
             </div>
-            <div class="links">
-                <a href="//icp.gov.moe/?keyword=20241789" target="_blank" >萌ICP备20241789号</a>
-                <a href="//icp.snzy.cc/?id=2025061789" target="_blank">梵AIA盟2025061789号</a>
-                <a href="https://icp.wudu.ltd/id.php?keyword=20251024" target="_blank">雾ICP备20251024号</a>
-                <a href="https://icp.redcha.cn/beian/ICP-2025080085.html" target="_blank">茶ICP备2025080085号</a>
-                <a href="//link3.cc/fortress" target="_blank">Link3.cc</a>
-                <a href="//space.bilibili.com/3461573418945245" target="_blank">哔哩哔哩</a>
-                <a href="//github.com/PopFortress/popfortress.github.io" target="_blank">Help contributing this site on GitHub</a>
-                <a href="/fakecaptcha?r=/info/changelog" target="_blank">更新日志</a>
-                <a href="/fakecaptcha?r=/info/" target="_blank">隐私政策 & 条款</a>
-                <a href="//creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
-                <a href="//mit-license.org/" target="_blank">MIT License</a>
-                <a href="//github.com/PopFortress/popfortress.github.io/issues/new" target="_blank">发送反馈</a>
-                <a href="/info/suspage" target="_blank">可疑的页面</a>
-                <a href="//travel.moe/" target="_blank">异次元之旅</a>
-                <a href="//icp.snzy.cc/go/" target="_blank">空间穿梭</a>
-                <a href="//icp.wudu.ltd/qy.php" target="_blank">星际迁跃</a>
-                <a href="//www.travellings.cn/go.html" target="_blank">开往</a>
-                <a href="https://www.foreverblog.cn/go.html" target="_blank">十年之约</a>
-                <a href="/info/certificates">证书与奖项</a>
-                <a href="javascript:;" class="options-btn">您的偏好选项</a>
+            <div class="links-wrapper">
+                <div class="links">
+                    <a href="//space.bilibili.com/3461573418945245" target="_blank">哔哩哔哩</a>
+                    <a href="//link3.cc/fortress" target="_blank">Link3.cc</a>
+                    <a href="//github.com/PopFortress/popfortress.github.io" target="_blank">Help contributing this site on GitHub</a>
+                    <a href="/fakecaptcha?r=/info/changelog" target="_blank">更新日志</a>
+                    <a href="/fakecaptcha?r=/info/" target="_blank">隐私政策 & 条款</a>
+                    <a href="//creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+                    <a href="//mit-license.org/" target="_blank">MIT License</a>
+                    <a href="//github.com/PopFortress/popfortress.github.io/issues/new" target="_blank">发送反馈</a>
+                    <a href="/sitemap.xml" target="_blank">站点地图</a>
+                    <a href="/info/suspage" target="_blank">可疑的页面</a>
+                    <a href="/info/certificates" target="_blank">证书与奖项</a>
+                    <a href="javascript:;" class="options-btn">您的偏好选项</a>
+                </div>
+                <mdui-divider></mdui-divider>
+                <div class="links">
+                    <a href="//icp.gov.moe/?keyword=20241789" target="_blank" >萌ICP备20241789号</a>
+                    <a href="//icp.snzy.cc/?id=2025061789" target="_blank">梵AIA盟2025061789号</a>
+                    <a href="https://icp.wudu.ltd/id.php?keyword=20251024" target="_blank">雾ICP备20251024号</a>
+                    <a href="https://icp.redcha.cn/beian/ICP-2025080085.html" target="_blank">茶ICP备2025080085号</a>
+                    <a href="https://icp.xnet.ren/id.php?keyword=20251024" target="_blank">信备20251024号</a>
+                </div>
+                <mdui-divider></mdui-divider>
+                <div class="links">
+                    <a href="//travel.moe/" target="_blank">异次元之旅</a>
+                    <a href="//icp.snzy.cc/go/" target="_blank">空间穿梭</a>
+                    <a href="//icp.wudu.ltd/qy.php" target="_blank">星际迁跃</a>
+                    <a href="https://icp.redcha.cn/go/travel.php" target="_blank">易往</a>
+                    <a href="https://icp.xnet.ren/qy.php" target="_blank">信网星际迁跃</a>
+                    <a href="//www.travellings.cn/go.html" target="_blank">开往</a>
+                    <a href="https://www.foreverblog.cn/go.html" target="_blank">十年之约</a>
+                    <a href="https://www.jiuchan.org/">揪蝉</a>
+                </div>
             </div>
         </mdui-card>
         <mdui-card class="giscus">

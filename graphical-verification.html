@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>帮助我们战胜机器人！- 图形验证</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 12px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            column-gap: 14px;
+            align-items: center;
+        }
+
+        mdui-button {
+            height: 32px;
+        }
+
+        mdui-text-field {
+            height: 40px;
+        }
+
+        .title {
+            font-size: 1.2rem;
+        }
+
+        .subtitle {
+            font-size: .9rem;
+            opacity: .8;
+        }
+
+        img#code {
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="form">
+        <div class="intro">
+            <div class="title">帮助我们战胜机器人！</div>
+            <div class="subtitle">请完成以下图形验证，以证明您是真人。</div>
+        </div>
+        <div class="input-wrapper">
+            <mdui-text-field placeholder="键入验证码…" variant="outlined"></mdui-text-field>
+            <img alt="code" id="code">
+            <mdui-tooltip content="更换图片">
+                <mdui-button-icon icon="refresh"></mdui-button-icon>
+            </mdui-tooltip>
+        </div>
+        <mdui-button full-width end-icon="keyboard_return">提交</mdui-button>
+    </div>
+
+    <script>
+        mdui.setColorScheme('#EF9A9A');
+        const $ = (query) => mdui.$(query)[0];
+        const apis = [{imgurl: 'https://v2.xxapi.cn/api/captcha?type={type}&width=128&height=40', verify_url: 'https://v2.xxapi.cn/api/captcha?id={id}&key={key}'}];
+        const img = $('#code');
+        const input = $('mdui-text-field');
+        const submitBtn = $('mdui-button');
+        const refreshBtn = $('mdui-button-icon');
+        let api;
+        let id;
+
+        const params = new URLSearchParams(location.search);
+        const url = params.get('r');
+
+        async function loadCode() {
+            api = apis[0];
+            const response = await fetch(api.imgurl.replace('{type}', ['string', 'math', 'digit'][Math.floor(Math.random() * 3)]));
+            const data = await response.json();
+            id = data.data.id;
+            img.src = data.data.url;
+        };
+
+        refreshBtn.onclick = loadCode;
+        img.onclick = loadCode;
+
+        function submitVerification() {
+            if (input.value.trim()) {
+                verifyCode();
+            };
+        };
+
+        async function verifyCode() {
+            submitBtn.loading = true;
+            submitBtn.textContent = '验证中…';
+            submitBtn.endIcon = '';
+            const response = await fetch(api.verify_url.replace('{id}', id).replace('{key}', input.value));
+            const data = await response.json();
+            if (data.code === 200) {
+                submitBtn.loading = false;
+                submitBtn.textContent = '自由通行！'
+                submitBtn.icon = 'check';
+                submitBtn.disabled = true;
+                setTimeout(() => {
+                    if (url) {
+                        document.title = '正在重定向…';
+                        location.replace(url);
+                    };
+                }, 1000);
+            } else {
+                mdui.snackbar({ message: '验证码无效。'});
+                submitBtn.loading = false;
+                submitBtn.endIcon = 'keyboard_return';
+                submitBtn.textContent = '提交';
+                input.value = '';
+                input.focus();
+                loadCode();
+            };
+        };
+
+        submitBtn.onclick = submitVerification;
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                submitVerification();
+            };
+        });
+
+        loadCode();
+    </script>
+
+</body>
+</html>
