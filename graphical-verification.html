@@ -54,6 +54,9 @@
         img#code {
             background-color: #fff;
         }
+        .intro {
+            margin-bottom: 12px;
+        }
     </style>
 </head>
 <body>
@@ -64,7 +67,7 @@
             <div class="subtitle">请完成以下图形验证，以证明您是真人。</div>
         </div>
         <div class="input-wrapper">
-            <mdui-text-field placeholder="键入验证码…" variant="outlined"></mdui-text-field>
+            <mdui-text-field placeholder="键入验证码…" variant="outlined" autofocus></mdui-text-field>
             <img alt="code" id="code">
             <mdui-tooltip content="更换图片">
                 <mdui-button-icon icon="refresh"></mdui-button-icon>

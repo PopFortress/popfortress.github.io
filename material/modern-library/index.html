@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>现代图书馆数据库 | Modern Library</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+</head>
+<body>
+
+    <div class="app">
+        <header>
+            <mdui-button icon="settings" variant="tonal" id="settings-btn">设置</mdui-button>
+            <mdui-button-icon id="settings-btn-icon" variant="tonal" icon="settings"></mdui-button-icon>
+            <div class="title-wrapper">
+                <div class="main-title">
+                    <mdui-icon name='local_library' style="color: rgb(var(--mdui-color-primary))"></mdui-icon>
+                    <div class="title">现代图书馆</div>
+                </div>
+                <div class="subtitle">现有藏书&nbsp;&nbsp;册</div>
+            </div>
+        </header>
+
+        <div class="input-wrapper">
+            <mdui-text-field variant="outlined" autocorrect="on" autocomplete="on" spellcheck="true" label="查找书籍名称、作者、ISBN和出版社…" autofocus type="search" id="search-input" clearable></mdui-text-field>
+        </div>
+        <mdui-fab icon="search" id="search-fab">查找</mdui-fab>
+
+        <main>
+            <div class="table-stats-wrapper">
+                <mdui-button icon="expand_more" variant="text" id="expand-all-btn">显示所有书籍</mdui-button>
+                <div class="loading">
+                    <mdui-circular-progress></mdui-circular-progress>
+                    <div class="loading-text">加载中…</div>
+                </div>
+            </div>
+
+            <table class="mdui-table" id="books-table">
+                <thead>
+                    <th id="thead-book-name">书</th>
+                    <th id="thead-author">作者</th>
+                    <th id="thead-isbn">ISBN</th>
+                    <th id="thead-publisher">出版社</th>
+                </thead>
+                <tbody id="books-list"></tbody>
+            </table>
+        </main>
+    </div>
+
+    <mdui-dialog headline="设置" class="options-dialog">
+        <div class="options-wrapper">
+            <div class="option">
+                <label for="author-toggle">显示作者</label>
+                <mdui-switch id="author-toggle" checked></mdui-switch>
+            </div>
+            <div class="option">
+                <label for="isbn-toggle">显示 ISBN</label>
+                <mdui-switch id="isbn-toggle" checked></mdui-switch>
+            </div>
+            <div class="option">
+                <label for="publisher-toggle">显示出版社</label>
+                <mdui-switch id="publisher-toggle" checked></mdui-switch>
+            </div>
+        </div>
+        <mdui-button slot="action" variant="text" class="close-dlg-btn">关闭</mdui-button>
+    </mdui-dialog>
+
+    <script src="./script.js"></script>
+    
+</body>
+</html>
