@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>管理您的个人数据</title>
+    <link rel="stylesheet" href="/static/better-table.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, .section-footer {
+            display: flex;
+            justify-content: center;
+        }
+        .app {
+            width: 100%;
+            max-width: 780px;
+            padding: 0 10px;
+        }
+        header {
+            margin: 20px 0;
+            font-size: 2rem;
+        }
+        .section-title {
+            margin: 17px 0;
+            font-size: 1.1rem;
+            margin-right: auto;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            column-gap: 10px;
+        }
+        .section-footer {
+            margin: 12px 0;
+            gap: 10px;
+        }
+        table {
+            width: 100%;
+        }
+        #erase-local-storage {
+            color: #ff0000;
+            text-underline-offset: 3px;
+            font-size: .8rem;
+        }
+        #erase-local-storage:active {
+            text-decoration: none;
+        }
+        .edit-input {
+            max-width: 100px;
+        }
+        #new-key {
+            font-size: .8rem;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="app">
+        <header>您的个人数据</header>
+        <hr>
+        <section>
+            <div class="section-header">
+                <div class="section-title">本地存储 (local storage)</div>
+                <button id="new-key">＋ 新建项</button>
+                <a href="javascript:;" id="erase-local-storage">抹掉所有数据</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>键 (Key)</th>
+                        <th>值 (Value)</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div class="section-footer">
+                <button id="export-data">↑ 导出数据</button>
+                <button id="import-data">↓ 导入数据</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const table = document.querySelector('table tbody');
+        const keys = Object.keys(localStorage);
+        const newKeyBtn = document.querySelector('#new-key');
+        const exportData = document.querySelector('#export-data');
+        const importData = document.querySelector('#import-data');
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            const value = localStorage.getItem(key);
+            const row = document.createElement('tr');
+            const keyCell = document.createElement('th');
+            const valueCell = document.createElement('td');
+            const actionCell = document.createElement('td');
+            const deleteButton = document.createElement('button');
+            const editButton = document.createElement('button');
+            editButton.style.marginRight = '10px';
+            deleteButton.textContent = '✗ 删除';
+            editButton.textContent = '✎ 编辑';
+            deleteButton.addEventListener('click', () => {
+                localStorage.removeItem(key);
+                location.reload();
+            });
+            editButton.addEventListener('click', () => {
+                const editingValueCell = document.createElement('td');
+                const input = document.createElement('input');
+                input.className = 'edit-input';
+                input.value = value;
+                input.addEventListener('blur', () => {
+                    if (value === input.value) {
+                        row.replaceChild(valueCell, editingValueCell);
+                        return;
+                    };
+                    localStorage.setItem(key, input.value);
+                    location.reload();
+                });
+                editingValueCell.appendChild(input);
+                row.replaceChild(editingValueCell, valueCell);
+                input.focus();
+            });
+            actionCell.appendChild(editButton);
+            actionCell.appendChild(deleteButton);
+            keyCell.textContent = key;
+            valueCell.textContent = value;
+            row.appendChild(keyCell);
+            row.appendChild(valueCell);
+            row.appendChild(actionCell);
+            table.appendChild(row);
+        };
+
+        const removeLocalStorage = document.querySelector('#erase-local-storage');
+        removeLocalStorage.onclick = () => {
+            if (confirm('你确定要清空所有数据吗？此操作不可恢复。')) {
+                localStorage.clear();
+                location.reload();
+            };
+        };
+
+        newKeyBtn.onclick = () => {
+            const row = document.createElement('tr');
+            const editingKeyCell = document.createElement('th');
+            const editingValueCell = document.createElement('td');
+            const editingActionCell = document.createElement('td');
+            const keyInput = document.createElement('input');
+            const valueInput = document.createElement('input');
+            const saveButton = document.createElement('button');
+            const cancelButton = document.createElement('button');
+            saveButton.textContent = '保存';
+            cancelButton.textContent = '取消';
+            saveButton.style.marginRight = '10px';
+            keyInput.className = 'edit-input';
+            valueInput.className = 'edit-input';
+            keyInput.placeholder = '键 (Key)';
+            valueInput.placeholder = '值 (Value)';
+            editingKeyCell.appendChild(keyInput);
+            editingValueCell.appendChild(valueInput);
+            editingActionCell.appendChild(saveButton);
+            editingActionCell.appendChild(cancelButton);
+            saveButton.addEventListener('click', () => {
+                const key = keyInput.value.trim();
+                const value = valueInput.value.trim();
+                if (!key || !value) {
+                    alert('键和值不能为空。');
+                    return;
+                };
+                localStorage.setItem(key, value);
+                location.reload();
+            });
+            cancelButton.addEventListener('click', () => {
+                row.remove();
+                newKeyBtn.disabled = false;
+            });
+            row.appendChild(editingKeyCell);
+            row.appendChild(editingValueCell);
+            row.appendChild(editingActionCell);
+            table.appendChild(row);
+            keyInput.focus();
+            newKeyBtn.disabled = true;
+        };
+
+        exportData.onclick = () => {
+            const data = {};
+            for (let i = 0; i < keys.length; i++) {
+                const key = keys[i];
+                const value = localStorage.getItem(key);
+                data[key] = value;
+            };
+            const content = JSON.stringify(data);
+            const a = document.createElement('a');
+            a.download = 'data.json';
+            a.href = URL.createObjectURL(new Blob([content], {type: 'text/plain'}));
+            a.click();
+        };
+
+        importData.onclick = () => {
+            if (!confirm('您正在尝试覆写所有本地存储数据，是否继续？')) {
+                return;
+            };
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.addEventListener('change', () => {
+                const file = input.files[0];
+                const reader = new FileReader();
+                reader.readAsText(file);
+                reader.onload = () => {
+                    const data = JSON.parse(reader.result);
+                    for (let key in data) {
+                        localStorage.setItem(key, data[key]);
+                    };
+                    location.reload();
+                };
+            });
+            input.click();
+        };
+    </script>
+
+    <script src="/static/common-auto-theme.js"></script>
+</body>
+</html>
