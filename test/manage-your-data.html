@@ -25,11 +25,16 @@
             font-size: 2rem;
         }
         .section-title {
-            margin: 17px 0;
             font-size: 1.1rem;
             margin-right: auto;
         }
         .section-header {
+            margin: 17px 0;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .header-actions {
             display: flex;
             align-items: center;
             column-gap: 10px;
@@ -40,6 +45,14 @@
         }
         table {
             width: 100%;
+        }
+        .value-cell {
+            word-break: break-all;
+            max-width: 26vw;
+            min-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         #erase-local-storage {
             color: #ff0000;
@@ -55,6 +68,10 @@
         #new-key {
             font-size: .8rem;
         }
+        label {
+            font-size: .8rem;
+            padding-left: 5px;
+        }
     </style>
 </head>
 <body>
@@ -65,8 +82,14 @@
         <section>
             <div class="section-header">
                 <div class="section-title">本地存储 (local storage)</div>
-                <button id="new-key">＋ 新建项</button>
-                <a href="javascript:;" id="erase-local-storage">抹掉所有数据</a>
+                <div class="header-actions">
+                    <div style="display: flex; align-items: center;">
+                        <input type="checkbox" name="show-full-value" id="show-full-value">
+                        <label for="show-full-value">显示完整值</label>
+                    </div>
+                    <button id="new-key">＋ 新建项</button>
+                    <a href="javascript:;" id="erase-local-storage">抹掉所有数据</a>
+                </div>
             </div>
             <table>
                 <thead>
@@ -97,6 +120,7 @@
             const row = document.createElement('tr');
             const keyCell = document.createElement('th');
             const valueCell = document.createElement('td');
+            valueCell.className = 'value-cell';
             const actionCell = document.createElement('td');
             const deleteButton = document.createElement('button');
             const editButton = document.createElement('button');
@@ -218,6 +242,24 @@
                 };
             });
             input.click();
+        };
+
+        const fullValueChceckbox = document.querySelector('#show-full-value');
+        fullValueChceckbox.onchange = (e) => {
+            const cells = document.querySelectorAll('.value-cell');
+            if (e.target.checked) {
+                cells.forEach(cell => {
+                    cell.style.whiteSpace = 'inherit';
+                    cell.style.overflow = 'inherit';
+                    cell.style.textOverflow = 'inherit';
+                });
+            } else {
+                cells.forEach(cell => {
+                    cell.style.whiteSpace = 'nowrap';
+                    cell.style.overflow = 'hidden'; 
+                    cell.style.textOverflow = 'ellipsis';
+                });
+            };
         };
     </script>
 

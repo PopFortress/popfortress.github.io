@@ -170,6 +170,8 @@ async function fetchSrc() {
             };
         });
     };
+
+    checkSayingsIndex();
 };
 
 ignoreNotifyCheckbox.onchange = (e) => {

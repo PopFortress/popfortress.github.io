@@ -45,6 +45,12 @@
             position: fixed;
             bottom: 30px;
             right: 60px;
+            display: none;
+            transition-duration: 1s;
+            transition-timing-function: ease-in-out;
+        }
+        .fab-extended {
+            width: fit-content !important;
         }
     </style>
 </head>
@@ -213,16 +219,11 @@
     <p>这是好结局哦！</p>
     <p class="author">—— 波普小阁</p>
 
-    <mdui-fab icon="arrow_upward" extended variant="secondary" class="top">返回顶部</mdui-fab>
+    <mdui-fab icon="arrow_upward" extended variant="secondary" class="top fab-extended" size="small">返回顶部</mdui-fab>
 
     <script>
         const winWidth = window.innerWidth;
         const fab = document.querySelector('.top');
-        if (winWidth < 400) {
-            setTimeout(() => {
-                fab.extended = false;
-            }, 2000);
-        };
 
         fab.addEventListener('click', () => {
             window.scrollTo({
@@ -236,6 +237,12 @@
 
         window.addEventListener('scroll', (event) => {
             fab.style.display = 'block';
+            if (winWidth < 400) {
+                setTimeout(() => {
+                    fab.classList.remove('fab-extended');
+                    fab.extended = false;
+                }, 2000);
+            };
         }, {passive: false});
     </script>
 </body>
