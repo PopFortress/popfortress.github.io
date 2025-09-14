@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Multi-Timezone Digital Clock</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --foreground: #222;
+      --background: #fff;
+      --surface-background: #eee;
+    }
+    body { font-family: Arial, sans-serif; background: var(--background); color: var(--foreground); }
+    h1 { text-align: center; }
+    .clocks { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
+    .clock-card {
+      background: var(--surface-background);
+      border-radius: 8px;
+      padding: 1em 2em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      width: 264px;
+      height: 147px;
+      text-align: center;
+    }
+    .zone { font-size: 1.1em; margin-bottom: 0.5em; }
+    .time { font-size: 2em; letter-spacing: 2px; }
+    .offset { font-size: .9em; margin-top: 0.5em; color: #99c; }
+    .iana-tz { font-size: 12px; opacity: .8; margin-top: .5em; }
+    footer {
+      margin: 3em 0;
+      text-align: center;
+    }
+    a {
+      color: var(--foreground);
+      font-size: .8em;
+      opacity: .8;
+    }
+    .add-tz {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+      max-width: 264px;
+      height: 147px;
+      cursor: pointer;
+      transition: .3s;
+    }
+    .add-tz:hover {
+      background: var(--background);
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+    }
+    dialog {
+      outline: none;
+      border: 2px solid var(--foreground);
+      border-radius: 8px;
+      background-color: var(--background);
+    }
+    dialog::backdrop {
+      backdrop-filter: blur(2px) brightness(.8);
+    }
+    .dlg-title, .input-group label {
+      color: var(--foreground);
+    }
+    #dialog-content-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+    .input-group label {
+      display: inline-block;
+      font-size: 12px;
+      width: 122px;
+      text-align: right;
+    }
+    .dlg-title {
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+    .dlg-actions {
+      text-align: right;
+      margin-top: 1em;
+    }
+    .input-group input {
+      width: 140px;
+    }
+    #errormsg {
+      display: none;
+      color: #ff0000;
+      font-size: 12px;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Multi-Timezone Digital Clock</h1>
+  <div class="clocks" id="clocks"></div>
+  <footer>
+    <a href="https://datetime.app/zh-hans/iana-timezones" target="_blank">What are IANA time zones?</a>
+  </footer>
+
+  <dialog id="add-tz-dialog">
+    <div id="dialog-content-wrapper">
+      <div class="dlg-title">Add Timezone</div>
+      <div class="input-group">
+        <label for="zone-label">Label:</label>
+        <input type="text" id="zone-label" required>
+      </div>
+      <div class="input-group">
+        <label for="zone-name">IANA Timezone Name:</label>
+        <input type="text" id="zone-name" required>
+      </div>
+    </div>
+    <div id="errormsg">Invalid timezone name.</div>
+    <div class="dlg-actions">
+      <button id="cancel-btn">Cancel</button>
+      <button id="add-tz-btn">Add</button>
+    </div>
+  </dialog>
+
+  <script>
+    var addTzCard;
+    // List of time zones to display
+    if (!localStorage.timeZones) {
+      localStorage.timeZones = JSON.stringify([
+        { label: "UTC", zone: "UTC" },
+        { label: "New York (EST)", zone: "America/New_York" },
+        { label: "London (BST)", zone: "Europe/London" },
+        { label: "Tokyo (JST)", zone: "Asia/Tokyo" },
+        { label: "Shanghai (CST)", zone: "Asia/Shanghai" },
+        { label: "Sydney (AEST)", zone: "Australia/Sydney" },
+        { label: "Moscow (MSK)", zone: "Europe/Moscow" },
+        { label: "Paris (CET)", zone: "Europe/Paris" },
+        { label: "Berlin (CET)", zone: "Europe/Berlin" },
+        { label: "Kolkata (IST)", zone: "Asia/Kolkata" },
+        { label: "Fiji (DST)", zone: "Pacific/Fiji" },
+        { label: "Iran Standard Time (IRST)", zone: "Asia/Tehran" },
+        { label: "Toronto (EST)", zone: "America/Toronto" },
+        { label: "West Africa Time (WAT)", zone: "Africa/Lagos" },
+        { label: "Arabia Standard Time (AST)", zone: "Asia/Riyadh" },
+      ]);
+    };
+
+    function getTimeString(zone) {
+      return new Date().toLocaleTimeString('en-US', {
+        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: zone
+      });
+    }
+
+    function getUTCOffset(zone) {
+      // Get offset in minutes
+      const now = new Date();
+      // Use the time zone's local time
+      const tzDate = new Date(now.toLocaleString('en-US', { timeZone: zone }));
+      // Offset in minutes = (UTC - Local)
+      // UTC time in milliseconds
+      const utc = Date.UTC(
+        tzDate.getFullYear(), tzDate.getMonth(), tzDate.getDate(),
+        tzDate.getHours(), tzDate.getMinutes(), tzDate.getSeconds()
+      );
+      const utcDate = new Date(now.toLocaleString('en-US', { timeZone: 'UTC' }));
+      // Local time in milliseconds
+      const local = tzDate.getTime();
+      const utcTime = utcDate.getTime();
+      // Offset in hours
+      const offset = (local - utcTime) / (1000 * 60 * 60);
+      const sign = offset >= 0 ? "+" : "-";
+      const absOffset = Math.abs(offset);
+      let hours = Math.floor(absOffset);
+      let minutes = Math.round((absOffset - hours) * 60);
+      if (minutes >= 60) {
+        hours += 1;
+        minutes -= 60;
+      }
+      return `UTC${sign}${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}`;
+    }
+
+    function renderClocks() {
+      const container = document.getElementById('clocks');
+      container.innerHTML = '';
+      JSON.parse(localStorage.timeZones).forEach(tz => {
+        const card = document.createElement('div');
+        card.className = 'clock-card';
+        card.innerHTML = `<div class="zone">${tz.label}</div>
+                          <div class="time">${getTimeString(tz.zone)}</div>
+                          <div class="offset">${getUTCOffset(tz.zone)}</div>
+                          <div class="iana-tz">${tz.zone}</div>`;
+        container.appendChild(card);
+      });
+      addTzCard = document.createElement('div');
+      addTzCard.className = 'clock-card add-tz';
+      addTzCard.innerHTML = '<div>＋ Add</div>';
+      container.appendChild(addTzCard);
+      
+      addTzCard.onclick = () => {
+        zoneLabel.value = '';
+        zoneName.value = '';
+        errormsg.style.display = 'none';
+        addTzDialog.showModal();
+        document.body.style.overflow = 'hidden';
+      };
+    };
+
+    
+    const addTzDialog = document.getElementById('add-tz-dialog');
+    const zoneLabel = document.getElementById('zone-label');
+    const zoneName = document.getElementById('zone-name');
+    const cancelBtn = document.getElementById('cancel-btn');
+    cancelBtn.onclick = () => {
+      addTzDialog.close();
+    }
+
+    addTzDialog.onclose = () => {
+      document.body.style.overflow = 'auto';
+    };
+
+    const addBtn = document.getElementById('add-tz-btn');
+    addBtn.onclick = () => {
+      const label = zoneLabel.value;
+      const zone = zoneName.value;
+      if (label.trim() && zone.trim()) {
+        const timezones = JSON.parse(localStorage.timeZones);
+        timezones.push({ label: label, zone: zone });
+        localStorage.timeZones = JSON.stringify(timezones);
+        try {
+          renderClocks();
+          addTzDialog.close();
+        } catch (e) {
+          const newTimezones = JSON.parse(localStorage.timeZones);
+          newTimezones.pop();
+          localStorage.timeZones = JSON.stringify(newTimezones);
+          errormsg.style.display = 'block';
+        };
+      };
+    };
+
+    zoneName.oninput = () => {
+      errormsg.style.display = 'none';
+    };
+
+    // Update every second
+    renderClocks();
+    setInterval(renderClocks, 1000);
+  </script>
+
+  <script>
+    const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const setStyleVariable = (name, value) => document.documentElement.style.setProperty(name, value);
+    if (isSystemDark) {
+      setStyleVariable('--foreground', '#fff');
+      setStyleVariable('--background', '#222');
+      setStyleVariable('--surface-background', '#333');
+    };
+  </script>
+</body>
+</html>

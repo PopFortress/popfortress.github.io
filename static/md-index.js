@@ -36,6 +36,7 @@ const notifyDlgDesc = $('.notify-dlg-desc');
 const clearCache = $('.clear-cache');
 var sayingsDesc;
 var sha;
+var commitMessage;
 var responseCommit;
 var dataCommit;
 var responseCount;
@@ -320,12 +321,13 @@ async function fetchCommitVersion() {
     };
 
     sha = dataCommit[0].sha;
+    commitMessage = dataCommit[0].commit.message;
     if (responseCount.status === 200) {
         commitLabel.textContent = `${sha.slice(0, 7)} (${dataCount[0].total} commits, +${dataCount[0].weeks[0].a}, -${dataCount[0].weeks[0].d})`;
     } else {
-        commitLabel.textContent = sha.slice(0, 7);
+        commitLabel.textContent = `${sha.slice(0, 7)} (${commitMessage.split('\n')[0]})`;
     };
-    commitLabel.title = sha;
+    commitLabel.title = `${sha}\n\n${commitMessage}`;
     commitLabel.href = '//github.com/PopFortress/popfortress.github.io/commits/main/';
     commitLabel.target = '_blank';
 };

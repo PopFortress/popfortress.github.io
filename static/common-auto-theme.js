@@ -3,4 +3,6 @@ const body = document.querySelector('body');
 if (isSystemDark) {
     body.style.backgroundColor = '#1d1d1f';
     body.style.color = '#fff';
-}
+    document.documentElement.style.setProperty('--foreground-color', '#fff');
+    document.documentElement.style.setProperty('--background-color', '#1d1d1f');
+};
