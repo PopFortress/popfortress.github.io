@@ -54,11 +54,17 @@ if (!localStorage.completedTasks) {
 if (!localStorage.todos) {
     localStorage.todos = '[]';
 };
-Notification.requestPermission((result) => {
-    if (result === 'granted') {
-        notify = true;
-    };
-});
+if (!navigator.userAgent.includes('HarmonyOS')
+    && !navigator.userAgent.includes('HuaweiBrowser')
+    && !navigator.userAgent.includes('Quark')) {
+    Notification.requestPermission((result) => {
+        if (result === 'granted') {
+            notify = true;
+        };
+    });
+} else {
+    notify = false;
+};
 
 wakeLockCheckbox.onchange = (e) => {
     if (e.target.checked) {
@@ -150,6 +156,7 @@ function stopPomodoro() {
     dotStatic.style.display = 'block';
     dot.style.display = 'none';
     mdui.removeColorScheme();
+    showActions();
 };
 
 function pausePomodoro() {
@@ -181,11 +188,11 @@ statusToggleFab.onclick = () => {
                     _remainMin = parseInt(workInput.value);
                     _remainSec = 0;
                     working();
+                    hideActions();
                 } else {
                     mdui.snackbar({message: 'value out of range.',});
                 };
             };
-            hideActions();
             break;
         case 'working':
             pausePomodoro();
@@ -270,13 +277,19 @@ function updateTodos() {
 };
 
 clearTodosBtn.onclick = () => {
-    while (todoItemsLst.firstChild) {
-        todoItemsLst.removeChild(todoItemsLst.firstChild);
-    };
-    tasksRemaining = 0;
-    updateTodoTitle();
-    tempArray = [];
-    updateTodos();
+    mdui.confirm({
+        headline: 'Clear All Items',
+        description: 'You\'re removing all your todo items. Are you sure?',
+        confirmText: 'Proceed',
+    }).then(() => {
+        while (todoItemsLst.firstChild) {
+            todoItemsLst.removeChild(todoItemsLst.firstChild);
+        };
+        tasksRemaining = 0;
+        updateTodoTitle();
+        tempArray = [];
+        updateTodos();
+    });
 };
 
 tabs.onchange = (e) => {

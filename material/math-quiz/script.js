@@ -25,6 +25,7 @@ const timeElapsed = get('.time-elapsed');
 const stopTimingBtn = get('.stop-timing-btn');
 const accuracy = get('.accuracy');
 const accuracyPercentage = get('.accuracy-percentage');
+const milestonesList = get('.milestones-list');
 var questionNum = 0;
 var corrcetAnswers = 0;
 var totalTrys = 0;
@@ -45,6 +46,9 @@ var subjects;
 var subjectDigits = [];
 var settings;
 const defaultCheckboxesStates = {};
+var quizStats = {};
+const milestones = [5, 10, 20, 30, 40, 50, 80, 100, 200, 300, 500, 750, 1000, 1500, 2000, 3000, 5000, 10000];
+let milestonesIndex = -1;
 
 allCheckboxes.forEach(checkbox => {
     if (checkbox.id !== 'fixed-max-digits') {
@@ -62,6 +66,18 @@ if (localStorage.mathquiz_maxDigits) {
 
 if (!localStorage.mathquiz_data) {
     localStorage.mathquiz_data = JSON.stringify(defaultCheckboxesStates);
+};
+if (!localStorage.mathquiz_stats) {
+    quizStats.achievements = [];
+    updateStats();
+} else {
+    quizStats = JSON.parse(localStorage.mathquiz_stats);
+    questionNum = quizStats.answeredQuestions;
+    corrcetAnswers = quizStats.corrcetAnswers;
+    totalTrys = quizStats.totalTrys;
+};
+function updateStats() {
+    localStorage.mathquiz_stats = JSON.stringify(quizStats);
 };
 
 settingsPanel.addEventListener('open', () => {
@@ -353,12 +369,31 @@ function loadQuiz() {
         settings.equations ? quizEquation() : loadQuiz();
         quizType = 'equation';
     };
+    updateQuizStats();
+    updateStats();
+};
+
+function updateQuizStats() {
+    quizStats.answeredQuestions = corrcetAnswers;
+    quizStats.corrcetAnswers = corrcetAnswers;
+    quizStats.totalTrys = totalTrys;
 };
 
 function checkAnswer() {
     if (quizInput.valueAsNumber === answer) {
         correctAnswer();
         corrcetAnswers++;
+        milestonesIndex = -1;
+        milestones.forEach(milestone => {
+            if (corrcetAnswers >= milestone) {
+                milestonesIndex = milestones.indexOf(milestone);
+            };
+        });
+        const achievementText = `Answered ${milestones[milestonesIndex]} questions correctly.`
+        if (milestonesIndex >= 0 && !(quizStats.achievements.includes(achievementText))) {
+            quizStats.achievements.push(achievementText);
+            mdui.snackbar({ message: `You have achieved the milestone of correctly answering ${milestones[milestonesIndex]} questions. Nice job!`});
+        };
     } else {
         incorrectAnswer();
     };
@@ -367,7 +402,23 @@ function checkAnswer() {
     checkBtn.disabled = true;
     quizInput.value = '';
     quizInput.focus();
+
+    updateQuizStats();
+    updateStats();
+    updateMilestones();
 };
+
+function updateMilestones() {
+    getAll('.milestones-list mdui-list-item').forEach(item => item.remove());
+    JSON.parse(localStorage.mathquiz_stats).achievements.forEach(achievement => {
+        const milestone = document.createElement('mdui-list-item');
+        milestone.textContent = achievement;
+        milestone.icon = 'verified';
+        milestone.nonclickable = true;
+        milestonesList.appendChild(milestone);
+    });
+};
+updateMilestones();
 
 function updateAccuracy() {
     accuracy.textContent = `${corrcetAnswers} / ${totalTrys}`;

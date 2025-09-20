@@ -163,3 +163,7 @@ mdui-top-app-bar-title {
     width: 19px;
     height: 19px;
 }
+
+.achievements-wrapper {
+    padding: 20px;
+}

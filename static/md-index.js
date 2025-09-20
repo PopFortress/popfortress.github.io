@@ -175,6 +175,8 @@ async function fetchSrc() {
     checkSayingsIndex();
 };
 
+openlinkBtn.onclick = () => { notifyDialog.open = false; };
+
 ignoreNotifyCheckbox.onchange = (e) => {
     if (e.target.checked) {
         localStorage.ignoreNotifyID = notifyDialog.dataset.notifyId;

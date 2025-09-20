@@ -46,8 +46,8 @@
         table {
             width: 100%;
         }
-        .value-cell {
-            word-break: break-all;
+        .key-cell, .value-cell{
+            word-break: break-word;
             max-width: 26vw;
             min-width: 100%;
             white-space: nowrap;
@@ -72,6 +72,17 @@
             font-size: .8rem;
             padding-left: 5px;
         }
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin: 11px 0;
+        }
+        #search {
+            flex-grow: 1;
+        }
+        #search-btn {
+            height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -90,6 +101,10 @@
                     <button id="new-key">＋ 新建项</button>
                     <a href="javascript:;" id="erase-local-storage">抹掉所有数据</a>
                 </div>
+            </div>
+            <div class="search-bar">
+                <input type="search" name="search" id="search" autofocus autocomplete="on" placeholder="搜索键值。">
+                <button type="button" id="search-btn">🔍 搜索</button>
             </div>
             <table>
                 <thead>
@@ -119,6 +134,7 @@
             const value = localStorage.getItem(key);
             const row = document.createElement('tr');
             const keyCell = document.createElement('th');
+            keyCell.className = 'key-cell';
             const valueCell = document.createElement('td');
             valueCell.className = 'value-cell';
             const actionCell = document.createElement('td');
@@ -245,21 +261,68 @@
         };
 
         const fullValueChceckbox = document.querySelector('#show-full-value');
-        fullValueChceckbox.onchange = (e) => {
-            const cells = document.querySelectorAll('.value-cell');
-            if (e.target.checked) {
-                cells.forEach(cell => {
+        function switchFullValue() {
+            sessionStorage.localstorage_show_full_value = fullValueChceckbox.checked;
+            const valueCells = document.querySelectorAll('.value-cell');
+            const keyCells = document.querySelectorAll('.key-cell');
+            valueCells.forEach(cell => {
+                if (fullValueChceckbox.checked) {
                     cell.style.whiteSpace = 'inherit';
                     cell.style.overflow = 'inherit';
                     cell.style.textOverflow = 'inherit';
-                });
-            } else {
-                cells.forEach(cell => {
+                } else {
                     cell.style.whiteSpace = 'nowrap';
                     cell.style.overflow = 'hidden'; 
                     cell.style.textOverflow = 'ellipsis';
+                };
+            });
+            keyCells.forEach(cell => {
+                if (fullValueChceckbox.checked) {
+                    cell.style.whiteSpace = 'inherit';
+                    cell.style.overflow = 'inherit';
+                    cell.style.textOverflow = 'inherit';
+                } else {
+                    cell.style.whiteSpace = 'nowrap';
+                    cell.style.overflow = 'hidden'; 
+                    cell.style.textOverflow = 'ellipsis';
+                };
+            });
+        }
+        fullValueChceckbox.onchange = switchFullValue;
+        if (sessionStorage.localstorage_show_full_value === 'true') {
+            fullValueChceckbox.checked = true;
+            switchFullValue();
+        };
+    </script>
+    <script>
+        function searchKeyValue() {
+            const keyword = searchInput.value.trim().toLowerCase();
+            if (!keyword) {
+                rows.forEach(row => row.style.display = 'table-row');
+                sessionStorage.removeItem('localstorage_search_kw');
+                return;
+            } else {
+                rows.forEach(row => {
+                    const key = row.querySelector('.key-cell').textContent.trim().toLowerCase();
+                    const value = row.querySelector('.value-cell').textContent.trim().toLowerCase();
+                    if (key.includes(keyword) || value.includes(keyword)) {
+                        row.style.display = 'table-row';
+                    } else {
+                        row.style.display = 'none';
+                    };
                 });
             };
+            sessionStorage.localstorage_search_kw = keyword;
+        };
+        const searchInput = document.querySelector('#search');
+        const searchBtn = document.querySelector('#search-btn');
+        const rows = document.querySelectorAll('table tbody tr');
+        searchBtn.onclick = searchKeyValue;
+        searchInput.oninput = searchKeyValue;
+
+        if (sessionStorage.localstorage_search_kw) {
+            searchInput.value = sessionStorage.localstorage_search_kw;
+            searchKeyValue();
         };
     </script>
 
