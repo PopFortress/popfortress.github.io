@@ -86,6 +86,7 @@ async function fetchBooks() {
         tr.appendChild(td4);
         booksList.appendChild(tr);
     });
+    loading.style.display = 'none';
 };
 
 expandAllBtn.onclick = async () => {
@@ -99,7 +100,6 @@ expandAllBtn.onclick = async () => {
 
 loading.style.display = 'flex';
 fetchBooks();
-loading.style.display = 'none';
 
 function searchBooks(keyword) {
     if (!booksTable.style.display) {

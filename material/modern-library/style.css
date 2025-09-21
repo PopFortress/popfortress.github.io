@@ -83,7 +83,7 @@ main {
 }
 
 .loading {
-    display: none;
+    display: flex;
     align-items: center;
     gap: 16px;
 }
@@ -126,4 +126,11 @@ td {
 
 .option label {
     margin-right: auto;
+}
+
+footer {
+    text-align: center;
+    font-size: .8rem;
+    opacity: .8;
+    padding: 20px 0 30px;
 }

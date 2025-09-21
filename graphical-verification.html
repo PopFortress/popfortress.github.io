@@ -57,6 +57,16 @@
         .intro {
             margin-bottom: 12px;
         }
+        #loading-modal {
+            margin: auto;
+            overflow: hidden;
+            border: none;
+            background-color: transparent;
+            outline: none;
+        }
+        #loading-modal::backdrop {
+            backdrop-filter: blur(3px);
+        }
     </style>
 </head>
 <body>
@@ -76,6 +86,10 @@
         <mdui-button full-width end-icon="keyboard_return">提交</mdui-button>
     </div>
 
+    <dialog id="loading-modal">
+        <mdui-circular-progress></mdui-circular-progress>
+    </dialog>
+
     <script>
         mdui.setColorScheme('#EF9A9A');
         const $ = (query) => mdui.$(query)[0];
@@ -89,13 +103,16 @@
 
         const params = new URLSearchParams(location.search);
         const url = params.get('r');
+        const loadingModal = $('#loading-modal');
 
         async function loadCode() {
+            loadingModal.showModal();
             api = apis[0];
             const response = await fetch(api.imgurl.replace('{type}', ['string', 'math', 'digit'][Math.floor(Math.random() * 3)]));
             const data = await response.json();
             id = data.data.id;
             img.src = data.data.url;
+            loadingModal.close();
         };
 
         refreshBtn.onclick = loadCode;
@@ -143,6 +160,7 @@
         });
 
         loadCode();
+
     </script>
 
 </body>
