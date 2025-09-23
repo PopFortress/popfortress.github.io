@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.app {
+    width: 100%;
+    max-width: 780px;
+    padding: 0 14px;
+}
+
+.input-wrapper {
+    width: 100%;
+    background-color: rgb(var(--mdui-color-surface-container));
+    padding: 40px 28px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+mdui-text-field::part(label) {
+    background: rgb(var(--mdui-color-surface-container));
+    max-width: 64%;
+}
+
+mdui-text-field::part(container) {
+    box-shadow: inherit;
+}
+
+mdui-text-field::part(container):focus-within {
+    box-shadow: inherit;
+}
+
+mdui-text-field:focus-within::part(input), mdui-text-field:focus-within::part(icon) {
+    color: rgb(var(--mdui-color-primary));
+}
+
+mdui-text-field::part(input) {
+    scrollbar-width: none;
+}
+
+::selection {
+    background-color: rgb(var(--mdui-color-primary));
+    color: #fff;
+}
+
+.search-btn {
+    box-shadow: none;
+    display: none;
+    opacity: 0;
+    width: fit-content !important;
+    transition-property: box-shadow, width, bottom, transform, opacity !important;
+}
+
+.result-wrapper {
+    margin: 10px 0;
+    line-height: 2;
+    letter-spacing: 1px;
+}
+
+.result-word {
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+#loading-modal {
+    margin: auto;
+    overflow: hidden;
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+#loading-modal::backdrop {
+    backdrop-filter: blur(3px);
+}
+
+.result-phonetic {
+    font-style: italic;
+    margin-bottom: 14px;
+    font-size: .8rem;
+}
+
+.audio-wrapper {
+    margin: 14px 0;
+    display: none;
+    gap: 10px;
+}
+
+.synonyms-wrapper, .sentences-wrapper, .relwords-wrapper, .phrases-wrapper {
+    display: none;
+    margin: 30px 0;
+    font-size: .9rem;
+}
+
+.synonyms-wrapper, .relwords-wrapper {
+    overflow-wrap: break-word;
+}
+
+a {
+    margin: 0 7px;
+    color: rgb(var(--mdui-color-primary));
+}
+
+.result {
+    margin-bottom: 77px;
+}

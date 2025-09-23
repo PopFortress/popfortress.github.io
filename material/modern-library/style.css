@@ -130,7 +130,12 @@ td {
 
 footer {
     text-align: center;
-    font-size: .8rem;
+    font-size: .7rem;
     opacity: .8;
     padding: 20px 0 30px;
+}
+
+footer a {
+    color: inherit;
+    opacity: .7;
 }

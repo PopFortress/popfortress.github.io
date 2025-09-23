@@ -27,9 +27,13 @@
             <div class="headline"></div>
             <div class="hitokoto"></div>
         </mdui-card>
-        <mdui-card class="weather" clickable>
+        <mdui-card class="weather">
             <div class="title">本地天气</div>
-            <div class="content flex">
+            <div class="content flex weather-content">
+                <div class="select-wrapper city-input-wrapper">
+                    <div class="label">键入城市名称</div>
+                    <mdui-text-field class="city-input" value="北京" variant="outlined"></mdui-text-field>
+                </div>
                 <div class="location flex">
                     <div class="city" style="margin-left: auto;"></div>
                     <mdui-icon name="location_on" style="font-size: 1rem;"></mdui-icon>
@@ -44,7 +48,7 @@
                         <div class="lowest-text"></div>
                     </div>
                     <div class="average flex" title="平均气温">
-                        <mdui-icon name="wb_sunny"></mdui-icon>
+                        <mdui-icon name="horizontal_rule"></mdui-icon>
                         <div class="average-text"></div>
                     </div>
                 </div>
@@ -55,17 +59,30 @@
                 </div>
             </div>
         </mdui-card>
+        <mdui-card class="weather-alarms">
+            <div class="title">天气预警</div>
+            <div class="content flex alarm-content">
+                <div class="select-wrapper city-input-wrapper">
+                    <div class="label">键入省级行政区名</div>
+                    <mdui-text-field class="province-input" value="北京" variant="outlined"></mdui-text-field>
+                </div>
+                <div class="alarms-list-wrapper">
+                    <div class="empty-alarms-label">暂无预警信息</div>
+                    <mdui-list class="alarms-list"></mdui-list>
+                </div>
+            </div>
+        </mdui-card>
         <mdui-card class="zhihu-daily" clickable>
             <div class="title">知乎日报</div>
             <div class="content">
                 <mdui-list class="zhihu-daily-list"></mdui-list>
             </div>
         </mdui-card>
-        <mdui-card class="history" clickable>
+        <mdui-card class="history">
             <div class="title">历史上的今天</div>
             <div class="content flex"></div>
         </mdui-card>
-        <mdui-card class="english" clickable>
+        <!-- <mdui-card class="english" clickable>
             <div class="title">今日励志英语</div>
             <div class="content flex">
                 <div class="date"></div>
@@ -75,7 +92,7 @@
                 </div>
                 <img class="img">
             </div>
-        </mdui-card>
+        </mdui-card> -->
         <mdui-card class="om" clickable>
             <div class="title">一分钟看世界</div>
             <div class="content flex">
@@ -88,7 +105,7 @@
                 </div>
             </div>
         </mdui-card>
-        <mdui-card class="currency" clickable>
+        <mdui-card class="currency">
             <div class="title">货币汇率</div>
             <div class="content">
                 <div class="update-time"></div>
@@ -96,7 +113,7 @@
                 <mdui-list class="currency-list"></mdui-list>
             </div>
         </mdui-card>
-        <mdui-card class="stock" clickable>
+        <mdui-card class="stock">
             <div class="title">股市行情</div>
             <div class="content">
                 <div class="update-time"></div>
@@ -104,7 +121,7 @@
                 <a href="https://www.msn.cn/zh-cn/money" target="_blank">前往 MSN</a>
             </div>
         </mdui-card>
-        <mdui-card class="bilibili" clickable>
+        <!-- <mdui-card class="bilibili" clickable>
             <div class="title">哔哩哔哩热榜</div>
             <div class="content">
                 <mdui-list class="bilibili-list"></mdui-list>
@@ -115,7 +132,7 @@
             <div class="content">
                 <mdui-list class="zhihu-list"></mdui-list>
             </div>
-        </mdui-card>
+        </mdui-card> -->
         <mdui-card class="maoyan" clickable>
             <div class="title">猫眼票房排行</div>
             <div class="content">

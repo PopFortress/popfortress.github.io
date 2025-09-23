@@ -141,6 +141,7 @@ function endGame() {
     et = Date.now();
     timeSpent.textContent = `${(et - st) / 1000}s`;
     endGameLink.style.display = 'none';
+    window.onbeforeunload = null;
 };
 
 endGameLink.ondblclick = endGame;
@@ -153,4 +154,8 @@ endGameLink.onclick = () => {
             dblclickTimeStack = [];
         };
     };
+};
+
+window.onbeforeunload = () => {
+    return 'Are you sure you want to leave? Your quiz progress will be lost.';
 };

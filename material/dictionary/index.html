@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>英语-中文词典</title>
+</head>
+<body>
+    
+    <div class="input-wrapper">
+        <mdui-text-field label="键入词汇、短语或句子。" variant="outlined" autosize max-rows="5" clearable icon="search" autofocus class="search-input" autocorrect="on" spellcheck="true"></mdui-text-field>
+        <mdui-fab extended class="search-btn">查词</mdui-fab>
+    </div>
+    <div class="app">
+        <div class="result-wrapper">
+            <div class="result-word"></div>
+            <div class="result-phonetic"></div>
+            <div class="audio-wrapper">
+                <mdui-chip elevated icon="volume_up" class="british-pronunciation-btn">英式</mdui-chip>
+                <mdui-chip elevated icon="volume_up" class="american-pronunciation-btn">美式</mdui-chip>
+            </div>
+            <div class="result"></div>
+
+            <div class="synonyms-wrapper">同近义词 (Synonyms):</div>
+            <div class="sentences-wrapper">例句 (Sentences):</div>
+            <div class="relwords-wrapper">同根词 (Related words):</div>
+            <div class="phrases-wrapper">短语 (Phrases):</div>
+        </div>
+    </div>
+
+    <dialog id="loading-modal">
+        <mdui-circular-progress></mdui-circular-progress>
+    </dialog>
+
+    <audio src="" id="british-pronunciation-audio"></audio>
+    <audio src="" id="american-pronunciation-audio"></audio>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>

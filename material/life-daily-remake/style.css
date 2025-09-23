@@ -249,12 +249,16 @@ a:hover {
     transition: .3s;
 }
 
-.horoscope .label {
+.weather-content {
+    transition: .3s;
+}
+
+.horoscope .label, .weather .label, .weather-alarms .label {
     text-align: center;
     font-size: .8rem;
 }
 
-.horoscope-input {
+.horoscope-input, .city-input, .province-input {
     transform: scale(.8);
     height: 32px;
     width: 100px;
@@ -265,4 +269,23 @@ a:hover {
     justify-content: flex-end;
     align-items: center;
     gap: 10px;
+}
+
+.city-input-wrapper {
+    justify-content: flex-start;
+}
+
+.weather-alarms .content {
+    flex-direction: column;
+}
+.alarms-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 96px;
+}
+
+.empty-alarms-label {
+    font-size: .8rem;
 }

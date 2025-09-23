@@ -26,6 +26,7 @@ const stopTimingBtn = get('.stop-timing-btn');
 const accuracy = get('.accuracy');
 const accuracyPercentage = get('.accuracy-percentage');
 const milestonesList = get('.milestones-list');
+const resetDataBtn = get('.reset-data-btn');
 var questionNum = 0;
 var corrcetAnswers = 0;
 var totalTrys = 0;
@@ -454,4 +455,18 @@ var timeInterval = setInterval(() => {
 stopTimingBtn.onclick = () => {
     clearInterval(timeInterval);
     hide(stopTimingBtn);
+};
+
+resetDataBtn.onclick = () => {
+    mdui.confirm({
+        headline: 'Reset All Data',
+        description: 'All your progress, milestones, and achievements will be lost. Are you sure you\'d like to proceed?',
+        confirmText: 'Proceed',
+        onConfirm: () => {
+            localStorage.removeItem('mathquiz_data');
+            localStorage.removeItem('mathquiz_stats');
+            localStorage.removeItem('mathquiz_maxDigits');
+            location.reload();
+        },
+    });
 };

@@ -167,3 +167,8 @@ mdui-top-app-bar-title {
 .achievements-wrapper {
     padding: 20px;
 }
+
+.reset-data-btn, .reset-data-btn::part(icon) {
+    color: rgb(var(--mdui-color-error));
+    width: fit-content;
+}

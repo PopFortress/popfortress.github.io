@@ -60,6 +60,12 @@ const horoShort = $('.horoscope .short');
 const horoSummary = $('.horoscope .summary');
 const horoLuckThings = $('.luck-things');
 const horoContent = $('.horoscope .content');
+const cityInput = $('.city-input');
+const weatherContent = $('.weather-content');
+const provinceInput = $('.province-input');
+const emptyAlarmsLabel = $('.empty-alarms-label');
+const alarmsList = $('.alarms-list');
+const alarmContent = $('.alarm-content');
 let lunarDate = '';
 
 const preferDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -71,9 +77,24 @@ let cardContentHTMLs = {};
 let contentHTML;
 let img_currency;
 
+if (!localStorage.life_daily_preferences) {
+    localStorage.life_daily_preferences = JSON.stringify({});
+} else {
+    const settings = JSON.parse(localStorage.life_daily_preferences);
+    if (settings.city) {
+        cityInput.value = settings.city;
+    };
+    if (settings.horoscope) {
+        horoInput.value = settings.horoscope;
+    };
+    if (settings.province) {
+        provinceInput.value = settings.province;
+    };
+};
+
 const apis = {
     lunarCalendar: 'https://www.36jxs.com/api/Commonweal/almanac?sun=',
-    weather: 'https://api.vvhan.com/api/weather',
+    weather: 'https://v2.xxapi.cn/api/weather?city={city}',
     zhihuDaily: 'https://api.allorigins.win/get?url=https://coco.codemao.cn/http-widget-proxy/https://news-at.zhihu.com/api/4/news/latest',
     history: 'https://seep.eu.org/https://query.asilu.com/today/list/',
     english: 'https://api.vvhan.com/api/dailyEnglish',
@@ -87,12 +108,14 @@ const apis = {
     epic: 'https://60s-api-cf.viki.moe/v2/epic',
     answer: 'https://60s-api-cf.viki.moe/v2/answer',
     bing: 'https://bing.shangzhenyang.com/api/json',
-    horoscopes: 'https://v2.xxapi.cn/api/horoscope?type={type}&time=today'
+    horoscopes: 'https://v2.xxapi.cn/api/horoscope?type={type}&time=today',
+    alarms: 'https://app.gjzwfw.gov.cn/fwmhapp/qixiang/interfaces/findWarnCapByElement.do',
 };
 
 const enMonth = {1: 'January.', 2: 'February.', 3: 'March.', 4: 'April.', 5: 'May.', 6: 'June.', 7: 'July.', 8: 'August.', 9: 'September.', 10: 'October.', 11: 'November.', 12: 'December.'};
 const currencyNamesList = ['USD','EUR','GBP','JPY','HKD','MOP','TWD', 'KRW', 'AUD', 'CAD'];
 const horoscopes = {'白羊座': 'aries', '金牛座': 'taurus', '双子座': 'gemini', '巨蟹座': 'cancer', '狮子座': 'leo', '处女座': 'virgo', '天秤座': 'libra', '天蝎座': 'scorpio', '射手座': 'sagittarius', '摩羯座': 'capricorn', '水瓶座': 'aquarius', '双鱼座': 'pisces'};
+const areaCodes = {"北京市": "110000","天津市": "120000","河北省": "130000","山西省": "140000","内蒙古自治区": "150000","辽宁省": "210000","吉林省": "220000","黑龙江省": "230000","上海市": "310000","江苏省": "320000","浙江省": "330000","安徽省": "340000","福建省": "350000","江西省": "360000","山东省": "370000","河南省": "410000","湖北省": "420000","湖南省": "430000","广东省": "440000","广西壮族自治区": "450000","海南省": "460000","重庆市": "500000","四川省": "510000","贵州省": "520000","云南省": "530000","西藏自治区": "540000","陕西省": "610000","甘肃省": "620000","青海省": "630000","宁夏回族自治区": "640000","新疆维吾尔自治区": "650000","新疆生产建设兵团": "660000"};
 
 /**
  * 
@@ -243,22 +266,25 @@ function fetchLunarCalendar() {
 };
 
 function fetchWeather() {
+    weatherContent.style.opacity = .3;
     requestAPI({
-        url: apis.weather,
+        url: apis.weather.replace('{city}', cityInput.value),
         callback: (data) => {
+            weatherContent.style.opacity = 1;
             if (cardContentHTMLs.weather) {
                 weatherCard.innerHTML = cardContentHTMLs.weather;
                 weatherCard.parentNode.clickable = true;
             };
-            const weatherHighest = data.data.high;
-            const weatherLowest = data.data.low;
-            const weatherAvg = (+weatherHighest.split('°')[0] + (+weatherLowest.split('°')[0])) / 2 + '°C';
-            highestText.textContent = weatherHighest;
-            lowestText.textContent = weatherLowest;
-            avgText.textContent = weatherAvg;
-            city.textContent = data.city;
-            wind.textContent = `${data.data.type}　${data.data.fengxiang}${data.data.fengli}`;
-            airQuality.innerHTML = `空气质量　${data.air.aqi_name}<br>污染指数　${data.air.aqi}<br>PM 2.5 指数　${data.air['pm2.5']}<br>PM 10 指数　${data.air.pm10}`;
+            const today = data.data.data[1];
+            const weatherHighest = today.temperature.split('-')[0];
+            const weatherLowest = today.temperature.split('-')[1].split('℃')[0];
+            const weatherAvg = ((+weatherHighest) + (+weatherLowest)) / 2;
+            highestText.textContent = weatherHighest + '℃';
+            lowestText.textContent = weatherLowest + '℃';
+            avgText.textContent = weatherAvg + '℃';
+            city.textContent = data.data.city;
+            wind.textContent = `${today.weather}　${today.wind}`;
+            airQuality.innerHTML = `空气质量　${today.air_quality}`;
         },
         errorCallback: (error) => {
             apiFailureHandler({
@@ -268,6 +294,13 @@ function fetchWeather() {
             });
         },
     });
+};
+
+cityInput.onchange = () => {
+    const settings = JSON.parse(localStorage.life_daily_preferences)
+    settings.city = cityInput.value;
+    localStorage.life_daily_preferences = JSON.stringify(settings);
+    fetchWeather();
 };
 
 function fetchZhihuDaily() {
@@ -510,9 +543,65 @@ function fetchHoroscopes() {
 horoInput.onchange = () => {
     if (horoscopes[horoInput.value]) {
         fetchHoroscopes();
+        const settings = JSON.parse(localStorage.life_daily_preferences)
+        settings.horoscope = horoInput.value;
+        localStorage.life_daily_preferences = JSON.stringify(settings);
     } else {
         horoInput.value = '';
         mdui.snackbar({ message: '名称不存在'});
+    };
+};
+
+async function fetchAlarms() {
+    alarmContent.style.opacity = .3;
+    const formData = new FormData();
+    formData.append('areaCode', areaCodes[provinceInput.value]);
+    formData.append('warnLevel', 'RED,BLUE,YELLOW,Orange,UNKOWN');
+    formData.append('warnEvent', 'A');
+    const response = await fetch(apis.alarms, {
+        method: 'POST',
+        body: formData,
+    });
+    const data = await response.json();
+    alarmContent.style.opacity = 1;
+    alarmsList.innerHTML = '';
+    data.forEach(alarm => {
+        if (alarm.sender.includes(cityInput.value)) {
+            const headline = document.createElement('mdui-list-item');
+            const description = document.createElement('mdui-list-subheader');
+            headline.innerHTML = alarm.headline;
+            description.innerHTML = `生效时间：${alarm.effective.split('.')[0]}<br>${alarm.description}`;
+            description.style.display = 'none';
+            headline.onclick = () => {
+                if (description.style.display === 'none') {
+                    alarmsList.querySelectorAll('mdui-list-subheader').forEach(item => {
+                        item.style.display = 'none';
+                    });
+                    description.style.display = 'block';
+                } else {
+                    description.style.display = 'none';
+                };
+                setPositions();
+            };
+            alarmsList.appendChild(headline);
+            alarmsList.appendChild(description);
+        };
+    });
+    if (alarmsList.children.length > 0) {
+        emptyAlarmsLabel.style.display = 'none';
+    };
+    setTimeout(setPositions, 300);
+};
+
+provinceInput.onchange = () => {
+    if (areaCodes[provinceInput.value]) {
+        fetchAlarms();
+        const settings = JSON.parse(localStorage.life_daily_preferences)
+        settings.province = provinceInput.value;
+        localStorage.life_daily_preferences = JSON.stringify(settings);
+    } else {
+        provinceInput.value = '';
+        mdui.snackbar({ message: '名称不存在，请尝试键入省级行政区的完整名称。'});
     };
 };
 
@@ -525,12 +614,13 @@ function fetchAllAPIs() {
     fetchEnglish();
     fetchOneMin();
     fetchCurrency();
-    fetchHots();
+    // fetchHots();
     fetchMaoyan();
     fetchEpic();
     fetchAnswer();
     fetchBing();
     fetchHoroscopes();
+    fetchAlarms();
 };
 
 fetchAllAPIs();
