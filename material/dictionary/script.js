@@ -20,14 +20,16 @@ const phrasesWrapper = $('.phrases-wrapper');
 const apis = {
     dict: 'https://v2.xxapi.cn/api/englishwords?word=',
     translation: 'https://api.pearktrue.cn/api/translate/',
-}
+};
+
+let isFreshlySearched = false;
 
 async function search() {
     document.body.style.overflow = 'hidden';
     loadingModal.showModal();
     const query = searchInput.value.trim();
     if (query) {
-        if (query.split(' ').length <= 1) {
+        if (query.split(' ').length <= 1 && query.match(/[a-zA-Z]/g)) {
             const url = apis.dict + query;
             const response = await fetch(url);
             const data = await response.json();
@@ -45,7 +47,11 @@ async function search() {
             resultWord.innerHTML = searchInput.value;
             let resultDetails = '';
             data.data.translations.forEach(translation => {
-                resultDetails += `${translation.pos}. ${translation.tran_cn}<br>`;
+                if (translation.pos) {
+                    resultDetails += `${translation.pos}. ${translation.tran_cn}<br>`;
+                } else {
+                    resultDetails += `${translation.tran_cn}<br>`;
+                };
             });
             result.innerHTML = resultDetails;
             if (data.data.ukphone && data.data.usphone) {
@@ -55,21 +61,21 @@ async function search() {
             };
 
             audioWrapper.style.display = 'flex';
-            britishAudio.src = data.data.ukspeech;
-            americanAudio.src = data.data.usspeech;
+            britishAudio.src = data.data.ukspeech.includes('type=1') ? data.data.ukspeech : `https://dict.youdao.com/dictvoice?audio=${searchInput.value}&type=1`;
+            americanAudio.src = data.data.usspeech.includes('type=2') ? data.data.usspeech : `https://dict.youdao.com/dictvoice?audio=${searchInput.value}&type=2`;
 
             if (data.data.synonyms.length > 0) {
                 synonymsWrapper.innerText = '同近义词 (Synonyms):　';
                 data.data.synonyms.forEach(synonym => {
                     synonym.Hwds.forEach(item => {
-                        const synonym = document.createElement('a');
-                        synonym.innerText = item.word;
-                        synonym.href = 'javascript:;';
-                        synonym.onclick = () => {
-                            searchInput.value = synonym.innerText;
+                        const synonymLink = document.createElement('a');
+                        synonymLink.innerText = `(${synonym.pos}. ${synonym.tran}) ${item.word}`;
+                        synonymLink.href = 'javascript:;';
+                        synonymLink.onclick = () => {
+                            searchInput.value = synonymLink.innerText.split(') ')[1];
                             search();
                         };
-                        synonymsWrapper.appendChild(synonym);
+                        synonymsWrapper.appendChild(synonymLink);
                     });
                 });
                 synonymsWrapper.style.display = 'block';
@@ -92,7 +98,7 @@ async function search() {
                 data.data.relWords.forEach(relword => {
                     relword.Hwds.forEach(item => {
                         const relwordLink = document.createElement('a');
-                        relwordLink.innerText = `(${relword.Pos}.) ${item.hwd}`;
+                        relwordLink.innerText = `(${relword.Pos}. ${item.tran}) ${item.hwd}`;
                         relwordLink.href = 'javascript:;';
                         relwordLink.onclick = () => {
                             searchInput.value = relwordLink.innerText.split(') ')[1];
@@ -120,15 +126,18 @@ async function search() {
             const response = await fetch(url);
             const data = await response.json();
 
-            audioWrapper.style.display = 'flex';
+            if (query.match(/[a-zA-Z]/g)) {
+                audioWrapper.style.display = 'flex';
+                britishAudio.src = `https://dict.youdao.com/dictvoice?audio=${searchInput.value}&type=1`;
+                americanAudio.src = `https://dict.youdao.com/dictvoice?audio=${searchInput.value}&type=2`;
+            } else {
+                audioWrapper.style.display = 'none';
+            };
             resultPhonetic.innerHTML = '';
             synonymsWrapper.style.display = 'none';
             sentencesWrapper.style.display = 'none';
             relwordsWrapper.style.display = 'none';
             phrasesWrapper.style.display = 'none';
-
-            britishAudio.src = `https://dict.youdao.com/dictvoice?audio=${searchInput.value}&type=1`;
-            americanAudio.src = `https://dict.youdao.com/dictvoice?audio=${searchInput.value}&type=2`;
 
             resultWord.innerText = data.data.text;
             result.innerText = data.data.translate;
@@ -137,6 +146,12 @@ async function search() {
     loadingModal.close();
     searchInput.blur();
     navigator.virtualKeyboard.hide();
+    location.hash = searchInput.value;
+    isFreshlySearched = true;
+    setTimeout(() => {
+        isFreshlySearched = false;
+    }, 500);
+    window.scrollTo(0, 0);
 };
 
 britishAudioBtn.onclick = () => {
@@ -170,6 +185,20 @@ searchInput.oninput = () => {
         searchBtn.style.opacity = 0;
         setTimeout(() => {
             searchBtn.style.display = 'none';
-        }, 300);
+        }, 200);
+        location.hash = '';
+    };
+};
+
+searchInput.onclear = () => {
+    location.hash = '';
+};
+
+window.onhashchange = window.onload = () => {
+    if (location.hash.split('#')[1] && !isFreshlySearched) {
+        searchInput.value = decodeURI(location.hash).split('#')[1];
+        search();
+    } else if (!isFreshlySearched) {
+        searchInput.value = '';
     };
 };

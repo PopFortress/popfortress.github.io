@@ -249,7 +249,7 @@ a:hover {
     transition: .3s;
 }
 
-.weather-content {
+.weather-content, .alarm-content {
     transition: .3s;
 }
 
@@ -258,7 +258,7 @@ a:hover {
     font-size: .8rem;
 }
 
-.horoscope-input, .city-input, .province-input {
+.horoscope-input, .city-input, .province-input, .region-input {
     transform: scale(.8);
     height: 32px;
     width: 100px;

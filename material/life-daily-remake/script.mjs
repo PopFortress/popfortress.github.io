@@ -66,6 +66,7 @@ const provinceInput = $('.province-input');
 const emptyAlarmsLabel = $('.empty-alarms-label');
 const alarmsList = $('.alarms-list');
 const alarmContent = $('.alarm-content');
+const regionInput = $('.region-input');
 let lunarDate = '';
 
 const preferDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -89,6 +90,9 @@ if (!localStorage.life_daily_preferences) {
     };
     if (settings.province) {
         provinceInput.value = settings.province;
+    };
+    if (settings.region) {
+        regionInput.value = settings.region;
     };
 };
 
@@ -117,6 +121,12 @@ const currencyNamesList = ['USD','EUR','GBP','JPY','HKD','MOP','TWD', 'KRW', 'AU
 const horoscopes = {'白羊座': 'aries', '金牛座': 'taurus', '双子座': 'gemini', '巨蟹座': 'cancer', '狮子座': 'leo', '处女座': 'virgo', '天秤座': 'libra', '天蝎座': 'scorpio', '射手座': 'sagittarius', '摩羯座': 'capricorn', '水瓶座': 'aquarius', '双鱼座': 'pisces'};
 const areaCodes = {"北京市": "110000","天津市": "120000","河北省": "130000","山西省": "140000","内蒙古自治区": "150000","辽宁省": "210000","吉林省": "220000","黑龙江省": "230000","上海市": "310000","江苏省": "320000","浙江省": "330000","安徽省": "340000","福建省": "350000","江西省": "360000","山东省": "370000","河南省": "410000","湖北省": "420000","湖南省": "430000","广东省": "440000","广西壮族自治区": "450000","海南省": "460000","重庆市": "500000","四川省": "510000","贵州省": "520000","云南省": "530000","西藏自治区": "540000","陕西省": "610000","甘肃省": "620000","青海省": "630000","宁夏回族自治区": "640000","新疆维吾尔自治区": "650000","新疆生产建设兵团": "660000"};
 
+
+function updateLocalStorage(key, input) {
+    const settings = JSON.parse(localStorage.life_daily_preferences);
+    settings[key] = input.value;
+    localStorage.life_daily_preferences = JSON.stringify(settings);
+};
 /**
  * 
  * @param {*} options {url, callback, errorCallback}
@@ -297,10 +307,10 @@ function fetchWeather() {
 };
 
 cityInput.onchange = () => {
-    const settings = JSON.parse(localStorage.life_daily_preferences)
-    settings.city = cityInput.value;
-    localStorage.life_daily_preferences = JSON.stringify(settings);
-    fetchWeather();
+    if (cityInput.value.trim()) {
+        updateLocalStorage('city', cityInput);
+        fetchWeather();
+    };
 };
 
 function fetchZhihuDaily() {
@@ -541,11 +551,9 @@ function fetchHoroscopes() {
 };
 
 horoInput.onchange = () => {
-    if (horoscopes[horoInput.value]) {
+    if (horoscopes[horoInput.value] && horoInput.value.trim()) {
         fetchHoroscopes();
-        const settings = JSON.parse(localStorage.life_daily_preferences)
-        settings.horoscope = horoInput.value;
-        localStorage.life_daily_preferences = JSON.stringify(settings);
+        updateLocalStorage('horoscope', horoInput);
     } else {
         horoInput.value = '';
         mdui.snackbar({ message: '名称不存在'});
@@ -566,7 +574,7 @@ async function fetchAlarms() {
     alarmContent.style.opacity = 1;
     alarmsList.innerHTML = '';
     data.forEach(alarm => {
-        if (alarm.sender.includes(cityInput.value)) {
+        if (alarm.sender.includes(regionInput.value)) {
             const headline = document.createElement('mdui-list-item');
             const description = document.createElement('mdui-list-subheader');
             headline.innerHTML = alarm.headline;
@@ -594,15 +602,17 @@ async function fetchAlarms() {
 };
 
 provinceInput.onchange = () => {
-    if (areaCodes[provinceInput.value]) {
+    if (areaCodes[provinceInput.value] && provinceInput.value.trim()) {
         fetchAlarms();
-        const settings = JSON.parse(localStorage.life_daily_preferences)
-        settings.province = provinceInput.value;
-        localStorage.life_daily_preferences = JSON.stringify(settings);
+        updateLocalStorage('province', provinceInput);
     } else {
         provinceInput.value = '';
         mdui.snackbar({ message: '名称不存在，请尝试键入省级行政区的完整名称。'});
     };
+};
+regionInput.onchange = () => {
+    updateLocalStorage('region', regionInput);
+    fetchAlarms();
 };
 
 function fetchAllAPIs() {
