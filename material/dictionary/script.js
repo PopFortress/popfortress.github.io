@@ -565,11 +565,10 @@ navRail.onchange = navBar.onchange = (e) => {
 
 if ("virtualKeyboard" in navigator) {
     navigator.virtualKeyboard.overlaysContent = true;
-} else {
-    searchInput.onfocus = quizInput.onfocus = () => {
-        navBar.style.display = 'none';
-    };
-    searchInput.onblur = quizInput.onblur = () => {
-        navBar.style.display = 'flex';
-    };
+};
+searchInput.onfocus = quizInput.onfocus = () => {
+    navBar.style.display = 'none';
+};
+searchInput.onblur = quizInput.onblur = () => {
+    navBar.style.display = 'flex';
 };
