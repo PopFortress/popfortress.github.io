@@ -47,6 +47,10 @@ const bookmarksList = $('.bookmarks-list');
 const startBookmarksBtn = $('.start-bookmarks-btn');
 const bookmarksHeader = $('.bookmarks-header');
 
+const exportBookmarks = $('#export-bookmarks');
+const importBookmarks = $('#import-bookmarks');
+
+
 const apis = {
     dict: 'https://v2.xxapi.cn/api/englishwords?word=',
     translation: 'https://api.pearktrue.cn/api/translate/',
@@ -486,7 +490,7 @@ addToBookmarksBtn.onclick = () => {
     loadBookmarks();
     if (addToBookmarksBtn.innerText === '添加至单词本') {
         const word = resultWord.innerText.trim();
-        const explanation = word.split(' ') <= 1 ? result.innerHTML.trim().slice(0, -4) : result.innerHTML.trim();
+        const explanation = word.split(' ').length <= 1 ? result.innerHTML.trim().slice(0, -4) : result.innerHTML.trim();
         bookmarks.push({ 'word': word, 'explain': explanation });
         addToBookmarksBtn.icon = 'bookmark_remove';
         addToBookmarksBtn.innerText = '从单词本中移除';
@@ -511,7 +515,7 @@ function switchPage(to) {
 
     if (to === 'bookmarks') {
         bookmarksList.innerHTML = '';
-        loadBookmarks().forEach(bookmark => {
+        loadBookmarks().reverse().forEach(bookmark => {
             const bookmarkItem = document.createElement('mdui-list-item');
             bookmarkItem.headline = bookmark.word;
             bookmarkItem.description = bookmark.explain.replaceAll('<br>', '　');
@@ -525,6 +529,33 @@ function switchPage(to) {
         });
         bookmarksHeader.innerText = `我的单词本 （${loadBookmarks().length}）`;
     };
+};
+
+exportBookmarks.onclick = () => {
+    const bookmarks = loadBookmarks();
+    const content = JSON.stringify(bookmarks, null, 2);
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'bookmarks.json';
+    a.click();
+};
+importBookmarks.onclick = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsText(file, 'UTF-8');
+        reader.onload = (e) => {
+            const bookmarks = JSON.parse(e.target.result);
+            localStorage.dictionary_bookmarks = JSON.stringify(bookmarks);
+            loadBookmarks();
+            switchPage('bookmarks');
+        };
+    };
+    input.click();
 };
 
 navRail.onchange = navBar.onchange = (e) => {
