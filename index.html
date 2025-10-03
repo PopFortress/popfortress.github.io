@@ -217,5 +217,27 @@
         <mdui-button slot="action" variant="text" class="notify-dlg-close-btn">关闭</mdui-button>
     </mdui-dialog>
 
+    <dialog id="loading-modal">
+        <mdui-circular-progress></mdui-circular-progress>
+    </dialog>
+    <script>
+        const loadingModal = document.querySelector('#loading-modal');
+        loadingModal.showModal();
+    </script>
+
+    <mdui-bottom-app-bar scroll-behavior="hide" scroll-threshold="30" class="cookie-wrapper">
+        <div class="cookie-dialog">
+            <div class="cookie-desc">我们使用可选的 Cookie，通过社交媒体连接等方式改善你在我们网站上的体验，并且根据你的在线活动投放个性化的广告。 如果你拒绝可选 Cookie，则我们将仅使用为你提供服务所必须的 Cookie。 你可以单击页面底部的“管理 Cookie”更改你的选择。</div>
+            <div class="cookie-options">
+                <mdui-button icon="check" id="accept-cookies">接受所有 Cookie</mdui-button>
+                <mdui-button icon="close" variant="outlined" id="decline-cookies">拒绝</mdui-button>
+            </div>
+        </div>
+        <div class="cookie-closing">
+            <mdui-icon name='done' style="margin-top: -12px;"></mdui-icon>
+            <div>已保存您的 Cookie 偏好</div>
+        </div>
+    </mdui-bottom-app-bar>
+
 </body>
 </html>

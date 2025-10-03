@@ -34,6 +34,11 @@ const openlinkBtn = $('.open-link-btn');
 const notifyDlgCloseBtn = $('.notify-dlg-close-btn');
 const notifyDlgDesc = $('.notify-dlg-desc');
 const clearCache = $('.clear-cache');
+const cookieWrapper = $('.cookie-wrapper');
+const acceptCookies = $('#accept-cookies');
+const declineCookies = $('#decline-cookies');
+const cookieDialog = $('.cookie-dialog');
+const cookieClosing = $('.cookie-closing');
 var sayingsDesc;
 var sha;
 var commitMessage;
@@ -73,7 +78,11 @@ notifyDlgCloseBtn.onclick = () => {
 
 clearCache.onclick = () => {
     localStorage.removeItem('ignoreNotifyID');
+    sessionStorage.clear();
     mdui.snackbar({message: '已清除缓存',});
+    setTimeout(() => {
+        location.reload();
+    }, 1000);
 };
 
 prevSayings.onclick = () => {
@@ -339,4 +348,29 @@ commitLabel.onclick = fetchCommitVersion;
 clearStorage.onclick = () => {
     localStorage.clear();
     location.reload();
+};
+
+acceptCookies.onclick = declineCookies.onclick = (e) => {
+    e.target.loading = true;
+    sessionStorage.cookiesAccepted = true;
+    setTimeout(() => {
+        e.target.loading = false;
+        cookieDialog.style.display = 'none';
+        cookieClosing.style.display = 'flex';
+        setTimeout(() => {
+            cookieWrapper.hide = true;
+            setTimeout(() => {
+                cookieWrapper.style.display = 'none';
+            }, 500);
+        }, 1200);
+    }, 800);
+};
+
+window.onload = () => {
+    loadingModal.close();
+    document.body.style.overflow = 'auto';
+};
+
+if (sessionStorage.cookiesAccepted) {
+    cookieWrapper.style.display = 'none';
 };

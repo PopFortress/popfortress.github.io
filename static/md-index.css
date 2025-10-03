@@ -14,6 +14,7 @@
 body {
     display: flex;
     justify-content: center;
+    overflow: hidden;
 }
 
 .app {
@@ -283,4 +284,59 @@ mdui-tabs {
     padding: 14px;
     color: rgb(var(--mdui-color-primary));
     font-size: 12px;
+}
+
+#loading-modal {
+    margin: auto;
+    overflow: hidden;
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+#loading-modal::backdrop {
+    backdrop-filter: blur(3px);
+}
+
+.cookie-wrapper {
+    font-size: .8rem;
+    line-height: 1.5;
+    min-height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cookie-dialog, .cookie-closing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 26px;
+}
+
+.cookie-desc {
+    max-width: 60%;
+}
+
+.cookie-options {
+    display: flex;
+    gap: 15px;
+}
+
+@media screen and (max-width: 534px) {
+    .cookie-desc {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .cookie-dialog, .cookie-closing {
+        display: inherit;
+    }
+}
+
+.cookie-closing {
+    display: none;
+}
+
+mdui-icon {
+    font-family: 'Material Icons';
 }

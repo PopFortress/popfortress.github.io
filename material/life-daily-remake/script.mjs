@@ -108,7 +108,7 @@ const apis = {
     stock: 'https://hq.stock.sohu.com/zs/006/zs_399006-1.html',
     bilibili: 'https://api.vvhan.com/api/hotlist/bili',
     zhihu: 'https://api.vvhan.com/api/hotlist/zhihuHot',
-    maoyan: 'https://60s-api-cf.viki.moe/v2/maoyan',
+    maoyan: 'https://seep.eu.org/https://api.52vmy.cn/api/wl/top/movie',
     epic: 'https://60s-api-cf.viki.moe/v2/epic',
     answer: 'https://60s-api-cf.viki.moe/v2/answer',
     bing: 'https://bing.shangzhenyang.com/api/json',
@@ -473,11 +473,12 @@ function fetchMaoyan() {
     requestAPI({
         url: apis.maoyan,
         callback: (data) => {
-            maoyanLastUpdate.textContent = `更新时间：${data.data.update_time}`;
+            let rankIndex = 1;
+            maoyanLastUpdate.textContent = `更新时间：${data.data.updateInfo.date}　${data.data.updateInfo.time}`;
             data.data.list.forEach(item => {
-                maoyanList.innerHTML += `<mdui-list-item nonclickable>${item.movie_name} (${item.release_year})\
-                <div slot="icon">#${item.rank}</div>\
-                <div slot="end-icon">${item.box_office_desc}</div></mdui-list-item>`
+                maoyanList.innerHTML += `<mdui-list-item href="https://www.maoyan.com/films/${item.movieInfo.movieId}" target="_blank">${item.movieInfo.movieName}\
+                <div slot="icon">#${rankIndex++}</div>\
+                <div slot="end-icon">${item.sumBoxDesc} (${item.movieInfo.releaseInfo})</div></mdui-list-item>`
             });
         },
     });

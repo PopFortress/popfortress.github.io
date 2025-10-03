@@ -91,7 +91,7 @@ function displayMoments(moments) {
             <div class="moment-text">${moment.text}</div>
             <mdui-divider></mdui-divider>
             <div class="moment-details">
-                <div class="datetime">${moment.time}</div>
+                <div class="datetime">${moment.time.split(':')[1].length > 1 ? moment.time : `${moment.time.split(':')[0]}:0${moment.time.split(':')[1]}`}</div>
                 <mdui-button-icon class="like-btn" icon="favorite_border" selected-icon="favorite" selectable></mdui-button-icon>
                 <mdui-button-icon class="comment-btn" icon="forum--outlined"></mdui-button-icon>
             </div>

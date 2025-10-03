@@ -11,10 +11,25 @@ body {
     align-items: center;
 }
 
-.app {
+.app-container {
     width: 100%;
     max-width: 780px;
     padding: 0 14px;
+}
+
+.app-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#app-page-dictation, #app-page-dictation-testing, #app-page-bookmarks {
+    display: none;
+}
+
+#app-page-dictation-testing {
+    padding: 32px 0;
 }
 
 .input-wrapper {
@@ -112,4 +127,176 @@ a {
 
 .result {
     margin-bottom: 77px;
+}
+
+@media screen and (max-width: 936px) {
+    #nav-bar { display: flex; }
+    #nav-rail { display: none; }
+    body { padding-left: 0 !important; padding-bottom: 80px !important;}
+}
+
+@media screen and (min-width: 936px) {
+    #nav-rail { display: flex; }
+    #nav-bar { display: none; }
+    body { padding-left: 81px !important; padding-bottom: 0 !important; }
+}
+
+.dictations-list {
+    width: 100%;
+}
+
+.dictations-list mdui-fab {
+    width: fit-content !important;
+}
+
+.dictations-list mdui-collapse-item::part(body) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quiz-card {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+}
+
+.quiz-actions-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.quiz-input-wrapper {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+#quiz-input {
+    height: 3rem;
+}
+#quiz-submit-btn {
+    height: calc(3rem - 2px);
+}
+#quiz-input::part(container) {
+    border-radius: 2em;
+}
+#quiz-input:focus-within::part(container) {
+    border: 2px solid rgb(var(--mdui-color-primary));
+}
+#quiz-input::part(input) {
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+#quiz-input::part(input)::placeholder {
+    opacity: .5;
+}
+
+.quiz-actions-wrapper * {
+    height: 2em;
+    width: auto;
+    font-size: .8rem;
+}
+
+.speech-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.definitions-wrapper {
+    text-align: center;
+    line-height: 1.5;
+    font-size: .9rem;
+}
+
+.quiz-result-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.quiz-result {
+    display: flex;
+    justify-content: center;
+}
+
+.correct-indicator, .incorrect-indicator {
+    display: none;
+    gap: 14px;
+}
+
+.correct-indicator { color: #008000;}
+.incorrect-indicator { color: rgb(var(--mdui-color-error));}
+
+#correct-answer {
+    font-size: .8rem;
+}
+
+.stats-card {
+    display: flex;
+    margin-bottom: 29px;
+    padding: 10px;
+    gap: 10px;
+    font-size: .9rem;
+}
+
+.question-num {
+    margin-right: auto;
+}
+
+#back-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+}
+
+#word-amount-input {
+    width: auto;
+    background: transparent;
+    box-shadow: unset;
+    transform: scale(.8);
+}
+
+#word-amount-input::part(label) {
+    background: transparent;
+}
+
+.result-card {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 35px;
+    line-height: 1.5;
+    color: rgb(var(--mdui-color-primary));
+    font-style: italic;
+    font-size: .8rem;
+}
+
+.bookmarks-header, .dictations-header {
+    padding: 30px 0 19px 40px;
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+.bookmarks-list {
+    width: 100%;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    word-break: break-all;
+}
+
+.add-to-bookmarks-btn {
+    display: none;
+    font-size: .7rem;
 }
