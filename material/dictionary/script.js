@@ -444,9 +444,11 @@ quizInput.onkeydown = (e) => {
 };
 
 skipBtn.onclick = () => {
-    if (!checkedAnswer && !showedAnswer) {
-        totalTrys++;
-        updateStats();
+    if (!checkedAnswer || !showedAnswer) {
+        if (!isAnswerCorrect) {
+            totalTrys++;
+            updateStats();
+        };
     };
     loadWord();
 };
@@ -566,9 +568,19 @@ navRail.onchange = navBar.onchange = (e) => {
 if ("virtualKeyboard" in navigator) {
     navigator.virtualKeyboard.overlaysContent = true;
 };
-searchInput.onfocus = quizInput.onfocus = () => {
-    navBar.style.display = 'none';
-};
-searchInput.onblur = quizInput.onblur = () => {
-    navBar.style.display = 'flex';
+
+window.addEventListener('load', updateUI);
+window.onresize = updateUI;
+function updateUI() {
+    if (window.innerWidth < 936) {
+        searchInput.onfocus = quizInput.onfocus = () => {
+            navBar.style.display = 'none';
+        };
+        searchInput.onblur = quizInput.onblur = () => {
+            navBar.style.display = 'flex';
+        };
+    } else {
+        searchInput.onblur = quizInput.onblur = null;
+        navBar.style.display = 'none';
+    };
 };
