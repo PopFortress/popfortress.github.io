@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/mdui/mdui.css">
     <script src="/mdui/mdui.global.js"></script>
     <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
     <link rel="stylesheet" href="./style.css">
     <title>英语-中文词典</title>
 </head>
@@ -101,11 +102,45 @@
 
     <div id="app-page-bookmarks" class="app-page">
         <div class="bookmarks-header-wrapper">
+            <mdui-circular-progress id="bookmarks-sync-progress"></mdui-circular-progress>
             <div class="bookmarks-header">我的单词本</div>
-            <mdui-button-icon icon="arrow_upward" id="export-bookmarks"></mdui-button-icon>
-            <mdui-button-icon icon="arrow_downward" id="import-bookmarks"></mdui-button-icon>
+            <mdui-dropdown>
+                <mdui-button-icon slot="trigger" icon="import_export"></mdui-button-icon>
+                <mdui-menu>
+                    <mdui-menu-item icon="arrow_upward" id="export-bookmarks">本地导出</mdui-menu-item>
+                    <mdui-menu-item icon="arrow_downward" id="import-bookmarks">本地导入</mdui-menu-item>
+                </mdui-menu>
+            </mdui-dropdown>
+            <mdui-dropdown>
+                <mdui-button-icon slot="trigger" icon="cloud_queue"></mdui-button-icon>
+                <mdui-menu>
+                    <mdui-menu-item icon="cloud_upload" id="cloud_upload_bookmarks">上传至云端</mdui-menu-item>
+                    <mdui-menu-item icon="sync" id="cloud_sync_bookmarks">从云端同步（下载）</mdui-menu-item>
+                    <mdui-menu-item icon="settings" id="cloud-settings">云同步设置</mdui-menu-item>
+                </mdui-menu>
+            </mdui-dropdown>
         </div>
         <mdui-list class="bookmarks-list"></mdui-list>
+    </div>
+
+    <div id="app-page-cloud-settings" class="app-page">
+        <div class="cloud-sett-header">云同步设置</div>
+        <div class="cloud-sett-wrapper">
+            <div class="desc">
+                <mdui-icon name="info--outlined" style="font-size: .7rem; margin-right: 1em;"></mdui-icon>
+                您可以在此处配置云端存储。我们默认使用 Gitee 作为数据托管平台。默认分支为 master 或默认分支。
+            </div>
+            <div class="form">
+                <mdui-text-field label="owner" icon="person" id="owner"></mdui-text-field>
+                <mdui-text-field label="repo" icon="folder" id="repo" value="dev-data"></mdui-text-field>
+                <mdui-text-field label="path" icon="folder_open" id="path" value="bookmarks.json"></mdui-text-field>
+                <mdui-text-field label="access_token" icon="vpn_key" id="access_token" type="password" toggle-password></mdui-text-field>
+            </div>
+            <div class="actions">
+                <mdui-button id="cloud-sett-save-btn" icon="done" full-width>保存设置</mdui-button>
+                <mdui-button id="cloud-sett-cancel-btn" icon="close" variant="elevated" full-width>取消</mdui-button>
+            </div>
+        </div>
     </div>
 
     <dialog id="loading-modal">

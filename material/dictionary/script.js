@@ -49,6 +49,18 @@ const bookmarksHeader = $('.bookmarks-header');
 
 const exportBookmarks = $('#export-bookmarks');
 const importBookmarks = $('#import-bookmarks');
+const cloudUploadBookmarks = $('#cloud_upload_bookmarks');
+const cloudSyncBookmarks = $('#cloud_sync_bookmarks');
+const cloudSettings = $('#cloud-settings');
+const cloudSettSaveBtn = $('#cloud-sett-save-btn');
+const cloudSettCancelBtn = $('#cloud-sett-cancel-btn');
+const ownerInput = $('#owner');
+const repoInput = $('#repo');
+const pathInput = $('#path');
+const accessTokenInput = $('#access_token');
+const syncProgress = $('#bookmarks-sync-progress');
+
+const xhr = new XMLHttpRequest();
 
 
 const apis = {
@@ -507,6 +519,84 @@ addToBookmarksBtn.onclick = () => {
     updateBookmarks();
 };
 
+cloudSettings.onclick = () => { switchPage('cloud-settings'); };
+cloudSettCancelBtn.onclick = () => { switchPage('bookmarks'); };
+cloudSettSaveBtn.onclick = () => {
+    const owner = ownerInput.value.trim();
+    const repo = repoInput.value.trim();
+    const path = pathInput.value.trim();
+    const accessToken = accessTokenInput.value.trim();
+    if (owner && repo && path && accessToken) {
+        localStorage.dictionary_remote_url = `https://seep.eu.org/https://gitee.com/api/v5/repos/${owner}/${repo}/contents/${path}?access_token=${accessToken}`;
+        localStorage.dictionary_remote_settings = JSON.stringify({ owner: owner, repo: repo, path: path, accessToken: accessToken });
+        mdui.snackbar({ message: '云同步设置已保存。'});
+        switchPage('bookmarks');
+    };
+};
+
+xhr.onerror = () => {
+        mdui.snackbar({ message: `云同步失败。请检查远程仓库配置是否正确。${xhr.status} ${xhr.statusText}`});
+        syncProgress.style.display = 'none';
+};
+
+cloudUploadBookmarks.onclick = () => {
+    if (!localStorage.dictionary_remote_url) {
+        switchPage('cloud-settings');
+        mdui.snackbar({ message: '请先配置云同步。'});
+        return;
+    };
+    syncProgress.style.display = 'block';
+
+    let bookmarks = localStorage.dictionary_bookmarks ? localStorage.dictionary_bookmarks : '[]';
+    bookmarks = bytesToBase64(new TextEncoder().encode(bookmarks));
+    let sha;
+    xhr.open('GET', localStorage.dictionary_remote_url);
+    xhr.send();
+    xhr.onload = () => {
+        sha = JSON.parse(xhr.responseText).sha;
+        xhr.open('PUT', localStorage.dictionary_remote_url.split('seep.eu.org/')[1]);
+        let body = new FormData();
+        body.append('content', bookmarks);
+        body.append('sha', sha);
+        body.append('message', 'upload bookmarks');
+        xhr.send(body);
+        xhr.onload = () => {
+            mdui.snackbar({ message: `云同步成功。${xhr.status} ${xhr.statusText}`});
+            syncProgress.style.display = 'none';
+        };
+    };
+};
+
+cloudSyncBookmarks.onclick = () => {
+    if (!localStorage.dictionary_remote_url) {
+        switchPage('cloud-settings');
+        mdui.snackbar({ message: '请先配置云同步。'});
+        return;
+    };
+    syncProgress.style.display = 'block';
+    xhr.open('GET', localStorage.dictionary_remote_url);
+    xhr.send();
+    xhr.onload = () => {
+        const base64 = JSON.parse(xhr.responseText).content;
+        bookmarks = JSON.parse(new TextDecoder().decode(base64ToBytes(base64)));
+        updateBookmarks();
+        mdui.snackbar({ message: `云同步成功。${xhr.status} ${xhr.statusText}`});
+        syncProgress.style.display = 'none';
+        switchPage('bookmarks');
+    };
+};
+
+function base64ToBytes(base64) {
+  const binString = atob(base64);
+  return Uint8Array.from(binString, (m) => m.codePointAt(0));
+};
+
+function bytesToBase64(bytes) {
+  const binString = Array.from(bytes, (byte) =>
+    String.fromCodePoint(byte),
+  ).join("");
+  return btoa(binString);
+};
 
 
 
@@ -530,6 +620,12 @@ function switchPage(to) {
             bookmarksList.appendChild(bookmarkItem);
         });
         bookmarksHeader.innerText = `我的单词本 （${loadBookmarks().length}）`;
+    } else if (to === 'cloud-settings') {
+        const settings = localStorage.dictionary_remote_settings ? JSON.parse(localStorage.dictionary_remote_settings) : null;
+        ownerInput.value = settings ? settings.owner : '';
+        repoInput.value = settings ? settings.repo : 'dev-data';
+        pathInput.value = settings ? settings.path : 'bookmarks.json';
+        accessTokenInput.value = settings ? settings.accessToken : '';
     };
 };
 
@@ -584,3 +680,5 @@ function updateUI() {
         navBar.style.display = 'none';
     };
 };
+
+// switchPage('cloud-settings');

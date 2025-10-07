@@ -24,7 +24,7 @@ body {
     align-items: center;
 }
 
-#app-page-dictation, #app-page-dictation-testing, #app-page-bookmarks {
+#app-page-dictation, #app-page-dictation-testing, #app-page-bookmarks, #app-page-cloud-settings {
     display: none;
 }
 
@@ -255,14 +255,14 @@ a {
     z-index: 10;
 }
 
-#word-amount-input {
+#word-amount-input, .form mdui-text-field {
     width: auto;
     background: transparent;
     box-shadow: unset;
     transform: scale(.8);
 }
 
-#word-amount-input::part(label) {
+#word-amount-input::part(label), .form mdui-text-field::part(label) {
     background: transparent;
 }
 
@@ -278,7 +278,7 @@ a {
     font-size: .8rem;
 }
 
-.bookmarks-header-wrapper, .dictations-header {
+.bookmarks-header-wrapper, .dictations-header, .cloud-sett-header {
     padding: 30px 40px 19px 40px;
     width: 100%;
     font-size: 1.2rem;
@@ -291,6 +291,7 @@ a {
 .bookmarks-header-wrapper {
     display: flex;
     align-items: center;
+    padding-left: 12px;
 }
 
 .bookmarks-header {
@@ -308,4 +309,36 @@ a {
 .add-to-bookmarks-btn {
     display: none;
     font-size: .7rem;
+}
+
+.cloud-sett-wrapper .desc {
+    font-size: .7rem;
+    text-align: center;
+    max-width: 70%;
+}
+
+.cloud-sett-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.cloud-sett-wrapper .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#bookmarks-sync-progress {
+    margin-right: 10px;
+    width: 26px;
+    height: 26px;
+    display: none;
 }
