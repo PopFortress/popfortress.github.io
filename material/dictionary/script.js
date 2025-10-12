@@ -62,6 +62,10 @@ const syncProgress = $('#bookmarks-sync-progress');
 
 const xhr = new XMLHttpRequest();
 
+const sortMenu = $('#sort-menu');
+const cloudMenuBtn = $('#cloud-menu-btn');
+const bookmarksSubheader = $('.bookmarks-subheader');
+
 
 const apis = {
     dict: 'https://v2.xxapi.cn/api/englishwords?word=',
@@ -491,6 +495,18 @@ let bookmarks;
 if (!localStorage.dictionary_bookmarks) {
     localStorage.dictionary_bookmarks = '[]';
 };
+let syncInfo;
+if (!localStorage.syncInfo) {
+    localStorage.syncInfo = '{"time": -1, "type": ""}';
+};
+function updateSyncInfo() {
+    localStorage.syncInfo = JSON.stringify(syncInfo);
+    return syncInfo;
+};
+function loadSyncInfo() {
+    syncInfo = JSON.parse(localStorage.syncInfo);
+    return syncInfo;
+};
 
 function updateBookmarks() {
     localStorage.dictionary_bookmarks = JSON.stringify(bookmarks);
@@ -534,10 +550,13 @@ cloudSettSaveBtn.onclick = () => {
     };
 };
 
-xhr.onerror = () => {
-        mdui.snackbar({ message: `云同步失败。请检查远程仓库配置是否正确。${xhr.status} ${xhr.statusText}`});
-        syncProgress.style.display = 'none';
+function XHRErrorHandler() {
+    mdui.snackbar({ message: `云同步失败。请检查远程仓库配置是否正确。${xhr.status} ${xhr.statusText}`});
+    syncProgress.style.display = 'none';
+    cloudMenuBtn.disabled = false;
 };
+
+xhr.onerror = XHRErrorHandler;
 
 cloudUploadBookmarks.onclick = () => {
     if (!localStorage.dictionary_remote_url) {
@@ -546,6 +565,7 @@ cloudUploadBookmarks.onclick = () => {
         return;
     };
     syncProgress.style.display = 'block';
+    cloudMenuBtn.disabled = true;
 
     let bookmarks = localStorage.dictionary_bookmarks ? localStorage.dictionary_bookmarks : '[]';
     bookmarks = bytesToBase64(new TextEncoder().encode(bookmarks));
@@ -561,8 +581,17 @@ cloudUploadBookmarks.onclick = () => {
         body.append('message', 'upload bookmarks');
         xhr.send(body);
         xhr.onload = () => {
+            if (xhr.status === 401) {
+                XHRErrorHandler();
+                return;
+            };
             mdui.snackbar({ message: `云同步成功。${xhr.status} ${xhr.statusText}`});
             syncProgress.style.display = 'none';
+            cloudMenuBtn.disabled = false;
+            syncInfo.time = Date.now();
+            syncInfo.type = '上传';
+            updateSyncInfo();
+            switchPage('bookmarks');
         };
     };
 };
@@ -574,6 +603,7 @@ cloudSyncBookmarks.onclick = () => {
         return;
     };
     syncProgress.style.display = 'block';
+    cloudMenuBtn.disabled = true;
     xhr.open('GET', localStorage.dictionary_remote_url);
     xhr.send();
     xhr.onload = () => {
@@ -582,6 +612,10 @@ cloudSyncBookmarks.onclick = () => {
         updateBookmarks();
         mdui.snackbar({ message: `云同步成功。${xhr.status} ${xhr.statusText}`});
         syncProgress.style.display = 'none';
+        cloudMenuBtn.disabled = false;
+        syncInfo.time = Date.now();
+        syncInfo.type = '下载';
+        updateSyncInfo();
         switchPage('bookmarks');
     };
 };
@@ -598,6 +632,39 @@ function bytesToBase64(bytes) {
   return btoa(binString);
 };
 
+function getSyncTimeString() {
+    const diff = (Date.now() - syncInfo.time) / 1000;
+    const days = Math.floor(diff / 86400);
+    const hours = Math.floor((diff % 86400) / 3600);
+    const minutes = Math.floor((diff % 3600) / 60);
+    const seconds = Math.floor(diff % 60);
+    if (days > 0) {
+        return `${days} 天前`;
+    } else if (hours > 0) {
+        return `${hours} 小时前`;
+    } else if (minutes > 0) {
+        return `${minutes} 分钟前`;
+    } else {
+        return `${seconds} 秒前`;
+    };
+};
+
+let sortMethod = 'newest';
+sortMenu.onchange = (e) => {
+    sortMethod = e.target.value;
+    switchPage('bookmarks');
+};
+
+function getSortedList() {
+    switch (sortMethod) {
+        case 'newest':
+            return loadBookmarks().reverse();
+        case 'oldest':
+            return loadBookmarks();
+        case 'alphabetical':
+            return loadBookmarks().sort((a, b) => a.word.localeCompare(b.word));
+    };
+};
 
 
 function switchPage(to) {
@@ -607,7 +674,7 @@ function switchPage(to) {
 
     if (to === 'bookmarks') {
         bookmarksList.innerHTML = '';
-        loadBookmarks().reverse().forEach(bookmark => {
+        getSortedList().forEach(bookmark => {
             const bookmarkItem = document.createElement('mdui-list-item');
             bookmarkItem.headline = bookmark.word;
             bookmarkItem.description = bookmark.explain.replaceAll('<br>', '　');
@@ -619,7 +686,13 @@ function switchPage(to) {
             };
             bookmarksList.appendChild(bookmarkItem);
         });
-        bookmarksHeader.innerText = `我的单词本 （${loadBookmarks().length}）`;
+        bookmarksHeader.innerText = `单词本（${loadBookmarks().length}）`;
+
+        if (loadSyncInfo().time > -1) {
+            bookmarksSubheader.innerText = `上次同步: ${getSyncTimeString()} (${syncInfo.type})`;
+        } else {
+            bookmarksSubheader.innerText = '从未同步';
+        };
     } else if (to === 'cloud-settings') {
         const settings = localStorage.dictionary_remote_settings ? JSON.parse(localStorage.dictionary_remote_settings) : null;
         ownerInput.value = settings ? settings.owner : '';

@@ -295,6 +295,9 @@ a {
 }
 
 .bookmarks-header {
+    font-size: 1rem;
+}
+.bookmarks-header-wrapper .headers {
     margin-right: auto;
 }
 
@@ -341,4 +344,10 @@ a {
     width: 26px;
     height: 26px;
     display: none;
+}
+
+.bookmarks-subheader {
+    width: 100%;
+    font-size: .7rem;
+    opacity: .7;
 }

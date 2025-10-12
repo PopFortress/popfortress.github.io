@@ -103,7 +103,18 @@
     <div id="app-page-bookmarks" class="app-page">
         <div class="bookmarks-header-wrapper">
             <mdui-circular-progress id="bookmarks-sync-progress"></mdui-circular-progress>
-            <div class="bookmarks-header">我的单词本</div>
+            <div class="headers">
+                <div class="bookmarks-header">单词本</div>
+                <div class="bookmarks-subheader"></div>
+            </div>
+            <mdui-dropdown>
+                <mdui-button-icon slot="trigger" icon="sort"></mdui-button-icon>
+                <mdui-menu selects="single" value="newest" id="sort-menu">
+                    <mdui-menu-item value="newest">时间（最新）</mdui-menu-item>
+                    <mdui-menu-item value="oldest">时间（最早）</mdui-menu-item>
+                    <mdui-menu-item value="alphabetical">A-Z</mdui-menu-item>
+                </mdui-menu>
+            </mdui-dropdown>
             <mdui-dropdown>
                 <mdui-button-icon slot="trigger" icon="import_export"></mdui-button-icon>
                 <mdui-menu>
@@ -112,7 +123,7 @@
                 </mdui-menu>
             </mdui-dropdown>
             <mdui-dropdown>
-                <mdui-button-icon slot="trigger" icon="cloud_queue"></mdui-button-icon>
+                <mdui-button-icon slot="trigger" icon="cloud_queue" id="cloud-menu-btn"></mdui-button-icon>
                 <mdui-menu>
                     <mdui-menu-item icon="cloud_upload" id="cloud_upload_bookmarks">上传至云端</mdui-menu-item>
                     <mdui-menu-item icon="sync" id="cloud_sync_bookmarks">从云端同步（下载）</mdui-menu-item>
