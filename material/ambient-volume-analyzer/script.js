@@ -10,74 +10,47 @@ const ele = {
 
 const ctx = ele.cvs.getContext('2d');
 
-// function initCanvas() {
-//     ele.cvs.width = 320 * devicePixelRatio;
-//     ele.cvs.height = 120 * devicePixelRatio;
-// };
-
-// initCanvas();
-let isInit = false;
 let dataArray, analyser;
 let db = 0;
 const REFERENCE = 0.00002;
-let instantDb = 0;
 let microphone;
+let audioCtx;
+let lastDecibelValue = 35;
+let smoothedDecibel = 35;
+let bufferLength;
 
-navigator.mediaDevices.getUserMedia({ 
-    audio: {
-        autoGainControl: false,
-        noiseSuppression: false,
-        echoCancellation: false
-    }})
-    .then(stream => {
-        if (isInit) {
-            return;
-        };
-
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-        audioCtx.onstatechange = function() {
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
+function requestMicrophone() {
+    navigator.mediaDevices.getUserMedia({ 
+        audio: {
+            autoGainControl: false,
+            noiseSuppression: false,
+            echoCancellation: false
+        }})
+        .then(stream => {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            microphone = audioCtx.createMediaStreamSource(stream);
+    
+            audioCtx.onstatechange = function() {
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                };
             };
-        };
-        analyser = audioCtx.createAnalyser();
-        analyser.fftSize = 1024;
-        dataArray = new Uint8Array(analyser.frequencyBinCount);
+            analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 2048;
+            bufferLength = analyser.frequencyBinCount;
+            dataArray = new Uint8Array(bufferLength);
+    
+            microphone.connect(analyser);
 
-        microphone = audioCtx.createMediaStreamSource(stream);
-        microphone.connect(analyser);
-        analyser.connect(audioCtx.destination);
-
-        isInit = true;
-    })
-    .catch(err => {
-        console.error('Microphone Permission Declined.' + err);
-        mdui.snackBar({ message: 'Microphone Permission Declined.' });
-    });
-
-function drawSpectrum() {
-    requestAnimationFrame(drawSpectrum);
-    const { width, height } = ele.cvs;
-    ctx.clearRect(0, 0, width, height);
-    if (!isInit) {
-        return;
-    };
-    analyser.getByteFrequencyData(dataArray);
-
-    const len = dataArray.length / 2.5;
-    const barWidth = width / len / 2;
-    ctx.fillStyle = '#fff';
-    for (let i = 0; i < len; i++) {
-        const data = dataArray[i];
-        const barHeight = data / 255 * height;
-        const x1 = i * barWidth + width / 2;
-        const x2 = width / 2 - (i + 1) * barWidth;
-        const y = height - barHeight;
-        ctx.fillRect(x1, y, barWidth, barHeight);
-        ctx.fillRect(x2, y, barWidth, barHeight);
-    };
+            processAudio();
+        })
+        .catch(err => {
+            console.error('Microphone Permission Declined.' + err);
+            mdui.snackbar({ message: 'Microphone Permission Declined.' });
+        }
+    );
 };
+
 
 function calcLevel(db) {
     if (db <= 40) {
@@ -95,48 +68,47 @@ function calcLevel(db) {
     };
 };
 
-function drawWaveform() {
-    requestAnimationFrame(drawWaveform);
-    if (!isInit) {
-        return;
+function processAudio() {
+
+    const update = () => {
+        analyser.getByteTimeDomainData(dataArray);
+        // 计算RMS（均方根）值作为音频振幅的衡量
+        let sum = 0;
+        for (let i = 0; i < bufferLength; i++) {
+            // 将值归一化到-1到1
+            const value = (dataArray[i] - 128) / 128;
+            sum += value * value; // 平方求和
+        }
+        
+        const rms = Math.sqrt(sum / bufferLength); // 计算均方根
+        let db = 20 * Math.log10(rms); // 转换成分贝值
+        db = Math.max(0, db + 60); // 调整范围到0-120dB
+        
+        // 平滑处理分贝值 - 解决值变换过快问题
+        const smoothingFactor = 0.2; // 平滑系数
+        smoothedDecibel = smoothingFactor * db + (1 - smoothingFactor) * smoothedDecibel;
+        
+        // 限制最大分贝值
+        lastDecibelValue = Math.min(130, smoothedDecibel);
+        lastDecibelValue += 20;
+        
+        updateWaveform();
+
+        requestAnimationFrame(update);
     };
+
+    update();
+
+    setInterval(() => {
+        updateDisplay(lastDecibelValue);
+    }, 500);
+};
+
+function updateWaveform() {
     const width = ele.cvs.clientWidth;
     const height = ele.cvs.clientHeight;
-    const timeData = new Uint8Array(analyser.frequencyBinCount);
-    const floatDataArray = new Float32Array(analyser.fftSize);
+    const timeData = new Uint8Array(bufferLength);
     analyser.getByteTimeDomainData(timeData);
-    analyser.getFloatTimeDomainData(floatDataArray);
-    
-    db = instantDb = 0;
-    
-
-    let sumSquares = 0.0;
-    for (let i = 0; i < floatDataArray.length; i++) {
-        sumSquares += floatDataArray[i] * floatDataArray[i];
-    }
-    const rms = Math.sqrt(sumSquares / floatDataArray.length);
-    
-    // 计算分贝值（绝对）
-    let rawDbValue = 20 * Math.log10(rms / REFERENCE);
-    
-    // 处理负值问题
-    if (rawDbValue < 0) {
-        rawDbValue = 0;
-    };
-    
-    
-    // 修复：使用更智能的平滑算法
-    // 当噪音稳定时减少平滑，当噪音变化大时增加平滑
-    const dbChange = Math.abs(rawDbValue - instantDb);
-    const smoothingFactor = Math.min(0.9, Math.max(0.1, 0.8 - dbChange / 10));
-    
-    // 更新即时值（使用智能平滑）
-    instantDb = smoothingFactor * instantDb + (1 - smoothingFactor) * rawDbValue;
-    db = 0.7 * db + 0.3 * instantDb + 25;
-    const noiseLevel = calcLevel(db);
-    ele.volume.textContent = Math.round(db);
-    ele.level.textContent = noiseLevel;
-
     ctx.clearRect(0, 0, width, height);
 
     ctx.lineWidth = 1.5;
@@ -165,4 +137,13 @@ function drawWaveform() {
     ctx.stroke();
 };
 
-drawWaveform();
+
+function updateDisplay(db) {
+    ele.volume.textContent = db.toFixed(1);
+    ele.level.textContent = calcLevel(db);
+};
+
+window.onload = () => {
+    requestMicrophone();
+    updateDisplay(smoothedDecibel);
+};
