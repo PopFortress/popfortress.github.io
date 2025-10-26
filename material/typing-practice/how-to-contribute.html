@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>我如何贡献新文章？ | 打字练习</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            color: #fff;
+            background-color: rgb(var(--mdui-color-primary));
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            letter-spacing: 1px;
+            flex-direction: column;
+        }
+
+        main {
+            width: 100%;
+            max-width: 800px;
+            padding: 0 16px;
+            line-height: 2;
+            font-size: .9em;
+            margin-top: 2em;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 16px;
+            background: rgb(var(--mdui-color-surface-container));
+            gap: 20px;
+            align-items: center;
+            text-align: center;
+        }
+
+        ol {
+            margin: 2em 0 2em 2em;
+        }
+        
+        code {
+            background: rgb(var(--mdui-color-surface-variant));
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: .7em;
+        }
+
+        a {
+            color: rgb(var(--mdui-color-primary));
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <mdui-icon name="info--outlined"></mdui-icon>
+        <div>在 GitHub 仓库中贡献新文章</div>
+    </header>
+
+    <main>
+        <p>感谢您对本站和“打字练习 | Just Enough Typewriting”的支持和对开源事业的奉献。</p>
+        <p>为了向我们提交您的文章，请参考以下步骤：</p>
+        <ol>
+            <li>在 <a href="//github.com/popfortress/popfortress.github.io" target="_blank">GitHub</a> 上 Fork 本仓库。</li>
+            <li>在您的 Fork 中创建一个新的分支。</li>
+            <li>在 <code>/material/typing-practice/articles/</code> 目录下的 <code>index.json</code> 文件中的对应语言分类中添加您的文章名称。</li>
+            <li>在 <code>articles</code> 目录下与您文章语言对应的目录中创建文本文件，命名格式如 <code>&lt;文章名&gt;.txt</code>，使 <code>&lt;文章名&gt;</code> 与上一步骤中您添加的名称对应。</li>
+            <li>在此文件中编写您的文章，请注意一行文本不宜超过 50 字或 100 个英文单词。</li>
+            <li>提交您的更改，并创建一个 Pull Request。</li>
+        </ol>
+        <p>我们将在 3-4 个工作日内审核您的更改，审核通过后您的更改将被合并，使您提交的文章成为预设的一部分。</p>
+    </main>
+
+    <script>
+        mdui.setColorScheme('#EF9A9A');
+    </script>
+
+</body>
+</html>

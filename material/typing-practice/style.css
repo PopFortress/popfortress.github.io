@@ -1,0 +1,274 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    letter-spacing: 1px;
+    align-items: center;
+    overflow: hidden;
+}
+
+.app-page {
+    width: 100%;
+    max-width: 960px;
+    padding: 0 10px;
+    display: none;
+}
+
+::selection {
+    color: #fff;
+    background-color: rgb(var(--mdui-color-primary));
+}
+
+header {
+    background: rgb(var(--mdui-color-surface-container));
+    padding: 32px 28px;
+    color: rgb(var(--mdui-color-primary));
+    font-size: 1.1em;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.app-page#home {
+    display: flex;
+}
+.app-page#home, .app-page#select-article, .app-page#settings {
+    max-width: 600px;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    text-align: center;
+    margin-top: 16px;
+}
+
+.progress-bar {
+    margin-top: 30px;
+}
+
+.app-page#home .entries-wrapper .icon {
+    min-width: 100px;
+    height: 100px;
+}
+
+.app-page#home .entries-wrapper mdui-card {
+    display: flex;
+    gap: 30px;
+    padding: 20px 31px;
+    align-items: center;
+}
+
+.entries-wrapper .title {
+    font-size: 1.4em;
+}
+
+.entries-wrapper .desc {
+    font-size: .9em;
+}
+
+.entries-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.progress {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.progress mdui-button-icon {
+    width: auto;
+    height: auto;
+    font-size: .8em;
+}
+
+#duration {
+    width: 96px;
+    height: 36px;
+    transform: scale(.8);
+}
+
+#duration::part(suffix) {
+    font-size: 0.8em;
+    white-space: nowrap;
+}
+
+.setting {
+    display: flex;
+    gap: 19px;
+    align-items: center;
+}
+
+.settings-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.app-page#settings {
+    height: calc( 100vh - 103.2px );
+}
+
+#start-practice {
+    margin-top: auto;
+    position: relative;
+}
+
+.app-page#typing {
+    flex-direction: column;
+    padding-top: 20px;
+    gap: 20px;
+}
+
+.stats-card {
+    padding: 16px;
+}
+.stats-card #typing-progress {
+    background-color: rgb(var(--mdui-color-surface-container));
+}
+.stats-wrapper, .progress-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+}
+.speed-box {
+    padding-right: 42px;
+}
+#speed { font-size: 2em; }
+#speed-unit { font-size: .7em; }
+#speed, #speed-unit { text-align: center; color: rgb(var(--mdui-color-primary)); }
+
+#time, #accuracy, #characters-typed {
+    font-size: 1.1em;
+}
+
+#typing-progress-text {
+    font-size: .8em;
+    color: rgb(var(--mdui-color-primary));
+}
+
+.stats-label {
+    padding-top: 10px;
+    font-size: .7em;
+    opacity: .8;
+}
+
+.stats-item {
+    text-align: center;
+}
+
+#pause {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+#menu {
+    margin: auto;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    overflow: hidden;
+}
+
+#menu::backdrop {
+    backdrop-filter: blur(3px);
+}
+
+.stacked-menu-actions {
+    margin-top: 29px;
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+}
+
+@keyframes page-fade-away {
+    from {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes page-fade-in {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.fade-out {
+    animation: page-fade-away .25s ease-in-out 0s;
+}
+
+.fade-in {
+    animation: page-fade-in .25s ease-in-out 0s;
+}
+
+.typing-area {
+    overflow-y: auto;
+    height: calc( 100vh - 107.2px - 127.2px - 10px);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.typing-block {
+    min-height: fit-content;
+    padding: 14px;
+    font-size: 1.1em;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+}
+
+.helpful-links {
+    display: flex;
+    justify-content: center;
+}
+
+a {
+    color: rgb(var(--mdui-color-primary));
+    font-size: .8em;
+}
+
+.typing-input {
+    height: 2em;
+}
+
+.typing-text {
+    margin-bottom: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    opacity: .6;
+}
+
+.block-focused {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.text-focused {
+    opacity: 1;
+}

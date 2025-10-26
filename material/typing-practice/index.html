@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>打字练习 | Just Type. </title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <header>打字练习 | Just Enough Typewriting</header>
+    <div class="app-page" id="home">
+        <div class="progress-bar">
+            <div class="subtitle">选择打字类型</div>
+        </div>
+        <div class="entries-wrapper">
+            <mdui-card variant="filled" id="chinese" clickable>
+                <div class="icon">
+                    <img src="https://s.namemc.com/img/emoji/twitter/1f1e8-1f1f3.svg" alt="中文" draggable="false">
+                </div>
+                <div class="content">
+                    <div class="title">中文打字</div>
+                    <div class="desc">适用于您的日常生活。</div>
+                </div>
+            </mdui-card>
+            <mdui-card variant="filled" id="english" clickable>
+                <div class="icon">
+                    <img src="https://s.namemc.com/img/emoji/twitter/1f1fa-1f1f8.svg" alt="English" draggable="false">
+                </div>
+                <div class="content">
+                    <div class="title">英文打字</div>
+                    <div class="desc">适合于阅读、学习、口语等场景</div>
+                </div>
+            </mdui-card>
+        </div>
+    </div>
+
+    <div class="app-page" id="select-article">
+        <div class="progress-bar">
+            <div class="progress">
+                <mdui-button-icon icon="arrow_back_ios" id="return-to-home"></mdui-button-icon>
+                <mdui-linear-progress value=".33"></mdui-linear-progress>
+            </div>
+            <div class="subtitle">选择文章</div>
+        </div>
+        <div class="articles-wrapper">
+            <mdui-list id="articles-list"></mdui-list>
+        </div>
+        <div class="helpful-links">
+            <a href="./how-to-contribute" target="_blank">我如何贡献新文章？</a>
+        </div>
+    </div>
+
+    <div class="app-page" id="settings">
+        <div class="progress-bar">
+            <div class="progress">
+                <mdui-button-icon icon="arrow_back_ios" id="return-to-selection"></mdui-button-icon>
+                <mdui-linear-progress value=".67"></mdui-linear-progress>
+            </div>
+            <div class="subtitle">练习设定</div>
+        </div>
+        <div class="settings-wrapper">
+            <div class="setting">
+                <div>练习时长</div>
+                <mdui-text-field type="number" variant="outlined" id="duration" suffix="分钟" value="5" min="1" max="50"></mdui-text-field>
+                <mdui-checkbox id="unlimited-duration">无限制</mdui-checkbox>
+            </div>
+        </div>
+        <mdui-button id="start-practice" icon="done">开始</mdui-button>
+    </div>
+
+    <div class="app-page" id="typing">
+        <mdui-button-icon icon="pause_circle_outline" id="pause"></mdui-button-icon>
+        <mdui-card class="stats-card" variant="filled">
+            <div class="stats-wrapper">
+                <div class="speed-box">
+                    <div id="speed">0</div>
+                    <div id="speed-unit">字/分钟</div>
+                </div>
+                <div class="stats-item">
+                    <div id="time">0:00</div>
+                    <div class="stats-label" id="time-label">剩余时间</div>
+                </div>
+                <div class="stats-item">
+                    <div id="accuracy">0%</div>
+                    <div class="stats-label">准确率</div>
+                </div>
+                <div class="stats-item">
+                    <div id="characters-typed">0 / 0</div>
+                    <div class="stats-label">字数</div>
+                </div>
+            </div>
+            <div class="progress-wrapper">
+                <mdui-linear-progress id="typing-progress" value="0"></mdui-linear-progress>
+                <div id="typing-progress-text">0%</div>
+            </div>
+        </mdui-card>
+        <div class="typing-area"></div>
+    </div>
+
+    <dialog id="menu">
+        <div class="menu-content">
+            <div style="text-align: center;">菜单</div>
+            <div class="stacked-menu-actions">
+                <mdui-button variant="outlined" icon="arrow_forward" id="resume">继续打字</mdui-button>
+                <mdui-button variant="outlined" icon="replay" id="restart">重新开始</mdui-button>
+                <mdui-button variant="outlined" icon="close" id="exit">退出练习</mdui-button>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="./script.js"></script>
+    
+</body>
+</html>

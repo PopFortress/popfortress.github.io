@@ -369,6 +369,8 @@ acceptCookies.onclick = declineCookies.onclick = (e) => {
 window.onload = () => {
     loadingModal.close();
     document.body.style.overflow = 'auto';
+    $('#main-avatar-alt').style.display = 'none';
+    $('#main-avatar').style.display = 'block';
 };
 
 if (sessionStorage.cookiesAccepted) {
