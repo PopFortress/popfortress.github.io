@@ -48,11 +48,12 @@ h1 {
 h2 {
     font-size: 14px;
     font-weight: 100;
+    letter-spacing: 1px;
 }
 
 a {
     text-decoration: none;
-    color: #E53935;
+    color: #db4f4f;
 }
 
 a:hover {
@@ -87,17 +88,19 @@ mdui-card {
     display: flex;
     gap: 10px;
     align-items: center;
+    font-size: .9rem;
 }
 
 @media screen and (max-width: 420px) {
     .sayings {
-        font-size: .9rem;
-        padding: 4px 4px 4px 32px;
+        font-size: .8rem;
+        padding: 4px 4px 4px 22px;
     }
 }
 
 .sayings-text {
     margin-right: auto;
+    letter-spacing: 1px;
 }
 
 .history-wrapper {
@@ -108,9 +111,15 @@ mdui-card {
 .search-box-wrapper {
     display: flex;
     gap: 10px;
+    margin: 32px 0;
+}
+
+.search-box::part(container) {
+    border-radius: var(--mdui-shape-corner-full);
 }
 
 .search-btn {
+    width: 52.8px;
     height: auto;
 }
 
@@ -137,6 +146,14 @@ mdui-card {
 
 mdui-tabs {
     margin: 20px 0;
+}
+
+mdui-tabs::part(container) {
+    overflow: hidden;
+}
+
+mdui-tab::part(label) {
+    font-size: .65rem;
 }
 
 .activity-container {
@@ -206,12 +223,13 @@ mdui-tabs {
     margin-top: -7px;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1480px) {
     .changelog-wrapper {
         position: inherit;
         width: 100%;
         max-width: 700px;
-        padding: 0 14px;
+        padding: 0 4px;
+        margin-bottom: 72px;
     }
     body {
         flex-direction: column;
@@ -355,4 +373,8 @@ mdui-icon {
 
 #main-avatar:hover, #main-avatar-alt:hover {
     transform: scale(1.05);
+}
+
+mdui-list-item::part(headline) {
+    font-size: .875rem;
 }

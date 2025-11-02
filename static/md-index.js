@@ -215,7 +215,7 @@ function searchSite() {
 
 function addListItemIcon() {
     listItems.forEach(element => {
-        element.endIcon = 'arrow_forward';
+        element.endIcon = 'keyboard_arrow_right';
         if (!element.icon) {
             element.icon = 'auto_awesome';
         };
@@ -306,6 +306,7 @@ if (showComments === 'true') {
     commentsSwitch.checked = true;
 } else {
     giscus.style.display = 'none';
+    giscus.removeChild(giscus.firstChild);
 };
 
 commentsSwitch.onchange = (e) => {
@@ -368,11 +369,22 @@ acceptCookies.onclick = declineCookies.onclick = (e) => {
 
 window.onload = () => {
     loadingModal.close();
-    document.body.style.overflow = 'auto';
     $('#main-avatar-alt').style.display = 'none';
     $('#main-avatar').style.display = 'block';
 };
 
+loadingModal.onclose = () => {
+    document.body.style.overflow = 'auto';
+    document.body.style.paddingBottom = '0';
+};
+
 if (sessionStorage.cookiesAccepted) {
     cookieWrapper.style.display = 'none';
+};
+
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.querySelectorAll('mdui-card').forEach(card => {
+        card.style.backgroundColor = 'rgb(var(--mdui-color-surface-container))';
+    });
+    $('.changelog-view-all').elevated = false;
 };

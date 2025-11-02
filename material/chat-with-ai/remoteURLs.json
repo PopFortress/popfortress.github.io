@@ -1,0 +1,14 @@
+{
+    "communityBot": {
+        "url": "https://api.ownthink.com/bot?spoken=",
+        "path": "data.info.text"
+    },
+    "glm": {
+        "url": "https://api.52vmy.cn/api/chat/glm?msg=",
+        "path": "data.answer"
+    },
+    "spark": {
+        "url": "https://api.52vmy.cn/api/chat/spark?msg=",
+        "path": "data.answer"
+    }
+}

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/mdui/mdui.css">
     <script src="/mdui/mdui.global.js" defer></script>
     <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
     <link rel="stylesheet" href="/static/md-index.css">
     <script src="/static/md-index.js" defer></script>
 </head>
@@ -20,7 +21,7 @@
             <div class="title-box">
                 <div class="avatars">
                     <mdui-avatar id="main-avatar-alt">P</mdui-avatar>
-                    <mdui-avatar id="main-avatar" label="PopFortress" src="https://avatars.githubusercontent.com/u/124672853?v=4&s=100"></mdui-avatar>
+                    <mdui-avatar id="main-avatar" label="PopFortress" src="/static/avater_logo2x.png"></mdui-avatar>
                 </div>
                 <div class="titles">
                     <h1>波普的温馨小阁</h1>
@@ -37,7 +38,7 @@
         </mdui-card>
         <div class="search-box-wrapper">
             <mdui-text-field variant="outlined" label="搜索 popfortress.github.io" type="search" clearable icon="search" class="search-box"></mdui-text-field>
-            <mdui-button variant="tonal" end-icon="arrow_forward" class="search-btn">搜索</mdui-button>
+            <mdui-button-icon variant="tonal" icon="arrow_forward" class="search-btn"></mdui-button-icon>
         </div>
         <mdui-tabs value="featured" variant="secondary" full-width>
             <mdui-tab value="featured">精选页面</mdui-tab>
@@ -46,8 +47,9 @@
             <mdui-tab value="announcements">公示页面</mdui-tab>
             <mdui-tab-panel slot="panel" value="featured">
                 <mdui-list>
-                    <mdui-list-item href="/material/moments/">即刻短文 | Moments</mdui-list-item>
-                    <mdui-list-item href="/material/chat-space/">聊天室 | Chat Room</mdui-list-item>
+                    <mdui-list-item href="/material/moments/" icon="comment">即刻短文 | Moments</mdui-list-item>
+                    <mdui-list-item href="/material/chat-space/" icon="textsms">聊天室 | Chat Room</mdui-list-item>
+                    <mdui-list-item href="/material/chat-with-ai/" icon="bubble_chart">Chat with AI</mdui-list-item>
                     <mdui-list-item href="/fakecaptcha?r=/CSS-FUN-WORKS/homepage/">我的个人主页</mdui-list-item>
                     <mdui-list-item href="/fakecaptcha?r=/a-dark-room/" icon="flag">A Dark Room</mdui-list-item>
                     <mdui-list-item href="/ballclock">彩色小球时钟</mdui-list-item>
@@ -77,25 +79,25 @@
             <mdui-tab-panel slot="panel" value="material">
                 <mdui-list>
                     <mdui-list-item href="/material/typing-practice/" icon="keyboard">打字练习 | Just Type.</mdui-list-item>
-                    <mdui-list-item href="/material/ambient-volume-analyzer/">环境噪声分析器</mdui-list-item>
-                    <mdui-list-item href="/material/life-daily-remake/">生活主页</mdui-list-item>
-                    <mdui-list-item href="/material/dictionary/">英语-中文词典</mdui-list-item>
-                    <mdui-list-item href="/material/profile-card-generator/">个人名片生成器</mdui-list-item>
-                    <mdui-list-item href="/material/cps-test/">CPS 测试</mdui-list-item>
-                    <mdui-list-item href="/material/calculator/">Google 计算器</mdui-list-item>
-                    <mdui-list-item href="/material/pomodoro/">番茄钟</mdui-list-item>
-                    <mdui-list-item href="/material/web-console/">网络控制台</mdui-list-item>
-                    <mdui-list-item href="/material/scoreboard/">计分板</mdui-list-item>
-                    <mdui-list-item href="/material/math-quiz/">Math Quiz</mdui-list-item>
-                    <mdui-list-item href="/material/checkbox-race/">Checkbox Race</mdui-list-item>
-                    <mdui-list-item href="/material/minecraft-quiz/">Minecraft Quiz</mdui-list-item>
-                    <mdui-list-item href="/material/ncm-lyrics/">查找网易云音乐歌词</mdui-list-item>
-                    <mdui-list-item href="/material/text-memorizing/">记忆文本</mdui-list-item>
+                    <mdui-list-item href="/material/ambient-volume-analyzer/" icon="keyboard_voice">环境噪声分析器</mdui-list-item>
+                    <mdui-list-item href="/material/life-daily-remake/" icon="newspaper">生活主页</mdui-list-item>
+                    <mdui-list-item href="/material/dictionary/" icon="menu_book">英语-中文词典</mdui-list-item>
+                    <mdui-list-item href="/material/profile-card-generator/" icon="badge">个人名片生成器</mdui-list-item>
+                    <mdui-list-item href="/material/cps-test/" icon="ads_click">CPS 测试</mdui-list-item>
+                    <mdui-list-item href="/material/calculator/" icon="calculate">Google 计算器</mdui-list-item>
+                    <mdui-list-item href="/material/pomodoro/" icon="timer">番茄钟</mdui-list-item>
+                    <mdui-list-item href="/material/web-console/" icon="network_wifi">网络控制台</mdui-list-item>
+                    <mdui-list-item href="/material/scoreboard/" icon="scoreboard">计分板</mdui-list-item>
+                    <mdui-list-item href="/material/math-quiz/" icon="quiz">Math Quiz</mdui-list-item>
+                    <mdui-list-item href="/material/checkbox-race/" icon="check_box">Checkbox Race</mdui-list-item>
+                    <mdui-list-item href="/material/minecraft-quiz/" icon="quiz">Minecraft Quiz</mdui-list-item>
+                    <mdui-list-item href="/material/ncm-lyrics/" icon="lyrics">查找网易云音乐歌词</mdui-list-item>
+                    <mdui-list-item href="/material/text-memorizing/" icon="article">记忆文本</mdui-list-item>
                     <mdui-list-item href="/material/united-earth/">地下城居住权抽签</mdui-list-item>
-                    <mdui-list-item href="/material/random-digit/">随机数字生成器</mdui-list-item>
-                    <mdui-list-item href="/material/exam-simulation/">模拟考试</mdui-list-item>
-                    <mdui-list-item href="/material/latex/">LaTeX 公式编辑器</mdui-list-item>
-                    <mdui-list-item href="/fakecaptcha?r=/graphical-verification?r=/material/modern-library/">现代图书馆数据库</mdui-list-item>
+                    <mdui-list-item href="/material/random-digit/" icon="123">随机数字生成器</mdui-list-item>
+                    <mdui-list-item href="/material/exam-simulation/" icon="edit_note">模拟考试</mdui-list-item>
+                    <mdui-list-item href="/material/latex/" icon="functions">LaTeX 公式编辑器</mdui-list-item>
+                    <mdui-list-item href="/fakecaptcha?r=/graphical-verification?r=/material/modern-library/" icon="local_library">现代图书馆数据库</mdui-list-item>
                 </mdui-list>
             </mdui-tab-panel>
             <mdui-tab-panel slot="panel" value="announcements">
@@ -117,6 +119,17 @@
                 </div>
             </mdui-card>
         </div>
+        <mdui-card class="giscus">
+            <script src="https://giscus.app/client.js" data-repo="PopFortress/popfortress.github.io" data-repo-id="R_kgDOL2BQ4Q" data-category="Announcements" data-category-id="DIC_kwDOL2BQ4c4Crfzk" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" async></script>
+            <div>Loading Giscus app...</div>
+        </mdui-card>
+        <div class="changelog-wrapper">
+            <fieldset class="changelog-box">
+                <legend>更新日志</legend>
+                <iframe src="/info/changelog?frame=true" frameborder="0" title="更新日志" class="changelog-frame" tabindex="2"></iframe>
+            </fieldset>
+            <mdui-chip elevated href="/fakecaptcha?r=/info/changelog" target="_blank" icon="arrow_forward" class="changelog-view-all" tabindex="1">展开全部</mdui-chip>
+        </div>
         <mdui-card class="footer">
             <div class="latest-update-wrapper">
                 <div class="latest-update">最后更新时间</div>
@@ -133,11 +146,17 @@
             </div>
             <div class="links-wrapper">
                 <div class="links">
+                    <a href="//github.com/PopFortress/popfortress.github.io" target="_blank"><img src="https://shields.wudu.ltd/gen.php?part1=Indev&part2=波普小阁&url=&style=orange" alt="Indev: 波普小阁"></a>
+                    <a href="https://zread.ai/PopFortress/popfortress.github.io" target="_blank"><img src="/static/Ask_Zread-_.svg" alt="zread"/></a>
+                </div>
+                <mdui-divider></mdui-divider>
+                <div class="links">
                     <a href="//space.bilibili.com/3461573418945245" target="_blank">哔哩哔哩</a>
                     <a href="//link3.cc/fortress" target="_blank">Link3.cc</a>
                     <a href="//github.com/PopFortress/popfortress.github.io" target="_blank">Help contributing this site on GitHub</a>
                     <a href="/fakecaptcha?r=/info/changelog" target="_blank">更新日志</a>
                     <a href="/fakecaptcha?r=/info/" target="_blank">隐私政策 & 条款</a>
+                    <a href="/info/about" target="_blank">关于此站点</a>
                     <a href="//creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
                     <a href="//mit-license.org/" target="_blank">MIT License</a>
                     <a href="//github.com/PopFortress/popfortress.github.io/issues/new" target="_blank">发送反馈</a>
@@ -167,10 +186,6 @@
                 </div>
             </div>
         </mdui-card>
-        <mdui-card class="giscus">
-            <script src="https://giscus.app/client.js" data-repo="PopFortress/popfortress.github.io" data-repo-id="R_kgDOL2BQ4Q" data-category="Announcements" data-category-id="DIC_kwDOL2BQ4c4Crfzk" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" async></script>
-            <div>Loading Giscus app...</div>
-        </mdui-card>
     </div>
 
     <a href="/index-vanilla" class="switch-ver">旧版主页</a>
@@ -181,13 +196,7 @@
         </a>
         <div slot="content" class="notify-list">没有新通知</div>
     </mdui-tooltip>
-    <div class="changelog-wrapper">
-        <fieldset class="changelog-box">
-            <legend>更新日志</legend>
-            <iframe src="/info/changelog?frame=true" frameborder="0" title="更新日志" class="changelog-frame" tabindex="2"></iframe>
-        </fieldset>
-        <mdui-chip elevated href="/fakecaptcha?r=/info/changelog" target="_blank" icon="arrow_forward" class="changelog-view-all" tabindex="1">展开全部</mdui-chip>
-    </div>
+    
 
     <mdui-dialog headline="您的偏好选项" class="options-dialog">
         <div class="options-wrapper">
