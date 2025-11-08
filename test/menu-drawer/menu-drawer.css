@@ -1,0 +1,132 @@
+body {
+    position: relative;
+    height: 100vh;
+}
+
+mdui-icon {
+    font-family: 'Material Icons';
+}
+
+fs-mdui-menu-drawer {
+    display: none;
+    height: fit-content;
+    min-height: 58vh;
+    max-height: 92vh;
+    width: 100%;
+    max-width: 660px;
+    
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 1.7em);
+    overflow: auto;
+}
+
+.fs-mdui-menu-drawer-container {
+    width: 100%;
+    height: fit-content;
+    min-height: 58vh;
+    max-height: 92vh;
+    border-radius: var(--mdui-shape-corner-extra-large);
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.fs-mdui-menu-drawer--open {
+    display: block;
+    animation: fs-menu-drawer-show .2s ease-out;
+}
+
+.fs-mdui-menu-drawer--onclose {
+    animation: fs-menu-drawer-hide .2s ease-out;
+}
+
+.fs-mdui-menu-drawer__title {
+    font-size: 1.5rem;
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@keyframes fs-menu-drawer-show {
+    from {
+        transform: translate(-50%, 100%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 1.7em);
+        opacity: 1;
+    }
+}
+
+@keyframes fs-menu-drawer-hide {
+    from {
+        transform: translate(-50%, 1.7em);
+        opacity: 1;
+    }
+    to {
+        transform: translate(-50%, 100%);
+        opacity: 0;
+    }
+}
+
+dialog.fs-mdui-menu-drawer-dialog {
+    outline: none;
+    border: none;
+}
+
+dialog.fs-mdui-menu-drawer-dialog::backdrop {
+    backdrop-filter: brightness(.7);
+}
+
+dialog.fs-mdui-menu-drawer-dialog--open::backdrop {
+    animation: fs-menu-drawer-backdrop-show .2s ease-out;
+}
+
+dialog.fs-mdui-menu-drawer-dialog--onclose::backdrop {
+    animation: fs-menu-drawer-backdrop-hide .2s ease-out;
+}
+
+@keyframes fs-menu-drawer-backdrop-show {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fs-menu-drawer-backdrop-hide {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+fs-mdui-menu-drawer-header {
+    width: 100%;
+    padding: 1em 1.2em .9em 1.2em;
+    display: flex;
+    align-items: center;
+}
+
+.fs-mdui-menu-drawer__close {
+    margin-left: auto;
+}
+
+fs-mdui-menu-drawer-body {
+    font-family: 'Varela Round', sans-serif;
+    overflow: auto;
+}
+
+.fs-mdui-menu-drawer__icon {
+    font-size: 1.5em;
+    margin-right: 12px;
+}

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>MenuDrawer 抽屉菜单组件 demo</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="./menu-drawer.css">
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .btn-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2em;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+        }
+
+        .app {
+            width: 100%;
+            max-width: 660px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-stack * {
+            width: fit-content;
+        }
+
+        #welcome-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120px;
+            line-height: 1.5;
+            text-align: center;
+            font-size: .875rem;
+        }
+
+        #instructions-body {
+            padding: 2em;
+            font-size: .875rem;
+            line-height: 1.6;
+        }
+        
+        pre {
+            display: block;
+            padding: 1.5em;
+            border-radius: 1em;
+            background-color: rgb(var(--mdui-color-on-secondary));
+            font-size: .8rem;
+            margin: 2em 0;
+            overflow-x: auto;
+        }
+
+        ol {
+            margin: 2em 0 2em 2em;
+        }
+
+        #ringtone-body mdui-list-item {
+            --shape-corner-rounded: var(--mdui-shape-corner-medium);
+        }
+    </style>
+</head>
+<body>
+    
+    <dialog class="fs-mdui-menu-drawer-dialog">
+        <fs-mdui-menu-drawer data-title="MenuDrawer" data-icon="celebration">
+            <mdui-card class="fs-mdui-menu-drawer-container">
+                <fs-mdui-menu-drawer-header></fs-mdui-menu-drawer-header>
+                <fs-mdui-menu-drawer-body id="welcome-body">🎉 欢迎使用 MenuDrawer 抽屉菜单组件！<br> 这是默认菜单内容</fs-mdui-menu-drawer-body>
+            </mdui-card>
+        </fs-mdui-menu-drawer>
+    </dialog>
+
+    <dialog class="fs-mdui-menu-drawer-dialog">
+        <fs-mdui-menu-drawer data-title="使用文档" data-icon="code">
+            <mdui-card class="fs-mdui-menu-drawer-container">
+                <fs-mdui-menu-drawer-header></fs-mdui-menu-drawer-header>
+                <fs-mdui-menu-drawer-body id="instructions-body">
+                    <p>MenuDrawer 是一个抽屉菜单组件，它基于 MDUI 框架开发。</p>
+                    <p>使用方法：</p>
+                    <ol>
+                        <li>在 HTML 中引入 MenuDrawer 组件的 CSS 和 JS 文件。</li>
+                        <li>在 HTML 中创建一个 dialog 元素，并为其添加 class="fs-mdui-menu-drawer-dialog"。</li>
+                        <li>在 dialog 元素中创建一个 fs-mdui-menu-drawer 元素，并为其添加 data-title 属性，用于设置菜单标题。</li>
+                        <li>在 fs-mdui-menu-drawer 元素中创建一个 mdui-card 元素，并为其添加 class="fs-mdui-menu-drawer-container"。</li>
+                        <li>在 mdui-card 元素中创建一个 fs-mdui-menu-drawer-header 元素，用于显示菜单标题。</li>
+                        <li>在 mdui-card 元素中创建一个 fs-mdui-menu-drawer-body 元素，用于显示菜单内容。</li>
+                        <li>在 fs-mdui-menu-drawer-body 元素中添加菜单内容。</li>
+                        <li>在需要打开菜单的地方，使用 JavaScript 调用 menudrawer.open() 方法，传入 dialog 元素的引用。</li>
+                    </ol>
+                    <p>示例代码：</p>
+                    <pre><code class="language-html">&lt;dialog class="fs-mdui-menu-drawer-dialog"&gt;
+    &lt;fs-mdui-menu-drawer data-title="MenuDrawer"&gt;
+        &lt;mdui-card class="fs-mdui-menu-drawer-container"&gt;
+            &lt;fs-mdui-menu-drawer-header&gt;&lt;/fs-mdui-menu-drawer-header&gt;
+            &lt;fs-mdui-menu-drawer-body&gt;
+                &lt;p&gt;这是菜单内容&lt;/p&gt;
+            &lt;/fs-mdui-menu-drawer-body&gt;
+        &lt;/mdui-card&gt;
+    &lt;/fs-mdui-menu-drawer&gt;
+&lt;/dialog&gt;
+
+&lt;script&gt;
+    const dialog = document.querySelector('.fs-mdui-menu-drawer-dialog');
+    menudrawer.open(dialog);
+&lt;/script&gt;</code></pre>
+                    <p>注意事项：</p>
+                    <ol>
+                        <li>需要前置 mdui 组件库文件，如 mdui.css 和 mdui.global.js，以及图标文件。</li>
+                        <li>你可以添加可选的菜单图标，在 fs-mdui-menu-drawer 元素上添加 data-icon 属性，值为 Material Icons 图标名称即可。</li>
+                        <li>通过 menudrawer.close() 方法传入 dialog 元素的引用来关闭特定的抽屉菜单。</li>
+                    </ol>
+                    <p style="margin-bottom: 2em;"> <mdui-icon name="highlight" style="font-size: .875em; margin-right: 1em;"></mdui-icon>提示：你可以通过 dialog.onclose 等事件监听抽屉菜单的打开与关闭。</p>
+                </fs-mdui-menu-drawer-body>
+            </mdui-card>
+        </fs-mdui-menu-drawer>
+    </dialog>
+
+
+    <dialog class="fs-mdui-menu-drawer-dialog">
+        <fs-mdui-menu-drawer data-title="选择铃声" data-icon="queue_music">
+            <mdui-card class="fs-mdui-menu-drawer-container">
+                <fs-mdui-menu-drawer-header></fs-mdui-menu-drawer-header>
+                <fs-mdui-menu-drawer-body id="ringtone-body">
+                    <mdui-list>
+                        <mdui-list-item rounded data-url="https://www.gstatic.com/pixel/sounds/the_big_adventure.ogg">
+                            大冒险
+                            <mdui-button-icon icon="play_arrow" slot="icon"></mdui-button-icon>
+                        </mdui-list-item>
+                        <mdui-list-item rounded data-url="https://www.gstatic.com/pixel/sounds/your_new_adventure.ogg">
+                            新的冒险
+                            <mdui-button-icon icon="play_arrow" slot="icon"></mdui-button-icon>
+                        </mdui-list-item>
+                        <mdui-list-item rounded data-url="https://www.gstatic.com/pixel/sounds/the_next_adventure.ogg">
+                            下一场冒险
+                            <mdui-button-icon icon="play_arrow" slot="icon"></mdui-button-icon>
+                        </mdui-list-item>
+                        <mdui-list-item rounded data-url="https://www.gstatic.com/pixel/sounds/fresh_morning.ogg">
+                            新的早晨
+                            <mdui-button-icon icon="play_arrow" slot="icon"></mdui-button-icon>
+                        </mdui-list-item>
+                        <mdui-list-item rounded data-url="https://www.gstatic.com/pixel/sounds/fresh_start.ogg">
+                            新的开始
+                            <mdui-button-icon icon="play_arrow" slot="icon"></mdui-button-icon>
+                        </mdui-list-item>
+                    </mdui-list>
+                </fs-mdui-menu-drawer-body>
+            </mdui-card>
+        </fs-mdui-menu-drawer>
+    </dialog>
+
+
+    <div class="app">
+        <div class="btn-stack">
+            <mdui-button icon="remove_red_eye" id="welcome-trigger">打开 MenuDrawer</mdui-button>
+            <mdui-button icon="code" id="instructions-trigger">查看使用文档</mdui-button>
+            <mdui-button icon="queue_music" id="ringtone-trigger">示例：选择铃声</mdui-button>
+            <small>版本：1.0.0</small>
+        </div>
+    </div>
+
+    <audio></audio>
+
+    
+    <script>
+        mdui.setColorScheme('#EF9A9A');
+    </script>
+    <script src="./menu-drawer.js"></script>
+    <script>
+        const welcome = document.querySelector('#welcome-trigger');
+        const instructions = document.querySelector('#instructions-trigger');
+        const ringtone = document.querySelector('#ringtone-trigger');
+        const listItems = document.querySelectorAll('#ringtone-body mdui-list-item');
+        const playBtns = document.querySelectorAll('#ringtone-body mdui-button-icon');
+        const audio = document.querySelector('audio');
+
+        welcome.onclick = () => {
+            menudrawer.open(__dialogs[0]);
+        };
+        instructions.onclick = () => {
+            menudrawer.open(__dialogs[1]);
+        };
+        ringtone.onclick = () => {
+            menudrawer.open(__dialogs[2]);
+        };
+        listItems.forEach((item) => {
+            item.onclick = (e) => {
+                if (e.target === item) {
+                    menudrawer.close(__dialogs[2]);
+                };
+            };
+        });
+        playBtns.forEach((btn) => {
+            btn.onclick = () => {
+                audio.src = btn.parentElement.dataset.url;
+                audio.play();
+            };
+        });
+        __dialogs[2].addEventListener('close', () => {
+            audio.pause();
+        });
+    </script>
+
+</body>
+</html>

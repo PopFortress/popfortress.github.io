@@ -7,7 +7,7 @@
 }
 
 ::selection {
-    background: #333;
+    background: rgba(var(--mdui-color-primary-light), 1);
     color: #fff;
 }
 
@@ -29,7 +29,7 @@ body {
     justify-content: center;
     align-items: center;
     height: fit-content;
-    color: #E53935;
+    color: #CC3333;
     margin: 40px;
 }
 
@@ -316,6 +316,13 @@ mdui-tab::part(label) {
     backdrop-filter: blur(3px);
 }
 
+.dlg-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    align-items: center;
+}
+
 .cookie-wrapper {
     font-size: .8rem;
     line-height: 1.5;
@@ -377,4 +384,10 @@ mdui-icon {
 
 mdui-list-item::part(headline) {
     font-size: .875rem;
+}
+
+.loading-close {
+    font-size: 12px;
+    transform: scale(.8);
+    display: none;
 }

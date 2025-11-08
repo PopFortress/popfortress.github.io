@@ -39,6 +39,7 @@ const acceptCookies = $('#accept-cookies');
 const declineCookies = $('#decline-cookies');
 const cookieDialog = $('.cookie-dialog');
 const cookieClosing = $('.cookie-closing');
+const loadingClose = $('.loading-close');
 var sayingsDesc;
 var sha;
 var commitMessage;
@@ -373,9 +374,13 @@ window.onload = () => {
     $('#main-avatar').style.display = 'block';
 };
 
+loadingClose.onclick = () => { loadingModal.close() };
+let loadingTimer = setTimeout(() => { loadingClose.style.display = 'block' }, 3000);
+
 loadingModal.onclose = () => {
     document.body.style.overflow = 'auto';
     document.body.style.paddingBottom = '0';
+    clearTimeout(loadingTimer);
 };
 
 if (sessionStorage.cookiesAccepted) {

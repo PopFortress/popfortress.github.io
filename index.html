@@ -231,7 +231,10 @@
     </mdui-dialog>
 
     <dialog id="loading-modal">
-        <mdui-circular-progress></mdui-circular-progress>
+        <div class="dlg-wrapper">
+            <mdui-circular-progress></mdui-circular-progress>
+            <mdui-chip class="loading-close" icon="clear" elevated>关闭</mdui-chip>
+        </div>
     </dialog>
     <script>
         const loadingModal = document.querySelector('#loading-modal');

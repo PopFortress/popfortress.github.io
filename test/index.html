@@ -34,6 +34,7 @@
     <a href="javascript:history.go(-1);">← 返回上级页面</a>
     <h1>测试页面索引</h1>
     <p style="font-weight: bolder;">⚠警告：这些实验性页面正在测试，极其不稳定，请自行承担访问风险！</p>
+    <input type="text" name="search" id="search-input" placeholder="search for tests...">
     <ul>
         <li><a href="demo.html">HTML早期练习-demo2</a></li>
         <li><a href="test1js-注册点击事件.html">test1js-注册点击事件</a></li>
@@ -63,7 +64,23 @@
         <li><a href="mdui.html">Material Design UI Demo</a></li>
         <li><a href="/graphical-verification.html">图形验证中间页</a></li>
         <li><a href="./manage-your-data">管理您的个人数据</a></li>
+        <li><a href="./menu-drawer/">MenuDrawer</a></li>
     </ul>
+
+
+    <script>
+        document.getElementById('search-input').addEventListener('input', function (e) {
+            let search = e.target.value.toLowerCase();
+            let links = document.querySelectorAll('li');
+            for (let link of links) {
+                if (link.textContent.toLowerCase().includes(search) || link.firstChild.href.toLowerCase().includes(search)) {
+                    link.style.display = 'list-item';
+                } else {
+                    link.style.display = 'none';
+                };
+            };
+        });
+    </script>
 
 </body>
 </html>
