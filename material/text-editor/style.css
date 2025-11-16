@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+.app {
+    width: 100%;
+}
+
+header {
+    display: flex;
+    white-space: nowrap;
+    overflow: auto;
+    max-height: 40px;
+}
+
+#file-tabs {
+    white-space: inherit;
+    overflow: auto;
+}
+
+#menu-btn, #new-tab-btn, #file-open-btn, #file-save-btn {
+    border-radius: 0;
+}
+
+#menu-btn {
+    border-bottom: 1px solid rgb(var(--mdui-color-surface-variant));
+    border-right: .5px solid rgb(var(--mdui-color-surface-variant));
+}
+
+#file-tabs mdui-tab div[slot='custom'] {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 0 .2em 0 1em;
+}
+
+.tab-title {
+    font-size: .875em;
+    color: rgb(var(--mdui-color-primary));
+}
+
+.close-tab {
+    transform: scale(.8);
+}
+
+#editor::part(container) {
+    box-shadow: none;
+}
+
+*::selection {
+    background: rgba(var(--mdui-color-primary-light), 1);
+    color: #fff;
+}
+
+#main-menu mdui-menu-item::part(end-text) {
+    font-size: .7em;
+}

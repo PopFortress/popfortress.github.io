@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>文本编辑器</title>
+    <link rel="stylesheet" href="/mdui//mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <div class="app">
+        <header>
+            <mdui-dropdown>
+                <mdui-button-icon id="menu-btn" icon="menu" slot="trigger"></mdui-button-icon>
+                <mdui-menu dense id="main-menu">
+                    <mdui-menu-item icon="add" end-text="Ctrl+N" id="new-file-menu-item">新文档</mdui-menu-item>
+                    <mdui-menu-item icon="file_open--outlined" end-text="Ctrl+O" id="file-open-menu-item">打开...</mdui-menu-item>
+                    <mdui-menu-item icon="history" disabled id="recent-files-menu-item">打开最近的文件</mdui-menu-item>
+                    <mdui-divider></mdui-divider>
+                    <mdui-menu-item icon="drive_file_rename_outline" id="rename-menu-item">重命名...</mdui-menu-item>
+                    <mdui-menu-item icon="save--outlined" end-text="Ctrl+S" id="file-save-menu-item">保存</mdui-menu-item>
+                    <mdui-menu-item icon="save_as--outlined" end-text="Ctrl+Shift+S" id="file-save-as-btn">另存为...</mdui-menu-item>
+                    <mdui-divider></mdui-divider>
+                    <mdui-menu-item icon="search" end-text="Ctrl+F" id="find-btn">查找...</mdui-menu-item>
+                    <mdui-menu-item icon="compare_arrows" end-text="Ctrl+Shift+F" id="find-replace-btn">替换...</mdui-menu-item>
+                    <mdui-divider></mdui-divider>
+                    <mdui-menu-item icon="open_in_full" end-text="F11" id="toggle-fullscreen">全屏模式</mdui-menu-item>
+                    <mdui-divider></mdui-divider>
+                    <mdui-menu-item icon="print--outlined" end-text="Ctrl+P" disabled id="print-btn">打印...</mdui-menu-item>
+                    <mdui-divider></mdui-divider>
+                    <mdui-menu-item icon="settings--outlined" end-text="F1" id="settings-btn">设置...</mdui-menu-item>
+                </mdui-menu>
+            </mdui-dropdown>
+            <mdui-tooltip content="打开...">
+                <mdui-button-icon id="file-open-btn" icon="file_open--outlined"></mdui-button-icon>
+            </mdui-tooltip>
+            <mdui-tooltip content="保存">
+                <mdui-button-icon id="file-save-btn" icon="save--outlined"></mdui-button-icon>
+            </mdui-tooltip>
+            <mdui-tabs value="新建文本文档.txt" variant="secondary" id="file-tabs">
+                <mdui-tab value="新建文本文档.txt">
+                    <div slot="custom">
+                        <div class="tab-title">新建文本文档.txt</div>
+                        <mdui-button-icon icon="close" class="close-tab"></mdui-button-icon>
+                    </div>
+                </mdui-tab>
+                <mdui-button-icon id="new-tab-btn" icon="add"></mdui-button-icon>
+            </mdui-tabs>
+        </header>
+        <main>
+            <mdui-text-field variant="outlined" id="editor" autofocus></mdui-text-field>
+        </main>
+    </div>
+
+    <script src="./script.js"></script>
+    
+</body>
+</html>

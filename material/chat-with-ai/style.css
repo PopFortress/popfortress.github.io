@@ -134,19 +134,27 @@ footer a {
     animation: message-appear .5s ease-out 0s normal 1 forwards ;
 }
 
+.message-wrapper.user {
+    align-items: flex-end;
+}
+
 .message-card {
     padding: 1em;
     background-color: rgb(var(--mdui-color-surface-container));
     border: 2px solid rgb(var(--mdui-color-surface-container-highest));
     font-size: .9rem;
     width: fit-content;
-    line-height: 1.6;
+    line-height: 1.8;
     max-width: 90%;
 }
 
 .message-card mdui-circular-progress {
     width: 1em;
     height: 1em;
+}
+
+.message-card ol, .message-card ul {
+    margin: 1em 2em;
 }
 
 @keyframes message-appear {
