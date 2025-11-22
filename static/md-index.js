@@ -40,6 +40,8 @@ const declineCookies = $('#decline-cookies');
 const cookieDialog = $('.cookie-dialog');
 const cookieClosing = $('.cookie-closing');
 const loadingClose = $('.loading-close');
+const foldedSectionsTriggers = document.querySelectorAll('.folded-sections-menu mdui-menu-item');
+const tabs = $('mdui-tabs.sections-tabs');
 var sayingsDesc;
 var sha;
 var commitMessage;
@@ -392,4 +394,28 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         card.style.backgroundColor = 'rgb(var(--mdui-color-surface-container))';
     });
     $('.changelog-view-all').elevated = false;
+};
+
+// handling folded sections
+foldedSectionsTriggers.forEach(item => {
+    item.onclick = () => {
+        tabs.value = item.dataset.value;
+        $(`.sections-tabs mdui-tab-panel[value=${item.value}]`).style.display = 'block';
+        const firstTab = $('.sections-tabs mdui-tab')
+        firstTab.textContent = item.textContent;
+        setTimeout(() => {
+            firstTab.active = true;
+        }, 100);
+        tabs.classList.add('viewing-folded-sections');
+    };
+});
+
+tabs.onchange = () => {
+    document.querySelectorAll('.hidden-sections').forEach(section => {
+        if (tabs.value) {
+            section.style.display = 'none';
+            $('.sections-tabs mdui-tab').textContent = '精选页面';
+            tabs.classList.remove('viewing-folded-sections');
+        };
+   });
 };

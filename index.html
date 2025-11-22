@@ -40,11 +40,17 @@
             <mdui-text-field variant="outlined" label="搜索 popfortress.github.io" type="search" clearable icon="search" class="search-box"></mdui-text-field>
             <mdui-button-icon variant="tonal" icon="arrow_forward" class="search-btn"></mdui-button-icon>
         </div>
-        <mdui-tabs value="featured" variant="secondary" full-width>
+        <mdui-tabs value="featured" variant="secondary" placement="top" full-width class="sections-tabs">
             <mdui-tab value="featured">精选页面</mdui-tab>
             <mdui-tab value="special">特别页面</mdui-tab>
             <mdui-tab value="material">Material Design</mdui-tab>
             <mdui-tab value="announcements">公示页面</mdui-tab>
+            <mdui-dropdown>
+                <mdui-button-icon icon="more_horiz" class="more-sections" slot="trigger"></mdui-button-icon>
+                <mdui-menu class="folded-sections-menu">
+                    <mdui-menu-item icon="archive--outlined" value="archives">归档</mdui-menu-item>
+                </mdui-menu>
+            </mdui-dropdown>
             <mdui-tab-panel slot="panel" value="featured">
                 <mdui-list>
                     <mdui-list-item href="/material/moments/" icon="comment">即刻短文 | Moments</mdui-list-item>
@@ -57,13 +63,8 @@
                     <mdui-list-item href="/iyan-poem">每日诗句</mdui-list-item>
                     <mdui-list-item href="/poem">诗集便笺</mdui-list-item>
                     <mdui-list-item href="/yxh">营销号文案生成器</mdui-list-item>
-                    <mdui-list-item href="/bing_wallpaper">必应随机壁纸</mdui-list-item>
-                    <mdui-list-item href="/bing_wallpaper_daily">必应每日壁纸</mdui-list-item>
-                    <mdui-list-item href="/essay">随笔收藏集</mdui-list-item>
-                    <mdui-list-item href="/encyclopedia">人物与名词</mdui-list-item>
                     <mdui-list-item href="/keep-screen-on">保持屏幕常亮</mdui-list-item>
-                    <mdui-list-item href="/rickroll-100million">瑞克摇B站视频数据显示</mdui-list-item>
-                    <mdui-list-item href="/multizone-clock">世界时钟　多时区时钟</mdui-list-item>
+                    <mdui-list-item href="/multizone-clock" icon="access_time">世界时钟　多时区时钟</mdui-list-item>
                 </mdui-list>
             </mdui-tab-panel>
             <mdui-tab-panel slot="panel" value="special">
@@ -106,6 +107,15 @@
                     <mdui-list-item href="/fakecaptcha?r=/announcements/vanilla-craft/">服务商店</mdui-list-item>
                     <mdui-list-item href="/announcements/intro/" icon="info">介绍</mdui-list-item>
                     <mdui-list-item href="/info/certificates" icon="verified">证书与奖项</mdui-list-item>
+                </mdui-list>
+            </mdui-tab-panel>
+            <mdui-tab-panel slot="panel" value="archives" class="hidden-sections">
+                <mdui-list>
+                    <mdui-list-item href="/bing_wallpaper" icon="archive--outlined">必应随机壁纸</mdui-list-item>
+                    <mdui-list-item href="/bing_wallpaper_daily" icon="archive--outlined">必应每日壁纸</mdui-list-item>
+                    <mdui-list-item href="/essay" icon="archive--outlined">随笔收藏集</mdui-list-item>
+                    <mdui-list-item href="/encyclopedia" icon="archive--outlined">人物与名词</mdui-list-item>
+                    <mdui-list-item href="/rickroll-100million" icon="archive--outlined">瑞克摇B站视频数据显示</mdui-list-item>
                 </mdui-list>
             </mdui-tab-panel>
         </mdui-tabs>

@@ -391,3 +391,14 @@ mdui-list-item::part(headline) {
     transform: scale(.8);
     display: none;
 }
+
+.more-sections {
+    border-radius: 0;
+    height: 3rem;
+    align-self: center;
+}
+
+.sections-tabs.viewing-folded-sections::part(indicator) {
+    left: 0 !important;
+    transform: none;
+}
