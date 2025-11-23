@@ -22,7 +22,9 @@ header {
 
 #file-tabs {
     white-space: inherit;
-    overflow: auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+    overflow-y: clip;
 }
 
 #menu-btn, #new-tab-btn, #file-open-btn, #file-save-btn {

@@ -42,7 +42,7 @@
                 <mdui-button-icon id="file-save-btn" icon="save--outlined"></mdui-button-icon>
             </mdui-tooltip>
             <mdui-tabs value="新建文本文档.txt" variant="secondary" id="file-tabs">
-                <mdui-tab value="新建文本文档.txt">
+                <mdui-tab value="新建文本文档.txt" class="focused-tab" id="initial-tab">
                     <div slot="custom">
                         <div class="tab-title">新建文本文档.txt</div>
                         <mdui-button-icon icon="close" class="close-tab"></mdui-button-icon>
@@ -55,6 +55,14 @@
             <mdui-text-field variant="outlined" id="editor" autofocus></mdui-text-field>
         </main>
     </div>
+
+    <mdui-dialog headline="重命名" id="rename-dialog" close-on-esc>
+        <mdui-text-field variant="outlined" id="rename-input"></mdui-text-field>
+        <mdui-button variant="text" slot="action" id="rename-dlg-cancel">取消</mdui-button>
+        <mdui-button variant="text" slot="action" id="rename-dlg-confirm">确定</mdui-button>
+    </mdui-dialog>
+
+    <input type="file" name="file" id="file-input" accept="text/*, *.*" style="display: none;">
 
     <script src="./script.js"></script>
     

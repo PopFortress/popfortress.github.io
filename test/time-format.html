@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>time format</title>
+    <style>
+        *{margin: 0; padding: 0; box-sizing: border-box;}
+
+        body {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center ;
+            height: 100vh;
+            gap: 16px;
+        }
+
+        header {
+            font-size: 1.2em;
+        }
+
+        #switch {
+            margin-right: .5em;
+        }
+
+        #hour {
+            width: 3em;
+        }
+        legend {
+            font-size: .7em;
+        }
+        fieldset {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: .2em;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>12/24 小时制转换</header>
+    <div>
+        <fieldset>
+            <legend>选择时间进制</legend>
+            <div>
+                <input type="radio" id="twelve" name="format" value="twelve" checked/>
+                <label for="twelve">12 小时制</label>
+            </div>
+            <div>
+                <input type="radio" id="twenty-four" name="format" value="twenty-four" />
+                <label for="twenty-four">24 小时制</label>
+            </div>
+        </fieldset>
+    </div>
+    <div>
+        <input type="number" min="0" max="12" value="0" id="hour">
+        <button id="switch" title="switch between AM/PM">AM</button>
+        <small>小时</small>
+    </div>
+    <div>
+        <button value="convert" id="convert-btn">转换为 24 小时制</button>
+    </div>
+    <div>
+        <div id="result"></div>
+    </div>
+
+
+    <script>
+        const switchBtn = document.getElementById('switch');
+        const twelve = document.getElementById('twelve');
+        const twentyFour = document.getElementById('twenty-four');
+        const hourInput = document.getElementById('hour');
+        const resultText = document.getElementById('result');
+        const convertBtn = document.getElementById('convert-btn');
+        let isAM = true;
+        let result;
+        switchBtn.onclick = () => {
+            switchBtn.innerText = switchBtn.innerText === 'AM' ? 'PM' : 'AM';
+            isAM = switchBtn.innerText === 'AM' ? true : false;
+        };
+        twelve.addEventListener('change', () => {
+            switchBtn.style.display = 'inline-block';
+            if (hourInput.value > 12) {
+                hourInput.value = 0;
+            };
+            hourInput.max = 12;
+            convertBtn.innerText = '转换为 24 小时制';
+        });
+        twentyFour.addEventListener('change', () => {
+            switchBtn.style.display = 'none';
+            hourInput.max = 24;
+            convertBtn.innerText = '转换为 12 小时制';
+        });
+
+        convertBtn.onclick = () => {
+            const hour = Number(hourInput.value);
+            if (twelve.checked) {
+                result = format24(hour, isAM);
+            } else {
+                result = format12(hour);
+            };
+            resultText.innerText = result;
+        };
+
+        function format24(hr, isAM) {
+            if (hr >= 0 && hr <= 24 && Number.isInteger(hr)) {
+                if (isAM) {
+                    if (hr === 12) {
+                        return 0;
+                    };
+                    return hr;
+                } else {
+                    if (hr + 12 <= 24) {
+                        return hr === 12 ? 12 : hr + 12;
+                    };
+                };
+            };
+        };
+        function format12(hr) {
+            if (hr >= 0 && hr <= 24 && Number.isInteger(hr)) {
+                if (hr >= 12) {
+                    if (hr === 12) {
+                        return `${hr} PM`;
+                    } else {
+                        if (hr === 24) {
+                            return `0 AM`;
+                        };
+                        return `${hr - 12} PM`;
+                    };
+                } else {
+                    return `${hr} AM`;
+                };
+            };
+        };
+    </script>
+
+</body>
+</html>
