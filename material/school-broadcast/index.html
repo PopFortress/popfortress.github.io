@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园广播系统</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="/static/NoSleep.min.js"></script>
+</head>
+<body>
+    
+    <div class="app-main">
+        <header>
+            <mdui-icon name="schedule"></mdui-icon>
+            <div class="title">广播计划表</div>
+        </header>
+        <mdui-card class="schedule-text-wrapper" variant="filled">
+            <div class="load-wrapper">
+                <mdui-circular-progress></mdui-circular-progress>
+                <div class="load-text">Fetching resources...</div>
+            </div>
+            <div id="schedule-text"></div>
+        </mdui-card>
+        <mdui-card class="broadcast-stats-wrapper" variant="filled">
+            <div class="broadcast-status">
+                <mdui-icon name="podcasts" id="broadcast-status-icon"></mdui-icon>
+                <div id="broadcast-status-text">广播状态</div>
+            </div>
+            <div class="server-accessibility-check">
+                <div class="term">
+                    <div class="icon" id="file-server-check-icon">
+                        <mdui-circular-progress></mdui-circular-progress>
+                    </div>
+                    <div id="file-server-check">文件服务可访问性</div>
+                </div>
+            </div>
+        </mdui-card>
+    </div>
+    <mdui-fab icon="play_arrow" id="status-switch" size="normal">开始广播</mdui-fab>
+
+    <mdui-dialog class="loading-dialog">
+        <div>
+            <mdui-circular-progress></mdui-circular-progress>
+        </div>
+    </mdui-dialog>
+
+    <audio id="broadcast-audio"></audio>
+
+    <script src="./script.js"></script>
+</body>
+</html>

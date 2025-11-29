@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Varela Round', sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+#status-switch {
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+}
+
+.app-main {
+    width: 100%;
+    max-width: 640px;
+    padding: 0 10px 28px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+header {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 40px;
+    color: rgb(var(--mdui-color-primary));
+    justify-content: center;
+    font-size: 1.3em;
+}
+
+mdui-card {
+    padding: 24px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.schedule-text-wrapper {
+    max-height: 346px;
+    overflow-y: auto;
+
+    line-height: 2;
+    letter-spacing: 1px;
+}
+
+#schedule-text {
+    height: fit-content;
+}
+
+.load-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 17px;
+}
+.load-wrapper mdui-circular-progress {
+    width: 16px;
+    height: 16px;
+}
+.load-text {
+    font-size: .8em;
+}
+
+.broadcast-status {
+    display: flex;
+    gap: 19px;
+    opacity: .7;
+    margin-bottom: 20px;
+}
+
+.server-accessibility-check {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.term {
+    display: flex;
+    gap: 14px;
+    align-content: center;
+    font-size: .7em;
+}
+
+.term .icon {
+    display: flex;
+    align-items: center;
+}
+
+.term mdui-circular-progress {
+    width: 16px;
+    height: 16px;
+}
+
+.check-icon {
+    color: rgb(var(--mdui-color-primary));
+    font-size: 1.5em;
+}
+
+.loading-dialog div {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
