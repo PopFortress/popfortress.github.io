@@ -79,11 +79,17 @@ statusSwitch.onclick = () => {
             broadcastStatusText.innerHTML = '广播已禁用';
             broadcastStatusText.style.fontWeight = 'inherit';
             broadcastStatus.style.opacity = '.7';
+            audioEle.pause();
         } else {
             const dt = new Date();
             if (schedule) {
                 schedule.forEach(item => {
-                    if (dt.getHours() <= item[0] && dt.getMinutes() < item[1]) {
+                    if (dt.getHours() <= item[0]) {
+                        if (dt.getHours() === item[0]) {
+                            if (dt.getMinutes() >= item[1]) {
+                                return;
+                            };
+                        };
                         timers.push(setTimeout(() => {
                             audioEle.src = `${filerserver}${filenames[item[2]]}`;
                             audioEle.play();
@@ -92,9 +98,13 @@ statusSwitch.onclick = () => {
                 });
                 if (timers.length <= 0) {
                     mdui.snackbar({ message: '当前时间段未广播。'});
+                    loadingDialog.open = false;
+                    return;
                 };
             } else {
                 mdui.snackbar({ message: '请重试。'});
+                loadingDialog.open = false;
+                return;
             };
             broadcast_status = true;
             statusSwitch.icon = 'stop';
