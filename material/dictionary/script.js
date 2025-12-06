@@ -65,6 +65,7 @@ const xhr = new XMLHttpRequest();
 const sortMenu = $('#sort-menu');
 const cloudMenuBtn = $('#cloud-menu-btn');
 const bookmarksSubheader = $('.bookmarks-subheader');
+const loadWrapper = $('.load-wrapper');
 
 
 const apis = {
@@ -357,6 +358,7 @@ function loadRandom() {
 
 function loadBookmarksQuiz() {
     const bookmarks = loadBookmarks();
+    bookmarks.reverse();
     if (questionNum < bookmarks.length) {
         const word = bookmarks[questionNum].word;
         const explain = bookmarks[questionNum].explain;
@@ -651,7 +653,7 @@ function getSyncTimeString() {
 
 let sortMethod = 'newest';
 sortMenu.onchange = (e) => {
-    sortMethod = e.target.value;
+    sortMethod = e.target.value? e.target.value : 'newest';
     switchPage('bookmarks');
 };
 
@@ -673,26 +675,30 @@ function switchPage(to) {
     currentPage = to;
 
     if (to === 'bookmarks') {
+        loadWrapper.style.display = 'flex';
         bookmarksList.innerHTML = '';
-        getSortedList().forEach(bookmark => {
-            const bookmarkItem = document.createElement('mdui-list-item');
-            bookmarkItem.headline = bookmark.word;
-            bookmarkItem.description = bookmark.explain.replaceAll('<br>', '　');
-            bookmarkItem.onclick = () => {
-                switchPage('dictionary');
-                searchInput.value = bookmark.word;
-                search();
-                navRail.value = navBar.value = 'dictionary';
+        setTimeout(() => {
+            getSortedList().forEach(bookmark => {
+                const bookmarkItem = document.createElement('mdui-list-item');
+                bookmarkItem.headline = bookmark.word;
+                bookmarkItem.description = bookmark.explain.replaceAll('<br>', '　');
+                bookmarkItem.onclick = () => {
+                    switchPage('dictionary');
+                    searchInput.value = bookmark.word;
+                    search();
+                    navRail.value = navBar.value = 'dictionary';
+                };
+                bookmarksList.appendChild(bookmarkItem);
+            });
+            bookmarksHeader.innerText = `单词本（${loadBookmarks().length}）`;
+    
+            if (loadSyncInfo().time > -1) {
+                bookmarksSubheader.innerText = `上次同步: ${getSyncTimeString()} (${syncInfo.type})`;
+            } else {
+                bookmarksSubheader.innerText = '从未同步';
             };
-            bookmarksList.appendChild(bookmarkItem);
-        });
-        bookmarksHeader.innerText = `单词本（${loadBookmarks().length}）`;
-
-        if (loadSyncInfo().time > -1) {
-            bookmarksSubheader.innerText = `上次同步: ${getSyncTimeString()} (${syncInfo.type})`;
-        } else {
-            bookmarksSubheader.innerText = '从未同步';
-        };
+            loadWrapper.style.display = 'none';
+        }, 200);
     } else if (to === 'cloud-settings') {
         const settings = localStorage.dictionary_remote_settings ? JSON.parse(localStorage.dictionary_remote_settings) : null;
         ownerInput.value = settings ? settings.owner : '';

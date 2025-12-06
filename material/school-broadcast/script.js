@@ -21,7 +21,8 @@ const filerserver = `${fileserver_name}/public/workdrive-public/download/`;
 const filenames = [
     'yjkvsc8b36f6f646c4adab47c15cfc9302868?x-cli-msg=%7B%22linkId%22%3A%221HCuFcqiQRf-36sAc%22%2C%22isFileOwner%22%3Afalse%2C%22version%22%3A%221.0%22%2C%22isWDSupport%22%3Afalse%7D', // pre
     'yjkvscbfb44befc2c4e4b830eac33d9649197?x-cli-msg=%7B%22linkId%22%3A%221HCuFcqiQRe-36sAc%22%2C%22isFileOwner%22%3Afalse%2C%22version%22%3A%221.0%22%2C%22isWDSupport%22%3Afalse%7D', // begin
-    'yjkvsf4fe0dcb66464c2b857a45bfd10879b8?x-cli-msg=%7B%22linkId%22%3A%221HCuFcqiQRg-36sAc%22%2C%22isFileOwner%22%3Afalse%2C%22version%22%3A%221.0%22%2C%22isWDSupport%22%3Afalse%7D' // end
+    'yjkvsf4fe0dcb66464c2b857a45bfd10879b8?x-cli-msg=%7B%22linkId%22%3A%221HCuFcqiQRg-36sAc%22%2C%22isFileOwner%22%3Afalse%2C%22version%22%3A%221.0%22%2C%22isWDSupport%22%3Afalse%7D', // end
+    'yjkvs79f73b03d0934840ac51f6d4e066c605?x-cli-msg=%7B%22linkId%22%3A%221HCuFcqiTIB-36sAc%22%2C%22isFileOwner%22%3Afalse%2C%22version%22%3A%221.0%22%2C%22isWDSupport%22%3Afalse%7D' // school song
 ];
 
 const loadWrapper = $('.load-wrapper');

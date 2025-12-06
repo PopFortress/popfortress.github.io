@@ -351,3 +351,10 @@ a {
     font-size: .7rem;
     opacity: .7;
 }
+
+.load-wrapper {
+    display: none;
+    height: calc(100vh - 89px);
+    justify-content: center;
+    align-items: center;
+}
