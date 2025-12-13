@@ -358,3 +358,8 @@ a {
     justify-content: center;
     align-items: center;
 }
+
+#bookmark-new-badge {
+    transform: translate(-5px, -10px);
+    display: none;
+}

@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+}
+
+.player {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(var(--mdui-color-surface-container));
+}
+
+.player__container {
+    display: flex;
+    justify-content: center;
+}
+
+.player__cover {
+    width: 100px;
+    height: 100px;
+    background: center no-repeat;
+    background-image: url(./radioreunion__1.1.png);
+}
+
+.player__playback, .player__playlist, .player__controls {
+    display: flex;
+    align-items: center;
+}
+
+.player__controls {
+    gap: 1em;
+}
+
+.player__title {
+    font-size: 1.1em;
+}
+.player__artist {
+    opacity: .8;
+    font-size: .8em;
+}
+.player__info {
+    padding: 1em 1.2em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player__progress {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    gap: .5em;
+}
+.player__progress-bar {
+    width: 100%;
+    transform: scale(.95);
+}
+.player__time_elapsed, .player__duration {
+    font-size: .8em;
+}
+.player__loading mdui-circular-progress {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+}
+.player__loading {
+    width: 100px;
+    height: 100px;
+    display: none;
+}
+
+header {
+    display: flex;
+    padding: 30px;
+}
+
+.header__title {
+    font-size: 1.3em;
+    color: rgb(var(--mdui-color-primary));
+    letter-spacing: 1px;
+}
+
+.welcome__illustration {
+    background: url(https://pic1.imgdb.cn/item/693d9294fe7cfeca3823a17f.png) no-repeat center;
+    width: 210px;
+    height: 210px;
+    background-size: cover;
+}
+.welcome__text {
+    font-size: .8em;
+    letter-spacing: 1px;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+.welcome {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}

@@ -66,6 +66,7 @@ const sortMenu = $('#sort-menu');
 const cloudMenuBtn = $('#cloud-menu-btn');
 const bookmarksSubheader = $('.bookmarks-subheader');
 const loadWrapper = $('.load-wrapper');
+const bookmarkNewBadge = $('#bookmark-new-badge');
 
 
 const apis = {
@@ -605,6 +606,8 @@ cloudSyncBookmarks.onclick = () => {
         return;
     };
     syncProgress.style.display = 'block';
+    bookmarkNewBadge.style.display = 'none';
+    cloudUploadBookmarks.disabled = false;
     cloudMenuBtn.disabled = true;
     xhr.open('GET', localStorage.dictionary_remote_url);
     xhr.send();
@@ -634,8 +637,8 @@ function bytesToBase64(bytes) {
   return btoa(binString);
 };
 
-function getSyncTimeString() {
-    const diff = (Date.now() - syncInfo.time) / 1000;
+function getSyncTimeString(timestamp) {
+    const diff = (Date.now() - timestamp) / 1000;
     const days = Math.floor(diff / 86400);
     const hours = Math.floor((diff % 86400) / 3600);
     const minutes = Math.floor((diff % 3600) / 60);
@@ -668,6 +671,26 @@ function getSortedList() {
     };
 };
 
+function fetchLatestCommit() {
+    if (localStorage.dictionary_remote_settings) {
+        const settings = JSON.parse(localStorage.dictionary_remote_settings);
+        const baseUrl = `https://gitee.com/api/v5/repos/${settings.owner}/${settings.repo}/commits`
+        xhr.open('GET', `${baseUrl}?per_page=1&page=1&access_token=${settings.accessToken}`);
+        xhr.send();
+        xhr.onload = () => {
+            const commit = JSON.parse(xhr.responseText)[0];
+            const date = commit.commit.committer.date;
+            const datetime = new Date(date);
+            bookmarksSubheader.innerHTML += `<br>最新提交: ${getSyncTimeString(datetime)} (${datetime.toLocaleString()})`;
+            if (datetime > syncInfo.time) {
+                bookmarkNewBadge.style.display = 'inline-flex';
+                cloudUploadBookmarks.disabled = true;
+            };
+            syncProgress.style.display = 'none';
+        };
+    };
+};
+
 
 function switchPage(to) {
     $(`#app-page-${currentPage}`).style.display = 'none';
@@ -677,6 +700,7 @@ function switchPage(to) {
     if (to === 'bookmarks') {
         loadWrapper.style.display = 'flex';
         bookmarksList.innerHTML = '';
+        syncProgress.style.display = 'block';
         setTimeout(() => {
             getSortedList().forEach(bookmark => {
                 const bookmarkItem = document.createElement('mdui-list-item');
@@ -693,10 +717,11 @@ function switchPage(to) {
             bookmarksHeader.innerText = `单词本（${loadBookmarks().length}）`;
     
             if (loadSyncInfo().time > -1) {
-                bookmarksSubheader.innerText = `上次同步: ${getSyncTimeString()} (${syncInfo.type})`;
+                bookmarksSubheader.innerHTML = `上次同步: ${getSyncTimeString(syncInfo.time)} (${syncInfo.type})`;
             } else {
-                bookmarksSubheader.innerText = '从未同步';
+                bookmarksSubheader.innerHTML = '从未同步';
             };
+            fetchLatestCommit();
             loadWrapper.style.display = 'none';
         }, 200);
     } else if (to === 'cloud-settings') {

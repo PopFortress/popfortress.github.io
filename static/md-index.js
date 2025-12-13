@@ -42,6 +42,7 @@ const cookieClosing = $('.cookie-closing');
 const loadingClose = $('.loading-close');
 const foldedSectionsTriggers = document.querySelectorAll('.folded-sections-menu mdui-menu-item');
 const tabs = $('mdui-tabs.sections-tabs');
+const dayEffectSwitch = $('#day-effects');
 var sayingsDesc;
 var sha;
 var commitMessage;
@@ -55,6 +56,8 @@ var notifyWrapper;
 var currSayingsIndex = 0;
 var currActivityIndex = 0;
 var data;
+const blackDays = ["1/6", "1/8", "1/21", "1/27", "2/4", "2/19", "3/5", "3/12", "3/29", "4/29", "5/9", "5/12", "6/26", "7/6", "7/7", "7/14", "8/5", "9/9", "9/18", "10/10", "11/7", "12/12", "12/13", "9/30"];
+const date_index = `${new Date().getMonth()+1}/${new Date().getDate()}`;
 const ghApiUrl = 'https://api.github.com/repos/PopFortress/popfortress.github.io';
 if (localStorage.showChangelog) {
     var showChangelog = localStorage.showChangelog;
@@ -73,6 +76,11 @@ if (localStorage.showComments) {
     var showComments = localStorage.showComments;
 } else {
     var showComments = 'true';
+};
+if (localStorage.dayEffect) {
+    var dayEffect = localStorage.dayEffect;
+} else {
+    var dayEffect = 'true';
 };
 
 notifyDlgCloseBtn.onclick = () => {
@@ -320,6 +328,23 @@ commentsSwitch.onchange = (e) => {
         localStorage.showComments = false;
         giscus.style.display = 'none';
     };
+};
+
+if (dayEffect === 'true') {
+    dayEffectSwitch.checked = true;
+    blackDays.forEach(day => {
+        if (date_index === day) {
+            document.documentElement.style.filter = 'grayscale(1)';
+        };
+    });
+};
+dayEffectSwitch.onchange = (e) => {
+    if (e.target.checked) {
+        localStorage.dayEffect = true;
+    } else {
+        localStorage.dayEffect = false;
+    };
+    location.reload();
 };
 
 async function fetchCommitVersion() {

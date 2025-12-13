@@ -84,7 +84,7 @@ mdui-card {
 
 .sayings {
     padding: 4px 4px 4px 50px;
-    color: #db4f4f;
+    color: #c74545;
     display: flex;
     gap: 10px;
     align-items: center;
@@ -249,13 +249,20 @@ mdui-tab::part(label) {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    overflow-y: hidden;
+    overflow-y: auto;
+    max-height: 49.8vh;
+    overflow-x: hidden;
+    scrollbar-width: thin;
 }
 
 .option {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.option label {
+    margin-right: auto;
 }
 
 .latest-update-wrapper {

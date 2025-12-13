@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Radio Reunion</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <div class="app-page" id="app-page__main">
+        <header>
+            <div class="header__title">Radio <span style="font-weight: 600;">Reunion</span></div>
+        </header>
+        <main>
+            <div class="welcome">
+                <div class="welcome__illustration"></div>
+                <div class="welcome__text">欢迎来到 Radio Reunion，敬请沉浸在音乐的韵律中 🎵</div>
+            </div>
+            <div class="start-options">
+                <mdui-list>
+                    <mdui-list-item id="start__url_option" description="输入流或播放列表的 URL." icon="public">输入在线流地址</mdui-list-item>
+                    <mdui-list-item id="start__search_option" description="在线查找歌曲和电台" icon="search">查找歌曲/电台</mdui-list-item>
+                </mdui-list>
+            </div>
+        </main>
+    </div>
+
+    <div class="player">
+        <div class="player__container">
+            <div class="player__loading">
+                <mdui-circular-progress></mdui-circular-progress>
+            </div>
+            <div class="player__cover"></div>
+            <div class="player__info">
+                <div class="player__title">Radio Reunion</div>
+                <div class="player__artist">团结电台</div>
+                <div class="player__progress">
+                    <div class="player__time_elapsed">0:00</div>
+                    <mdui-slider id="player__progress" value="0" step="1" min="0" max="100" class="player__progress-bar" nolabel disabled></mdui-slider>
+                    <div class="player__duration">0:00</div>
+                </div>
+            </div>
+            <div class="player__controls">
+                <div class="player__playback">
+                    <mdui-fab icon="play_arrow" class="player__playback_btn"></mdui-fab>
+                </div>
+                <div class="player__playlist">
+                    <mdui-button-icon icon="playlist_play"></mdui-button-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="player-audio"></audio>
+
+    <script src="./script.js"></script>
+    <script src="./responsive.js"></script>
+
+</body>
+</html>
