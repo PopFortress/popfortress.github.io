@@ -12,7 +12,7 @@
 </head>
 <body>
     
-    <div class="app-page" id="app-page__main">
+    <div class="app_page" id="app_page__main">
         <header>
             <div class="header__title">Radio <span style="font-weight: 600;">Reunion</span></div>
         </header>
@@ -25,7 +25,20 @@
                 <mdui-list>
                     <mdui-list-item id="start__url_option" description="输入流或播放列表的 URL." icon="public">输入在线流地址</mdui-list-item>
                     <mdui-list-item id="start__search_option" description="在线查找歌曲和电台" icon="search">查找歌曲/电台</mdui-list-item>
+                    <mdui-list-item id="start__featured_option" description="浏览精选电台和歌曲列表" icon="recommend--outlined">推荐列表</mdui-list-item>
                 </mdui-list>
+            </div>
+        </main>
+    </div>
+
+    <div class="app_page" id="app_page__search">
+        <header>
+            <mdui-button-icon icon="arrow_back" class="header__back_btn"></mdui-button-icon>
+            <div class="header__title">搜索</div>
+        </header>
+        <main>
+            <div class="search__container">
+                <mdui-text-field class="search__input" clearable variant="outlined" clear-icon="close" placeholder="查找歌曲和电台..."></mdui-text-field>
             </div>
         </main>
     </div>
@@ -50,11 +63,20 @@
                     <mdui-fab icon="play_arrow" class="player__playback_btn"></mdui-fab>
                 </div>
                 <div class="player__playlist">
-                    <mdui-button-icon icon="playlist_play"></mdui-button-icon>
+                    <mdui-button-icon icon="playlist_play" class="player__playlist_btn"></mdui-button-icon>
                 </div>
             </div>
         </div>
     </div>
+
+    <mdui-navigation-drawer class="playlist" placement="right" close-on-esc close-on-overlay-click modal>
+        <div class="playlist__header">
+            <div class="playlist__title">播放列表</div>
+            <mdui-button-icon icon="repeat" class="playback__ordering_btn"></mdui-button-icon>
+            <mdui-button-icon icon="clear_all" class="playlist__clear_btn"></mdui-button-icon>
+        </div>
+        <mdui-list class="playlist__playlist"></mdui-list>
+    </mdui-navigation-drawer>
 
     <audio id="player-audio"></audio>
 

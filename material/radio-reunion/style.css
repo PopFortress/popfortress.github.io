@@ -42,6 +42,9 @@ body {
 
 .player__title {
     font-size: 1.1em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .player__artist {
     opacity: .8;
@@ -52,10 +55,22 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 500px;
+}
+
+@media screen and (max-width: 710px) {
+    .player__info {
+        max-width: calc(100vw - 212px);
+        padding: 1em .5em;
+    }
+    .player__progress {
+        min-width: 0 !important;
+    }
 }
 
 .player__progress {
-    width: 400px;
+    min-width: 400px;
+    width: 100%;
     display: flex;
     align-items: center;
     gap: .5em;
@@ -81,6 +96,8 @@ body {
 header {
     display: flex;
     padding: 30px;
+    align-items: center;
+    gap: 10px;
 }
 
 .header__title {
@@ -106,6 +123,7 @@ main {
     flex-direction: column;
     gap: 30px;
     align-items: center;
+    padding-bottom: 2em;
 }
 .welcome {
     display: flex;
@@ -113,4 +131,44 @@ main {
     flex-direction: column;
     align-items: center;
     text-align: center;
+}
+.app_page {
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+.app_page:not(#app_page__main) {
+    display: none;
+}
+
+.playlist__title {
+    font-size: 1.3em;
+    letter-spacing: 1px;
+}
+
+.playlist__header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 23px;
+}
+.playlist__item_cover {
+    width: 60px;
+    height: 60px;
+}
+
+.playlist__playlist mdui-list-item::part(headline), .playlist__playlist mdui-list-item::part(description) {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search__container {
+    display: flex;
+    width: 100%;
+    max-width: 790px;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em 1.5em;
 }
