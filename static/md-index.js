@@ -43,6 +43,7 @@ const loadingClose = $('.loading-close');
 const foldedSectionsTriggers = document.querySelectorAll('.folded-sections-menu mdui-menu-item');
 const tabs = $('mdui-tabs.sections-tabs');
 const dayEffectSwitch = $('#day-effects');
+const fallbackFontSwitch = $('#second-font-src');
 var sayingsDesc;
 var sha;
 var commitMessage;
@@ -81,6 +82,11 @@ if (localStorage.dayEffect) {
     var dayEffect = localStorage.dayEffect;
 } else {
     var dayEffect = 'true';
+};
+if (localStorage.fallback_font_src) {
+    var fallback_font_src = localStorage.fallback_font_src;
+} else {
+    var fallback_font_src = 'false';
 };
 
 notifyDlgCloseBtn.onclick = () => {
@@ -343,6 +349,18 @@ dayEffectSwitch.onchange = (e) => {
         localStorage.dayEffect = true;
     } else {
         localStorage.dayEffect = false;
+    };
+    location.reload();
+};
+if (fallback_font_src === 'true') {
+    fallbackFontSwitch.checked = true;
+    document.head.innerHTML += '<link rel="stylesheet" href="/mdui/fallback_icons/material-icons-fallback.css"><link rel="stylesheet" href="/mdui/fallback_icons/material-icons-outlined-fallback.css">';
+};
+fallbackFontSwitch.onchange = (e) => {
+    if (e.target.checked) {
+        localStorage.fallback_font_src = true;
+    } else {
+        localStorage.fallback_font_src = false;
     };
     location.reload();
 };

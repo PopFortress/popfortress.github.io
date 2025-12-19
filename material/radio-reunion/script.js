@@ -20,15 +20,12 @@ const playlistClearBtn = $('.playlist__clear_btn');
 const playbackModeBtn = $('.playback__ordering_btn');
 
 const headerBackBtns = document.querySelectorAll('.header__back_btn');
-const searchInput = $('.search__input');
-
-let player_info = {
-    cover: '', title: '', artist: '', url: ''
-};
-let playlist_array = [];
-let playback_mode = 'list_repeat';
 
 let currentPage = 'main';
+
+const xhr = new XMLHttpRequest();
+const apiServer = 'https://163api.qijieya.cn';
+
 
 class Song {
     constructor(options) {
@@ -40,50 +37,80 @@ class Song {
     };
 };
 
+class Player {
+    constructor(options) {
+        this.currentIndex = options.currentIndex;
+        this.playlist = options.playlist;
+        this.playback_mode = options.playback_mode;
+    };
+    playSong(index) {
+        const song = this.playlist.playlist[index];
+        audio.src = song.url;
+        playerCover.style.display = 'none';
+        playerLoading.style.display = 'flex';
+        playerTitle.innerText = song.title;
+        playerArtist.innerText = song.artist;
+        playerTimeElapsed.innerText = '0:00';
+        audio.play();
+        setColorScheme();
+        this.currentIndex = index;
+        playlistList.childNodes.forEach((item) => {
+            item.active = false;
+        });
+        song.itemEle.active = true;
+    };
+    getCurrentSong() {
+        return this.playlist.playlist[this.currentIndex];
+    };
+};
+
 class Playlist {
-    constructor(length) {
-        this.length = length;
+    constructor() {
+        this.length = 0;
+        this.playlist = [];
     };
     addItem(options) {
-        const song = options;
+        let item = options;
+        item.index = this.length;
         const listItem = document.createElement('mdui-list-item');
-        listItem.headline = song.title;
-        listItem.description = song.artist;
+        listItem.headline = options.title;
+        listItem.description = options.artist;
         const coverImg = document.createElement('img');
-        coverImg.src = song.cover;
+        coverImg.src = options.cover;
         coverImg.slot = 'icon';
         coverImg.className = 'playlist__item_cover';
         const removeBtn = document.createElement('mdui-button-icon');
         removeBtn.icon = 'close';
         removeBtn.slot = 'end-icon';
         removeBtn.onclick = () => {
-            playlist.removeItem(playlist_array.indexOf(song), true);
+            playlist.removeItem(item.index);
         };
         listItem.appendChild(coverImg);
         listItem.appendChild(removeBtn);
         playlistList.firstChild ? playlistList.firstChild.before(listItem) : playlistList.appendChild(listItem);
-        song.itemEle = listItem;
-        listItem.onclick = () => {
-            if (playlist_array.indexOf(song) > -1) {
-                player_play_list_item(playlist_array.indexOf(song));
+        options.itemEle = listItem;
+        listItem.onclick = (e) => {
+            if (e.target === removeBtn) {
+                return;
+            } else {
+                player.playSong(item.index);
                 playlistContainer.open = false;
             };
         };
-        playlist_array.push(song);
+        this.playlist.push(item);
         this.length++;
     };
-    removeItem(index, isManual) {
-        console.log(index);
-        playlist_array[index].itemEle.remove();
-        playlist_array.splice(index, 1);
+    removeItem(index) {
+        this.playlist[index].itemEle.remove();
+        this.playlist.splice(index, 1);
         this.length--;
-        if (player_info.playlistIndex === index && isManual) {
+        if (player.currentIndex === index) {
             resetPlayer();
         };
     };
     clearItems() {
         playlistList.innerHTML = '';
-        playlist_array = [];
+        this.playlist = [];
         this.length = 0;
     };
 };
@@ -103,7 +130,12 @@ function resetPlayer() {
     mdui.removeColorScheme();
 };
 
-const playlist = new Playlist(playlist_array.length);
+const playlist = new Playlist();
+const player = new Player({
+    currentIndex: 0,
+    playlist: playlist,
+    playback_mode: 'list_repeat',
+});
 
 function time_formatting(seconds) {
     return `${Math.floor(seconds / 60)}:${Math.floor(seconds % 60) < 10 ? '0' : ''}${Math.floor(seconds % 60)}`
@@ -111,36 +143,12 @@ function time_formatting(seconds) {
 
 function setColorScheme() {
     const image = new Image();
-    image.src = player_info.cover;
+    image.src = player.getCurrentSong().cover;
     mdui.getColorFromImage(image).then((color) => {
         mdui.setColorScheme(color);
     });
 };
 
-function player_play_list_item(playlist_index) {
-    player_play_new(playlist_array[playlist_index]);
-    playlist.removeItem(playlist_index, false);
-};
-
-function player_play_new(options) {
-    Object.keys(options).forEach(key => {
-        player_info[key] = options[key];
-    });
-    audio.src = player_info.url;
-    playerCover.style.display = 'none';
-    playerLoading.style.display = 'flex';
-    playerTitle.innerText = player_info.title;
-    playerArtist.innerText = player_info.artist;
-    playerTimeElapsed.innerText = '0:00';
-    playlist.addItem(options);
-    audio.play();
-    setColorScheme();
-    player_info.playlistIndex = playlist_array.indexOf(options);
-    playlistList.childNodes.forEach((item) => {
-        item.active = false;
-    });
-    playlist_array[player_info.playlistIndex].itemEle.active = true;
-};
 
 audio.addEventListener('canplay', ()=> {
     if (audio.duration === Infinity) {
@@ -150,7 +158,7 @@ audio.addEventListener('canplay', ()=> {
         playerDuration.innerText =  time_formatting(audio.duration);
         playerProgressbar.disabled = false;
     };
-    playerCover.style.backgroundImage = `url(${player_info.cover})`;
+    playerCover.style.backgroundImage = `url(${player.getCurrentSong().cover})`;
     playerLoading.style.display = 'none';
     playerCover.style.display = 'block';
 });
@@ -164,6 +172,7 @@ audio.addEventListener('timeupdate', progressUpdateHandler);
 
 playerProgressbar.addEventListener('input', () => {
     audio.removeEventListener('timeupdate', progressUpdateHandler);
+    playerTimeElapsed.innerText = time_formatting((playerProgressbar.value / 100) * audio.duration);
 });
 playerProgressbar.addEventListener('change', () => {
     audio.currentTime = (playerProgressbar.value / 100) * audio.duration;
@@ -180,7 +189,7 @@ audio.addEventListener('pause', ()=> {
     playerPlayback.icon = 'play_arrow';
 });
 playerPlayback.onclick = () => {
-    if (player_info.url) {
+    if (player.getCurrentSong()) {
         audio.paused ? audio.play() : audio.pause();
     };
 };
@@ -200,12 +209,14 @@ startOptionUrl.onclick = ()=> {
         onConfirm: (value) => {
             if (value.trim()) {
                 const url = value.trim();
-                player_play_new({
+                playlist.addItem({
                     url: url,
                     cover: './radioreunion__1.1.png',
                     title: url,
                     artist: url.split('://')[1].split('/')[0],
+                    album: '团结电台（媒体流）'
                 });
+                player.playSong(playlist.length - 1);
             } else {
                 return false;
             }
@@ -221,7 +232,7 @@ mdui.loadLocale((locale) => import(`https://unpkg.com/mdui@2/locales/${locale}.j
 mdui.setLocale('zh-cn');
 
 document.onkeydown = (e) => {
-    if (e.key === ' ') {
+    if (e.key === ' ' && e.target.tagName !== 'MDUI-TEXT-FIELD') {
         e.preventDefault();
         playerPlayback.click();
     };
@@ -239,20 +250,20 @@ playlistClearBtn.onclick = () => {
 };
 
 audio.addEventListener('ended', () => {
-    switch (playback_mode) {
+    switch (player.playback_mode) {
         case 'list_repeat':
-            if (player_info.playlistIndex === playlist_array.length) {
-                player_play_list_item(0);
+            if (player.currentIndex === playlist.length - 1) {
+                player.playSong(0);
             } else {
-                player_play_list_item(player_info.playlistIndex);
+                player.playSong(player.currentIndex + 1);
             };
             break;
         case 'shuffle':
-            player_play_list_item(Math.floor(Math.random() * playlist_array.length));
+            player.playSong(Math.floor(Math.random() * playlist.length));
             break;
         case 'play_list_once':
-            if (player_info.playlistIndex < playlist_array.length) {
-                player_play_list_item(player_info.playlistIndex);
+            if (player.currentIndex < playlist.length) {
+                player.playSong(player.currentIndex + 1);
             };
             break;
         default:
@@ -266,24 +277,24 @@ audio.addEventListener('waiting', () => {
 });
 
 playbackModeBtn.onclick = () => {
-    switch (playback_mode) {
+    switch (player.playback_mode) {
         case 'list_repeat':
             playbackModeBtn.icon = 'repeat_one';
-            playback_mode = 'repeat_single';
+            player.playback_mode = 'repeat_single';
             audio.loop = true;
             break;
         case 'repeat_single':
             playbackModeBtn.icon = 'shuffle';
-            playback_mode = 'shuffle';
+            player.playback_mode = 'shuffle';
             audio.loop = false;
             break;
         case 'shuffle':
             playbackModeBtn.icon = 'arrow_right_alt';
-            playback_mode = 'play_list_once';
+            player.playback_mode = 'play_list_once';
             break;
         case 'play_list_once':
             playbackModeBtn.icon = 'repeat';
-            playback_mode = 'list_repeat';
+            player.playback_mode = 'list_repeat';
         default:
             break;
     };

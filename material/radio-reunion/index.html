@@ -8,6 +8,8 @@
     <script src="/mdui/mdui.global.js"></script>
     <link rel="stylesheet" href="/mdui/material-icons.css">
     <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="/mdui/fallback_icons/material-icons-fallback.css">
+    <link rel="stylesheet" href="/mdui/fallback_icons/material-icons-outlined-fallback.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -38,7 +40,12 @@
         </header>
         <main>
             <div class="search__container">
-                <mdui-text-field class="search__input" clearable variant="outlined" clear-icon="close" placeholder="查找歌曲和电台..."></mdui-text-field>
+                <mdui-text-field class="search__input" clearable variant="outlined" clear-icon="close" placeholder="查找歌曲和电台..." type="search"></mdui-text-field>
+            </div>
+            <div class="search__result">
+                <mdui-circular-progress class="search__loading" style="display: none;"></mdui-circular-progress>
+                <div class="search__result_stats"></div>
+                <mdui-list class="search__result_list"></mdui-list>
             </div>
         </main>
     </div>
@@ -81,6 +88,7 @@
     <audio id="player-audio"></audio>
 
     <script src="./script.js"></script>
+    <script src="./search.js"></script>
     <script src="./responsive.js"></script>
 
 </body>
