@@ -197,3 +197,20 @@ footer {
 :root {
     scroll-behavior: smooth;
 }
+
+.main__failure {
+    display: flex;
+    align-items: center;
+    opacity: .8;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 2em;
+}
+
+.main__failure__desc {
+    font-size: .7em;
+}
+
+.main__failure mdui-icon {
+    font-size: 1em;
+}

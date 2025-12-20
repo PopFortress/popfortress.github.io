@@ -15,6 +15,16 @@ let giscusEnabled = false;
 const pin = Math.floor(Math.random() * 1000000);
 const emailCfg = `title=Moments Subscription&text=<font color="DimGray">Greetings!</font>  <br><br> <font color="DimGray">You're now performing </font> <font color="red"> a subscription to the Moments</font> <font color="DimGray">, please enter the following code:</font>  <font color="Orange "size="5">${pin}</font> <font color="Gray "> in the text field to confirm your subscription.</font> <br>  <br><font color="Gray">Please note that your password or email may be modified accidentally by processing unauthorized activities. If you have not required this subscription, please simply ignore this email.</font> <br><font color="Gray">Our staff won't ask for your passcode, please keep this code secret.</font><br> <br> <font color="Gray">This email was sent automatically, please do not reply to it straightly.</font><br><font color="Gray">You received this email because you subscribed to the Moments on popfortress.github.io.</font><br><br><font color="Gray">popfortress.github.io</font>`;
 
+const xhr = new XMLHttpRequest();
+const access_token = JSON.parse(localStorage.dictionary_remote_settings)['accessToken'];
+const baseURL = 'https://seep.eu.org/https://gitee.com/api/v5/repos/popfortress/dev-data/contents/moments.json';
+let remoteURL;
+if (access_token) {
+    remoteURL = `${baseURL}?access_token=${access_token}`;
+} else {
+    remoteURL = baseURL;
+};
+
 shareBtn.onclick = () => {
     if (navigator.share) {
         mdui.snackbar({ message: '若无法分享，请授予相应权限或手动复制链接分享' });
@@ -71,16 +81,30 @@ subscribeBtn.onclick = () => {
     });
 };
 
-async function fetchMoments() {
-    const response = await fetch('./moments.json');
-    rawMomentsData = await response.json();
-    momentsData = [...rawMomentsData].reverse();
-    displayMoments(momentsData);
+function fetchMoments() {
+    xhr.open('GET', remoteURL);
+    xhr.send();
+    xhr.onload = () => {
+        const base64 = JSON.parse(xhr.responseText);
+        rawMomentsData = JSON.parse(new TextDecoder().decode(base64ToBytes(base64.content)));;
+        momentsData = [...rawMomentsData].reverse();
+        displayMoments(momentsData);
+    
+        document.querySelectorAll('a').forEach(link => {
+            link.target = '_blank';
+            loading.style.display = 'none';
+        });
+    };
+};
 
-    document.querySelectorAll('a').forEach(link => {
-    link.target = '_blank';
+xhr.onerror = () => {
+    mdui.snackbar({ message: '无法连接至服务器。' });
     loading.style.display = 'none';
-});
+};
+
+function base64ToBytes(base64) {
+  const binString = atob(base64);
+  return Uint8Array.from(binString, (m) => m.codePointAt(0));
 };
 
 function displayMoments(moments) {
