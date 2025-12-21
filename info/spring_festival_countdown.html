@@ -132,7 +132,7 @@
 
         <i class="fa fa-volume-off"></i>
 
-        <audio src="" loop></audio>
+        <audio autoplay src="https://files.zohopublic.com.cn/public/workdrive-public/download/54hdqed70c59de2eb42b881461d089e79a329?x-cli-msg=%7B%22linkId%22%3A%221HCuFcqiVND-36sAc%22%2C%22isFileOwner%22%3Afalse%2C%22version%22%3A%221.0%22%2C%22isWDSupport%22%3Afalse%7D" loop></audio>
 	</body>
 
 
@@ -158,21 +158,22 @@
 			}
 			setInterval(function(){
 				newYear()
-			},1000)
+			},1000);
+            newYear();
 		</script>
 
         <script>
             const musicToggle = document.querySelector('i');
             const audio = document.querySelector('audio');
             musicToggle.addEventListener('click', () => {
-                if (musicToggle.className == 'fa fa-volume-up'){
-                    audio.pause();
-                    musicToggle.className = 'fa fa-volume-off';
-                } else {
-                    audio.play();
-                    musicToggle.className = 'fa fa-volume-up';
-                };
+                audio.paused? audio.play(): audio.pause();
             });
+            audio.onplay = () => {
+                musicToggle.className = 'fa fa-volume-up'
+            };
+            audio.onpause = () => {
+                musicToggle.className = 'fa fa-volume-off'
+            };
         </script>
 
         <script src="/static/firework.js"></script>

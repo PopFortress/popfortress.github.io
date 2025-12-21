@@ -27,6 +27,11 @@
     ],
     "activities": [
         {
+            "title": "2026 喜迎双旦·欢度新年",
+            "target_url": "/info/spring_festival_countdown",
+            "imgurl": "https://images.pexels.com/photos/6027785/pexels-photo-6027785.jpeg"
+        },
+        {
             "title": "国家公祭日 铭记历史·勿忘国耻",
             "target_url": "https://www.19371213.com.cn/",
             "imgurl": "https://pic1.imgdb.cn/item/693d655525ec9c13612bddea.jpg"
@@ -42,7 +47,7 @@
             "imgurl": "https://pic1.imgdb.cn/item/6898753958cb8da5c816a567.png"
         }
     ],
-    "latest_update": "Dec. 20, 2025",
+    "latest_update": "Dec. 21, 2025",
     "notifications": [
         {"id": 1 ,"title": "帖文 #10 已发布，前往查看紫马岭公园的观光日记 →", "link": "/posts/10"},
         {"id": 2 ,"title": "听说 90% 的访客访问了页注中的“可疑的页面”"},

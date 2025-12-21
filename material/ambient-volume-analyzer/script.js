@@ -101,7 +101,7 @@ function processAudio() {
 
     setInterval(() => {
         updateDisplay(lastDecibelValue);
-    }, 500);
+    }, 50);
 };
 
 function updateWaveform() {

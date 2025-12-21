@@ -132,8 +132,13 @@ function displayMoments(moments) {
 sortLatest.addEventListener('click', () => {
     if (sortLatest.selected) {
         sortOldest.selected = false;
-        momentsData = [...rawMomentsData].reverse();
-        displayMoments(momentsData);
+        loading.style.display = 'block';
+        momentsList.innerHTML = '';
+        setTimeout(() => {
+            momentsData = [...rawMomentsData].reverse();
+            displayMoments(momentsData);
+            loading.style.display = 'none';
+        }, 100);
     } else {
         sortLatest.selected = true;
     };
@@ -142,8 +147,13 @@ sortLatest.addEventListener('click', () => {
 sortOldest.addEventListener('click', () => {
     if (sortOldest.selected) {
         sortLatest.selected = false;
-        momentsData = [...rawMomentsData];
-        displayMoments(momentsData);
+        loading.style.display = 'block';
+        momentsList.innerHTML = '';
+        setTimeout(() => {
+            momentsData = [...rawMomentsData];
+            displayMoments(momentsData);
+            loading.style.display = 'none';
+        }, 100);
     } else {
         sortOldest.selected = true;
     };
