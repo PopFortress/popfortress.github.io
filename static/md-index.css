@@ -83,17 +83,29 @@ mdui-card {
 }
 
 .sayings {
-    padding: 4px 4px 4px 50px;
-    color: #c74545;
     display: flex;
     gap: 10px;
     align-items: center;
     font-size: .9rem;
 }
 
+.sayings-card {
+    padding: 4px 4px 4px 50px;
+    color: #c74545;
+}
+
+.festival-text {
+    opacity: .8;
+    font-size: .7rem;
+    padding-top: .5em;
+    display: none;
+}
+
 @media screen and (max-width: 420px) {
     .sayings {
         font-size: .8rem;
+    }
+    .sayings-card {
         padding: 4px 4px 4px 22px;
     }
 }

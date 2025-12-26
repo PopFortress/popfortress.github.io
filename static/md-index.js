@@ -44,6 +44,7 @@ const foldedSectionsTriggers = document.querySelectorAll('.folded-sections-menu 
 const tabs = $('mdui-tabs.sections-tabs');
 const dayEffectSwitch = $('#day-effects');
 const fallbackFontSwitch = $('#second-font-src');
+const festivalText = $('.festival-text');
 var sayingsDesc;
 var sha;
 var commitMessage;
@@ -438,6 +439,16 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     });
     $('.changelog-view-all').elevated = false;
 };
+
+async function fetchFestival() {
+    const res = await fetch('https://seep.eu.org/https://api.52vmy.cn/api/wl/day/world');
+    const data = await res.json();
+    const date = data.info[0].date;
+    const text = `${data.info[0].desc}.　(${date.slice(0, 4)}年${date.slice(4, 6)}月${date.slice(6, 8)}日)`;
+    festivalText.innerText = text;
+    festivalText.style.display = 'block';
+};
+fetchFestival();
 
 // handling folded sections
 foldedSectionsTriggers.forEach(item => {
