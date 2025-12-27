@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <!-- next_spring_festival -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no">
     <title>春节倒计时</title>
     <link rel="stylesheet" href="../font-awesome/stylesheet/font-awesome.css">
+    <script src="/static/NoSleep.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -163,17 +164,37 @@
 		</script>
 
         <script>
+            function fireworkHandler() {
+                    createFirework(Math.random() * canvas.width, Math.random() * canvas.height);
+            };
+
+            const noSleep = new NoSleep();
+            noSleep.enable();
+
+            let fireworkInterval;
             const musicToggle = document.querySelector('i');
             const audio = document.querySelector('audio');
             musicToggle.addEventListener('click', () => {
                 audio.paused? audio.play(): audio.pause();
             });
             audio.onplay = () => {
-                musicToggle.className = 'fa fa-volume-up'
+                musicToggle.className = 'fa fa-volume-up';
+                fireworkInterval = setInterval(fireworkHandler, 500);
             };
             audio.onpause = () => {
-                musicToggle.className = 'fa fa-volume-off'
+                musicToggle.className = 'fa fa-volume-off';
+                clearInterval(fireworkInterval);
             };
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    clearInterval(fireworkInterval);
+                } else {
+                    if (!audio.paused) {
+                        fireworkInterval = setInterval(fireworkHandler, 500);
+                    };
+                };
+            });
         </script>
 
         <script src="/static/firework.js"></script>

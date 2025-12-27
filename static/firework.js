@@ -1,4 +1,3 @@
-(function() {
     // 创建Canvas元素
     const canvas = document.createElement('canvas');
     document.body.appendChild(canvas);
@@ -105,10 +104,10 @@
 
         // 清除已消失的烟花
         fireworks = fireworks.filter(function(firework) {
-            return firework.particles[0].alpha > 0;
+            return firework.particles.every(function(particle) {
+                return particle.alpha > 0;
+            });
         });
     }
 
     animate();
-
-})();
