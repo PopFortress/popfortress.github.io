@@ -1,3 +1,5 @@
+// contains search page logic
+
 const searchInput = $('.search__input');
 const searchLoading = $('.search__loading');
 const searchStats = $('.search__result_stats');
@@ -13,6 +15,7 @@ function searchSongs(page) {
     const keywords = searchInput.value.trim();
     if (keywords) {
         searchLoading.style.display = 'block';
+        searchList.innerHTML = '';
         xhr.open('GET', `${apiServer}/cloudsearch?keywords=${keywords}&limit=20&offset=${(page - 1) * 20}`);
         xhr.send();
         xhr.onload = () => {
@@ -20,7 +23,6 @@ function searchSongs(page) {
             let songInfo = {};
             if (data.code === 200) {
                 songsCount = data.result.songCount;
-                searchList.innerHTML = '';
                 data.result.songs.forEach(song => {
                     songInfo = {};
                     songInfo.title = song.name;
@@ -35,16 +37,16 @@ function searchSongs(page) {
                     
                     const listitem = document.createElement('mdui-list-item');
                     const coverImg = document.createElement('img');
-                    coverImg.src = songInfo.cover;
+                    coverImg.src = song.al.picUrl;
                     coverImg.slot = 'icon';
                     coverImg.className = 'playlist__item_cover';
                     listitem.headline = songInfo.title;
                     listitem.description = songInfo.album ? `${songInfo.artist} - 《${songInfo.album}》` : `${songInfo.artist}`;
                     listitem.appendChild(coverImg);
+                    songInfo.id = song.id;
                     listitem.dataset.song_info = JSON.stringify(songInfo);
                     listitem.onclick = (e) => {
-                        playerLoading.style.display = 'block';
-                        playerCover.style.display = 'none';
+                        player.switchLoadingState('loading');
                         const info = JSON.parse(e.target.dataset.song_info);
                         xhr.open('GET', info.url);
                         xhr.send();
@@ -54,8 +56,10 @@ function searchSongs(page) {
                                 const url = data.data[0].url;
                                 info.url = url;
                             };
-                            playlist.addItem(info);
+                            const song = new Song(info);
+                            playlist.addItem(song);
                             player.playSong(playlist.length - 1);
+                            loadLyrics(info.id);
                         };
                     };
                     searchList.appendChild(listitem);

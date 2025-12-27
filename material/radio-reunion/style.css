@@ -30,6 +30,7 @@ body {
     background: center no-repeat;
     background-image: url(./radioreunion__1.1.png);
     background-size: cover;
+    cursor: pointer;
 }
 
 .player__playback, .player__playlist, .player__controls {
@@ -66,9 +67,9 @@ body {
         max-width: calc(100vw - 212px);
         padding: 1em .5em;
     }
-    .player__progress {
+    /* .player__progress {
         min-width: 0 !important;
-    }
+    } */
 }
 
 .player__progress {
@@ -176,6 +177,10 @@ main {
     padding: 2em 1.5em;
 }
 
+.search__result {
+    max-width: 790px;
+}
+
 @media screen and (max-width: 340px) {
     .player__progress {
         display: none;
@@ -184,4 +189,60 @@ main {
 
 .search__loading {
     display: none;
+}
+
+
+.featured__container {
+    width: 100%;
+    max-width: 790px;
+}
+
+mdui-tab::part(icon) {
+    margin-right: 10px;
+}
+
+.featured__loading_container {
+    display: flex;
+    justify-content: center;
+    padding: 2em;
+}
+
+.featured__item_cover {
+    width: 100px;
+    height: 100px;
+}
+
+/* lyrics page */
+.lyrics__container{
+    height: 420px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+    max-width: 790px;
+    width: 100%;
+}
+.lyrics__container ul{
+    transition: 0.3s;
+    width: 100%;
+    text-align: center;
+}
+.lyrics__container li{
+    height: 30px;
+    line-height: 30px;
+    transition: 0.3s;
+    list-style: none;
+    color: rgb(var(--mdui-color-secondary));
+    opacity: .8;
+    margin: 10px 0;
+}
+.lyrics__container li.active{
+    color: rgb(var(--mdui-color-primary));
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.lyrics__loading_wrapper {
+    display: none;
+    justify-content: center;
+    padding: 2em;
 }

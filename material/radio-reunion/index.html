@@ -50,6 +50,42 @@
         </main>
     </div>
 
+    <div class="app_page" id="app_page__featured">
+        <header>
+            <mdui-button-icon icon="arrow_back" class="header__back_btn"></mdui-button-icon>
+            <div class="header__title">推荐列表</div>
+        </header>
+        <main>
+            <div class="featured__container">
+                <mdui-tabs value="radio_stations" full-width variant="secondary">
+                    <mdui-tab value="radio_stations" icon="radio--outlined" inline>电台</mdui-tab>
+
+                    <mdui-tab-panel slot="panel" value="radio_stations">
+                        <mdui-list class="featured__radio_stations_list"></mdui-list>
+                    </mdui-tab-panel>
+                </mdui-tabs>
+                <div class="featured__loading_container">
+                    <mdui-circular-progress class="featured__loading"></mdui-circular-progress>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="app_page" id="app_page__lyrics">
+        <header>
+            <mdui-button-icon icon="arrow_back" class="header__back_btn"></mdui-button-icon>
+            <div class="header__title">歌词详情</div>
+        </header>
+        <main>
+            <div class="lyrics__loading_wrapper">
+                <mdui-circular-progress class="lyrics__loading"></mdui-circular-progress>
+            </div>
+            <div class="lyrics__container">
+                <ul></ul>
+            </div>
+        </main>
+    </div>
+
     <div class="player">
         <div class="player__container">
             <div class="player__loading">
@@ -89,7 +125,10 @@
 
     <script src="./script.js"></script>
     <script src="./search.js"></script>
+    <script src="./featured.js"></script>
+    <script src="./ui.js"></script>
     <script src="./responsive.js"></script>
+    <script src="./lyrics.js"></script>
 
 </body>
 </html>

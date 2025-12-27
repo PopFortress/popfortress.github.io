@@ -1,8 +1,6 @@
+// essential ui logic
 const $ = (query) => mdui.$(query)[0];
 
-const startOptionUrl = $('#start__url_option');
-const startOptionSearch = $('#start__search_option');
-const startOptionFeatured = $('#start__featured_option');
 const audio = $('#player-audio');
 const playerTitle = $('.player__title');
 const playerArtist = $('.player__artist');
@@ -19,14 +17,12 @@ const playlistList = $('.playlist__playlist');
 const playlistClearBtn = $('.playlist__clear_btn');
 const playbackModeBtn = $('.playback__ordering_btn');
 
-const headerBackBtns = document.querySelectorAll('.header__back_btn');
 
-let currentPage = 'main';
-
+// essential definitions
 const xhr = new XMLHttpRequest();
 const apiServer = 'https://163api.qijieya.cn';
 
-
+// objects definitions
 class Song {
     constructor(options) {
         this.title = options.title;
@@ -34,6 +30,9 @@ class Song {
         this.url = options.url;
         this.cover = options.cover;
         this.album = options.album;
+        if (options.id) {
+            this.id = options.id; // only for ncm
+        };
     };
 };
 
@@ -42,8 +41,11 @@ class Player {
         this.currentIndex = options.currentIndex;
         this.playlist = options.playlist;
         this.playback_mode = options.playback_mode;
+        this.loadingState = 'loaded'; // 'loading' or 'loaded'
     };
     playSong(index) {
+        console.log(index);
+        
         const song = this.playlist.playlist[index];
         audio.src = song.url;
         playerCover.style.display = 'none';
@@ -52,15 +54,44 @@ class Player {
         playerArtist.innerText = song.artist;
         playerTimeElapsed.innerText = '0:00';
         audio.play();
-        setColorScheme();
         this.currentIndex = index;
         playlistList.childNodes.forEach((item) => {
             item.active = false;
         });
         song.itemEle.active = true;
+        setColorScheme();
     };
     getCurrentSong() {
         return this.playlist.playlist[this.currentIndex];
+    };
+    resetPlayer() {
+        audio.pause();
+        playerCover.style.backgroundImage = 'url("./radioreunion__1.1.png")';
+        playerTitle.innerText = 'Radio Reunion';
+        playerArtist.innerText = '团结电台';
+        playerProgressbar.disabled = true;
+        setTimeout(() => {
+            playerTimeElapsed.innerText = playerDuration.innerText ='0:00';
+            playerProgressbar.value = 0;
+        }, 100);
+        audio.removeAttribute('src');
+        mdui.removeColorScheme();
+        this.switchLoadingState('loaded');
+    };
+    switchLoadingState(status) {
+        switch (status) {
+            case 'loading':
+                playerLoading.style.display = 'flex';
+                playerCover.style.display = 'none';
+                this.loadingState = 'loading';
+                break;
+            case 'loaded':
+                playerLoading.style.display = 'none';
+                playerCover.style.display = 'block';
+                this.loadingState = 'loaded';
+            default:
+                break;
+        };
     };
 };
 
@@ -87,14 +118,16 @@ class Playlist {
         };
         listItem.appendChild(coverImg);
         listItem.appendChild(removeBtn);
-        playlistList.firstChild ? playlistList.firstChild.before(listItem) : playlistList.appendChild(listItem);
+        playlistList.appendChild(listItem);
+        listItem.dataset.index = item.index;
         options.itemEle = listItem;
         listItem.onclick = (e) => {
             if (e.target === removeBtn) {
                 return;
             } else {
-                player.playSong(item.index);
+                player.playSong(+e.target.dataset.index);
                 playlistContainer.open = false;
+                loadLyrics(player.getCurrentSong().id);
             };
         };
         this.playlist.push(item);
@@ -102,10 +135,9 @@ class Playlist {
     };
     removeItem(index) {
         this.playlist[index].itemEle.remove();
-        this.playlist.splice(index, 1);
-        this.length--;
+        this.playlist[index] = null;
         if (player.currentIndex === index) {
-            resetPlayer();
+            player.resetPlayer();
         };
     };
     clearItems() {
@@ -115,34 +147,32 @@ class Playlist {
     };
 };
 
-function resetPlayer() {
-    audio.pause();
-    playerCover.style.backgroundImage = 'url("./radioreunion__1.1.png")';
-    playerTitle.innerText = 'Radio Reunion';
-    playerArtist.innerText = '团结电台';
-    playerProgressbar.disabled = true;
-    setTimeout(() => {
-        playerTimeElapsed.innerText = playerDuration.innerText ='0:00';
-        playerProgressbar.value = 0;
-    }, 100);
-    audio.removeAttribute('src');
-    player_info = { cover: '', title: '', artist: '', url: '' };
-    mdui.removeColorScheme();
+class LyricsDisplayer {
+    constructor() {
+        this.lyrics = '[00:00.00]团结电台　Radio Reunion';
+    };
 };
 
+
+
+// initialize objects
 const playlist = new Playlist();
 const player = new Player({
     currentIndex: 0,
     playlist: playlist,
     playback_mode: 'list_repeat',
 });
+const lyricsDisplayer = new LyricsDisplayer();
 
+
+// assistant functions
 function time_formatting(seconds) {
     return `${Math.floor(seconds / 60)}:${Math.floor(seconds % 60) < 10 ? '0' : ''}${Math.floor(seconds % 60)}`
 };
 
 function setColorScheme() {
     const image = new Image();
+    image.crossOrigin = 'anonymous';
     image.src = player.getCurrentSong().cover;
     mdui.getColorFromImage(image).then((color) => {
         mdui.setColorScheme(color);
@@ -150,6 +180,7 @@ function setColorScheme() {
 };
 
 
+// player behavior control
 audio.addEventListener('canplay', ()=> {
     if (audio.duration === Infinity) {
         playerDuration.innerText = '';
@@ -159,8 +190,7 @@ audio.addEventListener('canplay', ()=> {
         playerProgressbar.disabled = false;
     };
     playerCover.style.backgroundImage = `url(${player.getCurrentSong().cover})`;
-    playerLoading.style.display = 'none';
-    playerCover.style.display = 'block';
+    player.switchLoadingState('loaded');
 });
 
 function progressUpdateHandler() {
@@ -182,8 +212,7 @@ playerProgressbar.addEventListener('change', () => {
 
 audio.addEventListener('play', ()=> {
     playerPlayback.icon = 'pause';
-    playerLoading.style.display = 'none';
-    playerCover.style.display = 'block';
+    player.switchLoadingState('loaded');
 });
 audio.addEventListener('pause', ()=> {
     playerPlayback.icon = 'play_arrow';
@@ -195,42 +224,22 @@ playerPlayback.onclick = () => {
 };
 audio.addEventListener('error', () => {
     mdui.snackbar({ message: `无法播放资源: ${audio.currentSrc}`});
-    playerLoading.style.display = 'none';
-    playerCover.style.display = 'block';
+    player.switchLoadingState('loaded');
 });
 
-startOptionUrl.onclick = ()=> {
-    mdui.prompt({
-        headline: "输入 URL.",
-        textFieldOptions: {
-            placeholder: "https://example.com/stream",
-            pattern: '[a-zA-z]+://[^\]*',
-        },
-        onConfirm: (value) => {
-            if (value.trim()) {
-                const url = value.trim();
-                playlist.addItem({
-                    url: url,
-                    cover: './radioreunion__1.1.png',
-                    title: url,
-                    artist: url.split('://')[1].split('/')[0],
-                    album: '团结电台（媒体流）'
-                });
-                player.playSong(playlist.length - 1);
-            } else {
-                return false;
-            }
-        }
-    })
-}
 
+// playlist ui
 playerPlaylistBtn.onclick = () => {
     playlistContainer.open = playlistContainer.open ? false : true;
 }
 
+// mdui localization
 mdui.loadLocale((locale) => import(`https://unpkg.com/mdui@2/locales/${locale}.js`));
 mdui.setLocale('zh-cn');
 
+
+// player control logic.
+// space play/pause.
 document.onkeydown = (e) => {
     if (e.key === ' ' && e.target.tagName !== 'MDUI-TEXT-FIELD') {
         e.preventDefault();
@@ -238,44 +247,69 @@ document.onkeydown = (e) => {
     };
 };
 
+
+// clear playlist
 playlistClearBtn.onclick = () => {
     mdui.confirm({
         headline: '清除播放列表',
         description: '所有项目将被移除。你确定吗？',
         onConfirm: () => {
             playlist.clearItems();
-            resetPlayer();
+            player.resetPlayer();
         },
     });
 };
 
+// player behavior when ended
 audio.addEventListener('ended', () => {
+    let next_index;
     switch (player.playback_mode) {
         case 'list_repeat':
             if (player.currentIndex === playlist.length - 1) {
-                player.playSong(0);
+                let founded = false;
+                playlist.playlist.forEach(item => {
+                    if (item && !founded) {
+                        founded = true;
+                        player.playSong(item.index);
+                        next_index = item.index;
+                    };
+                });
             } else {
-                player.playSong(player.currentIndex + 1);
+                next_index = player.currentIndex + 1
+                player.playSong(next_index);
             };
             break;
         case 'shuffle':
-            player.playSong(Math.floor(Math.random() * playlist.length));
+            next_index = Math.floor(Math.random() * playlist.length);
+            player.playSong(next_index);
             break;
         case 'play_list_once':
             if (player.currentIndex < playlist.length) {
-                player.playSong(player.currentIndex + 1);
+                next_index = player.currentIndex + 1
+                player.playSong(next_index);
             };
             break;
         default:
             break;
     };
+    console.log(next_index);
+    if (next_index) {
+        audio.addEventListener('canplay', loadingHandler);
+    };
+    function loadingHandler() {
+        setTimeout(() => {
+            loadLyrics(playlist.playlist[next_index].id);
+        }, 3000);
+        audio.removeEventListener('canplay', loadingHandler);
+    };
 });
 
+// audio loading behavior
 audio.addEventListener('waiting', () => {
-    playerLoading.style.display = 'flex';
-    playerCover.style.display = 'none';
+    player.switchLoadingState('loading');
 });
 
+// playback mode
 playbackModeBtn.onclick = () => {
     switch (player.playback_mode) {
         case 'list_repeat':
@@ -300,19 +334,6 @@ playbackModeBtn.onclick = () => {
     };
 };
 
-startOptionSearch.onclick =() => {
-    switchPage('search');
-    searchInput.focus();
+playerCover.onclick = () => {
+    switchPage('lyrics');
 };
-
-function switchPage(destination) {
-    $(`#app_page__${currentPage}`).style.display = 'none';
-    $(`#app_page__${destination}`).style.display = 'block';
-    currentPage = destination;
-};
-
-headerBackBtns.forEach((btn) => {
-    btn.onclick = () => {
-        switchPage('main');
-    };
-});
