@@ -26,7 +26,7 @@ async function fetchFeaturedList() {
             song.cover = `https://seep.eu.org/${song.cover}`;
             playlist.addItem(song);
             player.playSong(playlist.length - 1);
-            resetLyrics();
+            lyricsDisplayer.resetLyrics();
         };
         radioStationsList.appendChild(listitem);
     });

@@ -114,12 +114,22 @@
 
     <mdui-navigation-drawer class="playlist" placement="right" close-on-esc close-on-overlay-click modal>
         <div class="playlist__header">
-            <div class="playlist__title">播放列表</div>
+            <div class="playlist__title">播放列表<mdui-badge class="playlist__title_badge"></mdui-badge></div>
             <mdui-button-icon icon="repeat" class="playback__ordering_btn"></mdui-button-icon>
             <mdui-button-icon icon="clear_all" class="playlist__clear_btn"></mdui-button-icon>
         </div>
         <mdui-list class="playlist__playlist"></mdui-list>
     </mdui-navigation-drawer>
+
+    <div class="welcome_overlay">
+        <div class="welcome__content">
+            <div class="header__title">Radio <span style="font-weight: 600;">Reunion</span></div>
+            <div class="welcome__desc">
+                <mdui-icon name='headphones'></mdui-icon>
+                <div>请佩戴耳机以享受最佳体验。</div>
+            </div>
+        </div>
+    </div>
 
     <audio id="player-audio"></audio>
 

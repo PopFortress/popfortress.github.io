@@ -444,7 +444,12 @@ async function fetchFestival() {
     const res = await fetch('https://seep.eu.org/https://api.52vmy.cn/api/wl/day/world');
     const data = await res.json();
     const date = data.info[0].date;
-    const text = `${data.info[0].desc}.　(${date.slice(0, 4)}年${date.slice(4, 6)}月${date.slice(6, 8)}日)`;
+    let text;
+    if (data.info[0].countdown === 0) {
+        text = `今天是 ${data.info[0].festival}`;
+    } else {
+        text = `${data.info[0].desc}.　(${date.slice(0, 4)}年${date.slice(4, 6)}月${date.slice(6, 8)}日)`;
+    };
     festivalText.innerText = text;
     festivalText.style.display = 'block';
 };

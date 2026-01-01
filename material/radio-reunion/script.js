@@ -16,6 +16,7 @@ const playerPlaylistBtn = $('.player__playlist_btn');
 const playlistList = $('.playlist__playlist');
 const playlistClearBtn = $('.playlist__clear_btn');
 const playbackModeBtn = $('.playback__ordering_btn');
+const playlistBadge = $('.playlist__title_badge');
 
 
 // essential definitions
@@ -127,11 +128,12 @@ class Playlist {
             } else {
                 player.playSong(+e.target.dataset.index);
                 playlistContainer.open = false;
-                loadLyrics(player.getCurrentSong().id);
+                lyricsDisplayer.loadLyrics(player.getCurrentSong().id);
             };
         };
         this.playlist.push(item);
         this.length++;
+        this.updateBadge();
     };
     removeItem(index) {
         this.playlist[index].itemEle.remove();
@@ -139,17 +141,48 @@ class Playlist {
         if (player.currentIndex === index) {
             player.resetPlayer();
         };
+        this.updateBadge();
     };
     clearItems() {
         playlistList.innerHTML = '';
         this.playlist = [];
         this.length = 0;
+        this.updateBadge();
+    };
+    updateBadge() {
+        playlistBadge.innerText = this.length;
+        if (this.length > 0) {
+            playlistBadge.style.display = 'inline-flex';
+        } else {
+            playlistBadge.style.display = 'none';
+        };
     };
 };
 
 class LyricsDisplayer {
     constructor() {
         this.lyrics = '[00:00.00]团结电台　Radio Reunion';
+    };
+    loadLyrics(id) {
+        if (id) {
+            doms.loading.style.display = 'flex';
+            this.resetLyrics();
+            xhr.open('GET', `https://163api.qijieya.cn/lyric?id=${id}`);
+            xhr.send();
+            xhr.onload = () => {
+                doms.loading.style.display = 'none';
+                const data = JSON.parse(xhr.responseText);
+                if (data.lrc) {
+                    this.lyrics = data.lrc.lyric;
+                    lrcData = parseLrc(this.lyrics);
+                    createLrcElement();
+                };
+            };
+        };
+    };
+    resetLyrics() {
+        doms.ul.style.transform = `translateY(0px)`;
+        doms.ul.innerHTML = '';
     };
 };
 
@@ -284,7 +317,7 @@ audio.addEventListener('ended', () => {
             player.playSong(next_index);
             break;
         case 'play_list_once':
-            if (player.currentIndex < playlist.length) {
+            if (player.currentIndex < playlist.length - 1) {
                 next_index = player.currentIndex + 1
                 player.playSong(next_index);
             };
@@ -293,13 +326,13 @@ audio.addEventListener('ended', () => {
             break;
     };
     console.log(next_index);
-    if (next_index) {
+    if (next_index > -1) {
         audio.addEventListener('canplay', loadingHandler);
     };
     function loadingHandler() {
         setTimeout(() => {
-            loadLyrics(playlist.playlist[next_index].id);
-        }, 3000);
+            lyricsDisplayer.loadLyrics(playlist.playlist[next_index].id);
+        }, 1000);
         audio.removeEventListener('canplay', loadingHandler);
     };
 });

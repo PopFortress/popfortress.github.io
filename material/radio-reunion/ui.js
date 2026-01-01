@@ -3,8 +3,9 @@
 const startOptionUrl = $('#start__url_option');
 const startOptionSearch = $('#start__search_option');
 const startOptionFeatured = $('#start__featured_option');
-const headerBackBtns = document.querySelectorAll('.header__back_btn');
+const welcomeOverlay = $('.welcome_overlay');
 let currentPage = 'main';
+let pages_stack = [];
 startOptionSearch.onclick =() => {
     switchPage('search');
     searchInput.focus();
@@ -15,19 +16,28 @@ startOptionFeatured.onclick = () => {
 };
 
 function switchPage(destination) {
+    if (!pages_stack.includes(destination) && currentPage !== destination) {
+        pages_stack.push(currentPage);
+    };
     $(`#app_page__${currentPage}`).style.display = 'none';
     $(`#app_page__${destination}`).style.display = 'block';
     currentPage = destination;
+    // back btn handler
+    if (currentPage !== 'main') {
+        $(`#app_page__${currentPage} .header__back_btn`).onclick = () => {
+            switchPage(pages_stack[pages_stack.length - 1]);
+            pages_stack.pop();
+        };
+    } else {
+        pages_stack = [];
+    };
+
+    // page switching events handling
     if (destination === 'featured') {
         fetchFeaturedList();
     };
 };
 
-headerBackBtns.forEach((btn) => {
-    btn.onclick = () => {
-        switchPage('main');
-    };
-});
 
 
 // url option handler
@@ -57,3 +67,13 @@ startOptionUrl.onclick = ()=> {
         },
     });
 };
+
+// welcome screen
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        welcomeOverlay.style.opacity = 0;
+        setTimeout(() => {
+            welcomeOverlay.style.display = 'none';
+        }, 300)
+    }, 1000);
+})

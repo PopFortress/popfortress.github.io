@@ -59,7 +59,7 @@ function searchSongs(page) {
                             const song = new Song(info);
                             playlist.addItem(song);
                             player.playSong(playlist.length - 1);
-                            loadLyrics(info.id);
+                            lyricsDisplayer.loadLyrics(info.id);
                         };
                     };
                     searchList.appendChild(listitem);

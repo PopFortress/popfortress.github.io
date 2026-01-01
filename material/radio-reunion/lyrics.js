@@ -64,10 +64,7 @@ function createLrcElement(){
 }
 createLrcElement()
 
-function resetLyrics() {
-    doms.ul.style.transform = `translateY(0px)`;
-    doms.ul.innerHTML = '';
-};
+
 
 // 容器高度
 var containerHeight = doms.container.clientHeight;
@@ -109,18 +106,3 @@ function setOffset(){
 // 事件监听
 doms.audio.addEventListener('timeupdate', setOffset);
 
-function loadLyrics(id) {
-    doms.loading.style.display = 'flex';
-    resetLyrics();
-    xhr.open('GET', `https://163api.qijieya.cn/lyric?id=${id}`);
-    xhr.send();
-    xhr.onload = () => {
-        doms.loading.style.display = 'none';
-        const data = JSON.parse(xhr.responseText);
-        if (data.lrc) {
-            lyricsDisplayer.lyrics = data.lrc.lyric;
-            lrcData = parseLrc(lyricsDisplayer.lyrics);
-            createLrcElement();
-        };
-    };
-};
