@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    letter-spacing: 1px;
+}
+
+section {
+    display: flex;
+    width: 100%;
+    padding: 3em;
+    column-gap: 70px;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+section:nth-of-type(odd) {
+    background-color: rgb(var(--mdui-color-surface-container-low));
+    justify-content: flex-start;
+}
+
+section:nth-of-type(even) {
+    background-color: rgb(var(--mdui-color-surface-container-high));
+    flex-direction: row-reverse;
+}
+
+header {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    background-color: rgb(var(--mdui-color-surface-container));
+}
+
+.header__title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+h1 {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.section__title {
+    font-size: 2.2rem;
+}
+
+.section__desc {
+    line-height: 1.5;
+}
+
+.section__text {
+    max-width: 39%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.section__text mdui-button {
+    width: fit-content;
+}
+
+@media screen and (max-width: 575px) {
+    .section__text {
+        max-width: 100%;
+    }
+    section {
+        flex-wrap: wrap;
+    }
+}
+
+.section__contents {
+    display: flex;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+.app_item {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    padding: 12px;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+}
+
+.app_item mdui-icon {
+    font-size: 2.6rem;
+}
+
+.example_applications {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.platforms {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
+
+.platforms__image {
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.platforms__image.gitee {
+    background-image: url(https://gitee.com/static/images/logo.svg);
+}
+
+.platforms__image.github {
+    background-image: url(https://github.com/fluidicon.png);
+}
+
+.platforms__image.gitlab {
+    background-image: url(https://gitlab.com/assets/logo-911de323fa0def29aaf817fca33916653fc92f3ff31647ac41d2c39bbe243edb.svg);
+}
+
+.platforms__image.codeberg {
+    background-image: url(https://codeberg.org/assets/img/logo-250px.png);
+}
+
+.platforms__image.bitbucket {
+    background-image: url(https://www.kudoslab.io/img/integration/bitbucket.png);
+}
+
+.platforms__image.gitpod {
+    background-image: url(https://www.tech-logo.com/static/images/icons/gitpod/gitpod.png);
+}
+
+.platforms__name {
+    font-size: 1.4rem;
+}
+
+.platforms__latency {
+    font-size: 1.6rem;
+    color: rgb(var(--mdui-color-error));
+    padding-top: 1.2rem;
+}
+
+.platform {
+    text-align: center;
+    padding: 1.5rem;
+}

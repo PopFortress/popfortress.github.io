@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cloud Services | 云服务</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+</head>
+<body>
+    
+    <header>
+        <div class="header__title">
+            <mdui-icon name="cloud--outlined"></mdui-icon>
+            <h1>Fortress 云服务</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <section>
+            <div class="section__text">
+                <div class="section__title">向您介绍 Fortress 云服务生态</div>
+                <div class="section__desc">
+                    Fortress 云服务是以 Gitee 仓库托管为基础的云端数据存储、分发和同步服务。自 2025 年 9 月启动以来，项目已与 popfortress.github.io 上的多个网站应用深度集成，为用户提供无缝流畅的跨设备使用体验。
+                </div>
+                <mdui-button href="https://gitee.com/popfortress/dev-data" icon="open_in_new" target="_blank">查看示例仓库</mdui-button>
+            </div>
+            <div class="section__contents">
+                <div class="example_applications">
+                    <mdui-card class="app_item" variant="filled">
+                        <mdui-icon name="menu_book"></mdui-icon>
+                        <div class="app_item__name">中-英词典</div>
+                        <mdui-button-icon icon="open_in_new" href="/material/dictionary/" target="_blank"></mdui-button-icon>
+                    </mdui-card>
+                    <mdui-card class="app_item" variant="filled">
+                        <mdui-icon name="radio--outlined"></mdui-icon>
+                        <div class="app_item__name">团结电台</div>
+                        <mdui-button-icon icon="open_in_new" href="/material/radio-reunion/" target="_blank"></mdui-button-icon>
+                    </mdui-card>
+                    <mdui-card class="app_item" variant="filled">
+                        <mdui-icon name="calendar_month--outlined"></mdui-icon>
+                        <div class="app_item__name">日历·日程</div>
+                        <mdui-tooltip content="正在开发中…" placement="bottom">
+                            <div>
+                                <mdui-button-icon icon="open_in_new" disabled></mdui-button-icon>
+                            </div>
+                        </mdui-tooltip>
+                    </mdui-card>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section__text">
+                <div class="section__title">为什么选择我们？</div>
+                <div class="section__desc">
+                    <strong>稳定且快速的存储服务</strong>
+                    <div>借助于 Gitee 遍布于中国大陆的数据节点服务器和庞大的 CDN 网络，我们提供稳定数据存储与托管服务，使中国大陆的用户可以快速、轻松地访问我们的服务，助您跨设备同步数据省时又省力。</div>
+                </div>
+            </div>
+            <div class="section__contents platforms">
+                <mdui-card variant="filled" class="platform">
+                    <div class="platforms__image gitee"></div>
+                    <div class="platforms__latency" style="color: #05ad05;">45ms</div>
+                </mdui-card>
+                <div class="platform">
+                    <div class="platforms__image github"></div>
+                    <div class="platforms__latency">1050ms</div>
+                </div>
+                <div class="platform">
+                    <div class="platforms__image gitlab"></div>
+                    <div class="platforms__latency">924ms</div>
+                </div>
+                <div class="platform">
+                    <div class="platforms__image codeberg"></div>
+                    <div class="platforms__latency">726ms</div>
+                </div>
+                <div class="platform">
+                    <div class="platforms__image bitbucket"></div>
+                    <div class="platforms__latency">810ms</div>
+                </div>
+                <div class="platform">
+                    <div class="platforms__image gitpod"></div>
+                    <div class="platforms__latency">2177ms</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>
