@@ -63,16 +63,6 @@ body {
     max-width: 500px;
 }
 
-@media screen and (max-width: 710px) {
-    .player__info {
-        max-width: calc(100vw - 212px);
-        padding: 1em .5em;
-    }
-    .player__progress {
-        min-width: 0 !important;
-    }
-}
-
 .player__progress {
     min-width: 400px;
     width: 100%;
@@ -80,6 +70,18 @@ body {
     align-items: center;
     gap: .5em;
 }
+
+@media screen and (max-width: 710px) {
+    .player__info {
+        max-width: calc(100vw - 212px);
+        padding: 1em .5em;
+    }
+    .player__progress {
+        min-width: 0;
+        width: calc(100vw - 222px - 1em);
+    }
+}
+
 .player__progress-bar {
     width: 100%;
     transform: scale(.95);
@@ -180,6 +182,7 @@ main {
 }
 
 .search__result {
+    width: 100%;
     max-width: 790px;
 }
 
@@ -216,7 +219,7 @@ mdui-tab::part(icon) {
 
 /* lyrics page */
 .lyrics__container{
-    height: 420px;
+    height: calc(100vh - 200px - 2em);
     overflow-x: hidden;
     overflow-y: auto;
     scrollbar-width: none;
@@ -229,7 +232,7 @@ mdui-tab::part(icon) {
     text-align: center;
 }
 .lyrics__container li{
-    height: 30px;
+    height: auto;
     line-height: 30px;
     transition: 0.3s;
     list-style: none;
@@ -252,6 +255,7 @@ mdui-tab::part(icon) {
 .playlist__title_badge {
     transform: translate(-8px, -14px);
     display: none;
+    background: rgb(var(--mdui-color-primary));
 }
 
 mdui-badge {
@@ -281,4 +285,27 @@ mdui-badge {
 .welcome__desc {
     display: flex;
     gap: 12px;
+}
+
+.detail__see_mv {
+    display: none;
+}
+
+.detail__actions {
+    margin-left: auto;
+}
+
+.mv__video {
+    max-width: 46%;
+    border-radius: 1em;
+}
+
+@media screen and (max-width: 425px) {
+    .mv__video {
+        max-width: 100%;
+    }
+}
+
+.search__tabs {
+    display: none;
 }

@@ -4,6 +4,8 @@ const startOptionUrl = $('#start__url_option');
 const startOptionSearch = $('#start__search_option');
 const startOptionFeatured = $('#start__featured_option');
 const welcomeOverlay = $('.welcome_overlay');
+const viewMV = $('.detail__see_mv');
+const mvVideo = $('.mv__video');
 let currentPage = 'main';
 let pages_stack = [];
 startOptionSearch.onclick =() => {
@@ -33,9 +35,32 @@ function switchPage(destination) {
     };
 
     // page switching events handling
-    if (destination === 'featured') {
-        fetchFeaturedList();
+    switch (destination) {
+        case 'featured':
+            fetchFeaturedList();
+            break;
+        case 'lyrics':
+            checkMVAvailability();
+            break;
+        case 'mv':
+            audio.pause();
+            loadMV();
+            break;
+        default:
+            break;
     };
+};
+
+function checkMVAvailability() {
+    if (player.getCurrentSong().mvid) {
+        viewMV.style.display = 'block';
+    } else {
+        viewMV.style.display = 'none';
+    };
+};
+
+viewMV.onclick = () => {
+    switchPage('mv');
 };
 
 

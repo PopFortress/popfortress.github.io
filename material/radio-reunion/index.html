@@ -43,9 +43,21 @@
                 <mdui-text-field class="search__input" clearable variant="outlined" clear-icon="close" placeholder="查找歌曲和电台..." type="search"></mdui-text-field>
             </div>
             <div class="search__result">
-                <mdui-circular-progress class="search__loading" style="display: none;"></mdui-circular-progress>
-                <div class="search__result_stats"></div>
-                <mdui-list class="search__result_list"></mdui-list>
+                <mdui-tabs value="songs" full-width variant="secondary" class="search__tabs">
+                    <mdui-tab value="songs" icon="music_note--outlined" inline>歌曲</mdui-tab>
+                    <mdui-tab value="stations" icon="radio--outlined" inline>电台</mdui-tab>
+
+                    <mdui-tab-panel slot="panel" value="songs">
+                        <mdui-circular-progress class="search__loading" style="display: none;"></mdui-circular-progress>
+                        <div class="search__result_stats"></div>
+                        <mdui-list class="search__result_list"></mdui-list>
+                    </mdui-tab-panel>
+                    
+                    <mdui-tab-panel slot="panel" value="stations">
+                        <mdui-circular-progress class="stations__loading" style="display: none;"></mdui-circular-progress>
+                        <mdui-list class="stations__result_list"></mdui-list>
+                    </mdui-tab-panel>
+                </mdui-tabs>
             </div>
         </main>
     </div>
@@ -75,6 +87,9 @@
         <header>
             <mdui-button-icon icon="arrow_back" class="header__back_btn"></mdui-button-icon>
             <div class="header__title">歌词详情</div>
+            <div class="detail__actions">
+                <mdui-button icon="movie--outlined" class="detail__see_mv" variant="tonal">查看 MV</mdui-button>
+            </div>
         </header>
         <main>
             <div class="lyrics__loading_wrapper">
@@ -83,6 +98,16 @@
             <div class="lyrics__container">
                 <ul></ul>
             </div>
+        </main>
+    </div>
+
+    <div class="app_page" id="app_page__mv">
+        <header>
+            <mdui-button-icon icon="arrow_back" class="header__back_btn"></mdui-button-icon>
+            <div class="header__title">MV 详情</div>
+        </header>
+        <main>
+            <video controls class="mv__video"></video>
         </main>
     </div>
 
@@ -139,6 +164,7 @@
     <script src="./ui.js"></script>
     <script src="./responsive.js"></script>
     <script src="./lyrics.js"></script>
+    <script src="./mv.js"></script>
 
 </body>
 </html>

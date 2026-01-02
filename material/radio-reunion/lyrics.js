@@ -29,8 +29,10 @@ function parseLrc(lrc){
             time:parseTime(timeStr),
             words: parts[1]
         }
-        result.push(obj);
-    }
+        if (str) {
+            result.push(obj);
+        };
+    };
     return result;
 }
 

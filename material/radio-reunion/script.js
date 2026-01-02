@@ -31,8 +31,13 @@ class Song {
         this.url = options.url;
         this.cover = options.cover;
         this.album = options.album;
+
+        // only for ncm
         if (options.id) {
-            this.id = options.id; // only for ncm
+            this.id = options.id;
+        };
+        if (options.mvid) {
+            this.mvid = options.mvid;
         };
     };
 };
@@ -78,6 +83,7 @@ class Player {
         audio.removeAttribute('src');
         mdui.removeColorScheme();
         this.switchLoadingState('loaded');
+        lyricsDisplayer.resetLyrics();
     };
     switchLoadingState(status) {
         switch (status) {
@@ -150,12 +156,19 @@ class Playlist {
         this.updateBadge();
     };
     updateBadge() {
-        playlistBadge.innerText = this.length;
-        if (this.length > 0) {
+        const playlist_length = this.getRealLength();
+        playlistBadge.innerText = playlist_length;
+        if (playlist_length > 0) {
             playlistBadge.style.display = 'inline-flex';
         } else {
             playlistBadge.style.display = 'none';
         };
+    };
+    getRealLength() {
+        return this.playlist.filter((item) => item !== null).length;
+    };
+    getFilteredList() {
+        return this.playlist.filter((item) => item !== null);
     };
 };
 
@@ -215,7 +228,7 @@ function setColorScheme() {
 
 // player behavior control
 audio.addEventListener('canplay', ()=> {
-    if (audio.duration === Infinity) {
+    if (audio.duration === Infinity || audio.duration === 0) {
         playerDuration.innerText = '';
         playerProgressbar.disabled = true;
     } else {
@@ -298,7 +311,15 @@ audio.addEventListener('ended', () => {
     let next_index;
     switch (player.playback_mode) {
         case 'list_repeat':
-            if (player.currentIndex === playlist.length - 1) {
+            let isLastSong;
+            if (playlist.playlist[playlist.length - 1] && player.currentIndex === playlist.length - 1) {
+                isLastSong = true;
+            } else if (player.currentIndex === playlist.getRealLength() - 1) {
+                isLastSong = true;
+            } else {
+                isLastSong = false;
+            };
+            if (isLastSong) {
                 let founded = false;
                 playlist.playlist.forEach(item => {
                     if (item && !founded) {
@@ -318,7 +339,9 @@ audio.addEventListener('ended', () => {
             break;
         case 'play_list_once':
             if (player.currentIndex < playlist.length - 1) {
-                next_index = player.currentIndex + 1
+                const list = playlist.getFilteredList();
+                next_index = list.indexOf(player.getCurrentSong()) + 1;
+                next_index = playlist.playlist.indexOf(list[next_index]);
                 player.playSong(next_index);
             };
             break;
@@ -328,6 +351,7 @@ audio.addEventListener('ended', () => {
     console.log(next_index);
     if (next_index > -1) {
         audio.addEventListener('canplay', loadingHandler);
+        checkMVAvailability();
     };
     function loadingHandler() {
         setTimeout(() => {
