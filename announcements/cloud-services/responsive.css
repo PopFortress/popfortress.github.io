@@ -1,0 +1,11 @@
+@media screen and (max-width: 575px) {
+    .section__text {
+        max-width: 100%;
+    }
+    section {
+        flex-wrap: wrap;
+    }
+    .advantages {
+        flex-wrap: wrap;
+    }
+}

@@ -8,11 +8,15 @@ const searchTabs = $('.search__tabs');
 const stationsLoading = $('.stations__loading');
 const stationsList = $('.stations__result_list');
 
-const stationsAPI = 'https://seep.eu.org/https://radio5.cn/api/play';
+const stationsAPI = 'https://radio5.cn/api/play';
 
 searchInput.onkeydown = (e) => {
     if (e.key === 'Enter') {
-        searchSongs(1);
+        if (searchTabs.value === 'songs') {
+            searchSongs(1);
+        } else {
+            searchStations();
+        };
     };
 };
 
@@ -20,7 +24,7 @@ function searchSongs(page) {
     const keywords = searchInput.value.trim();
     if (keywords) {
         searchTabs.style.display = 'flex';
-        searchLoading.style.display = 'block';
+        searchLoading.style.display = 'flex';
         searchList.innerHTML = '';
         xhr.open('GET', `${apiServer}/cloudsearch?keywords=${keywords}&limit=20&offset=${(page - 1) * 20}`);
         xhr.send();
@@ -92,7 +96,7 @@ function searchSongs(page) {
 function searchStations() {
     const keywords = searchInput.value.trim();
     if (keywords) {
-        stationsLoading.style.display = 'block';
+        stationsLoading.style.display = 'flex';
         stationsList.innerHTML = '';
         xhr.open('GET', `${stationsAPI}/search?search=${keywords}`);
         xhr.send();
@@ -103,17 +107,46 @@ function searchStations() {
                 listitem.headline = station.title;
                 listitem.description = station.author;
                 const coverImg = document.createElement('img');
-                coverImg.outerHTML = station.thumbnail;
+                coverImg.src = station.thumbnail.split('src=\"')[1].split('\"')[0];
                 coverImg.slot = 'icon';
+                coverImg.className = 'playlist__item_cover';
+                const station_info = {};
+                station_info.webpage_url = station.url;
+                station_info.cover = `https://seep.eu.org/${coverImg.src}`;
+                station_info.title = station.title;
+                station_info.artist = station.author;
+                station_info.album = 'radio5.cn';
+                listitem.dataset.station_info = JSON.stringify(station_info);
+                listitem.onclick = (e) => {
+                    player.switchLoadingState('loading');
+                    const info = JSON.parse(e.target.dataset.station_info);
+                    xhr.open('GET', `https://seep.eu.org/${info.webpage_url}`);
+                    xhr.send();
+                    xhr.onload = () => {
+                        const postid = xhr.responseText.split('postid-')[1].split(' ')[0];
+                        xhr.open('GET', `https://seep.eu.org/${stationsAPI}/play/${postid}?type=post`);
+                        xhr.send();
+                        xhr.onload = () => {
+                            const data = JSON.parse(xhr.responseText);
+                            info.url = data.stream_url;
+                            const song = new Song(info);
+                            playlist.addItem(song);
+                            player.playSong(playlist.length - 1);
+                        };
+                    };
+                };
                 listitem.appendChild(coverImg);
                 stationsList.appendChild(listitem);
             });
+            stationsLoading.style.display = 'none';
         };
     };
 };
 
-// searchTabs.onchange = () => {
-//     if (searchTabs.value = 'stations') {
-//         searchStations();
-//     };
-// };
+searchTabs.onchange = () => {
+    if (searchTabs.value === 'stations') {
+        searchStations();
+    } else {
+        searchSongs(1);
+    };
+};

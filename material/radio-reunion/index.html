@@ -48,13 +48,17 @@
                     <mdui-tab value="stations" icon="radio--outlined" inline>电台</mdui-tab>
 
                     <mdui-tab-panel slot="panel" value="songs">
-                        <mdui-circular-progress class="search__loading" style="display: none;"></mdui-circular-progress>
+                        <div class="search__loading">
+                            <mdui-circular-progress></mdui-circular-progress>
+                        </div>
                         <div class="search__result_stats"></div>
                         <mdui-list class="search__result_list"></mdui-list>
                     </mdui-tab-panel>
                     
                     <mdui-tab-panel slot="panel" value="stations">
-                        <mdui-circular-progress class="stations__loading" style="display: none;"></mdui-circular-progress>
+                        <div class="stations__loading">
+                            <mdui-circular-progress></mdui-circular-progress>
+                        </div>
                         <mdui-list class="stations__result_list"></mdui-list>
                     </mdui-tab-panel>
                 </mdui-tabs>

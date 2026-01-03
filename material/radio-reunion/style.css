@@ -306,6 +306,12 @@ mdui-badge {
     }
 }
 
-.search__tabs {
+/* .search__tabs {
     display: none;
+} */
+
+.search__loading, .stations__loading {
+    display: none;
+    justify-content: center;
+    padding: 40px;
 }

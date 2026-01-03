@@ -66,15 +66,6 @@ h1 {
     width: fit-content;
 }
 
-@media screen and (max-width: 575px) {
-    .section__text {
-        max-width: 100%;
-    }
-    section {
-        flex-wrap: wrap;
-    }
-}
-
 .section__contents {
     display: flex;
     padding: 2rem;
@@ -156,4 +147,10 @@ h1 {
 .platform {
     text-align: center;
     padding: 1.5rem;
+}
+
+.advantages {
+    display: flex;
+    align-items: center;
+    gap: 60px;
 }
