@@ -400,7 +400,7 @@ clearStorage.onclick = () => {
 
 acceptCookies.onclick = declineCookies.onclick = (e) => {
     e.target.loading = true;
-    sessionStorage.cookiesAccepted = true;
+    localStorage.cookiesAccepted = true;
     setTimeout(() => {
         e.target.loading = false;
         cookieDialog.style.display = 'none';
@@ -429,7 +429,7 @@ loadingModal.onclose = () => {
     clearTimeout(loadingTimer);
 };
 
-if (sessionStorage.cookiesAccepted) {
+if (localStorage.cookiesAccepted) {
     cookieWrapper.style.display = 'none';
 };
 

@@ -2,7 +2,7 @@
     "radio_stations": [
         {
             "title": "CGTN Radio",
-            "artist": "CGTN Radio",
+            "artist": "CGTN",
             "url": "https://sk.cri.cn/am846.m3u8",
             "cover": "https://radio-res.cgtn.com/image/2112/1639986367791.jpg",
             "description": "CGTN Radio is a global media platform with the slogan “Hear the diffrence.” that provides news, analysis, and commentary on international affairs and Chinese perspectives. It is available in multiple languages and covers a wide range of topics, including politics, economics, culture, and science. CGTN Radio is owned and operated by the China Global Television Network (CGTN), a state-owned media organization based in Beijing, China.",
@@ -10,7 +10,7 @@
         },
         {
             "title": "CGTN English",
-            "artist": "CGTN English",
+            "artist": "CGTN",
             "url": "https://english-livetx.cgtn.com/hls/yypdyyctzb_sd.m3u8",
             "cover": "https://radio-res.cgtn.com/image/2210/1665880315954.jpg",
             "description": "CGTN English TV Channel is a 24-hour international news channel broadcast to a global audience.",
@@ -18,7 +18,7 @@
         },
         {
             "title": "CGTN Documentary",
-            "artist": "CGTN Documentary",
+            "artist": "CGTN",
             "url": "https://english-livetx.cgtn.com/hls/yypdjlctzb_sd.m3u8",
             "cover": "https://radio-res.cgtn.com/image/2201/1643162478720.png",
             "description": "Listen to CGTN Documentary channel, the only Chinese TV channel to broadcast documentaries in English 24/7.",
@@ -34,11 +34,27 @@
         },
         {
             "title": "24/7 Cafe Radio",
-            "artist": "24/7 Cafe Radio",
+            "artist": "24/7 Online Radio Group",
             "url": "https://ec6.yesstreaming.net:1555/stream",
             "cover": "https://ec6.yesstreaming.net:1430/media/widgets/247_Cafe_Radio.jpg",
             "description": "Welcome to 24/7 Cafe Radio. Listen 24/7 to relaxing, chillout, cafe music. Make yourself a drink, maybe a coffee, and just listen to cafe music. This station is produced by the 24/7 Online Radio Group. 24/7 Cafe Radio was launched on 13th November, 2020 to provide high quality cafe music.",
             "album": "24/7 Cafe Radio"
+        },
+        {
+            "title": "1.FM - Cafe Radio",
+            "artist": "1.FM Radio Network",
+            "url": "http://strm112.1.fm/caferadio_mobile_mp3",
+            "cover": "https://seep.eu.org/https://beta.1.fm/stations/cafe.png",
+            "description": "Welcome to 1.FM Radio Network. Grab yourself a cup of coffee, listen to relaxing jazz cafe songs to chillout and enjoy your day. The music starts here.",
+            "album": "1.FM - Cafe Radio"
+        },
+        {
+            "title": "1.FM - Chillout Lounge",
+            "artist": "1.FM Radio Network",
+            "url": "https://strm112.1.fm/chilloutlounge_mobile_mp3",
+            "cover": "https://seep.eu.org/https://beta.1.fm/stations/chillout_lounge.png",
+            "description": "Feeling bored? Need a break? Listen to 1.FM Chillout Lounge radio to relax and enjoy the perfect moment.",
+            "album": "1.FM - Chillout Lounge"
         }
     ]
 }

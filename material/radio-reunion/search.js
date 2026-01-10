@@ -10,6 +10,57 @@ const stationsList = $('.stations__result_list');
 
 const stationsAPI = 'https://radio5.cn/api/play';
 
+const searchHistoryList = $('.search__history_list');
+const searchClearHistory = $('.search__clear_history');
+// search history
+function loadSearchHistory() {
+    return JSON.parse(localStorage.rr_search_history || '[]');
+};
+function setSearchHistory(object) {
+    localStorage.rr_search_history = JSON.stringify(object);
+};
+let search_history = loadSearchHistory();
+
+function loadHistoryList() {
+    search_history = loadSearchHistory();
+    searchHistoryList.innerHTML = '';
+    [...search_history].reverse().forEach(item => {
+        const entry = document.createElement('mdui-menu-item');
+        entry.icon = 'history';
+        entry.innerText = item.kw;
+        entry.dataset.type = item.type;
+        if (item.type === 'songs') {
+            entry.endIcon = 'music_note--outlined';
+        } else {
+            entry.endIcon = 'radio--outlined';
+        };
+        entry.onclick = (e) => {
+            searchInput.value = item.kw;
+            if (e.target.dataset.type === 'songs') {
+                searchTabs.value = 'songs';
+                searchSongs(1);
+            } else {
+                searchTabs.value = 'stations';
+                searchStations();
+            };
+        };
+        searchHistoryList.appendChild(entry);
+    });
+    searchHistoryList.appendChild(searchClearHistory);
+    if (search_history.length > 0) {
+        searchClearHistory.style.display = 'block';
+    } else {
+        searchClearHistory.style.display = 'none';
+    };
+    searchInput.focus();
+};
+searchInput.onfocus = loadHistoryList;
+
+searchClearHistory.onclick = () => {
+    localStorage.removeItem('rr_search_history');
+    loadHistoryList();
+};
+
 searchInput.onkeydown = (e) => {
     if (e.key === 'Enter') {
         if (searchTabs.value === 'songs') {
@@ -17,6 +68,8 @@ searchInput.onkeydown = (e) => {
         } else {
             searchStations();
         };
+        search_history.push({ kw: searchInput.value.trim(), type: searchTabs.value });
+        setSearchHistory(search_history);
     };
 };
 

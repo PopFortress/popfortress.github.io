@@ -54,8 +54,7 @@ class Player {
         
         const song = this.playlist.playlist[index];
         audio.src = song.url;
-        playerCover.style.display = 'none';
-        playerLoading.style.display = 'flex';
+        this.switchLoadingState('loading');
         playerTitle.innerText = song.title;
         playerArtist.innerText = song.artist;
         playerTimeElapsed.innerText = '0:00';
@@ -65,6 +64,9 @@ class Player {
             item.active = false;
         });
         song.itemEle.active = true;
+        if (!song.id) {
+            lyricsDisplayer.resetLyrics();
+        };
         setColorScheme();
     };
     getCurrentSong() {
@@ -94,7 +96,9 @@ class Player {
                 break;
             case 'loaded':
                 playerLoading.style.display = 'none';
-                playerCover.style.display = 'block';
+                if (!controlsFullwidth) {
+                    playerCover.style.display = 'block';
+                };
                 this.loadingState = 'loaded';
             default:
                 break;
