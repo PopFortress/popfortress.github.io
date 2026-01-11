@@ -217,7 +217,13 @@ const lyricsDisplayer = new LyricsDisplayer();
 
 // assistant functions
 function time_formatting(seconds) {
-    return `${Math.floor(seconds / 60)}:${Math.floor(seconds % 60) < 10 ? '0' : ''}${Math.floor(seconds % 60)}`
+    const ts = `${Math.floor(seconds % 60) < 10 ? '0' : ''}${Math.floor(seconds % 60)}`;
+    const tm = seconds % 3600 >= 60 ? Math.floor(seconds % 3600 / 60) : '0';
+    if (seconds >= 3600) {
+        return `${Math.floor(seconds / 3600)}:${tm < 10 ? '0' : ''}${tm}:${ts}`;
+    } else {
+        return `${Math.floor(seconds / 60)}:${ts}`;
+    };
 };
 
 function setColorScheme() {

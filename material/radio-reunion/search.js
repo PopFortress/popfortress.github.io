@@ -12,6 +12,7 @@ const stationsAPI = 'https://radio5.cn/api/play';
 
 const searchHistoryList = $('.search__history_list');
 const searchClearHistory = $('.search__clear_history');
+const searchHIstoryDropdown = $('.search__history_dropdown');
 // search history
 function loadSearchHistory() {
     return JSON.parse(localStorage.rr_search_history || '[]');
@@ -53,6 +54,7 @@ function loadHistoryList() {
         searchClearHistory.style.display = 'none';
     };
     searchInput.focus();
+    searchHistoryList.scrollTo(0, 0);
 };
 searchInput.onfocus = loadHistoryList;
 
@@ -70,6 +72,8 @@ searchInput.onkeydown = (e) => {
         };
         search_history.push({ kw: searchInput.value.trim(), type: searchTabs.value });
         setSearchHistory(search_history);
+        searchInput.blur();
+        searchHIstoryDropdown.open = false;
     };
 };
 

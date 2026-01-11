@@ -150,6 +150,7 @@ function generateMemorizeFrame(title, content) {
     answeringField.style.display = 'none';
     cancelBtn.style.display = 'none';
     memorizeBtn.textContent = '记忆此段落';
+    memorizeBtn.variant = 'tonal';
     checkBtn.textContent = '检查答案';
     checkBtn.style.display = 'none';
     memorizeBtn.onclick = () => {

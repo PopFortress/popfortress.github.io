@@ -319,6 +319,9 @@ mdui-badge {
 
 .search__history_list {
     max-width: none;
+    max-height: 34vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
 }
 
 .search__history_list mdui-menu-item::part(end-icon) {

@@ -96,6 +96,7 @@ notifyDlgCloseBtn.onclick = () => {
 
 clearCache.onclick = () => {
     localStorage.removeItem('ignoreNotifyID');
+    localStorage.removeItem('cookiesAccepted');
     sessionStorage.clear();
     mdui.snackbar({message: '已清除缓存',});
     setTimeout(() => {
