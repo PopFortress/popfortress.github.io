@@ -331,3 +331,28 @@ mdui-badge {
 .search__clear_history::part(label) {
     text-align: right;
 }
+
+.start_options {
+    display: flex;
+    justify-content: center;
+    padding-top: 2em;
+}
+
+.start__options_list {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.start__options_list mdui-list-item {
+    width: 248px;
+    border: 2px solid rgb(var(--mdui-color-primary));
+    border-radius: calc(var(--shape-corner-rounded) + 2px);
+}
+
+@media screen and (max-width: 763px) {
+    .start_options {
+        padding-top: 0;
+    }
+}

@@ -474,7 +474,7 @@ tabs.onchange = () => {
     document.querySelectorAll('.hidden-sections').forEach(section => {
         if (tabs.value) {
             section.style.display = 'none';
-            $('.sections-tabs mdui-tab').textContent = '精选页面';
+            $('.sections-tabs mdui-tab').textContent = '精选';
             tabs.classList.remove('viewing-folded-sections');
         };
    });

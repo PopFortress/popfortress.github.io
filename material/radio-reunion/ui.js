@@ -7,6 +7,7 @@ const welcomeOverlay = $('.welcome_overlay');
 const viewMV = $('.detail__see_mv');
 const mvVideo = $('.mv__video');
 let currentPage = 'main';
+let previousPage;
 let pages_stack = [];
 startOptionSearch.onclick =() => {
     switchPage('search');
@@ -31,7 +32,9 @@ function switchPage(destination) {
             destinationEle.style.opacity = '1';
         }, 100);
 
+        previousPage = currentPage;
         currentPage = destination;
+        
         // back btn handler
         if (currentPage !== 'main') {
             $(`#app_page__${currentPage} .header__back_btn`).onclick = () => {
@@ -41,7 +44,7 @@ function switchPage(destination) {
         } else {
             pages_stack = [];
         };
-    
+
         // page switching events handling
         switch (destination) {
             case 'featured':
@@ -56,7 +59,9 @@ function switchPage(destination) {
                 break;
             case 'search':
                 searchHistoryList.style.width = searchInput.clientWidth + 'px';
-                searchInput.focus();
+                if (previousPage === 'main') {
+                    searchInput.focus();
+                };
                 break;
             default:
                 break;
