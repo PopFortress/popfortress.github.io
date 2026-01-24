@@ -70,11 +70,24 @@ searchInput.onkeydown = (e) => {
         } else {
             searchStations();
         };
-        search_history.push({ kw: searchInput.value.trim(), type: searchTabs.value });
-        setSearchHistory(search_history);
+        const historyObject = { kw: searchInput.value.trim(), type: searchTabs.value };
+        if (!search_history.includes(historyObject)) {
+            search_history.push(historyObject);
+            setSearchHistory(search_history);
+        };
         searchInput.blur();
         searchHIstoryDropdown.open = false;
     };
+};
+
+searchInput.oninput = (e) => {
+    searchHistoryList.childNodes.forEach(item => {
+        if (item.innerText.toLowerCase().includes(searchInput.value.toLowerCase())) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        };
+    });
 };
 
 function searchSongs(page) {

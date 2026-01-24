@@ -227,12 +227,14 @@ mdui-tab::part(label) {
     width: 100%;
     height: 100%;
     border-color: rgb(var(--mdui-color-primary));
+    border-radius: var(--mdui-shape-corner-medium);
 }
 
 .changelog-frame {
     width: 100%;
     height: calc(100% + 7px);
     margin-top: -7px;
+    border-radius: var(--mdui-shape-corner-medium);
 }
 
 @media screen and (max-width: 1480px) {

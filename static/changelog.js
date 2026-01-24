@@ -14,7 +14,7 @@ if (isSystemDark) {
 }
 
 if (params.get('frame') === 'true') {
-    document.documentElement.style.scrollbarWidth = 'none';
+    document.documentElement.style.scrollbarWidth = 'thin';
     header.style.display = 'none';
     main.style.padding = '0';
     dl.style.margin = '0';
