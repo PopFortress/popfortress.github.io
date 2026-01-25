@@ -58,6 +58,7 @@ var notifyWrapper;
 var currSayingsIndex = 0;
 var currActivityIndex = 0;
 var data;
+const monthsMap = {'01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr', '05': 'May', '06': 'Jun', '07': 'Jul', '08': 'Aug', '09': 'Sep', '10': 'Oct', '11': 'Nov', '12': 'Dec'};
 const blackDays = ["1/6", "1/8", "1/21", "1/27", "2/4", "2/19", "3/5", "3/12", "3/29", "4/29", "5/9", "5/12", "6/26", "7/6", "7/7", "7/14", "8/5", "9/9", "9/18", "10/10", "11/7", "12/12", "12/13", "9/30"];
 const date_index = `${new Date().getMonth()+1}/${new Date().getDate()}`;
 const ghApiUrl = 'https://api.github.com/repos/PopFortress/popfortress.github.io';
@@ -164,7 +165,6 @@ async function fetchSrc() {
 
     sayingsText.innerHTML = data.sayings[0].title;
     sayingsDesc = data.sayings[0].desc;
-    latestUpdateLabel.innerHTML = `最后更新时间　${data.latest_update}`;
     activityImg.style.backgroundImage = `url(${data.activities[0].imgurl})`;
     activityTitleLabel.innerHTML = data.activities[0].title;
     activityImg.href = `/fakecaptcha?r=${data.activities[0].target_url}`;
@@ -390,6 +390,11 @@ async function fetchCommitVersion() {
     commitLabel.title = `${sha}\n\n${commitMessage}`;
     commitLabel.href = '//github.com/PopFortress/popfortress.github.io/commits/main/';
     commitLabel.target = '_blank';
+    const raw_date = dataCommit[0].commit.committer.date;
+    const yr = raw_date.slice(0, 4);
+    const month = monthsMap[raw_date.slice(5, 7)] + '.';
+    const day = raw_date.slice(8, 10);
+    latestUpdateLabel.innerHTML = `最后更新时间　${month} ${day}, ${yr}`;
 };
 
 commitLabel.onclick = fetchCommitVersion;

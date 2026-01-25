@@ -106,7 +106,7 @@ function searchSongs(page) {
                 data.result.songs.forEach(song => {
                     songInfo = {};
                     songInfo.title = song.name;
-                    songInfo.url = `${apiServer}/song/url?id=${song.id}`;
+                    songInfo.url = `${mediaServer}?id=${song.id}`;
                     let artists = [];
                     song.ar.forEach(artist => {
                         artists.push(artist.name);  
@@ -141,19 +141,23 @@ function searchSongs(page) {
                     listitem.onclick = (e) => {
                         player.switchLoadingState('loading');
                         const info = JSON.parse(e.target.dataset.song_info);
-                        xhr.open('GET', info.url);
-                        xhr.send();
-                        xhr.onload = () => {
-                            const data = JSON.parse(xhr.responseText);
-                            if (data.code === 200) {
-                                const url = data.data[0].url;
-                                info.url = url;
-                            };
-                            const song = new Song(info);
-                            playlist.addItem(song);
-                            player.playSong(playlist.length - 1);
-                            lyricsDisplayer.loadLyrics(info.id);
-                        };
+                        // xhr.open('GET', info.url);
+                        // xhr.send();
+                        // xhr.onload = () => {
+                        //     const data = JSON.parse(xhr.responseText);
+                        //     if (data.code === 200) {
+                        //         const url = data.data[0].url;
+                        //         info.url = url;
+                        //     };
+                        //     const song = new Song(info);
+                        //     playlist.addItem(song);
+                        //     player.playSong(playlist.length - 1);
+                        //     lyricsDisplayer.loadLyrics(info.id);
+                        // };
+                        const song = new Song(info);
+                        playlist.addItem(song);
+                        player.playSong(playlist.length - 1);
+                        lyricsDisplayer.loadLyrics(info.id);
                     };
                     searchList.appendChild(listitem);
                 });

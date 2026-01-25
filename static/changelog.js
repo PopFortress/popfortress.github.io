@@ -16,7 +16,7 @@ if (isSystemDark) {
 if (params.get('frame') === 'true') {
     document.documentElement.style.scrollbarWidth = 'thin';
     header.style.display = 'none';
-    main.style.padding = '0';
+    main.style.padding = '0 0 17px 9px';
     dl.style.margin = '0';
     links.forEach(e => {
         e.target = '_top';

@@ -22,6 +22,12 @@ const playlistBadge = $('.playlist__title_badge');
 // essential definitions
 const xhr = new XMLHttpRequest();
 const apiServer = 'https://163api.qijieya.cn';
+const apiServerAlternate = 'https://apis.netstart.cn/music';
+const mediaServer = 'https://music.163.com/song/media/outer/url';
+
+xhr.onerror = (e) => {
+    mdui.snackbar({ message: `无法连接至服务器。`});
+};
 
 // objects definitions
 class Song {
