@@ -42,7 +42,7 @@ body {
     transition: 0.3s;
     width: 340px;
     padding: 14px;
-    opacity: .8;
+    /* opacity: .8; */
     line-height: 1.5;
     overflow: inherit;
 }
@@ -258,7 +258,11 @@ a:hover {
     font-size: .8rem;
 }
 
-.horoscope-input, .city-input, .province-input, .region-input {
+.city-region-config {
+    display: flex;
+}
+
+.horoscope-input, .city-input, .province-input, .region-input, .region-select {
     transform: scale(.8);
     height: 32px;
     width: 100px;
@@ -288,4 +292,13 @@ a:hover {
 
 .empty-alarms-label {
     font-size: .8rem;
+}
+
+.news-item:part(headline) {
+    line-height: 1.7;
+}
+
+.om .date, .om .sayings {
+    opacity: .8;
+    font-size: .9rem;
 }

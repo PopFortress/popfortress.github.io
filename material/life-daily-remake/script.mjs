@@ -67,6 +67,8 @@ const emptyAlarmsLabel = $('.empty-alarms-label');
 const alarmsList = $('.alarms-list');
 const alarmContent = $('.alarm-content');
 const regionInput = $('.region-input');
+const regionSelect = $('.region-select');
+const regionMenu = $('.region-menu');
 let lunarDate = '';
 
 const preferDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -77,6 +79,7 @@ if (preferDarkMode) {
 let cardContentHTMLs = {};
 let contentHTML;
 let img_currency;
+let ifFetchWeather = false;
 
 if (!localStorage.life_daily_preferences) {
     localStorage.life_daily_preferences = JSON.stringify({});
@@ -94,11 +97,16 @@ if (!localStorage.life_daily_preferences) {
     if (settings.region) {
         regionInput.value = settings.region;
     };
+    if (settings.city_region && settings.region_value) {
+        regionSelect.value = settings.city_region;
+        regionSelect.dataset.value = settings.region_value;
+        ifFetchWeather = true;
+    };
 };
 
 const apis = {
     lunarCalendar: 'https://www.36jxs.com/api/Commonweal/almanac?sun=',
-    weather: 'https://v2.xxapi.cn/api/weather?city={city}',
+    weather: 'https://v.api.aa1.cn/api/api-tianqi-3/index.php?msg={city}',
     zhihuDaily: 'https://api.allorigins.win/get?url=https://coco.codemao.cn/http-widget-proxy/https://news-at.zhihu.com/api/4/news/latest',
     history: 'https://seep.eu.org/https://query.asilu.com/today/list/',
     english: 'https://api.vvhan.com/api/dailyEnglish',
@@ -122,9 +130,9 @@ const horoscopes = {'白羊座': 'aries', '金牛座': 'taurus', '双子座': 'g
 const areaCodes = {"北京市": "110000","天津市": "120000","河北省": "130000","山西省": "140000","内蒙古自治区": "150000","辽宁省": "210000","吉林省": "220000","黑龙江省": "230000","上海市": "310000","江苏省": "320000","浙江省": "330000","安徽省": "340000","福建省": "350000","江西省": "360000","山东省": "370000","河南省": "410000","湖北省": "420000","湖南省": "430000","广东省": "440000","广西壮族自治区": "450000","海南省": "460000","重庆市": "500000","四川省": "510000","贵州省": "520000","云南省": "530000","西藏自治区": "540000","陕西省": "610000","甘肃省": "620000","青海省": "630000","宁夏回族自治区": "640000","新疆维吾尔自治区": "650000","新疆生产建设兵团": "660000"};
 
 
-function updateLocalStorage(key, input) {
+function updateLocalStorage(key, value) {
     const settings = JSON.parse(localStorage.life_daily_preferences);
-    settings[key] = input.value;
+    settings[key] = value;
     localStorage.life_daily_preferences = JSON.stringify(settings);
 };
 /**
@@ -136,11 +144,14 @@ function requestAPI(options) {
     .then (response => response.json())
     .then (data => {
         options.callback(data);
-        // setPositions();
+        setTimeout(() => {
+            setPositions();
+        }, 0);
     })
     .catch(error => {
         console.error(`Failed to fetch ${options.url}: ${error}`);
         options.errorCallback(error);
+        setPositions();
     });
 };
 
@@ -285,16 +296,27 @@ function fetchWeather() {
                 weatherCard.innerHTML = cardContentHTMLs.weather;
                 weatherCard.parentNode.clickable = true;
             };
-            const today = data.data.data[1];
-            const weatherHighest = today.temperature.split('-')[0];
-            const weatherLowest = today.temperature.split('-')[1].split('℃')[0];
-            const weatherAvg = ((+weatherHighest) + (+weatherLowest)) / 2;
-            highestText.textContent = weatherHighest + '℃';
-            lowestText.textContent = weatherLowest + '℃';
-            avgText.textContent = weatherAvg + '℃';
-            city.textContent = data.data.city;
-            wind.textContent = `${today.weather}　${today.wind}`;
-            airQuality.innerHTML = `空气质量　${today.air_quality}`;
+            regionMenu.innerHTML = '';
+            if (!ifFetchWeather) {
+                regionSelect.value = '';
+            };
+            const regions = data.data[0];
+            delete regions.msg;
+            if (Object.keys(regions).length) {
+                Object.keys(regions).forEach(key => {
+                    const menuitem = document.createElement('mdui-menu-item');
+                    menuitem.innerText = regions[key];
+                    menuitem.dataset.value = key;
+                    menuitem.onclick = (e) => {
+                        regionSelect.dataset.value = e.target.dataset.value;
+                        regionSelect.value = e.target.innerText;
+                        fetchWeatherData();
+                        updateLocalStorage('city_region', e.target.innerText);
+                        updateLocalStorage('region_value', e.target.dataset.value);
+                    };
+                    regionMenu.appendChild(menuitem);
+                });
+            };
         },
         errorCallback: (error) => {
             apiFailureHandler({
@@ -306,9 +328,30 @@ function fetchWeather() {
     });
 };
 
+function fetchWeatherData() {
+    weatherContent.style.opacity = .3;
+    requestAPI({
+        url: `${apis.weather.replace('{city}', cityInput.value)}&type=${regionSelect.dataset.value}`,
+        callback: (data) => {
+            weatherContent.style.opacity = 1;
+            const today = data.data[1];
+            const weatherHighest = today.wendu.split('～')[1];
+            const weatherLowest = today.wendu.split('～')[0];
+            const weatherAvg = ((+weatherHighest) + (+weatherLowest)) / 2;
+            highestText.textContent = weatherHighest + '℃';
+            lowestText.textContent = weatherLowest + '℃';
+            avgText.textContent = weatherAvg + '℃';
+            city.textContent = regionSelect.value;
+            wind.textContent = `${today.tianqi}　${today.fengdu}`;
+            airQuality.innerHTML = `空气质量　${today.pm}`;
+            ifFetchWeather = false;
+        },
+    });
+};
+
 cityInput.onchange = () => {
     if (cityInput.value.trim()) {
-        updateLocalStorage('city', cityInput);
+        updateLocalStorage('city', cityInput.value);
         fetchWeather();
     };
 };
@@ -401,7 +444,7 @@ function fetchOneMin() {
             };
             oneminDate.textContent = `农历　${data.data.lunar_date}`;
             data.data.news.forEach(news => {
-                oneminNewsList.innerHTML += `<mdui-list-item href="//cn.bing.com/search?q=${news}" target="_blank" icon="keyboard_arrow_right">${news}</mdui-list-item>`;
+                oneminNewsList.innerHTML += `<mdui-list-item class="news-item" nonclickable>${news}</mdui-list-item>`;
             });
             oneminDetailsLink.href = data.data.link;
             oneminSayings.textContent = `【微语】${data.data.tip}`;
@@ -554,7 +597,7 @@ function fetchHoroscopes() {
 horoInput.onchange = () => {
     if (horoscopes[horoInput.value] && horoInput.value.trim()) {
         fetchHoroscopes();
-        updateLocalStorage('horoscope', horoInput);
+        updateLocalStorage('horoscope', horoInput.value);
     } else {
         horoInput.value = '';
         mdui.snackbar({ message: '名称不存在'});
@@ -605,14 +648,14 @@ async function fetchAlarms() {
 provinceInput.onchange = () => {
     if (areaCodes[provinceInput.value] && provinceInput.value.trim()) {
         fetchAlarms();
-        updateLocalStorage('province', provinceInput);
+        updateLocalStorage('province', provinceInput.value);
     } else {
         provinceInput.value = '';
         mdui.snackbar({ message: '名称不存在，请尝试键入省级行政区的完整名称。'});
     };
 };
 regionInput.onchange = () => {
-    updateLocalStorage('region', regionInput);
+    updateLocalStorage('region', regionInput.value);
     fetchAlarms();
 };
 
@@ -665,4 +708,9 @@ if (window.innerWidth >= 368) {
     cards.forEach(card => {
         card.clickable = false;
     });
+};
+
+window.onload = setPositions;
+if (ifFetchWeather) {
+    fetchWeatherData();
 };

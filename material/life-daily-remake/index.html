@@ -32,7 +32,13 @@
             <div class="content flex weather-content">
                 <div class="select-wrapper city-input-wrapper">
                     <div class="label">键入城市名称</div>
-                    <mdui-text-field class="city-input" value="北京" variant="outlined"></mdui-text-field>
+                    <div class="city-region-config">
+                        <mdui-text-field class="city-input" value="北京" variant="outlined"></mdui-text-field>
+                        <mdui-dropdown trigger="click focus">
+                            <mdui-text-field class="region-select" readonly icon="map" variant="outlined" slot="trigger"></mdui-text-field>
+                            <mdui-menu class="region-menu" dense></mdui-menu>
+                        </mdui-dropdown>
+                    </div>
                 </div>
                 <div class="location flex">
                     <div class="city" style="margin-left: auto;"></div>
@@ -76,7 +82,7 @@
                 </div>
             </div>
         </mdui-card>
-        <mdui-card class="zhihu-daily" clickable>
+        <mdui-card class="zhihu-daily">
             <div class="title">知乎日报</div>
             <div class="content">
                 <mdui-list class="zhihu-daily-list"></mdui-list>
@@ -86,7 +92,7 @@
             <div class="title">历史上的今天</div>
             <div class="content flex"></div>
         </mdui-card>
-        <!-- <mdui-card class="english" clickable>
+        <!-- <mdui-card class="english">
             <div class="title">今日励志英语</div>
             <div class="content flex">
                 <div class="date"></div>
@@ -97,7 +103,7 @@
                 <img class="img">
             </div>
         </mdui-card> -->
-        <mdui-card class="om" clickable>
+        <mdui-card class="om">
             <div class="title">一分钟看世界</div>
             <div class="content flex">
                 <div class="date"></div>
@@ -125,13 +131,13 @@
                 <a href="https://www.msn.cn/zh-cn/money" target="_blank">前往 MSN</a>
             </div>
         </mdui-card>
-        <!-- <mdui-card class="bilibili" clickable>
+        <!-- <mdui-card class="bilibili">
             <div class="title">哔哩哔哩热榜</div>
             <div class="content">
                 <mdui-list class="bilibili-list"></mdui-list>
             </div>
         </mdui-card>
-        <mdui-card class="zhihu" clickable>
+        <mdui-card class="zhihu">
             <div class="title">知乎热榜</div>
             <div class="content">
                 <mdui-list class="zhihu-list"></mdui-list>
