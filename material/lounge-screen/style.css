@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: calc(72px + 1em) .7em 2em .7em;
+}
+
+header {
+    height: min-content;
+    margin-bottom: 1em;
+    position: fixed;
+    z-index: 512;
+}
+
+.header__loading {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+header {
+    box-sizing: content-box;
+    width: 100vw;
+    background-color: rgb(var(--mdui-color-surface-container));
+}
+
+.header__wrapper {
+    display: flex;
+    padding: 1em;
+    gap: 16px;
+    align-items: center;
+}
+
+.header__title {
+    color: rgb(var(--mdui-color-primary));
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.header__back_btn {
+    display: none;
+}
+
+.app_page {
+    width: 100%;
+    max-width: 810px;
+}
+
+.collapse_list__content {
+    margin-left: 2.5rem;
+}
+
+.search__input {
+    margin-bottom: 1em;
+}
+
+.app_page:not(#search) {
+    display: none;
+}
+
+thead th {
+    text-align: center;
+    font-size: calc(1rem + .125vw);
+    background-color: rgb(var(--mdui-color-surface-container-low));
+}
+
+.screen__table, .stations__table {
+    width: 100%;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 560px) {
+    .screen__table_wrapper {
+        margin-top: 0 !important;
+    }
+}
+
+a.table__train_code {
+    color: rgb(var(--mdui-color-primary));
+    text-decoration-thickness: 1px;
+}
+
+
+.train__wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1.6rem;
+}
+
+.train__wrapper mdui-card {
+    padding: 1em;
+    width: 100%;
+}
+
+.train__wrapper mdui-card mdui-divider {
+    margin: .8em 0 1.1em 0;
+}
+
+.basic__subtitle {
+    font-size: 1.2rem;
+}
+
+.basic_info__label {
+    width: 6em;
+    color: rgb(var(--mdui-color-primary));
+    text-align: right;
+    margin-right: 1em;
+    display: inline-block;
+}

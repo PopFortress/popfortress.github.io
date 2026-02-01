@@ -186,6 +186,7 @@ async function fetchHitokoto() {
     } else {
         hitokoto.textContent = data.hitokoto;
     };
+    setPositions();
 };
 
 function setPositions() {

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>候车室大屏</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <script src="/mdui/mdui.global.js"></script>
+</head>
+<body>
+    
+    <header>
+        <div class="header__wrapper">
+            <mdui-button-icon icon="keyboard_backspace" class="header__back_btn"></mdui-button-icon>
+            <mdui-top-app-bar-title class="header__title">选择一个车站</mdui-top-app-bar-title>
+            <mdui-circular-progress class="header__loading"></mdui-circular-progress>
+        </div>
+    </header>
+
+    <main>
+        <div class="app_page" id="search">
+            <div class="search">
+                <mdui-text-field autofocus class="search__input" variant="outlined" icon="search" placeholder="搜索全国站点" clearable clear-icon="close"></mdui-text-field>
+            </div>
+
+            <mdui-list>
+                <mdui-collapse accordion class="stations__collapse" value="trend">
+                    <mdui-collapse-item value="history">
+                        <mdui-list-item slot="header" icon="history" end-icon="keyboard_arrow_down">历史记录</mdui-list-item>
+                        <div class="collapse_list__content"></div>
+                    </mdui-collapse-item>
+                    <mdui-collapse-item value="trend">
+                        <mdui-list-item slot="header" icon="trending_up" end-icon="keyboard_arrow_up">知名站点</mdui-list-item>
+                        <div class="collapse_list__content stations_list__featured"></div>
+                    </mdui-collapse-item>
+                </mdui-collapse>
+            </mdui-list>
+        </div>
+
+        <div class="app_page" id="screen">
+            <div class="mdui-table screen__table_wrapper">
+                <table class="screen__table">
+                    <thead>
+                        <tr>
+                            <th>车次</th>
+                            <th>始发站</th>
+                            <th>终到站</th>
+                            <th>开车时间</th>
+                            <th>候车室/检票口</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table__trains_list"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="app_page" id="train">
+            <div class="train__wrapper">
+                <mdui-card class="train__basic_info_card" variant="outlined">
+                    <div class="basic__subtitle">车次信息</div>
+                    <mdui-divider></mdui-divider>
+                    <mdui-list class="basic__info_list"></mdui-list>
+                </mdui-card>
+
+                <mdui-card class="train__stations_info_card" variant="outlined">
+                    <div class="basic__subtitle">经停站点</div>
+                    <mdui-divider></mdui-divider>
+                    <div class="mdui-table stations__table_wrapper">
+                        <table class="stations__table">
+                            <thead>
+                                <tr>
+                                    <th>站点</th>
+                                    <th>到达时间</th>
+                                    <th>发车时间</th>
+                                    <th>停留时间</th>
+                                    <th>出站口</th>
+                                </tr>
+                            </thead>
+                            <tbody class="stations__station_list"></tbody>
+                        </table>
+                    </div>
+                </mdui-card>
+            </div>
+        </div>
+    </main>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>
