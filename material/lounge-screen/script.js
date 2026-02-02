@@ -183,9 +183,11 @@ searchInput.onkeydown = (e) => {
     if (e.key === 'Enter') {
         const keywords = searchInput.value.trim();
         if (keywords) {
+            let found = false;
             stationsCollapse.querySelectorAll('.collapse_list__content mdui-list-item').forEach(station => {
-                if (station.innerHTML === keywords) {
+                if (station.innerHTML === keywords && !found) {
                     showResultOf(keywords);
+                    found = true;
                 };
             });
         };
@@ -201,6 +203,13 @@ function showResultOf(station) {
     xhr.open('GET', `${apiServer}/station/${station}`);
     xhr.send();
     xhr.onload = () => {
+        if (xhr.status === 404) {
+            mdui.snackbar( { message: `未查询到站点相关信息。${xhr.status} ${xhr.statusText}` } );
+            switchPage({ destination: 'search', title: '选择一个车站' });
+            loading(false);
+            return;
+        };
+
         const data = JSON.parse(xhr.responseText);
         if (data.station) {
             headerTitle.innerText = data.station;

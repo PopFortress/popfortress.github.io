@@ -356,3 +356,51 @@ mdui-badge {
         padding-top: 0;
     }
 }
+
+
+.header__account__user_wrapper {
+    display: none;
+}
+
+.home_page__title {
+    margin-right: auto;
+}
+
+.login__icon {
+    width: 48px;
+    height: 48px;
+    background: url(./netease_icon.svg) no-repeat center;
+    background-size: contain;
+}
+
+.login__container {
+    width: 100%;
+    max-width: 400px;
+    padding: 0 10px;
+}
+
+.login__card {
+    width: 100%;
+    padding: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.2em;
+}
+
+.login__form_wrapper, .login__input_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: .8em;
+    width: 100%;
+}
+
+.login__form_wrapper {
+    gap: 1.1em;
+}
+
+.login__login_btn {
+    height: 33px;
+    width: 100%;
+}

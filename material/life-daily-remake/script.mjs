@@ -107,7 +107,7 @@ if (!localStorage.life_daily_preferences) {
 const apis = {
     lunarCalendar: 'https://www.36jxs.com/api/Commonweal/almanac?sun=',
     weather: 'https://v.api.aa1.cn/api/api-tianqi-3/index.php?msg={city}',
-    zhihuDaily: 'https://api.allorigins.win/get?url=https://coco.codemao.cn/http-widget-proxy/https://news-at.zhihu.com/api/4/news/latest',
+    zhihuDaily: 'https://seep.eu.org/https://daily.zhihu.com/api/4/news/latest',
     history: 'https://seep.eu.org/https://query.asilu.com/today/list/',
     english: 'https://api.vvhan.com/api/dailyEnglish',
     oneMin: 'https://60s-api-cf.viki.moe/v2/60s',
@@ -366,15 +366,15 @@ function fetchZhihuDaily() {
                 zhihuDaily.parentNode.clickable = true;
             };
             zhihuDailyList.innerHTML += '<mdui-list-subheader>今日精选</mdui-list-subheader>';
-            JSON.parse(data.contents).top_stories.forEach(story => {
+            data.top_stories.forEach(story => {
                 zhihuDailyList.innerHTML += `<mdui-list-item href=${story.url} target="_blank">${story.title}\
-                    <img slot="end-icon" src=${story.image}>\
+                    <img slot="icon" src=${story.image}>\
                 </mdui-list-item>`;
             });
             zhihuDailyList.innerHTML += '<mdui-list-subheader>故事</mdui-list-subheader>';
-            JSON.parse(data.contents).stories.forEach(story => {
+            data.stories.forEach(story => {
                 zhihuDailyList.innerHTML += `<mdui-list-item href=${story.url} target="_blank">${story.title}\
-                    <img slot="end-icon" src=${story.images[0]}>\
+                    <img slot="icon" src=${story.images[0]}>\
                 </mdui-list-item>`;
             });
             zhihuDaily.innerHTML += '<a href="https://daily.zhihu.com/" target="_blank">查看更多内容</a>';
@@ -666,7 +666,7 @@ function fetchAllAPIs() {
     fetchWeather();
     fetchZhihuDaily();
     fetchHistory();
-    fetchEnglish();
+    // fetchEnglish();
     fetchOneMin();
     fetchCurrency();
     // fetchHots();

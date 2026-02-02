@@ -16,7 +16,17 @@
     
     <div class="app_page" id="app_page__main">
         <header>
-            <div class="header__title">Radio <span style="font-weight: 600;">Reunion</span></div>
+            <div class="header__title home_page__title">Radio <span style="font-weight: 600;">Reunion</span></div>
+            <div class="header__account_box">
+                <div class="header__account__login_wrapper">
+                    <mdui-tooltip content="登录到网易云账户" placement="bottom-left">
+                        <mdui-button-icon icon="account_circle--outlined" class="login__button"></mdui-button-icon>
+                    </mdui-tooltip>
+                </div>
+                <div class="header__account__user_wrapper">
+                    <mdui-avatar icon="account_circle--outlined"></mdui-avatar>
+                </div>
+            </div>
         </header>
         <main>
             <div class="welcome">
@@ -120,6 +130,27 @@
         </main>
     </div>
 
+    <div class="app_page" id="app_page__auth">
+        <header>
+            <mdui-button-icon icon="arrow_back" class="header__back_btn"></mdui-button-icon>
+            <div class="header__title">登录您的账户</div>
+        </header>
+        <main>
+            <div class="login__container">
+                <mdui-card class="login__card" variant="elevated">
+                    <div class="login__icon"></div>
+                    <div class="login__form_wrapper login__email_wrapper">
+                        <div class="login__input_wrapper">
+                            <mdui-text-field icon="email--outlined" placeholder="邮箱" type="email" class="login_email__email_input"></mdui-text-field>
+                            <mdui-text-field icon="password--outlined" placeholder="密码" type="password" toggle-password class="login_email__pasword_input"></mdui-text-field>
+                        </div>
+                        <mdui-button class="login__login_email_btn login__login_btn" full-width variant="tonal">登录</mdui-button>
+                    </div>
+                </mdui-card>
+            </div>
+        </main>
+    </div>
+
     <div class="player">
         <div class="player__container">
             <div class="player__loading">
@@ -174,6 +205,7 @@
     <script src="./responsive.js"></script>
     <script src="./lyrics.js"></script>
     <script src="./mv.js"></script>
+    <script src="./auth.js"></script>
 
 </body>
 </html>

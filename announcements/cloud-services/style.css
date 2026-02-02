@@ -154,3 +154,26 @@ h1 {
     align-items: center;
     gap: 60px;
 }
+
+.tryout__actions {
+    display: flex;
+    gap: 2.25rem;
+    flex-wrap: wrap;
+}
+
+.start_using__card {
+    display: flex;
+    gap: 1.1em;
+    align-items: center;
+    padding: 20px;
+    color: rgb(var(--mdui-color-primary));
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.start_using__card mdui-icon {
+    font-size: 2rem;
+}
