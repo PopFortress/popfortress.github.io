@@ -70,12 +70,22 @@ a:focus {
     outline: dashed .1px;
 }
 
-.switch-ver {
+.switch-ver, .notify, .dev-auth {
     position: absolute;
     top: 10px;
-    right: 10px;
     font-size: 14px;
 }
+
+.switch-ver {
+    right: 10px;
+}
+.notify {
+    right: 72px;
+}
+.dev-auth {
+    right: 140px;
+}
+
 
 mdui-card {
     display: block;
@@ -293,14 +303,7 @@ mdui-tab::part(label) {
     margin-top: -10px;
 }
 
-.notify {
-    position: absolute;
-    top: 10px;
-    right: 72px;
-    font-size: 14px;
-}
-
-.notify-icon {
+.notify-icon, .outer-link-icon {
     font-family: 'Material Icons';
     font-size: 14px;
 }

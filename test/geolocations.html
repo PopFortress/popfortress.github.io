@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>geolocations 地理位置</title>
+</head>
+<body>
+
+    <button id="find-me">显示我的位置</button><br />
+    <p id="status"></p>
+    <a id="map-link" target="_blank"></a>
+    <p id="location_name"></p>
+    
+    <small style="opacity: .6;">部分代码 来自 MDN</small>
+    
+    
+    <script src="/static/common-auto-theme.js"></script>
+
+    <script>
+        const status = document.querySelector("#status");
+        const mapLink = document.querySelector("#map-link");
+        const findBtn = document.querySelector("#find-me");
+
+        function geoFindMe() {
+            mapLink.href = "";
+            mapLink.textContent = "";
+
+            function success(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                status.textContent = "正在获取位置信息……";
+                mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+                mapLink.textContent = `纬度：${latitude} °，经度：${longitude} °`;
+                searchForPlace(latitude, longitude);
+            };
+
+            function error() {
+                status.textContent = "无法获取你的位置";
+            }
+
+            if (!navigator.geolocation) {
+                status.textContent = "你的浏览器不支持地理位置";
+            } else {
+                status.textContent = "定位中……";
+                navigator.geolocation.getCurrentPosition(success, error);
+            }
+        }
+
+        findBtn.addEventListener("click", geoFindMe);
+        
+        const xhr = new XMLHttpRequest();
+        const locationName = document.querySelector("#location_name");
+        function searchForPlace(latitude, longitude) {
+            xhr.open('POST', 'https://www.mapchaxun.cn/api/getMapRegeo');
+            const location = `{"location":"${latitude.toFixed(6)},${longitude.toFixed(6)}"}`;
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(location);
+            xhr.onload = () => {
+                const data = JSON.parse(xhr.responseText);
+                const result = data.result;
+                const address = `${result.address_component.province}${result.address_component.city}${result.address}`;
+                locationName.textContent = address;
+                status.textContent = '';
+                findBtn.disabled = true;
+            };
+        };
+    </script>
+
+</body>
+</html>

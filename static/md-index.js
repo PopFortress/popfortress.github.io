@@ -393,7 +393,12 @@ async function fetchCommitVersion() {
     const raw_date = dataCommit[0].commit.committer.date;
     const yr = raw_date.slice(0, 4);
     const month = monthsMap[raw_date.slice(5, 7)] + '.';
-    const day = raw_date.slice(8, 10);
+    let day = raw_date.slice(8, 10);
+    const hr = raw_date.split('T')[1].split(':')[0];
+    // UTC timezone
+    if (+hr >= 16) {
+        day++;
+    };
     latestUpdateLabel.innerHTML = `最后更新时间　${month} ${day}, ${yr}`;
 };
 

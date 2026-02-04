@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>开发者仪表板</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <header>
+        <mdui-icon name="dashboard"></mdui-icon>
+        <div class="header__welcome">欢迎</div>
+        <mdui-button-icon icon="edit--outlined" class="token_edit_btn"></mdui-button-icon>
+    </header>
+
+    <main>
+        <div class="description">
+            您正在访问 Fortress Desktop 开发者仪表板。
+            <br>
+            以下是一些实用链接（仅供开发测试使用）
+        </div>
+        <div class="token__container">
+            <div class="token__wrapper">
+                <div>您的 访问令牌为</div>
+                <mdui-icon name="key"></mdui-icon>
+                <div class="token__token"></div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="./script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+header {
+    width: 100%;
+    padding: 1.2em;
+    background-color: rgb(var(--mdui-color-surface-container));
+    position: fixed;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    gap: 1em;
+    letter-spacing: 1px;
+}
+
+.header__welcome, header mdui-icon {
+    font-size: 1.5rem;
+}
+
+main {
+    margin-top: 80px;
+    width: 100%;
+    max-width: 790px;
+    padding: 0 10px;
+}
+
+.description {
+    text-align: center;
+    opacity: .9;
+    font-size: .9rem;
+    line-height: 2;
+    letter-spacing: 1px;
+    margin: 1.5em 0;
+}
+
+mdui-dialog::part(panel) {
+    margin: 1rem;
+}
+
+.token__container {
+    display: flex;
+    justify-content: center;
+}
+
+.token__wrapper {
+    align-items: center;
+    font-size: .9rem;
+    gap: 6px;
+    display: none;
+
+    white-space: nowrap;
+    overflow: auto;
+}
+
+.token__wrapper mdui-icon {
+    font-size: 1rem;
+}
+
+.token__token {
+    color: rgb(var(--mdui-color-primary));
+}
+
+.token_edit_btn {
+    margin-left: auto;
+}
