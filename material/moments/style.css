@@ -156,7 +156,7 @@ mdui-divider {
     opacity: .17;
 }
 
-.moment-details .datetime {
+.moment-details .datetime, .location_wrapper {
     opacity: .76;
     font-size: .8rem;
     line-height: 1.5;
@@ -165,6 +165,8 @@ mdui-divider {
 .moment-details {
     display: flex;
     column-gap: 20px;
+    flex-wrap: wrap;
+    row-gap: 12px;
 }
 
 .like-btn, .comment-btn {
@@ -213,4 +215,15 @@ footer {
 
 .main__failure mdui-icon {
     font-size: 1em;
+}
+
+.location_wrapper {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: .8rem;
+}
+
+.location_wrapper mdui-icon {
+    font-size: 1rem;
 }

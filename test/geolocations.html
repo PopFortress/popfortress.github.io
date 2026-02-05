@@ -11,8 +11,11 @@
     <p id="status"></p>
     <a id="map-link" target="_blank"></a>
     <p id="location_name"></p>
+    <textarea id="response_text" style="field-sizing: content; resize: none; display: none;" readonly></textarea>
     
-    <small style="opacity: .6;">部分代码 来自 MDN</small>
+    <div style="margin-top: 1em;">
+        <small style="opacity: .6;">部分代码 来自 MDN <a href="https://www.mapchaxun.cn/jingweiduchaxun" target="_blank">经纬度查询</a></small>
+    </div>
     
     
     <script src="/static/common-auto-theme.js"></script>
@@ -21,6 +24,7 @@
         const status = document.querySelector("#status");
         const mapLink = document.querySelector("#map-link");
         const findBtn = document.querySelector("#find-me");
+        const responseText = document.querySelector("#response_text");
 
         function geoFindMe() {
             mapLink.href = "";
@@ -58,6 +62,8 @@
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(location);
             xhr.onload = () => {
+                responseText.style.display = 'inline-block';
+                responseText.value = JSON.stringify(JSON.parse(xhr.responseText), null, 4);
                 const data = JSON.parse(xhr.responseText);
                 const result = data.result;
                 const address = `${result.address_component.province}${result.address_component.city}${result.address}`;

@@ -9,6 +9,8 @@ const sortOldest = $('#sort-oldest');
 const toggleGiscus = $('#toggle-giscus');
 const giscusWrapper = $('.giscus-wrapper');
 const loading = $('mdui-circular-progress');
+const failureDesc = $('.main__failure__desc');
+const loadingIcon = $('.main__loading_icon');
 let rawMomentsData;
 let momentsData;
 let giscusEnabled = false;
@@ -16,11 +18,15 @@ const pin = Math.floor(Math.random() * 1000000);
 const emailCfg = `title=Moments Subscription&text=<font color="DimGray">Greetings!</font>  <br><br> <font color="DimGray">You're now performing </font> <font color="red"> a subscription to the Moments</font> <font color="DimGray">, please enter the following code:</font>  <font color="Orange "size="5">${pin}</font> <font color="Gray "> in the text field to confirm your subscription.</font> <br>  <br><font color="Gray">Please note that your password or email may be modified accidentally by processing unauthorized activities. If you have not required this subscription, please simply ignore this email.</font> <br><font color="Gray">Our staff won't ask for your passcode, please keep this code secret.</font><br> <br> <font color="Gray">This email was sent automatically, please do not reply to it straightly.</font><br><font color="Gray">You received this email because you subscribed to the Moments on popfortress.github.io.</font><br><br><font color="Gray">popfortress.github.io</font>`;
 
 const settings = localStorage.dictionary_remote_settings;
+const token = localStorage.developer_access_token;
 const xhr = new XMLHttpRequest();
-const baseURL = 'https://seep.eu.org/https://gitee.com/api/v5/repos/popfortress/dev-data/contents/moments.json';
+const baseURL = 'https://gitee.com/api/v5/repos/popfortress/dev-data/contents/moments.json';
 let remoteURL;
 if (settings) {
     const access_token = JSON.parse(settings)['accessToken'];
+    remoteURL = `${baseURL}?access_token=${access_token}`;
+} else if (token) {
+    const access_token = token;
     remoteURL = `${baseURL}?access_token=${access_token}`;
 } else {
     remoteURL = baseURL;
@@ -95,6 +101,8 @@ function fetchMoments() {
             link.target = '_blank';
             loading.style.display = 'none';
         });
+        failureDesc.innerHTML = `已加载 ${momentsData.length} 条动态短文`;
+        loadingIcon.name = 'done';
     };
 };
 
@@ -110,17 +118,26 @@ function base64ToBytes(base64) {
 
 function displayMoments(moments) {
     momentsList.innerHTML = '';
+    let elementIndex = 0;
     moments.forEach(moment => {
+        const locationWrapper = document.createElement('div');
+        locationWrapper.className = 'location_wrapper';
         momentsList.innerHTML += 
         `<mdui-card variant="filled">
             <div class="moment-text">${moment.text}</div>
             <mdui-divider></mdui-divider>
-            <div class="moment-details">
+            <div class="moment-details" data-index='${elementIndex}'>
                 <div class="datetime">${moment.time.split(':')[1].length > 1 ? moment.time : `${moment.time.split(':')[0]}:0${moment.time.split(':')[1]}`}</div>
                 <mdui-button-icon class="like-btn" icon="favorite_border" selected-icon="favorite" selectable></mdui-button-icon>
                 <mdui-button-icon class="comment-btn" icon="forum--outlined"></mdui-button-icon>
             </div>
         </mdui-card>`;
+
+        momentsList.querySelector(`div.moment-details[data-index="${elementIndex}"]`).appendChild(locationWrapper);
+        if (moment.location) {
+            locationWrapper.innerHTML = `<mdui-icon name='location_on--outlined'></mdui-icon><div class="location">${moment.location}</div>`;
+        };
+        elementIndex++;
     });
     const commentBtns = document.querySelectorAll('.comment-btn');
     commentBtns.forEach(commentBtn => {

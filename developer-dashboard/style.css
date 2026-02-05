@@ -71,3 +71,7 @@ mdui-dialog::part(panel) {
 .token_edit_btn {
     margin-left: auto;
 }
+
+.links__container {
+    margin: 2em 0;
+}

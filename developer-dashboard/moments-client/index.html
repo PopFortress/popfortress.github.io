@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Moments 客户端</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <header>
+        <div class="header__title">发布短文</div>
+    </header>
+
+    <main>
+        <div class="text__container">
+            <mdui-text-field variant="outlined" class="text__text_field" placeholder="分享这一刻…　&lt;3" rows="7" autofocus></mdui-text-field>
+        </div>
+        <div class="snippets__container">
+            <div class="pictures__wrapper">
+                <mdui-button icon="add_a_photo--outlined" variant="elevated" class="pictures__add_btn">添加图片</mdui-button>
+                <div class="pictures__step_one">
+                    <mdui-chip elevated icon="compress--outlined" href="https://docsmall.com/image-compress" target="_blank">压缩图片</mdui-chip>
+                    <mdui-chip elevated icon="file_upload--outlined" href="https://www.superbed.cn/" target="_blank">上传图片至聚合图床</mdui-chip>
+                    <mdui-chip elevated end-icon="navigate_next--outlined" class="pirctures__next_step_btn"></mdui-chip>
+                </div>
+                <div class="pictures__step_two">
+                    <mdui-text-field variant="outlined" placeholder="键入图片地址…" class="pictures__url_input"></mdui-text-field>
+                    <mdui-chip elevated icon="photo--outlined" class="pictures__preview_btn">预览图片</mdui-chip>
+                    <mdui-chip elevated end-icon="done" class="pictures__done_btn"></mdui-chip>
+                </div>
+            </div>
+            <div class="locations__wrapper">
+                <mdui-button icon="add_location_alt--outlined" variant="elevated" class="locations__add_btn">添加位置</mdui-button>
+                <div class="locations__method_select">
+                    <mdui-chip elevated icon="keyboard--outlined" class="locations__manually_input_btn">输入地点</mdui-chip>
+                    <mdui-chip elevated icon="auto_awesome--outlined" class="locations__auto_detection_btn">自动获取</mdui-chip>
+                    <mdui-chip elevated icon="location_off--outlined" class="locations__remove_btn">移除位置</mdui-chip>
+                </div>
+                <div class="locations__input_wrapper">
+                    <mdui-text-field variant="outlined" placeholder="输入地点…" class="locations__input"></mdui-text-field>
+                    <mdui-chip elevated end-icon="done" class="locations__done_btn"></mdui-chip>
+                </div>
+            </div>
+        </div>
+        <div class="status__container">
+            <div class="status__indicator">
+                <mdui-circular-progress class="status__loading"></mdui-circular-progress>
+                <mdui-icon name="done" class="status__icon"></mdui-icon>
+            </div>
+            <div class="status__text"></div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="version__desc">适用于 Moments 的在线客户端（版本：1.0.0，存储服务器：Gitee）</div>
+    </footer>
+
+    <mdui-fab extended icon="publish--outlined" class="publish__btn">发布</mdui-fab>
+
+
+    <mdui-dialog icon="preview--outlined" headline="图片预览" close-on-esc close-on-overlay-click class="preview__dialog">
+        <div class="preview__container">
+            <div class="preview__loading_wrapper">
+                <mdui-circular-progress class="preview__loading"></mdui-circular-progress>
+            </div>
+            <img alt="图片" class="preview__image">
+            <div class="preview__error_wrapper">
+                <mdui-icon name="close" class="preview__error_icon"></mdui-icon>
+                <div class="preview__error_text">图片加载失败</div>
+            </div>
+        </div>
+    </mdui-dialog>
+
+    <dialog class="loading__dialog">
+        <div class="loading__container">
+            <mdui-circular-progress></mdui-circular-progress>
+            <div class="loading__text">正在载入…</div>
+        </div>
+    </dialog>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>
