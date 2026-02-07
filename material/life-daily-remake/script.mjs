@@ -368,13 +368,13 @@ function fetchZhihuDaily() {
             zhihuDailyList.innerHTML += '<mdui-list-subheader>今日精选</mdui-list-subheader>';
             data.top_stories.forEach(story => {
                 zhihuDailyList.innerHTML += `<mdui-list-item href=${story.url} target="_blank">${story.title}\
-                    <img slot="icon" src=${story.image}>\
+                    <img slot="end-icon" src=${story.image}>\
                 </mdui-list-item>`;
             });
             zhihuDailyList.innerHTML += '<mdui-list-subheader>故事</mdui-list-subheader>';
             data.stories.forEach(story => {
                 zhihuDailyList.innerHTML += `<mdui-list-item href=${story.url} target="_blank">${story.title}\
-                    <img slot="icon" src=${story.images[0]}>\
+                    <img slot="end-icon" src=${story.images[0]}>\
                 </mdui-list-item>`;
             });
             zhihuDaily.innerHTML += '<a href="https://daily.zhihu.com/" target="_blank">查看更多内容</a>';
@@ -520,9 +520,15 @@ function fetchMaoyan() {
             let rankIndex = 1;
             maoyanLastUpdate.textContent = `更新时间：${data.data.updateInfo.date}　${data.data.updateInfo.time}`;
             data.data.list.forEach(item => {
-                maoyanList.innerHTML += `<mdui-list-item href="https://www.maoyan.com/films/${item.movieInfo.movieId}" target="_blank">${item.movieInfo.movieName}\
-                <div slot="icon">#${rankIndex++}</div>\
-                <div slot="end-icon">${item.sumBoxDesc} (${item.movieInfo.releaseInfo})</div></mdui-list-item>`
+                maoyanList.innerHTML += `<mdui-list-item data-index=${rankIndex} href="https://www.maoyan.com/films/${item.movieInfo.movieId}" target="_blank">${item.movieInfo.movieName}\
+                <div slot="icon">#${rankIndex}</div></mdui-list-item>`;
+                const listitem = maoyanList.querySelector(`mdui-list-item[data-index="${rankIndex}"]`);
+                if (item.movieInfo.releaseInfo) {
+                    listitem.innerHTML += `<div slot="end-icon">${item.sumBoxDesc} (${item.movieInfo.releaseInfo})</div>`;
+                } else {
+                    listitem.innerHTML += `<div slot="end-icon">${item.sumBoxDesc}</div>`;
+                };
+                rankIndex++;
             });
         },
     });

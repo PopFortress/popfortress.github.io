@@ -546,7 +546,7 @@ cloudSettSaveBtn.onclick = () => {
     const path = pathInput.value.trim();
     const accessToken = accessTokenInput.value.trim();
     if (owner && repo && path && accessToken) {
-        localStorage.dictionary_remote_url = `https://seep.eu.org/https://gitee.com/api/v5/repos/${owner}/${repo}/contents/${path}?access_token=${accessToken}`;
+        localStorage.dictionary_remote_url = `https://gitee.com/api/v5/repos/${owner}/${repo}/contents/${path}?access_token=${accessToken}`;
         localStorage.dictionary_remote_settings = JSON.stringify({ owner: owner, repo: repo, path: path, accessToken: accessToken });
         mdui.snackbar({ message: '云同步设置已保存。'});
         switchPage('bookmarks');
@@ -577,7 +577,7 @@ cloudUploadBookmarks.onclick = () => {
     xhr.send();
     xhr.onload = () => {
         sha = JSON.parse(xhr.responseText).sha;
-        xhr.open('PUT', localStorage.dictionary_remote_url.split('seep.eu.org/')[1]);
+        xhr.open('PUT', localStorage.dictionary_remote_url);
         let body = new FormData();
         body.append('content', bookmarks);
         body.append('sha', sha);

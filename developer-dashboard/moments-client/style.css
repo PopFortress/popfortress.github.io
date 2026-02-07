@@ -171,3 +171,10 @@ footer {
 .status__indicator {
     display: none;
 }
+
+.locations__add_btn::part(label) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 75vw;
+}
