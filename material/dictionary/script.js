@@ -545,9 +545,14 @@ cloudSettSaveBtn.onclick = () => {
     const repo = repoInput.value.trim();
     const path = pathInput.value.trim();
     const accessToken = accessTokenInput.value.trim();
-    if (owner && repo && path && accessToken) {
-        localStorage.dictionary_remote_url = `https://gitee.com/api/v5/repos/${owner}/${repo}/contents/${path}?access_token=${accessToken}`;
-        localStorage.dictionary_remote_settings = JSON.stringify({ owner: owner, repo: repo, path: path, accessToken: accessToken });
+    if (owner && repo && path) {
+        if (accessToken) {
+            localStorage.dictionary_remote_url = `https://gitee.com/api/v5/repos/${owner}/${repo}/contents/${path}?access_token=${accessToken}`;
+            localStorage.dictionary_remote_settings = JSON.stringify({ owner: owner, repo: repo, path: path, accessToken: accessToken });
+        } else {
+            localStorage.dictionary_remote_url = `https://gitee.com/api/v5/repos/${owner}/${repo}/contents/${path}`;
+            localStorage.dictionary_remote_settings = JSON.stringify({ owner: owner, repo: repo, path: path, accessToken: ''});
+        };
         mdui.snackbar({ message: '云同步设置已保存。'});
         switchPage('bookmarks');
     };
@@ -678,6 +683,11 @@ function fetchLatestCommit() {
         xhr.open('GET', `${baseUrl}?per_page=1&page=1&access_token=${settings.accessToken}`);
         xhr.send();
         xhr.onload = () => {
+            if (xhr.status === 401) {
+                mdui.snackbar({ message: '访问令牌无效或已过期。'});
+                syncProgress.style.display = 'none';
+                return;
+            };
             const commit = JSON.parse(xhr.responseText)[0];
             const date = commit.commit.committer.date;
             const datetime = new Date(date);
@@ -688,6 +698,8 @@ function fetchLatestCommit() {
             };
             syncProgress.style.display = 'none';
         };
+    } else {
+        syncProgress.style.display = 'none';
     };
 };
 
@@ -761,7 +773,6 @@ importBookmarks.onclick = () => {
 };
 
 navRail.onchange = navBar.onchange = (e) => {
-    navRail.value = navBar.value = e.target.value;
     switchPage(e.target.value);
 };
 
