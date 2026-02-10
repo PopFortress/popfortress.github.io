@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>翼课网自动听写（词语听写）</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/test/menu-drawer/menu-drawer.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+</head>
+<body>
+    
+    <main>
+        <p>下载适用于 Python 的程序源文件。</p>
+        <p>ekwing-auto-dictation.zip</p>
+        <mdui-button icon="open_in_new--outlined" href="https://1drv.ms/u/c/ED8BFA72F2897E14/IQDmtAVFXe2XR6295ZxjVNxBAULNRM5SsToa_2uXacS2KeQ?e=yOEJLW" target="_blank">前往 OneDrive</mdui-button>
+        <mdui-button variant="tonal" class="instructions__btn">查看使用文档</mdui-button>
+        <iframe src="https://1drv.ms/u/c/ED8BFA72F2897E14/IQTmtAVFXe2XR6295ZxjVNxBAaPVqGv2XLgw1z6u8_7HjDo" width="170" height="150" frameborder="0" scrolling="no" allowfullscreen></iframe>
+        <small>* 受限制地区用户可能无法访问此链接。</small>
+    </main>
+
+    <dialog class="fs-mdui-menu-drawer-dialog" id="instructions">
+        <fs-mdui-menu-drawer data-title="使用文档" data-icon="article--outlined">
+            <mdui-card class="fs-mdui-menu-drawer-container">
+                <fs-mdui-menu-drawer-header></fs-mdui-menu-drawer-header>
+                <fs-mdui-menu-drawer-body id="instructions__body">
+                    <p>1. 前往 OneDrive 下载程序包。</p>
+                    <p>2. 检查是否安装 Python（版本 ≥ 3.10）以及 keyboard 库。</p>
+                    <p>若未安装 Python 请前往 Python 官网下载最新版本进行安装。</p>
+                    <p>若未安装 keyboard 库请通过以下命令来安装。</p>
+                    <pre>pip install keyboard</pre>
+                    <p>3. 打开翼课网网页端，在打开词语听写窗口前打开 F12 开发人员工具。打开听写窗口后找到并复制名为 proxy 请求的响应结果。</p>
+                    <p>4. 解压压缩文件包，将结果粘贴至 <code>vocabulary</code> 目录下的 <code>words.json</code> 文件中。</p>
+                    <p>5. 在压缩包根目录下打开终端，运行命令：</p>
+                    <pre>python .\main.py</pre>
+                    <p>6. 按换行键确定开始后在 3 秒内切换到翼课网网页端，点击开始听写按钮。</p>
+                    <p>7. 享受自动听写带来的便捷！</p>
+                    <small style="padding-bottom: 5em;">若遇任何问题，请自行搜索解决。</small>
+                </fs-mdui-menu-drawer-body>
+            </mdui-card>
+        </fs-mdui-menu-drawer>
+    </dialog>
+
+    <script>
+        mdui.setColorScheme('#EF9A9A');
+        const instructionsBtn = document.querySelector('.instructions__btn');
+        const instructionsDrawer = document.querySelector('#instructions');
+        instructionsBtn.addEventListener('click', () => {
+            menudrawer.open(instructionsDrawer);
+        });
+    </script>
+
+    <script src="/test/menu-drawer/menu-drawer.js"></script>
+
+</body>
+</html>

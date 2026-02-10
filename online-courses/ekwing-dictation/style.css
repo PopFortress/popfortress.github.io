@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+}
+
+main {
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+#instructions__body {
+    padding: 1.5em;
+}
+
+#instructions__body p {
+    line-height: 2;
+    margin: .5em 0;
+}
+
+pre, code {
+    background-color: rgb(var(--mdui-color-surface-container));
+}
+
+pre {
+    padding: .8em;
+}

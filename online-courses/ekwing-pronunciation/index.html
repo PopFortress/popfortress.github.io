@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>翼课网自动朗读（读记单词）</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <main>
+        <mdui-card class="info__wrapper" variant="filled">
+            <mdui-icon name="info--outlined"></mdui-icon>
+            <div class="info__text">请使用翼课网网页端，在打开读记词语窗口前启用 F12 开发人员调试工具，打开后复制 proxy 请求的响应数据，将其粘贴至下方输入框中。</div>
+        </mdui-card>
+        <mdui-text-field autosize min-rows="3" label="在此粘贴 proxy 返回数据" variant="outlined" autofocus max-rows="10" class="data__field"></mdui-text-field>
+        <mdui-button icon="play_arrow" disabled class="pronounce__btn">开始朗读</mdui-button>
+        <mdui-button icon="stop" class="stop__btn">停止朗读</mdui-button>
+        <small>* 根据测试数据，若翼课网录音异常，请尝试用其它（如移动）设备播放朗读音频。因为在某些情况下，设备内部音频无法被麦克风音源录制到。</small>
+    </main>
+
+    <audio class="audio"></audio>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>

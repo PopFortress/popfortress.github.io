@@ -105,7 +105,7 @@ startOptionUrl.onclick = ()=> {
                 });
                 playlist.addItem(song);
                 player.playSong(playlist.length - 1);
-                resetLyrics();
+                lyricsDisplayer.resetLyrics();
             } else {
                 return false;
             };

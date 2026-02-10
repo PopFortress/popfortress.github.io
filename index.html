@@ -54,6 +54,7 @@
                 <mdui-button-icon icon="more_horiz" class="more-sections" slot="trigger"></mdui-button-icon>
                 <mdui-menu class="folded-sections-menu">
                     <mdui-menu-item icon="archive--outlined" value="archives">归档</mdui-menu-item>
+                    <mdui-menu-item icon="school--outlined" value="online-courses">在线课程</mdui-menu-item>
                 </mdui-menu>
             </mdui-dropdown>
             <mdui-tab-panel slot="panel" value="featured">
@@ -125,6 +126,12 @@
                     <mdui-list-item href="/essay" icon="archive--outlined">随笔收藏集</mdui-list-item>
                     <mdui-list-item href="/encyclopedia" icon="archive--outlined">人物与名词</mdui-list-item>
                     <mdui-list-item href="/rickroll-100million" icon="archive--outlined">瑞克摇B站视频数据显示</mdui-list-item>
+                </mdui-list>
+            </mdui-tab-panel>
+            <mdui-tab-panel slot="panel" value="online-courses" class="hidden-sections">
+                <mdui-list>
+                    <mdui-list-item href="/online-courses/ekwing-pronunciation/" icon="headset_mic--outlined">翼课网自动朗读（读记单词）</mdui-list-item>
+                    <mdui-list-item href="/online-courses/ekwing-dictation/" icon="edit--outlined">翼课网自动听写（词语听写）</mdui-list-item>
                 </mdui-list>
             </mdui-tab-panel>
         </mdui-tabs>
