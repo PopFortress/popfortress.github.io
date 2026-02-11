@@ -470,6 +470,9 @@ fetchFestival();
 foldedSectionsTriggers.forEach(item => {
     item.onclick = () => {
         tabs.value = item.dataset.value;
+        document.querySelectorAll('.hidden-sections').forEach(section => {
+            section.style.display = 'none';
+        });
         $(`.sections-tabs mdui-tab-panel[value=${item.value}]`).style.display = 'block';
         const firstTab = $('.sections-tabs mdui-tab')
         firstTab.textContent = item.textContent;

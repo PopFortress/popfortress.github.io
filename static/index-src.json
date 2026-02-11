@@ -27,6 +27,11 @@
     ],
     "activities": [
         {
+            "title": "「骐骥驰骋 势不可挡」2026 年春节联欢晚会",
+            "target_url": "https://space.bilibili.com/501554611",
+            "imgurl": "https://pic1.imgdb.cn/item/698ca95517402bfe3bc87cd8.jpg"
+        },
+        {
             "title": "2026 喜迎双旦·欢度新年",
             "target_url": "/info/spring_festival_countdown",
             "imgurl": "https://images.pexels.com/photos/6027785/pexels-photo-6027785.jpeg"
@@ -47,7 +52,7 @@
             "imgurl": "https://pic1.imgdb.cn/item/6898753958cb8da5c816a567.png"
         }
     ],
-    "latest_update": "Jan. 24, 2026",
+    "latest_update": "<deprecated>",
     "notifications": [
         {"id": 1 ,"title": "帖文 #12 已发布！✨🎉<br><br>探秘“一大会址” —— 南湖红船！前往查看游记 →", "link": "/posts/12", "alert": true},
         {"id": 2 ,"title": "听说 90% 的访客访问了页注中的“可疑的页面”"},
