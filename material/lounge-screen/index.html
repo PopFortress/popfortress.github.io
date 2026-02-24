@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
     <link rel="stylesheet" href="/mdui/material-icons.css">
     <script src="/mdui/mdui.global.js"></script>
+    <script src="/static/NoSleep.min.js"></script>
 </head>
 <body>
     
@@ -17,6 +18,11 @@
             <mdui-button-icon icon="keyboard_backspace" class="header__back_btn"></mdui-button-icon>
             <mdui-top-app-bar-title class="header__title">选择一个车站</mdui-top-app-bar-title>
             <mdui-circular-progress class="header__loading"></mdui-circular-progress>
+        </div>
+        <div class="notify__wrapper">
+            <mdui-icon name="notifications_active--outlined" class="notify__icon"></mdui-icon>
+            <div class="notify__desc"></div>
+            <mdui-button-icon class="notify__cancel_btn" icon="close"></mdui-button-icon>
         </div>
     </header>
 
@@ -51,6 +57,7 @@
                             <th>开车时间</th>
                             <th>候车室/检票口</th>
                             <th>状态</th>
+                            <th>通知</th>
                         </tr>
                     </thead>
                     <tbody class="table__trains_list"></tbody>
@@ -87,6 +94,8 @@
             </div>
         </div>
     </main>
+
+    <audio class="speech__audio"></audio>
 
     <script src="./script.js"></script>
 

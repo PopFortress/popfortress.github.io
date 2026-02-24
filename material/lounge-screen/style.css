@@ -113,3 +113,45 @@ a.table__train_code {
     margin-right: 1em;
     display: inline-block;
 }
+
+.table__notify_btn {
+    height: min-content;
+    max-height: 17px;
+    font-size: 1rem;
+    width: auto;
+    position: relative;
+}
+
+.notify__wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1.2em;
+    flex-wrap: nowrap;
+    padding: 9px 2px;
+    white-space: nowrap;
+    max-height: 16px;
+    background-color: rgb(var(--mdui-color-surface-container-high));
+    font-size: .7rem;
+    align-items: center;
+
+    display: none;
+    opacity: 0;
+    transform: translateY(-40px);
+    transition: .5s;
+
+    --foreground-color: inherit;
+}
+
+.notify__desc {
+    color: var(--foreground-color);
+}
+
+.notify__cancel_btn {
+    max-height: 27px;
+    transform: scale(.7);
+}
+
+.notify__icon {
+    font-size: 1rem;
+    color: var(--foreground-color);
+}

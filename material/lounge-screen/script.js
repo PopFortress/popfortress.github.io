@@ -26,9 +26,21 @@ const tableTrainsList = $('.table__trains_list');
 const basicInfoList = $('.basic__info_list');
 const stationsStationList = $('.stations__station_list');
 
+const notifyWrapper = $('.notify__wrapper');
+const notifyDesc = $('.notify__desc');
+const notifyCancelBtn = $('.notify__cancel_btn');
+const appContainer = $('main');
+const speechAudio = $('.speech__audio');
+
+const broadcastSFX = 'https://files.zohopublic.com.cn/public/workdrive-public/download/hstg87b361319499f468fb5907ed68f878918?x-cli-msg=%7B%22linkId%22%3A%221HCuFcqjcI1-36sAc%22%2C%22isFileOwner%22%3Afalse%2C%22version%22%3A%221.0%22%2C%22isWDSupport%22%3Afalse%7D';
+
+new NoSleep().enable();
+
 let allCollapseItems;
 let currentPage = 'search';
 let currentStation;
+let notifiedTraincode;
+let latestStatus; // notified train
 function switchPage(options) {
     const destination = options.destination;
     const title = options.title;
@@ -233,6 +245,7 @@ function showResultOf(station) {
                             break;
                         case '停止检票':
                             th.style.color = '#B71C1C';
+                            break;
                         default:
                             break;
                     };
@@ -256,7 +269,50 @@ function showResultOf(station) {
                 };
                 tr.appendChild(th);
             });
+            const actionCell = document.createElement('th');
+            const notifyBtn = document.createElement('mdui-button-icon');
+            notifyBtn.className = 'table__notify_btn';
+            notifyBtn.icon = 'notification_add--outlined';
+            notifyBtn.dataset.traincode = train[0];
+            notifyBtn.onclick = (e) => {
+                tableTrainsList.querySelectorAll('.table__notify_btn').forEach(btn => {
+                    btn.icon = 'notification_add--outlined';
+                    btn.disabled = false;
+                });
+                addNotify(e.target.dataset.traincode);
+                e.target.icon = 'done';
+                setTimeout(() => {
+                    e.target.disabled = true;
+                }, 350);
+            };
+            actionCell.appendChild(notifyBtn);
+            tr.appendChild(actionCell);
             tableTrainsList.appendChild(tr);
+
+            if (train[0] === notifiedTraincode) {
+                notifyBtn.icon = 'done';
+                notifyBtn.disabled = true;
+                if (train[5] !== '正点' && train[5] !== latestStatus) {
+                    latestStatus = train[5];
+                    let notifyColor = 'inherit';
+                    switch (train[5]) {
+                        case '正在检票':
+                            notifyColor = '#009688';
+                            break;
+                        case '停止检票':
+                            notifyColor  = '#B71C1C';
+                        default:
+                            break;
+                    };
+                    if (train[5].includes('晚点')) {
+                        notifyColor = '#FBC02D';
+                    };
+                    notify({
+                        message: `${notifiedTraincode} 次列车当前 ${train[5]}`,
+                        color: notifyColor,
+                    });
+                };
+            };
         });
         if (!updateInterval) {
             updateInterval = setInterval(() => {
@@ -311,4 +367,47 @@ function showTrainInfoOf(traincode) {
         });
         loading(false);
     };
+};
+
+function switchNotifyHeaderDisplayState(show) {
+    if (show) {
+        notifyWrapper.style.display = 'flex';
+        setTimeout(() => {
+            appContainer.style.paddingTop = 'calc(1em + 99px)';
+            notifyWrapper.style.transform = 'translateY(0)';
+            notifyWrapper.style.opacity = '1';
+        }, 0);
+    } else {
+        notifyWrapper.style.transform = 'translateY(-16px)';
+        notifyWrapper.style.opacity = '0';
+        notifyWrapper.style.display = 'none';
+        appContainer.style.paddingTop = 'calc(1em + 72px)';
+    };
+};
+
+function notify(options) {
+    const message = options.message;
+    const color = options.color;
+    notifyWrapper.style.setProperty('--foreground-color', color);
+    notifyDesc.innerText = message;
+    speechAudio.src = broadcastSFX;
+    speechAudio.play();
+    navigator.vibrate([200, 100, 200]);
+};
+
+
+function addNotify(traincode) {
+    latestStatus = void 0;
+    notifiedTraincode = traincode;
+    switchNotifyHeaderDisplayState(true);
+    notify({
+        message: `已订阅车次 ${traincode} 的实时到达信息`,
+        color: 'inherit'
+    });
+};
+
+notifyCancelBtn.onclick = () => {
+    notifiedTraincode = void 0;
+    switchNotifyHeaderDisplayState(false);
+    showResultOf(currentStation);
 };
