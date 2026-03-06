@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>现代图书馆客户端</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <header>
+        <div class="header__title">管理图书册</div>
+    </header>
+
+    <main>
+        <div class="table__container mdui-table">
+            <table>
+                <thead>
+                    <th>书名</th>
+                    <th>作者</th>
+                    <th>ISBN</th>
+                    <th>出版社</th>
+                    <th>定价</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <mdui-card class="add__btn" variant="filled" clickable>
+            <mdui-icon name="add"></mdui-icon>
+            <div>添加书籍</div>
+        </mdui-card>
+    </main>
+
+    
+    <script src="./script.js"></script>
+
+</body>
+</html>

@@ -93,7 +93,7 @@ function fetchMoments() {
     xhr.send();
     xhr.onload = () => {
         const base64 = JSON.parse(xhr.responseText);
-        rawMomentsData = JSON.parse(new TextDecoder().decode(base64ToBytes(base64.content)));;
+        rawMomentsData = JSON.parse(new TextDecoder().decode(base64ToBytes(base64.content)));
         momentsData = [...rawMomentsData].reverse();
         displayMoments(momentsData);
     
@@ -112,8 +112,8 @@ xhr.onerror = () => {
 };
 
 function base64ToBytes(base64) {
-  const binString = atob(base64);
-  return Uint8Array.from(binString, (m) => m.codePointAt(0));
+    const binString = atob(base64);
+    return Uint8Array.from(binString, (m) => m.codePointAt(0));
 };
 
 function displayMoments(moments) {

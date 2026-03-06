@@ -97,9 +97,9 @@ mdui-circular-progress {
     font-size: .9rem;
 }
 
-#books-table {
-    border-collapse: collapse;
+.table__container {
     display: none;
+    white-space: nowrap;
 }
 
 th {
@@ -138,4 +138,14 @@ footer {
 footer a {
     color: inherit;
     opacity: .7;
+}
+
+table thead th {
+    background: rgb(var(--mdui-color-surface-container));
+}
+
+table thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }

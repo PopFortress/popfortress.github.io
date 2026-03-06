@@ -25,7 +25,7 @@
         </header>
 
         <div class="input-wrapper">
-            <mdui-text-field variant="outlined" autocorrect="on" autocomplete="on" spellcheck="true" label="查找书籍名称、作者、ISBN和出版社…" autofocus type="search" id="search-input" clearable></mdui-text-field>
+            <mdui-text-field variant="outlined" autocorrect="on" autocomplete="on" spellcheck="true" label="查找书籍名称、作者、ISBN 和出版社…" autofocus type="search" id="search-input" clearable></mdui-text-field>
         </div>
         <mdui-fab icon="search" id="search-fab">查找</mdui-fab>
 
@@ -38,19 +38,22 @@
                 </div>
             </div>
 
-            <table class="mdui-table" id="books-table">
-                <thead>
-                    <th id="thead-book-name">书</th>
-                    <th id="thead-author">作者</th>
-                    <th id="thead-isbn">ISBN</th>
-                    <th id="thead-publisher">出版社</th>
-                </thead>
-                <tbody id="books-list"></tbody>
-            </table>
+            <div class="mdui-table table__container">
+                <table id="books-table">
+                    <thead>
+                        <th id="thead-book-name">书</th>
+                        <th id="thead-author">作者</th>
+                        <th id="thead-isbn">ISBN</th>
+                        <th id="thead-publisher">出版社</th>
+                        <th id="thead-price">定价</th>
+                    </thead>
+                    <tbody id="books-list"></tbody>
+                </table>
+            </div>
         </main>
 
         <footer>
-            <div style="margin-bottom: 6px;">现代图书馆 &copy; Modern Library 2025</div>
+            <div style="margin-bottom: 6px;">现代图书馆 &copy; Modern Library 2026</div>
             <div>
                 <a href="https://pdc.capub.cn/" target="_blank">中国国家版本馆</a>
                 <a href="https://zh.ai1412.ru/" target="_blank">Z-Libray</a>
@@ -71,6 +74,10 @@
             <div class="option">
                 <label for="publisher-toggle">显示出版社</label>
                 <mdui-switch id="publisher-toggle" checked></mdui-switch>
+            </div>
+            <div class="option">
+                <label for="price-toggle">显示定价</label>
+                <mdui-switch id="price-toggle" checked></mdui-switch>
             </div>
         </div>
         <mdui-button slot="action" variant="text" class="close-dlg-btn">关闭</mdui-button>
