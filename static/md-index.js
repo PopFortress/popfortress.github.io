@@ -395,6 +395,9 @@ async function fetchCommitVersion() {
     const yr = raw_date.slice(0, 4);
     const month = monthsMap[raw_date.slice(5, 7)] + '.';
     let day = raw_date.slice(8, 10);
+    if (day.includes('0')) {
+        day = day.slice(1);
+    };
     const hr = raw_date.split('T')[1].split(':')[0];
     // UTC timezone
     if (+hr >= 16) {

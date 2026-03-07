@@ -135,7 +135,7 @@ fetchBooks();
 function searchBooks(keyword) {
     if (!booksTable.style.display) {
         expandAllBtn.style.display = 'none';
-        booksTable.style.display = 'table';
+        tableContainer.style.display = 'block';
     };
     loading.style.display = 'flex';
     const books = booksList.querySelectorAll('tr');
