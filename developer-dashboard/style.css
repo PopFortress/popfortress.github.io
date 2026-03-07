@@ -19,6 +19,7 @@ header {
     align-items: center;
     gap: 1em;
     letter-spacing: 1px;
+    z-index: 256;
 }
 
 .header__welcome, header mdui-icon {
@@ -45,9 +46,10 @@ mdui-dialog::part(panel) {
     margin: 1rem;
 }
 
-.token__container {
+.token__container, .github_token__container {
     display: flex;
     justify-content: center;
+    line-height: 1.5;
 }
 
 .token__wrapper {
@@ -60,11 +62,21 @@ mdui-dialog::part(panel) {
     overflow: auto;
 }
 
-.token__wrapper mdui-icon {
+.github_token__wrapper {
+    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    white-space: nowrap;
+    overflow: auto;
+}
+
+.token__wrapper mdui-icon, .github_token__wrapper mdui-icon {
     font-size: 1rem;
 }
 
-.token__token {
+.token__token, .github_token__token {
     color: rgb(var(--mdui-color-primary));
 }
 
@@ -74,4 +86,13 @@ mdui-dialog::part(panel) {
 
 .links__container {
     margin: 2em 0;
+}
+
+a {
+    color: rgb(var(--mdui-color-primary));
+    -webkit-tap-highlight-color: transparent;
+}
+
+a:active {
+    color: rgb(var(--mdui-color-secondary));
 }

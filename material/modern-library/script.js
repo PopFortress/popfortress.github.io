@@ -31,20 +31,11 @@ const theadPrice = $('#thead-price');
 const theadPublisher = $('#thead-publisher');
 const tableContainer = $('.table__container');
 
-const dictSettings = localStorage.dictionary_remote_settings;
+const ghToken = localStorage.github_access_token;
 const token = localStorage.developer_access_token;
 const xhr = new XMLHttpRequest();
-const baseURL = 'https://gitee.com/api/v5/repos/popfortress/dev-data/contents/library.json';
-let remoteURL;
-if (dictSettings) {
-    const access_token = JSON.parse(dictSettings)['accessToken'];
-    remoteURL = `${baseURL}?access_token=${access_token}`;
-} else if (token) {
-    const access_token = token;
-    remoteURL = `${baseURL}?access_token=${access_token}`;
-} else {
-    remoteURL = baseURL;
-};
+const baseURL = 'https://api.github.com/repos/popfortress/dev-data/contents/library.json';
+let remoteURL = baseURL;
 
 xhr.onerror = () => {
     loading.style.display = 'none';
@@ -90,6 +81,9 @@ searchFab.onmouseleave = () => {
 
 async function fetchBooks() {
     xhr.open('GET', remoteURL);
+    if (ghToken) {
+        xhr.setRequestHeader('Authorization', `Bearer ${ghToken}`);
+    };
     xhr.send();
     xhr.onload = () => {
         const base64 = JSON.parse(xhr.responseText);

@@ -22,7 +22,7 @@ header {
 
 main {
     width: 100%;
-    max-width: 1080px;
+    max-width: 1298px;
     padding: 0 10px 3.2em 10px;
 }
 
@@ -49,6 +49,27 @@ table thead th {
 }
 
 .table__input {
-    height: 2.8em;
+    height: 2.3em;
     min-width: 177px;
+    font-size: .875rem;
+}
+
+.table__input::part(input) {
+    font-size: .875rem;
+}
+
+.table__remove_btn {
+    color: rgb(var(--mdui-color-primary));
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.table__remove_btn:active {
+    color: rgb(var(--mdui-color-secondary));
+}
+
+.commit__form {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
 }

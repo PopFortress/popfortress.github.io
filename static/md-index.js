@@ -45,6 +45,7 @@ const tabs = $('mdui-tabs.sections-tabs');
 const dayEffectSwitch = $('#day-effects');
 const fallbackFontSwitch = $('#second-font-src');
 const festivalText = $('.festival-text');
+const archivedItems = document.querySelectorAll('.hidden-sections[value="archives"] mdui-list-item');
 var sayingsDesc;
 var sha;
 var commitMessage;
@@ -465,6 +466,13 @@ async function fetchFestival() {
     festivalText.style.display = 'block';
 };
 fetchFestival();
+
+archivedItems.forEach(item => {
+    if (item.icon === 'auto_awesome') {
+        item.icon = 'archive--outlined';
+    };
+});
+
 
 // handling folded sections
 foldedSectionsTriggers.forEach(item => {
