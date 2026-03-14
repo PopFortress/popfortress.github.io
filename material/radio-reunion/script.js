@@ -303,7 +303,7 @@ mdui.setLocale('zh-cn');
 // player control logic.
 // space play/pause.
 document.onkeydown = (e) => {
-    if (e.key === ' ' && e.target.tagName !== 'MDUI-TEXT-FIELD') {
+    if (e.key === ' ' && e.target.tagName !== 'MDUI-TEXT-FIELD'  && e.target.tagName !== 'VIDEO') {
         e.preventDefault();
         playerPlayback.click();
     };

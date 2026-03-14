@@ -4,6 +4,14 @@ const loginBtn = $('.login__button');
 const emailEmailInput = $('.login_email__email_input');
 const emailPwdInput = $('.login_email__pasword_input');
 const submitLoginEmailBtn = $('.login__login_email_btn');
+const qrMethodBtn = $('.login__qr_method_btn');
+
+const emailMethodWrapper = $('.login__email_wrapper');
+const qrMethodWrapper = $('.login__qr_wrapper');
+const accountMethodBtn = $('.login__account_method_btn');
+
+const qrImg = $('.login__qr__img');
+const qrLink = $('.login__qr__link');
 
 loginBtn.onclick = () => {
     switchPage('auth');
@@ -13,6 +21,7 @@ class Authenticator {
     constructor(options) {
         this.account = options.account;
         this.cookie;
+        this.qrImgUrl = '';
     };
     loginEmail(options) {
         const email = options.email;
@@ -55,4 +64,35 @@ emailPwdInput.onkeydown = (e) => {
     if (e.key === 'Enter') {
         attemptLoginEmail();
     };
+};
+
+qrMethodBtn.onclick = () => {
+    emailMethodWrapper.style.display = 'none';
+    qrMethodWrapper.style.display = 'flex';
+    qrMethodBtn.style.display = 'none';
+    accountMethodBtn.style.display = 'block';
+
+    if (!authenticator.qrImgUrl) {
+        xhr.open('GET', `${apiServer}/login/qr/key`);
+        xhr.send();
+        xhr.onload = () => {
+            const data = JSON.parse(xhr.responseText);
+            const unikey = data.data.unikey;
+            xhr.open('GET', `${apiServer}/login/qr/create?key=${unikey}&qrimg=true`);
+            xhr.send();
+            xhr.onload = () => {
+                const data = JSON.parse(xhr.responseText);
+                authenticator.qrImgUrl = data.data.qrimg;
+                qrImg.src = authenticator.qrImgUrl;
+                qrLink.href = data.data.qrurl;
+            };
+        };
+    };
+};
+
+accountMethodBtn.onclick = () => {
+    emailMethodWrapper.style.display = 'flex';
+    qrMethodWrapper.style.display = 'none';
+    qrMethodBtn.style.display = 'block';
+    accountMethodBtn.style.display = 'none';
 };

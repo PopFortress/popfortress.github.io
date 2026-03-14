@@ -6,6 +6,7 @@ const startOptionFeatured = $('#start__featured_option');
 const welcomeOverlay = $('.welcome_overlay');
 const viewMV = $('.detail__see_mv');
 const mvVideo = $('.mv__video');
+const viewComments = $('.detail__view_comments');
 let currentPage = 'main';
 let previousPage;
 let pages_stack = [];
@@ -52,6 +53,7 @@ function switchPage(destination) {
                 break;
             case 'lyrics':
                 checkMVAvailability();
+                mvVideo.pause();
                 break;
             case 'mv':
                 audio.pause();
@@ -63,6 +65,9 @@ function switchPage(destination) {
                     searchInput.focus();
                 };
                 break;
+            case 'comments':
+                loadComments();
+                break;
             default:
                 break;
         };
@@ -72,9 +77,9 @@ function switchPage(destination) {
 function checkMVAvailability() {
     if (player.getCurrentSong()) {
         if (player.getCurrentSong().mvid) {
-            viewMV.style.display = 'block';
+            viewMV.disabled = false;
         } else {
-            viewMV.style.display = 'none';
+            viewMV.disabled = true;
         };
     };
 };
@@ -83,6 +88,9 @@ viewMV.onclick = () => {
     switchPage('mv');
 };
 
+viewComments.onclick = () => {
+    switchPage('comments');
+};
 
 
 // url option handler

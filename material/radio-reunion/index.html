@@ -107,7 +107,13 @@
             <mdui-button-icon icon="arrow_back" class="header__back_btn"></mdui-button-icon>
             <div class="header__title">歌词详情</div>
             <div class="detail__actions">
-                <mdui-button icon="movie--outlined" class="detail__see_mv" variant="tonal">查看 MV</mdui-button>
+                <mdui-dropdown placement="bottom-end">
+                    <mdui-button-icon icon="more_vert" slot="trigger" class="detail__more_btn"></mdui-button-icon>
+                    <mdui-menu>
+                        <mdui-menu-item class="detail__see_mv" disabled icon="movie--outlined">查看 MV</mdui-menu-item>
+                        <mdui-menu-item class="detail__view_comments" icon="rate_review--outlined">评论</mdui-menu-item>
+                    </mdui-menu>
+                </mdui-dropdown>
             </div>
         </header>
         <main>
@@ -126,8 +132,20 @@
             <div class="header__title">MV 详情</div>
         </header>
         <main>
+            <div class="mv__title"></div>
             <video controls class="mv__video"></video>
         </main>
+    </div>
+
+    <div class="app_page" id="app_page__comments">
+        <header>
+            <mdui-button-icon icon="arrow_back" class="header__back_btn"></mdui-button-icon>
+            <div class="header__title">评论</div>
+        </header>
+        <main>
+            <div class="comments__list"></div>
+        </main>
+        </header>
     </div>
 
     <div class="app_page" id="app_page__auth">
@@ -145,6 +163,15 @@
                             <mdui-text-field icon="password--outlined" placeholder="密码" type="password" toggle-password class="login_email__pasword_input"></mdui-text-field>
                         </div>
                         <mdui-button class="login__login_email_btn login__login_btn" full-width variant="tonal">登录</mdui-button>
+                    </div>
+                    <div class="login__form_wrapper login__qr_wrapper">
+                        <img alt="qrcode" class="login__qr__img">
+                        <a href="javascript:;" class="login__qr__link" target="_blank">网页登录</a>
+                        <div>扫描二维码登录</div>
+                    </div>
+                    <div class="login__methods_wrapper">
+                        <mdui-button-icon icon="qr_code_scanner" class="login__qr_method_btn"></mdui-button-icon>
+                        <mdui-button-icon icon="person--outlined" class="login__account_method_btn"></mdui-button-icon>
                     </div>
                 </mdui-card>
             </div>
@@ -206,6 +233,7 @@
     <script src="./lyrics.js"></script>
     <script src="./mv.js"></script>
     <script src="./auth.js"></script>
+    <script src="./comments.js"></script>
 
 </body>
 </html>

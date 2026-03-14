@@ -1,3 +1,5 @@
+const mvTitle = $('.mv__title');
+
 function loadMV() {
     const mvid = player.getCurrentSong().mvid;
     xhr.open('GET', `${apiServer}/mv/detail?mvid=${mvid}`);
@@ -5,11 +7,13 @@ function loadMV() {
     xhr.onload = () => {
         const data = JSON.parse(xhr.responseText);
         mvVideo.poster = data.data.cover;
+        mvTitle.innerText = data.data.name;
         xhr.open('GET', `${apiServer}/mv/url?id=${mvid}`);
         xhr.send();
         xhr.onload = () => {
             const data = JSON.parse(xhr.responseText);
             mvVideo.src = data.data.url;
+            mvVideo.play();
         };
     };
 };

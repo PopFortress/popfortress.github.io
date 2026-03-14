@@ -288,10 +288,6 @@ mdui-badge {
     gap: 12px;
 }
 
-.detail__see_mv {
-    display: none;
-}
-
 .detail__actions {
     margin-left: auto;
 }
@@ -303,7 +299,7 @@ mdui-badge {
 
 @media screen and (max-width: 425px) {
     .mv__video {
-        max-width: 100%;
+        max-width: 94%;
     }
 }
 
@@ -346,7 +342,7 @@ mdui-badge {
 }
 
 .start__options_list mdui-list-item {
-    width: 248px;
+    min-width: 248px;
     border: 2px solid rgb(var(--mdui-color-primary));
     border-radius: calc(var(--shape-corner-rounded) + 2px);
 }
@@ -403,4 +399,60 @@ mdui-badge {
 .login__login_btn {
     height: 33px;
     width: 100%;
+}
+
+.login__qr_wrapper, .login__account_method_btn {
+    display: none;
+}
+
+.login__qr_wrapper {
+    justify-content: center;
+    align-items: center;
+}
+
+.mv__title {
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 1.5;
+    letter-spacing: 1px;
+}
+
+.detail__more_btn {
+    width: 36px;
+    height: 36px;
+}
+
+/* comments page */
+.comments__wrapper {
+    display: flex;
+    gap: 1em;
+    padding: 1.4em;
+    width: 100%;
+    max-width: 790px;
+}
+
+.comments__contents_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1em;
+}
+
+.comments__nickname {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.comments__content {
+    line-height: 1.5;
+}
+
+.comments__quote_wrapper {
+    padding: 1em;
+    line-height: 1.5;
+    background-color: #ededed;
+}
+
+.comments__datetime {
+    font-size: .875rem;
+    opacity: .8;
 }
