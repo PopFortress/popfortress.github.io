@@ -21,7 +21,7 @@ const playlistBadge = $('.playlist__title_badge');
 
 // essential definitions
 const xhr = new XMLHttpRequest();
-const apiServer = 'https://163api.qijieya.cn';
+const apiServer = 'https://zm.armoe.cn';
 const apiServerAlternate = 'https://apis.netstart.cn/music';
 const mediaServer = 'https://music.163.com/song/media/outer/url';
 
@@ -190,7 +190,7 @@ class LyricsDisplayer {
         if (id) {
             doms.loading.style.display = 'flex';
             this.resetLyrics();
-            xhr.open('GET', `https://163api.qijieya.cn/lyric?id=${id}`);
+            xhr.open('GET', `${apiServer}/lyric?id=${id}`);
             xhr.send();
             xhr.onload = () => {
                 doms.loading.style.display = 'none';
