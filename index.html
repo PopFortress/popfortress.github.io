@@ -13,8 +13,27 @@
     <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
     <link rel="stylesheet" href="/static/md-index.css">
     <script src="/static/md-index.js" defer></script>
+    <style>
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgb(var(--mdui-color-background));
+            transition: opacity .3s ease-out;
+            z-index: 32767;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
+
+    <div class="loading-overlay">
+        <img src="/static/avater_logo2x.png" alt="popfortress">
+    </div>
     
     <div class="app">
         <mdui-card>

@@ -17,18 +17,51 @@ function parseTime(timeStr){
  * 每个歌词对象 
  * {time: 开始时间, words:歌词内容}
  */
-function parseLrc(lrc){
+function parseLrc(lrc, tlyric){
     var result = [];
     var lines = lrc.split('\n'); // 字符串数组
+    if (tlyric) {
+        var tlyricList = [];
+        var tlyricLines = tlyric.split('\n');
+
+        tlyricLines.forEach(line => {
+            if (line.includes('[by:')) {
+                delete tlyricLines[tlyricLines.indexOf(line)];
+            };
+        });
+    
+        tlyricLines.forEach(line => {
+            let parts = line.split(']');
+            let timeStr = parts[0].substring(1);
+            var obj = {
+                time: parseTime(timeStr),
+                words: parts[1],
+            };
+            if (line) {
+                tlyricList.push(obj);
+            };
+        });
+    };
+
     for(let i = 0; i < lines.length; i++){
         // 遍历lines
         let str = lines[i]; //每一句歌词字符串
+        
         let parts = str.split(']'); //分割
         let timeStr = parts[0].substring(1); //截取时间
-        var obj ={
+        var obj = {
             time:parseTime(timeStr),
             words: parts[1]
-        }
+        };
+
+        if (tlyric) {
+            tlyricList.forEach(line => {
+                if (line.time === obj.time) {
+                    obj.words = obj.words.concat(`<br>${line.words}`);
+                };
+            });
+        };
+
         if (str) {
             result.push(obj);
         };
@@ -60,10 +93,10 @@ function findIndex(){
 function createLrcElement(){
     for(let i=0; i<lrcData.length; i++){
         let li = document.createElement('li');
-        li.textContent = lrcData[i].words;
+        li.innerHTML = lrcData[i].words;
         doms.ul.appendChild(li);
-    }
-}
+    };
+};
 createLrcElement()
 
 

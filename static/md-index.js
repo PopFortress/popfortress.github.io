@@ -1,5 +1,17 @@
 const $ = (query) => mdui.$(query)[0];
 
+
+// early loading overlay
+const overlay = $('.loading-overlay');
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        overlay.style.opacity = 0;
+        setTimeout(() => {
+            overlay.style.display = 'none';
+        }, 300)
+    }, 1000);
+});
+
 const appContainer = $('.app');
 const sayingsCard = $('.sayings');
 const sayingsText = $('.sayings-text');

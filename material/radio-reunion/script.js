@@ -197,7 +197,11 @@ class LyricsDisplayer {
                 const data = JSON.parse(xhr.responseText);
                 if (data.lrc) {
                     this.lyrics = data.lrc.lyric;
-                    lrcData = parseLrc(this.lyrics);
+                    if (data.tlyric.lyric) {
+                        lrcData = parseLrc(this.lyrics, data.tlyric.lyric);
+                    } else {
+                        lrcData = parseLrc(this.lyrics);
+                    };
                     createLrcElement();
                 };
             };

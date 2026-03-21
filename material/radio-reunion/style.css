@@ -234,7 +234,7 @@ mdui-tab::part(icon) {
 }
 .lyrics__container li{
     height: auto;
-    line-height: 30px;
+    line-height: 1.5;
     transition: 0.3s;
     list-style: none;
     color: rgb(var(--mdui-color-secondary));
@@ -435,6 +435,7 @@ mdui-badge {
     display: flex;
     flex-direction: column;
     gap: 1.1em;
+    width: 100%;
 }
 
 .comments__nickname {
@@ -449,10 +450,27 @@ mdui-badge {
 .comments__quote_wrapper {
     padding: 1em;
     line-height: 1.5;
-    background-color: #ededed;
+    background-color: rgb(var(--mdui-color-surface-container));
+    font-size: .875rem;
+    width: 100%;
 }
 
 .comments__datetime {
     font-size: .875rem;
     opacity: .8;
+}
+
+.comments__view_replies_btn {
+    height: 36px;
+    width: fit-content;
+    margin-left: auto;
+}
+
+.comments__replies_dialog::part(panel) {
+    max-width: 94%;
+    max-height: 65%;
+}
+
+.comments__replies__owner_comment {
+    background-color: rgb(var(--mdui-color-surface-container));
 }
