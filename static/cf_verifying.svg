@@ -1,0 +1,11 @@
+<svg width="192" height="192" viewBox="0 0 230 230" xmlns="http://www.w3.org/2000/svg">
+  <!-- 8个绿色圆点均匀分布在圆环上 -->
+  <circle cx="115" cy="32" r="12" fill="#2e7d32" opacity="0.9"/>
+  <circle cx="175" cy="65" r="12" fill="#2e7d32" opacity="0.9"/>
+  <circle cx="195" cy="120" r="12" fill="#2e7d32" opacity="0.9"/>
+  <circle cx="175" cy="175" r="12" fill="#2e7d32" opacity="0.9"/>
+  <circle cx="115" cy="200" r="12" fill="#2e7d32" opacity="0.9"/>
+  <circle cx="55" cy="175" r="12" fill="#2e7d32" opacity="0.9"/>
+  <circle cx="35" cy="120" r="12" fill="#2e7d32" opacity="0.9"/>
+  <circle cx="55" cy="65" r="12" fill="#2e7d32" opacity="0.9"/>
+</svg>

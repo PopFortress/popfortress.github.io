@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Just a moment...</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            color: #313131;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0 16px;
+        }
+        
+        main {
+            margin: 8rem auto;
+        }
+        
+        main, footer {
+            width: 100%;
+            max-width: 896px;
+        }
+
+        .domain__wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: .8rem 0;
+        }
+
+        .domain__wrapper img {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .sitename {
+            line-height: 125%;
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            margin-bottom: 8px;
+            line-height: 125%;
+            font-size: 1.5rem;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            text-align: center;
+            padding: 1rem 0 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .copyright {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            padding-bottom: 1.1rem;
+            font-size: .8rem;
+        }
+
+        hr {
+            max-width: calc(100vw - 32px);
+            opacity: .4;
+        }
+
+        .sitename, .subtitle {
+            font-family: Microsoft YaHei UI, sans-serif;
+        }
+
+        @media (width <= 1024px) {
+            main {
+                padding-right: 1.5rem;
+                padding-left: 1.5rem;
+            }
+        }
+
+        .ray_id {
+            font-size: 12px;
+            line-height: 1.2;
+            font-family: serif;
+            margin-top: 16px;
+        }
+
+        .ray_id code {
+            font-family: serif, monospace;
+        }
+
+        .verification {
+            gap: 5px;
+            align-items: center;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .verify-loading {
+            display: flex;
+            width: 30px;
+            height: 30px;
+            animation: spin 5s linear infinite;
+            visibility: visible;
+            object-fit: fill;
+        }
+
+        .verification {
+            border: 1px solid #d0d0d0;
+            padding: 10px;
+            width: fit-content;
+            margin-top: 19px;
+            background-color: #f8f8f8;
+        }
+
+        .loading__text {
+            font-size: 14px;
+            margin-right: 99px;
+        }
+
+        .links {
+            display: flex;
+            font-size: 12px;
+            color: #313131;
+            justify-content: right;
+        }
+
+        .links a {
+            color: #313131;
+        }
+    </style>
+</head>
+<body>
+    
+    <main>
+        <div class="domain__wrapper">
+            <img src="/favicon.ico" alt="">
+            <div class="sitename"></div>
+        </div>
+        <div class="subtitle">执行安全验证</div>
+        <div class="desc">此网站使用安全服务来防范恶意自动程序。当网站验证您不是自动程序时，会显示此页面。</div>
+        <div class="verification" style="display: none;">
+            <div class="verify-loading">
+                <img src="/static/cf_verifying.svg" alt="" draggable="false">
+            </div>
+            <div class="loading__text">正在验证…</div>
+            <div class="cf__info">
+                <div class="logo" style="height: 32px;">
+                    <img src="/static/cf.svg" alt="cloudflare" draggable="false" width="64" height="32">
+                </div>
+                <div class="links">
+                    <a href="https://www.cloudflare.com/zh-cn/privacypolicy/" target="_blank">隐私</a>
+                    <div style="font-weight: 600; font-family: Microsoft YaHei UI;">·</div>
+                    <a href="https://challenges.cloudflare.com/cdn-cgi/challenge-platform/help" target="_blank">帮助</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <hr style="width: 100%;">
+        <div class="ray_id"></div>
+        <div class="copyright">
+            <div>由 <a href="https://www.cloudflare.com/?utm_source=challenge&utm_campaign=m" target="_blank">Cloudflare</a> 提供的性能和安全服务</div>
+            <div style="opacity: .6;">|</div>
+            <a href="https://www.cloudflare.com/zh-cn/privacypolicy/" target="_blank">隐私</a>   
+        </div>
+    </footer>
+
+
+
+    <script>
+        const params = new URLSearchParams(location.search)
+        const redirectUrl = params.get('r') || sessionStorage.redirectUrl;
+        sessionStorage.redirectUrl = redirectUrl;
+        if (!location.href.includes('__cf')) {
+            location.href = `${location.href.split('?')[0]}?__cf_chl_rt_tk=9gMNK5NIWdlZiPDBRzhfoxs6VrYZCPEBZVoDk8SOHAg-1774709159-1.0.1.1-v4iV.LpxF4aPRfIe1TVPegJozrbSmiJ8vjUzp6RNQ5s`;
+        };
+
+        const $ = (query) => document.querySelector(query);
+        const doms = {
+            sitename: $('.sitename'),
+            rayId: $('.ray_id'),
+            verification: $('.verification'),
+        };
+
+        doms.sitename.innerHTML = location.hostname;
+        doms.rayId.innerHTML = `Ray ID: <code>${Math.floor(Math.random()*0xfffffffffffff).toString(16)}${Math.floor(Math.random()*0xfff).toString(16)}</code>`;
+        window.onload = () => {
+            setTimeout(() => {
+                doms.verification.style.display = 'flex';
+                document.title = '请稍候…';
+                setTimeout(() => {
+                    localStorage.lastVerified = Date.now();
+                    location.replace(redirectUrl);
+                }, 5600);
+            }, 1200);
+        };
+    </script>
+
+</body>
+</html>

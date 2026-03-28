@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
 });
 
+// clinet verification
+if (Date.now() - (+localStorage.lastVerified || 0) > 5.76e7) {
+    location.href = '/fakecaptcha?r=/cf-challenge?r=/';
+};
+
 const appContainer = $('.app');
 const sayingsCard = $('.sayings');
 const sayingsText = $('.sayings-text');
