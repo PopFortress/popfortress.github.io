@@ -107,11 +107,16 @@
             <mdui-button-icon icon="arrow_back" class="header__back_btn"></mdui-button-icon>
             <div class="header__title">歌词详情</div>
             <div class="detail__actions">
-                <mdui-dropdown placement="bottom-end">
+                <mdui-dropdown placement="bottom-end" stay-open-on-click>
                     <mdui-button-icon icon="more_vert" slot="trigger" class="detail__more_btn"></mdui-button-icon>
-                    <mdui-menu>
+                    <mdui-menu submenu-trigger="click focus hover" selects="multiple" value="show-translation" class="details__menu">
                         <mdui-menu-item class="detail__see_mv" disabled icon="movie--outlined">查看 MV</mdui-menu-item>
                         <mdui-menu-item class="detail__view_comments" icon="rate_review--outlined">评论</mdui-menu-item>
+                        <mdui-menu-item>
+                            歌词选项
+                            <mdui-menu-item slot="submenu" value="show-translation">显示翻译</mdui-menu-item>
+                            <mdui-menu-item slot="submenu" value="show-notations">显示注音</mdui-menu-item>
+                        </mdui-menu-item>
                     </mdui-menu>
                 </mdui-dropdown>
             </div>

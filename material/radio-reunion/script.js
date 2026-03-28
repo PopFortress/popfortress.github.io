@@ -18,6 +18,8 @@ const playlistClearBtn = $('.playlist__clear_btn');
 const playbackModeBtn = $('.playback__ordering_btn');
 const playlistBadge = $('.playlist__title_badge');
 
+const detailsMenu = $('.details__menu');
+
 
 // essential definitions
 const xhr = new XMLHttpRequest();
@@ -197,8 +199,10 @@ class LyricsDisplayer {
                 const data = JSON.parse(xhr.responseText);
                 if (data.lrc) {
                     this.lyrics = data.lrc.lyric;
-                    if (data.tlyric.lyric) {
+                    if (data.tlyric.lyric && detailsMenu.value.includes('show-translation')) {
                         lrcData = parseLrc(this.lyrics, data.tlyric.lyric);
+                    } else if (data.romalrc.lyric && detailsMenu.value.includes('show-notations')) {
+                        lrcData = parseLrc(this.lyrics, data.romalrc.lyric);
                     } else {
                         lrcData = parseLrc(this.lyrics);
                     };
@@ -212,6 +216,9 @@ class LyricsDisplayer {
         doms.ul.innerHTML = '';
     };
 };
+
+// lyrics options logic
+detailsMenu.onchange = () => { lyricsDisplayer.loadLyrics(player.getCurrentSong().id) };
 
 
 
