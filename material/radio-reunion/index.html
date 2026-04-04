@@ -24,7 +24,15 @@
                     </mdui-tooltip>
                 </div>
                 <div class="header__account__user_wrapper">
-                    <mdui-avatar icon="account_circle--outlined"></mdui-avatar>
+                    <mdui-dropdown class="account__menu">
+                        <mdui-button-icon slot="trigger">
+                            <mdui-avatar class="header__avatar"></mdui-avatar>
+                        </mdui-button-icon>
+                        <mdui-menu>
+                            <mdui-menu-item class="header__username" disabled></mdui-menu-item>
+                            <mdui-menu-item class="account__logout" icon="logout--outlined">退出登录</mdui-menu-item>
+                        </mdui-menu>
+                    </mdui-dropdown>
                 </div>
             </div>
         </header>
@@ -109,7 +117,7 @@
             <div class="detail__actions">
                 <mdui-dropdown placement="bottom-end" stay-open-on-click>
                     <mdui-button-icon icon="more_vert" slot="trigger" class="detail__more_btn"></mdui-button-icon>
-                    <mdui-menu submenu-trigger="click focus hover" selects="multiple" value="show-translation" class="details__menu">
+                    <mdui-menu submenu-trigger="click focus hover" selects="single" value="show-translation" class="details__menu">
                         <mdui-menu-item class="detail__see_mv" disabled icon="movie--outlined">查看 MV</mdui-menu-item>
                         <mdui-menu-item class="detail__view_comments" icon="rate_review--outlined">评论</mdui-menu-item>
                         <mdui-menu-item>

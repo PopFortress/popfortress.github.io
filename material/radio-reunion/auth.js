@@ -14,6 +14,14 @@ const qrImg = $('.login__qr__img');
 const qrLink = $('.login__qr__link');
 const qrInfo = $('.login__form__qr__info');
 
+const headerUsername = $('.header__username');
+const headerAvatar = $('.header__avatar');
+const accountMenu = $('.account__menu');
+const accountLogout = $('.account__logout');
+
+const loginBox = $('.header__account__login_wrapper');
+const accountBox = $('.header__account__user_wrapper');
+
 loginBtn.onclick = () => {
     switchPage('auth');
 };
@@ -38,6 +46,9 @@ class Authenticator {
             } else if (data.code === 200) {
                 this.cookie = data.cookie;
                 mdui.snackbar({ message: '登录成功。' });
+                this.isLoggedIn = true;
+                this.fetchUserInfo();
+                switchPage('main');
             } else {
                 mdui.snackbar({ message: `${data.code} ${data.message}` });
             };
@@ -46,7 +57,7 @@ class Authenticator {
         };
     };
     loginQrcode(key) {
-        xhr.open('GET', `${apiServer}/login/qr/check%3Fkey=${key}`);
+        xhr.open('GET', `${apiServer}/login/qr/check%3Fkey=${key}?r=${Date.now()}`);
         xhr.send();
         xhr.onload = () => {
             const data = JSON.parse(xhr.responseText);
@@ -61,6 +72,7 @@ class Authenticator {
                 mdui.snackbar({ message: '登录成功。' });
                 switchPage('main');
                 this.isLoggedIn = true;
+                this.fetchUserInfo();
             };
 
             if (!this.isLoggedIn) {
@@ -68,9 +80,35 @@ class Authenticator {
             };
         };
     };
+    fetchUserInfo() {
+        xhr.open('GET', `${apiServer}/user/account?r=${Date.now()}`);
+        xhr.send();
+        xhr.onload = () => {
+            const data = JSON.parse(xhr.responseText);
+            if (data.profile) {
+                loginBox.style.display = 'none';
+                accountBox.style.display = 'inherit';
+
+                headerUsername.innerText = data.profile.nickname;
+                headerAvatar.src = data.profile.avatarUrl;
+            } else {
+                loginBox.style.display = 'inherit';
+                accountBox.style.display = 'none';
+            };
+        };
+    };
+    logout() {
+        xhr.open('GET', `${apiServer}/logout`);
+        xhr.send();
+        xhr.onload = () => {
+            this.isLoggedIn = false;
+            this.fetchUserInfo();
+        };
+    };
 };
 
 const authenticator = new Authenticator({ account: 'guest' });
+authenticator.fetchUserInfo();
 
 submitLoginEmailBtn.onclick = attemptLoginEmail;
 
@@ -90,6 +128,8 @@ emailPwdInput.onkeydown = (e) => {
         attemptLoginEmail();
     };
 };
+
+accountLogout.onclick = authenticator.logout;
 
 qrMethodBtn.onclick = () => {
     emailMethodWrapper.style.display = 'none';

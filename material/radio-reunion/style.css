@@ -356,8 +356,10 @@ mdui-badge {
 }
 
 
-.header__account__user_wrapper {
+.header__account__user_wrapper, .header__account__login_wrapper {
     display: none;
+    width: 40px;
+    height: 40px;
 }
 
 .home_page__title {
@@ -498,4 +500,13 @@ mdui-badge {
 .login__form__qr__info {
     text-align: center;
     font-size: 14px;
+}
+
+.account__logout::part(icon), .account__logout::part(label) {
+    color: rgb(var(--mdui-color-error));
+}
+
+.header__username::part(label) {
+    font-size: 1rem;
+    color: inherit;
 }

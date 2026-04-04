@@ -199,9 +199,9 @@ class LyricsDisplayer {
                 const data = JSON.parse(xhr.responseText);
                 if (data.lrc) {
                     this.lyrics = data.lrc.lyric;
-                    if (data.tlyric.lyric && detailsMenu.value.includes('show-translation')) {
+                    if (data.tlyric.lyric && detailsMenu.value === 'show-translation') {
                         lrcData = parseLrc(this.lyrics, data.tlyric.lyric);
-                    } else if (data.romalrc.lyric && detailsMenu.value.includes('show-notations')) {
+                    } else if (data.romalrc.lyric && detailsMenu.value === 'show-notations') {
                         lrcData = parseLrc(this.lyrics, data.romalrc.lyric);
                     } else {
                         lrcData = parseLrc(this.lyrics);
@@ -218,7 +218,7 @@ class LyricsDisplayer {
 };
 
 // lyrics options logic
-detailsMenu.onchange = () => { lyricsDisplayer.loadLyrics(player.getCurrentSong().id) };
+detailsMenu.onchange = () => { if (player.getCurrentSong()) lyricsDisplayer.loadLyrics(player.getCurrentSong().id) };
 
 
 
