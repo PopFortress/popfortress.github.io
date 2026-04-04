@@ -96,7 +96,7 @@ function searchSongs(page) {
         searchTabs.style.display = 'flex';
         searchLoading.style.display = 'flex';
         searchList.innerHTML = '';
-        xhr.open('GET', `${apiServer}/cloudsearch?keywords=${keywords}&limit=20&offset=${(page - 1) * 20}`);
+        xhr.open('GET', `${apiServer}/cloudsearch%3Fkeywords=${keywords}&limit=20&offset=${(page - 1) * 20}`);
         xhr.send();
         xhr.onload = () => {
             const data = JSON.parse(xhr.responseText);
@@ -106,7 +106,7 @@ function searchSongs(page) {
                 data.result.songs.forEach(song => {
                     songInfo = {};
                     songInfo.title = song.name;
-                    songInfo.InfoUrl = `${apiServer}/song/url?id=${song.id}`;
+                    songInfo.InfoUrl = `${apiServer}/song/url%3Fid=${song.id}`;
                     let artists = [];
                     song.ar.forEach(artist => {
                         artists.push(artist.name);  

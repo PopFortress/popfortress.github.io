@@ -95,6 +95,12 @@ function createLrcElement(){
         let li = document.createElement('li');
         li.innerHTML = lrcData[i].words;
         doms.ul.appendChild(li);
+        li.onclick = () => {
+            if (li.className !== 'active') {
+                doms.audio.currentTime = lrcData[i].time;
+                audio.play();
+            };
+        };
     };
 };
 createLrcElement()

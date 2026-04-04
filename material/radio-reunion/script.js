@@ -23,7 +23,7 @@ const detailsMenu = $('.details__menu');
 
 // essential definitions
 const xhr = new XMLHttpRequest();
-const apiServer = 'https://zm.armoe.cn';
+const apiServer = 'https://seep.eu.org/https://ncm-api-enhanced.vercel.app';
 const apiServerAlternate = 'https://apis.netstart.cn/music';
 const mediaServer = 'https://music.163.com/song/media/outer/url';
 
@@ -192,7 +192,7 @@ class LyricsDisplayer {
         if (id) {
             doms.loading.style.display = 'flex';
             this.resetLyrics();
-            xhr.open('GET', `${apiServer}/lyric?id=${id}`);
+            xhr.open('GET', `${apiServer}/lyric%3Fid=${id}`);
             xhr.send();
             xhr.onload = () => {
                 doms.loading.style.display = 'none';

@@ -66,7 +66,7 @@ class Comment {
     loadReplies(parentCommentId) {
         repliesDialog.open = true;
         if (songId) {
-            xhr.open('GET', `${apiServer}/comment/floor?parentCommentId=${parentCommentId}&id=${songId}&type=0`);
+            xhr.open('GET', `${apiServer}/comment/floor%3FparentCommentId=${parentCommentId}&id=${songId}&type=0`);
             xhr.send();
             xhr.onload = function () {
                 const data = JSON.parse(xhr.responseText);
@@ -111,7 +111,7 @@ function loadComments() {
         songId = player.getCurrentSong().id;
     };
     if (songId) {
-        xhr.open('GET', `${apiServer}/comment/music?id=${songId}`);
+        xhr.open('GET', `${apiServer}/comment/music%3Fid=${songId}`);
         xhr.send();
         xhr.onload = function () {
             const data = JSON.parse(xhr.responseText);

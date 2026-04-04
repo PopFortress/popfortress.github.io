@@ -22,7 +22,12 @@ function resizePlayer() {
     if (controlsFullwidth) {
         showElements([playerCover], 'block');
         showElements([playerControls], 'flex');
-        playerInfo.style.width = playerProgress.style.width = 'inherit';
+        playerInfo.style.width = 'inherit';
+        if (window.innerWidth > 340) {
+            playerProgress.style.width = 'inherit';
+        } else {
+            hideElements([playerProgress]);
+        };
         playerContainer.style.width = 'auto';
         if (window.innerWidth < 710) {
             playerInfo.style.maxWidth = 'calc(100vw - 212px)';
