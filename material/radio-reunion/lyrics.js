@@ -96,7 +96,7 @@ function createLrcElement(){
         li.innerHTML = lrcData[i].words;
         doms.ul.appendChild(li);
         li.onclick = () => {
-            if (li.className !== 'active') {
+            if (li.className !== 'active' && player.getCurrentSong()) {
                 doms.audio.currentTime = lrcData[i].time;
                 audio.play();
             };

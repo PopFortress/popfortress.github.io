@@ -39,6 +39,10 @@ function switchPage(destination) {
         // back btn handler
         if (currentPage !== 'main') {
             $(`#app_page__${currentPage} .header__back_btn`).onclick = () => {
+                if (currentPage === 'mv') {
+                    player.showPlayerFrame(true);
+                };
+
                 switchPage(pages_stack[pages_stack.length - 1]);
                 pages_stack.pop();
             };
@@ -58,6 +62,7 @@ function switchPage(destination) {
             case 'mv':
                 audio.pause();
                 loadMV();
+                player.showPlayerFrame(false);
                 break;
             case 'search':
                 searchHistoryList.style.width = searchInput.clientWidth + 'px';

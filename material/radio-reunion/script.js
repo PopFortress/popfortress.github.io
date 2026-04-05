@@ -19,11 +19,13 @@ const playbackModeBtn = $('.playback__ordering_btn');
 const playlistBadge = $('.playlist__title_badge');
 
 const detailsMenu = $('.details__menu');
+const lyrcisAlbumCover = $('.lyrics__album__cover');
+const playerFrame = $('.player');
 
 
 // essential definitions
 const xhr = new XMLHttpRequest();
-const apiServer = 'https://seep.eu.org/https://ncm-api-enhanced.vercel.app';
+let apiServer = 'https://seep.eu.org/https://ncm-api-enhanced-nine.vercel.app';
 const apiServerAlternate = 'https://apis.netstart.cn/music';
 const mediaServer = 'https://music.163.com/song/media/outer/url';
 
@@ -56,9 +58,11 @@ class Player {
         this.playlist = options.playlist;
         this.playback_mode = options.playback_mode;
         this.loadingState = 'loaded'; // 'loading' or 'loaded'
+        this.hidden = false;
     };
     playSong(index) {
         console.log(index);
+        lyrcisAlbumCover.style.display = 'none';
         
         const song = this.playlist.playlist[index];
         audio.src = song.url;
@@ -111,6 +115,20 @@ class Player {
             default:
                 break;
         };
+    };
+    showPlayerFrame(status) {
+        if (status) {
+            playerFrame.style.display = 'inherit';
+            setTimeout(() => {
+                playerFrame.classList.remove('hidden');
+            }, 400);
+        } else {
+            playerFrame.classList.add('hidden');
+            setTimeout(() => {
+                playerFrame.style.display = 'none';
+            }, 400);
+        };
+        this.hidden = !status;
     };
 };
 
@@ -199,15 +217,18 @@ class LyricsDisplayer {
                 const data = JSON.parse(xhr.responseText);
                 if (data.lrc) {
                     this.lyrics = data.lrc.lyric;
-                    if (data.tlyric.lyric && detailsMenu.value === 'show-translation') {
+                    if (data.tlyric && detailsMenu.value === 'show-translation') {
                         lrcData = parseLrc(this.lyrics, data.tlyric.lyric);
-                    } else if (data.romalrc.lyric && detailsMenu.value === 'show-notations') {
+                    } else if (data.romalrc && detailsMenu.value === 'show-notations') {
                         lrcData = parseLrc(this.lyrics, data.romalrc.lyric);
                     } else {
                         lrcData = parseLrc(this.lyrics);
                     };
                     createLrcElement();
                 };
+
+                lyrcisAlbumCover.style.display = 'inherit';
+                lyrcisAlbumCover.style.backgroundImage = `url(${player.getCurrentSong().cover})`;
             };
         };
     };
@@ -314,7 +335,7 @@ mdui.setLocale('zh-cn');
 // player control logic.
 // space play/pause.
 document.onkeydown = (e) => {
-    if (e.key === ' ' && e.target.tagName !== 'MDUI-TEXT-FIELD'  && e.target.tagName !== 'VIDEO') {
+    if (e.key === ' ' && e.target.tagName !== 'MDUI-TEXT-FIELD'  && e.target.tagName !== 'VIDEO' && !player.hidden) {
         e.preventDefault();
         playerPlayback.click();
     };

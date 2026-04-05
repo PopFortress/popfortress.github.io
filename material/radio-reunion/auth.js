@@ -129,7 +129,7 @@ emailPwdInput.onkeydown = (e) => {
     };
 };
 
-accountLogout.onclick = authenticator.logout;
+accountLogout.onclick = authenticator.logout.bind(authenticator);
 
 qrMethodBtn.onclick = () => {
     emailMethodWrapper.style.display = 'none';
