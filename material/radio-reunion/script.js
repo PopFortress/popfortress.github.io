@@ -21,6 +21,7 @@ const playlistBadge = $('.playlist__title_badge');
 const detailsMenu = $('.details__menu');
 const lyrcisAlbumCover = $('.lyrics__album__cover');
 const playerFrame = $('.player');
+const appPages = document.querySelectorAll('.app_page');
 
 
 // essential definitions
@@ -31,6 +32,18 @@ const mediaServer = 'https://music.163.com/song/media/outer/url';
 
 xhr.onerror = (e) => {
     mdui.snackbar({ message: `无法连接至服务器。`});
+};
+
+function requestAPI(endpoint, method = 'GET', cacheEnabled = true) {
+    let url;
+    if (cacheEnabled) {
+        url = `${apiServer}${endpoint}`;
+    } else {
+        url = `${apiServer}${endpoint}?r=${Date.now()}`;
+    };
+    xhr.open(method, url);
+    xhr.send();
+    return xhr;
 };
 
 // objects definitions
@@ -59,6 +72,7 @@ class Player {
         this.playback_mode = options.playback_mode;
         this.loadingState = 'loaded'; // 'loading' or 'loaded'
         this.hidden = false;
+        this.isPlayingFM = false;
     };
     playSong(index) {
         console.log(index);
@@ -121,14 +135,36 @@ class Player {
             playerFrame.style.display = 'inherit';
             setTimeout(() => {
                 playerFrame.classList.remove('hidden');
-            }, 400);
+                appPages.forEach(page => {
+                    page.style.maxHeight = 'calc(100vh - 100px)';
+                });
+            }, 0);
         } else {
             playerFrame.classList.add('hidden');
             setTimeout(() => {
                 playerFrame.style.display = 'none';
+                appPages.forEach(page => {
+                    page.style.maxHeight = 'inherit';
+                });
             }, 400);
         };
         this.hidden = !status;
+    };
+    playNcmSong(songInfo) {
+        let info = songInfo;
+        xhr.open('GET', `${apiServer}/song/url%3Fid=${info.id}`);
+        xhr.send();
+        xhr.onload = () => {
+            const data = JSON.parse(xhr.responseText);
+            if (data.code === 200) {
+                const url = data.data[0].url;
+                info.url = url;
+            };
+            const song = new Song(info);
+            playlist.addItem(song);
+            player.playSong(playlist.length - 1);
+            lyricsDisplayer.loadLyrics(info.id);
+        };
     };
 };
 
@@ -136,6 +172,8 @@ class Playlist {
     constructor() {
         this.length = 0;
         this.playlist = [];
+        this.fmPlaylist = []; // for ncm personal fm
+        this.fmIndex = 0;
     };
     addItem(options) {
         let item = options;
@@ -205,9 +243,11 @@ class Playlist {
 class LyricsDisplayer {
     constructor() {
         this.lyrics = '[00:00.00]团结电台　Radio Reunion';
+        this.isLyricsStatic = false;
     };
     loadLyrics(id) {
         if (id) {
+            this.isLyricsStatic = true;
             doms.loading.style.display = 'flex';
             this.resetLyrics();
             xhr.open('GET', `${apiServer}/lyric%3Fid=${id}`);
@@ -235,6 +275,7 @@ class LyricsDisplayer {
     resetLyrics() {
         doms.ul.style.transform = `translateY(0px)`;
         doms.ul.innerHTML = '';
+        lyrcisAlbumCover.style.display = 'none';
     };
 };
 
@@ -357,6 +398,10 @@ playlistClearBtn.onclick = () => {
 // player behavior when ended
 audio.addEventListener('ended', () => {
     let next_index;
+    if (player.isPlayingFM) {
+        fmPlayNext();
+        return;
+    };
     switch (player.playback_mode) {
         case 'list_repeat':
             let isLastSong;

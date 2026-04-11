@@ -110,6 +110,10 @@ header {
     padding: 30px;
     align-items: center;
     gap: 10px;
+    position: fixed;
+    z-index: 256;
+    width: 100%;
+    background: rgb(var(--mdui-color-surface));
 }
 
 .header__title {
@@ -136,6 +140,7 @@ main {
     gap: 30px;
     align-items: center;
     padding-bottom: 2em;
+    padding-top: 100px;
 }
 .welcome {
     display: flex;
@@ -251,7 +256,7 @@ mdui-tab::part(icon) {
 .lyrics__container li.active{
     color: rgb(var(--mdui-color-primary));
     opacity: 1;
-    transform: scale(1.2);
+    font-size: 116%;
 }
 
 .lyrics__loading_wrapper {
@@ -279,6 +284,7 @@ mdui-badge {
     background: rgb(var(--mdui-color-background));
     display: flex;
     transition: opacity .3s ease-out;
+    z-index: 512;
 }
 
 .welcome__content {
@@ -531,10 +537,26 @@ mdui-badge {
 }
 
 .lyrics__album__cover {
-    border-radius: var(--mdui-shape-corner-small);
-    width: 432px;
-    height: 432px;
+    border-radius: var(--mdui-shape-corner-medium);
+    width: 417px;
+    height: 417px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    display: none;
+}
+
+.discover__card {
+    padding: 1.1em;
+    display: flex;
+    gap: 11px;
+    align-items: center;
+}
+
+.discover__card, .discover__card mdui-icon {
+    font-size: 1.4rem;
+}
+
+.personal_fm__skip, .personal_fm__stop {
+    display: none;
 }

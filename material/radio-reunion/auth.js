@@ -86,12 +86,14 @@ class Authenticator {
         xhr.onload = () => {
             const data = JSON.parse(xhr.responseText);
             if (data.profile) {
+                this.isLoggedIn = true;
                 loginBox.style.display = 'none';
                 accountBox.style.display = 'inherit';
 
                 headerUsername.innerText = data.profile.nickname;
                 headerAvatar.src = data.profile.avatarUrl;
             } else {
+                this.isLoggedIn = false;
                 loginBox.style.display = 'inherit';
                 accountBox.style.display = 'none';
             };
@@ -129,7 +131,13 @@ emailPwdInput.onkeydown = (e) => {
     };
 };
 
-accountLogout.onclick = authenticator.logout.bind(authenticator);
+accountLogout.onclick = () => {
+    mdui.confirm({
+        headline: '登出账户',
+        description: '你即将登出账户。',
+        onConfirm: () => { authenticator.logout(); },
+    });
+};
 
 qrMethodBtn.onclick = () => {
     emailMethodWrapper.style.display = 'none';

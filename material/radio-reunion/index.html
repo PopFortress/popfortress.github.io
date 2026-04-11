@@ -48,6 +48,17 @@
                     <mdui-list-item rounded id="start__featured_option" description="浏览精选电台和歌曲列表" icon="recommend--outlined">推荐列表</mdui-list-item>
                 </mdui-list>
             </div>
+
+            <mdui-divider style="width: 81%;"></mdui-divider>
+            <div class="discover">
+                <mdui-card class="discover__card">
+                    <mdui-icon name="radio--outlined"></mdui-icon>
+                    <div class="discover__card__title">私人 FM</div>
+                    <mdui-button-icon icon="play_circle--outlined" class="personal_fm__start"></mdui-button-icon>
+                    <mdui-button-icon icon="skip_next--outlined" class="personal_fm__skip"></mdui-button-icon>
+                    <mdui-button-icon icon="stop_circle--outlined" class="personal_fm__stop"></mdui-button-icon>
+                </mdui-card>
+            </div>
         </main>
     </div>
 
@@ -245,6 +256,18 @@
 
     <audio id="player-audio"></audio>
 
+    <script>
+        // welcome screen
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                welcomeOverlay.style.opacity = 0;
+                setTimeout(() => {
+                    welcomeOverlay.style.display = 'none';
+                }, 300)
+            }, 1000);
+        });
+    </script>
+
     <script src="./script.js"></script>
     <script src="./search.js"></script>
     <script src="./featured.js"></script>
@@ -254,6 +277,7 @@
     <script src="./mv.js"></script>
     <script src="./auth.js"></script>
     <script src="./comments.js"></script>
+    <script src="./for_you.js"></script>
 
 </body>
 </html>

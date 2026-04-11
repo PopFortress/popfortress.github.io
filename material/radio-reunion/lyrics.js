@@ -47,27 +47,36 @@ function parseLrc(lrc, tlyric){
         // 遍历lines
         let str = lines[i]; //每一句歌词字符串
         
-        let parts = str.split(']'); //分割
-        let timeStr = parts[0].substring(1); //截取时间
-        var obj = {
-            time:parseTime(timeStr),
-            words: parts[1]
-        };
-
-        if (tlyric) {
-            tlyricList.forEach(line => {
-                if (line.time === obj.time) {
-                    obj.words = obj.words.concat(`<br>${line.words}`);
-                };
-            });
-        };
-
-        if (str) {
-            result.push(obj);
+        if (str.includes(']')) {
+            lyricsDisplayer.isLyricsStatic = false;
+            let parts = str.split(']'); //分割
+            let timeStr = parts[0].substring(1); //截取时间
+            var obj = {
+                time:parseTime(timeStr),
+                words: parts[1]
+            };
+    
+            if (tlyric) {
+                tlyricList.forEach(line => {
+                    if (line.time === obj.time) {
+                        obj.words = obj.words.concat(`<br>${line.words}`);
+                    };
+                });
+            };
+    
+            if (str) {
+                result.push(obj);
+            };
+        } else {
+            if (str) {
+                result.push({
+                    time: 0, words: str,
+                });
+            };
         };
     };
     return result;
-}
+};
 
 var lrcData = parseLrc(lyricsDisplayer.lyrics);
 
@@ -96,7 +105,7 @@ function createLrcElement(){
         li.innerHTML = lrcData[i].words;
         doms.ul.appendChild(li);
         li.onclick = () => {
-            if (li.className !== 'active' && player.getCurrentSong()) {
+            if (li.className !== 'active' && player.getCurrentSong() && !lyricsDisplayer.isLyricsStatic) {
                 doms.audio.currentTime = lrcData[i].time;
                 audio.play();
             };
@@ -139,10 +148,10 @@ function setOffset(){
     }
 
     const activatedLine = $('.lyrics__container li.active')
-    if (activatedLine) {
+    if (activatedLine && !lyricsDisplayer.isLyricsStatic) {
         activatedLine.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
-}
+};
 
 // 事件监听
 doms.audio.addEventListener('timeupdate', setOffset);

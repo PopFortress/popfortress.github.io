@@ -58,6 +58,7 @@ function switchPage(destination) {
             case 'lyrics':
                 checkMVAvailability();
                 mvVideo.pause();
+                audio.play();
                 break;
             case 'mv':
                 audio.pause();
@@ -125,13 +126,3 @@ startOptionUrl.onclick = ()=> {
         },
     });
 };
-
-// welcome screen
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        welcomeOverlay.style.opacity = 0;
-        setTimeout(() => {
-            welcomeOverlay.style.display = 'none';
-        }, 300)
-    }, 1000);
-})

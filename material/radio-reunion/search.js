@@ -141,19 +141,7 @@ function searchSongs(page) {
                     listitem.onclick = (e) => {
                         player.switchLoadingState('loading');
                         const info = JSON.parse(e.target.dataset.song_info);
-                        xhr.open('GET', info.InfoUrl);
-                        xhr.send();
-                        xhr.onload = () => {
-                            const data = JSON.parse(xhr.responseText);
-                            if (data.code === 200) {
-                                const url = data.data[0].url;
-                                info.url = url;
-                            };
-                            const song = new Song(info);
-                            playlist.addItem(song);
-                            player.playSong(playlist.length - 1);
-                            lyricsDisplayer.loadLyrics(info.id);
-                        };
+                        player.playNcmSong(info);
                     };
                     searchList.appendChild(listitem);
                 });
