@@ -6,6 +6,8 @@ const fmStop = $('.personal_fm__stop');
 
 function playPersonalFM() {
     if (authenticator.isLoggedIn) {
+        fmStart.style.display = 'none';
+        fmSkipBtn.style.display = fmStop.style.display = 'inline-block';
         requestAPI('/personal_fm').onload = () => {
             const data = JSON.parse(xhr.responseText);
             const songInfoList = [];
@@ -19,7 +21,7 @@ function playPersonalFM() {
                 });
                 songInfo.artist = artists.join(', ');
                 songInfo.cover = song.album.picUrl;
-                songInfo.album = song.name;
+                songInfo.album = song.album.name;
                 songInfo.mvid = song.mvid;
                 songInfoList.push(songInfo);
             });
@@ -44,8 +46,6 @@ function fmPlayNext() {
 };
 
 fmStart.onclick = () => {
-    fmStart.style.display = 'none';
-    fmSkipBtn.style.display = fmStop.style.display = 'inline-block';
     playPersonalFM();
 };
 

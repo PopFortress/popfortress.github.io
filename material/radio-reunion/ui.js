@@ -7,6 +7,10 @@ const welcomeOverlay = $('.welcome_overlay');
 const viewMV = $('.detail__see_mv');
 const mvVideo = $('.mv__video');
 const viewComments = $('.detail__view_comments');
+const viewSongDetails = $('.detail__view_song_details');
+const songDetailsDialog = $('.lyrics__details_dialog');
+const songDetailsText = $('.lyrics__song_details');
+
 let currentPage = 'main';
 let previousPage;
 let pages_stack = [];
@@ -96,6 +100,13 @@ viewMV.onclick = () => {
 
 viewComments.onclick = () => {
     switchPage('comments');
+};
+
+viewSongDetails.onclick = () => {
+    songDetailsDialog.open = true;
+    const song = player.getCurrentSong();
+    songDetailsText.innerHTML = 
+    `标题：${song.title}<br>艺术家：${song.artist}<br>专辑名称：${song.album}<br>网易云 id: ${song.id || 'N/A'}<br>网易云 mvid: ${song.mvid || 'N/A'}`;
 };
 
 

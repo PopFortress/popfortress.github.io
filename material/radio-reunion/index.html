@@ -131,6 +131,7 @@
                     <mdui-menu submenu-trigger="click focus hover" selects="single" value="show-translation" class="details__menu">
                         <mdui-menu-item class="detail__see_mv" disabled icon="movie--outlined">查看 MV</mdui-menu-item>
                         <mdui-menu-item class="detail__view_comments" icon="rate_review--outlined">评论</mdui-menu-item>
+                        <mdui-menu-item class="detail__view_song_details" icon="info--outlined">歌曲详情</mdui-menu-item>
                         <mdui-menu-item>
                             歌词选项
                             <mdui-menu-item slot="submenu" value="show-translation">显示翻译</mdui-menu-item>
@@ -153,6 +154,9 @@
                 </div>
             </div>
         </main>
+        <mdui-dialog headline="歌曲详情" icon="info--outlined" class="lyrics__details_dialog" close-on-overlay-click close-on-esc>
+            <div class="lyrics__song_details"></div>
+        </mdui-dialog>
     </div>
 
     <div class="app_page" id="app_page__mv">

@@ -560,3 +560,9 @@ mdui-badge {
 .personal_fm__skip, .personal_fm__stop {
     display: none;
 }
+
+.lyrics__song_details {
+    font-size: .875rem;
+    opacity: .9;
+    line-height: 1.5;
+}

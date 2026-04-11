@@ -37,7 +37,7 @@ langMenu.onchange = (e) => {
 };
 
 async function fetchRegions() {
-    let response = await fetch('https://zm.armoe.cn/countries/code/list');
+    let response = await fetch('https://seep.eu.org/https://ncm-api-enhanced-nine.vercel.app/countries/code/list');
     let data = await response.json();
     data.data.forEach(type => {
         type.countryList.forEach(region => {
