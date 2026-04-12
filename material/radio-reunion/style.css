@@ -481,7 +481,7 @@ mdui-badge {
     margin-left: auto;
 }
 
-.comments__replies_dialog::part(panel) {
+mdui-dialog::part(panel) {
     max-width: 94%;
     max-height: 65%;
 }

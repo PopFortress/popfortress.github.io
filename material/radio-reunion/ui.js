@@ -45,6 +45,7 @@ function switchPage(destination) {
             $(`#app_page__${currentPage} .header__back_btn`).onclick = () => {
                 if (currentPage === 'mv') {
                     player.showPlayerFrame(true);
+                    audio.play();
                 };
 
                 switchPage(pages_stack[pages_stack.length - 1]);
@@ -62,7 +63,6 @@ function switchPage(destination) {
             case 'lyrics':
                 checkMVAvailability();
                 mvVideo.pause();
-                audio.play();
                 break;
             case 'mv':
                 audio.pause();
@@ -105,8 +105,12 @@ viewComments.onclick = () => {
 viewSongDetails.onclick = () => {
     songDetailsDialog.open = true;
     const song = player.getCurrentSong();
-    songDetailsText.innerHTML = 
-    `标题：${song.title}<br>艺术家：${song.artist}<br>专辑名称：${song.album}<br>网易云 id: ${song.id || 'N/A'}<br>网易云 mvid: ${song.mvid || 'N/A'}`;
+    if (song) {
+        songDetailsText.innerHTML = 
+        `标题：${song.title}<br>艺术家：${song.artist}<br>专辑名称：${song.album}<br>网易云 id: ${song.id || 'N/A'}<br>网易云 mvid: ${song.mvid || 'N/A'}`;
+    } else {
+        songDetailsText.innerHTML = '没有元数据。';
+    };
 };
 
 
