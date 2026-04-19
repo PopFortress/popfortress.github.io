@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>保质日期计算器</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <div class="app">
+        <header>保质日期计算器</header>
+        <div class="input-area">
+            <mdui-text-field type="date" label="生产日期" class="input__production_date"></mdui-text-field>
+            <div class="shelf_life__wrapper">
+                <mdui-text-field type="number" label="保质期" class="input__shelf_life"></mdui-text-field>
+                <mdui-select class="shelf_life__unit_select" value="month">
+                    <mdui-menu-item value="month">月</mdui-menu-item>
+                    <mdui-menu-item value="year">年</mdui-menu-item>
+                    <mdui-menu-item value="day">日</mdui-menu-item>
+                    <mdui-menu-item value="week">周</mdui-menu-item>
+                </mdui-select>
+            </div>
+        </div>
+        <mdui-button full-width variant="tonal" class="calculation__btn">计算</mdui-button>
+        <div class="result__wrapper">
+            <div class="status__text"></div>
+            <div class="expiration_date"></div>
+            <div class="days_remain"></div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>

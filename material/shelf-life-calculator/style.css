@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: 100%;
+    max-width: 700px;
+    padding: 10px;
+}
+
+header {
+    color: rgb(var(--mdui-color-primary));
+    font-size: 2rem;
+    text-align: center;
+    width: 100%;
+    padding: 1.5em;
+}
+
+.input-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.input-area mdui-text-field, .input-area mdui-select::part(text-field) {
+    height: 3.5rem;
+}
+
+.shelf_life__unit_select {
+    -webkit-tap-highlight-color: transparent;
+    flex: 1;
+}
+
+.input__shelf_life {
+    flex: 2;
+}
+
+.input__production_date {
+    flex: 1.4;
+}
+
+.shelf_life__wrapper {
+    display: flex;
+    gap: 3px;
+    flex: 1;
+}
+
+.result__wrapper {
+    margin: 2rem 0;
+    text-align: center;
+    font-size: .875rem;
+    line-height: 1.5;
+}
