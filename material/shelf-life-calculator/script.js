@@ -15,7 +15,11 @@ productionDateInput.value = new Date().toISOString().split('T')[0];
 
 calculationBtn.onclick = () => {
     if (shelfLifeInput.checkValidity() && shelfLifeInput.value && shelfLifeUnitSelect.value && productionDateInput.checkValidity() && productionDateInput.value) {
-        calculateShelfLife();
+        if (new Date(productionDateInput.value) <= new Date()) {
+            calculateShelfLife();
+        } else {
+            mdui.snackbar( { message: '生产日期不能晚于当前日期。', closeOnOutsideClick: true} );
+        };
     } else {
         mdui.snackbar( { message: '请填写所有信息并确保信息有效性。', closeOnOutsideClick: true} );
     };

@@ -27,6 +27,11 @@
     ],
     "activities": [
         {
+            "title": "二周年庆典",
+            "target_url": "/info/2nd-anniversary",
+            "imgurl": "https://pic1.imgdb.cn/item/69ec5b04603ad2331df30e39.png"
+        },
+        {
             "title": "「骐骥驰骋 势不可挡」2026 年春节联欢晚会",
             "target_url": "https://space.bilibili.com/501554611",
             "imgurl": "https://pic1.imgdb.cn/item/698ca95517402bfe3bc87cd8.jpg"

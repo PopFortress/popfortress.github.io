@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>波普的温馨小阁·二周年庆典</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: #0073ff4d;
+        }
+
+        body {
+            height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .app {
+            width: 100%;
+            max-width: 971px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 0 6px;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+        }
+
+        .header__avatar {
+            width: 54px;
+            height: 54px;
+        }
+
+        mdui-divider.divider {
+            width: 79%;
+            opacity: .32;
+        }
+
+        .continue_btn {
+            width: 140px;
+            transition: .3s;
+            opacity: 0;
+        }
+
+        section:not(#section-1) {
+            opacity: 0;
+            display: none;
+        }
+
+        section, .navigations {
+            transition: .3s ease-out;
+        }
+
+        .previous_btn, .continue_btn {
+            display: none;
+        }
+
+        section p {
+            color: rgb(var(--mdui-color-primary));
+            font-size: calc(1.1rem + 1vw);
+            text-align: center;
+            line-height: 1.7;
+            letter-spacing: 1px;
+        }
+
+        #section-1 p {
+            font-size: calc(0.9rem + 1vw);
+        }
+
+        #section-1 p {
+            transition: .2s;
+            opacity: 0;
+        }
+
+        section span {
+            font-size: calc(1.2rem + 1vw);
+            font-weight: bold;
+            background-color: rgb(var(--mdui-color-primary));
+            color: #fff;
+            padding: 3px 6px;
+            border-radius: var(--mdui-shape-corner-extra-small);
+            white-space: nowrap;
+        }
+
+        a {
+            text-underline-offset: 5px;
+            color: inherit;
+        }
+
+        .activity_cover {
+            width: 70%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+        }
+
+    </style>
+</head>
+<body>
+    
+
+    <div class="app">
+        <header>
+            <mdui-avatar src="/static/avater_logo2x.png" class="header__avatar"></mdui-avatar>
+        </header>
+        <mdui-divider class="divider"></mdui-divider>
+        <div class="content__wrapper">
+            <section id="section-1">
+                <p>光阴似箭，岁月如梭</p>
+                <p>波普小阁又和大家度过了精彩的一年</p>
+                <p>在网站迎来二周年的这个特别日子，</p>
+                <p>让我们举杯同庆，回顾这不平凡的一年。</p>
+            </section>
+            <section id="section-2">
+                <p>这是网站上线的第 <span>730</span> 天</p>
+                <p>网站现可通过 <span>GitHub Pages</span> 和 <span>Netlify App</span> 两大平台访问。</p>
+            </section>
+            <section id="section-3">
+                <p>今年，网站新增 <span>7451</span> 行代码，143 个 Bug.</p>
+            </section>
+            <section id="section-4">
+                <p>总访问量 <span>1140+</span> 次，较去年增长 <span>138%</span>！</p>
+                <p>网站稳定运行率依旧 <span>100%</span>！🌐</p>
+            </section>
+            <section id="section-5">
+                <p>今年网站代码语言成分如下</p>
+                <p>HTML <span>36.6%</span></p>
+                <p>CSS <span>11.8%</span></p>
+                <p>SCSS <span>0.8%</span></p>
+                <p>JavaScript <span>50.8%</span>！</p>
+            </section>
+            <section id="section-6">
+                <p>今年网站共更新 <span>143</span> 次</p>
+                <p>新增实用应用和工具 <span>35</span> 个！</p>
+            </section>
+            <section id="section-7">
+                <p><a href="/material/radio-reunion/" target="_blank"><span>团结电台</span> Radio Reunion</a> 汇聚优质音乐、电台资源</p>
+                <p>兼具实用和美观性，广受青睐。</p>
+            </section>
+            <section id="section-8">
+                <p><a href="/material/dictionary/" target="_blank">英语-中文词典</a> 引入创新 <span>云同步</span> 功能</p>
+                <p>打破静态网站局限</p>
+            </section>
+            <section id="section-9">
+                <p><a href="/material/lounge-screen/" target="_blank">候车室大屏</a> 功能完备，随时随地可查全国各地 <span>车站大屏</span></p>
+            </section>
+            <section id="section-10">
+                <p>…还有更多等你探索！</p>
+            </section>
+            <section id="section-11">
+                <p>感谢每位访问者的支持和陪伴</p>
+                <p>波普小阁将在新的一年中，继续创造更多 <s>bug</s> 实用应用！</p>
+            </section>
+            <section id="section-12" style="text-align: center;">
+                <img src="https://pic1.imgdb.cn/item/69ecb057de2d74e282b3a114.png" class="activity_cover">
+                <p>波普的温馨小阁</p>
+                <p>二周年 · 感谢有你</p>
+            </section>
+        </div>
+        <mdui-divider class="divider"></mdui-divider>
+        <div class="navigations">
+            <mdui-button-icon icon="arrow_back" class="previous_btn"></mdui-button-icon>
+            <mdui-button class="continue_btn">现在就开始吧</mdui-button>
+        </div>
+    </div>
+
+
+    <script>
+        mdui.setColorScheme('#EF9A9A');
+        const $ = (query) => mdui.$(query)[0];
+
+        const sections = document.querySelectorAll('section');
+        const continueBtn = $('.continue_btn');
+        const previousBtn = $('.previous_btn');
+        const welcomeTitles = document.querySelectorAll('#section-1 p');
+        let sectionIndex = 0;
+        continueBtn.addEventListener('click', () => {
+            const currentSection = sections[sectionIndex];
+            const nextSection = sections[sectionIndex + 1];
+            if (sectionIndex < sections.length - 1) {
+                currentSection.style.opacity = '0';
+                setTimeout(() => {
+                    currentSection.style.display = 'none';
+                    nextSection.style.display = 'block';
+                    setTimeout(() => {
+                        nextSection.style.opacity = '1';
+                    }, 100);
+                }, 300);
+                sectionIndex++;
+                if (sectionIndex >= sections.length - 1) {
+                    continueBtn.textContent = '返回首页';
+                    continueBtn.endIcon = '';
+                    continueBtn.href = '/';
+                };
+            };
+            if (sectionIndex > 0 && sectionIndex < sections.length - 1) {
+                previousBtn.style.display = 'inline-block';
+                continueBtn.textContent = '继续';
+                continueBtn.endIcon = 'arrow_forward';
+            };
+        });
+
+        previousBtn.addEventListener('click', () => {
+            const currentSection = sections[sectionIndex];
+            const previousSection = sections[sectionIndex - 1];
+            if (sectionIndex > 0) {
+                currentSection.style.opacity = '0';
+                setTimeout(() => {
+                    currentSection.style.display = 'none';
+                    previousSection.style.display = 'block';
+                    setTimeout(() => {
+                        previousSection.style.opacity = '1';
+                    }, 100);
+                }, 300);
+                sectionIndex--;
+            };
+            if (sectionIndex < sections.length - 1) {
+                continueBtn.textContent = '继续';
+                continueBtn.endIcon = 'arrow_forward';
+                continueBtn.href = '';
+            };
+            if (sectionIndex <= 0) {
+                previousBtn.style.display = 'none';
+                continueBtn.textContent = '现在就开始吧';
+                continueBtn.endIcon = '';
+            };
+        });
+
+        document.addEventListener('DOMContentLoaded', () => { 
+            setTimeout(() => {
+                welcomeTitles.forEach((title, index) => {
+                    setTimeout(() => {
+                        title.style.opacity = '1';
+                    }, 1700 * index);
+                });
+                setTimeout(() => {
+                    continueBtn.style.display = 'inline-block';
+                    setTimeout(() => {
+                        continueBtn.style.opacity = '1';
+                    }, 100);
+                }, 6800);
+                    
+            }, 1000);
+        });
+    </script>
+    
+
+</body>
+</html>
