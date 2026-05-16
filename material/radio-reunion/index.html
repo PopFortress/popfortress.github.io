@@ -79,6 +79,7 @@
             <div class="search__result">
                 <mdui-tabs value="songs" full-width variant="secondary" class="search__tabs">
                     <mdui-tab value="songs" icon="music_note--outlined" inline>歌曲</mdui-tab>
+                    <mdui-tab value="songlists" icon="playlist_play" inline>播放列表</mdui-tab>
                     <mdui-tab value="stations" icon="radio--outlined" inline>电台</mdui-tab>
 
                     <mdui-tab-panel slot="panel" value="songs">
@@ -86,12 +87,28 @@
                             <mdui-circular-progress></mdui-circular-progress>
                         </div>
                         <div class="search__result_stats"></div>
+                        <div class="search__type_frame">
+                            <mdui-icon name='music_note'></mdui-icon>
+                            <div class="search__type_text">键入以开始搜索单曲</div>
+                        </div>
                         <mdui-list class="search__result_list"></mdui-list>
+                    </mdui-tab-panel>
+
+                    <mdui-tab-panel slot="panel" value="songlists">
+                        <div class="search__type_frame">
+                            <mdui-icon name='queue_music'></mdui-icon>
+                            <div class="search__type_text">键入以开始搜索播放列表</div>
+                        </div>
+                        <mdui-list class="songlist__result_list"></mdui-list>
                     </mdui-tab-panel>
                     
                     <mdui-tab-panel slot="panel" value="stations">
                         <div class="stations__loading">
                             <mdui-circular-progress></mdui-circular-progress>
+                        </div>
+                        <div class="search__type_frame">
+                            <mdui-icon name='radio'></mdui-icon>
+                            <div class="search__type_text">键入以开始搜索电台</div>
                         </div>
                         <mdui-list class="stations__result_list"></mdui-list>
                     </mdui-tab-panel>
@@ -181,6 +198,24 @@
         <mdui-dialog headline="评论回复" icon="comment--outlined" class="comments__replies_dialog" close-on-overlay-click close-on-esc>
             <div class="comments__replies_list"></div>
         </mdui-dialog>
+    </div>
+
+    <div class="app_page" id="app_page__playlist_details">
+        <header>
+            <mdui-button-icon icon="arrow_back" class="header__back_btn"></mdui-button-icon>
+            <div class="header__title">歌单详情</div>
+        </header>
+        <main>
+            <mdui-card variant="filled" class="songlist__detail_wrapper">
+                <img class="songlist__detail_cover">
+                <div class="songlist__detail_info">
+                    <div class="songlist__detail_title"></div>
+                    <div class="songlist__detail_author"></div>
+                    <div class="songlist__detail_description"></div>
+                </div>
+            </mdui-card>
+            <mdui-list class="songlist__tracks_list"></mdui-list>
+        </main>
     </div>
 
     <div class="app_page" id="app_page__auth">
@@ -282,6 +317,7 @@
     <script src="./auth.js"></script>
     <script src="./comments.js"></script>
     <script src="./for_you.js"></script>
+    <script src="./songlist.js"></script>
 
 </body>
 </html>

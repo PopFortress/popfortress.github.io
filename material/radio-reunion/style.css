@@ -566,3 +566,63 @@ mdui-dialog::part(panel) {
     opacity: .9;
     line-height: 1.5;
 }
+
+.search__type_frame {
+    width: 100%;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: .5;
+    gap: 1em;
+    padding: 3rem;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.search__type_frame mdui-icon {
+    font-size: 4rem;
+}
+
+.search__type_text {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.songlist__detail_wrapper {
+    display: flex;
+    gap: 1.5em;
+    align-items: center;
+    padding: 1.1em;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.songlist__detail_cover {
+    width: 128px;
+    height: 128px;
+}
+
+.songlist__detail_title {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 9px;
+}
+
+.songlist__detail_author, .songlist__detail_description {
+    font-size: .875rem;
+    opacity: .8;
+    line-height: 1.5;
+}
+
+#app_page__playlist_details main > * {
+    max-width: 790px;
+}
+
+#app_page__playlist_details main {
+    padding-left:  10px;
+    padding-right: 10px;
+}

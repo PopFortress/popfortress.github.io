@@ -68,7 +68,7 @@ class Authenticator {
                 qrInfo.innerText = '请确认授权以登录。';
             } else if (data.code === 803) {
                 qrInfo.innerText = '登录成功。';
-                this.cookie = data.cookie;
+                this.cookie = localStorage.rr_cookie = encodeURIComponent(data.cookie);
                 mdui.snackbar({ message: '登录成功。' });
                 switchPage('main');
                 this.isLoggedIn = true;
@@ -81,7 +81,7 @@ class Authenticator {
         };
     };
     fetchUserInfo() {
-        xhr.open('GET', `${apiServer}/user/account?r=${Date.now()}`);
+        xhr.open('GET', `${apiServer}/user/account%3Fcookie=${this.cookie}?r=${Date.now()}`);
         xhr.send();
         xhr.onload = () => {
             const data = JSON.parse(xhr.responseText);
@@ -110,7 +110,12 @@ class Authenticator {
 };
 
 const authenticator = new Authenticator({ account: 'guest' });
+if (localStorage.rr_cookie) {
+    authenticator.cookie = localStorage.rr_cookie;
+    authenticator.isLoggedIn = true;
+};
 authenticator.fetchUserInfo();
+
 
 submitLoginEmailBtn.onclick = attemptLoginEmail;
 

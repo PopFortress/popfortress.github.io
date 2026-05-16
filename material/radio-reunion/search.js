@@ -7,6 +7,8 @@ const searchList = $('.search__result_list');
 const searchTabs = $('.search__tabs');
 const stationsLoading = $('.stations__loading');
 const stationsList = $('.stations__result_list');
+const searchTypeFrames = document.querySelectorAll('.search__type_frame');
+const songlistsList = $('.songlist__result_list');
 
 const stationsAPI = 'https://radio5.cn/api/play';
 
@@ -30,19 +32,33 @@ function loadHistoryList() {
         entry.icon = 'history';
         entry.innerText = item.kw;
         entry.dataset.type = item.type;
-        if (item.type === 'songs') {
-            entry.endIcon = 'music_note--outlined';
-        } else {
-            entry.endIcon = 'radio--outlined';
+        switch (item.type) {
+            case 'songs':
+                entry.endIcon = 'music_note--outlined';
+                break;
+            case 'stations':
+                entry.endIcon = 'radio--outlined';
+                break;
+            case 'songlists':
+                entry.endIcon = 'playlist_play--outlined';
+                break;
+            default:
+                break;
         };
         entry.onclick = (e) => {
             searchInput.value = item.kw;
-            if (e.target.dataset.type === 'songs') {
-                searchTabs.value = 'songs';
-                searchSongs(1);
-            } else {
-                searchTabs.value = 'stations';
-                searchStations();
+            switch (e.target.dataset.type) {
+                case 'songs':
+                    searchTabs.value = 'songs';
+                    break;
+                case 'stations':
+                    searchTabs.value = 'stations';
+                    break;
+                case 'songlists':
+                    searchTabs.value = 'songlists';
+                    break;
+                default:
+                    break;
             };
         };
         searchHistoryList.appendChild(entry);
@@ -65,10 +81,18 @@ searchClearHistory.onclick = () => {
 
 searchInput.onkeydown = (e) => {
     if (e.key === 'Enter') {
-        if (searchTabs.value === 'songs') {
-            searchSongs(1);
-        } else {
-            searchStations();
+        switch (searchTabs.value) {
+            case 'songs':
+                searchSongs(1);
+                break;
+            case 'stations':
+                searchStations();
+                break;
+            case 'songlists':
+                searchSonglists();
+                break;
+            default:
+                break;
         };
         const historyObject = { kw: searchInput.value.trim(), type: searchTabs.value };
         if (!search_history.includes(historyObject)) {
@@ -93,6 +117,7 @@ searchInput.oninput = (e) => {
 function searchSongs(page) {
     const keywords = searchInput.value.trim();
     if (keywords) {
+        hideAllTypeFrames();
         searchTabs.style.display = 'flex';
         searchLoading.style.display = 'flex';
         searchList.innerHTML = '';
@@ -104,46 +129,7 @@ function searchSongs(page) {
             if (data.code === 200) {
                 songsCount = data.result.songCount;
                 data.result.songs.forEach(song => {
-                    songInfo = {};
-                    songInfo.title = song.name;
-                    songInfo.InfoUrl = `${apiServer}/song/url%3Fid=${song.id}`;
-                    let artists = [];
-                    song.ar.forEach(artist => {
-                        artists.push(artist.name);  
-                    });
-                    songInfo.artist = artists.join(', ');
-                    songInfo.album = song.al.name;
-                    songInfo.cover = song.al.picUrl;
-                    
-                    const listitem = document.createElement('mdui-list-item');
-                    const coverImg = document.createElement('img');
-                    const extraInfo = document.createElement('div');
-                    let extra_info = [];
-                    if (song.fee) {
-                        extra_info.push('付费');
-                    };
-                    if (song.mv) {
-                        extra_info.push('MV 可用');
-                    };
-                    extraInfo.innerHTML = extra_info.join('　');
-                    extraInfo.slot = 'end-icon';
-
-                    coverImg.src = song.al.picUrl;
-                    coverImg.slot = 'icon';
-                    coverImg.className = 'playlist__item_cover';
-                    listitem.headline = songInfo.title;
-                    listitem.description = songInfo.album ? `${songInfo.artist} - 《${songInfo.album}》` : `${songInfo.artist}`;
-                    listitem.appendChild(coverImg);
-                    listitem.appendChild(extraInfo);
-                    songInfo.id = song.id;
-                    songInfo.mvid = song.mv;
-                    listitem.dataset.song_info = JSON.stringify(songInfo);
-                    listitem.onclick = (e) => {
-                        player.switchLoadingState('loading');
-                        const info = JSON.parse(e.target.dataset.song_info);
-                        player.playNcmSong(info);
-                    };
-                    searchList.appendChild(listitem);
+                    appendSongItem(song, searchList);
                 });
             searchLoading.style.display = 'none';
             };
@@ -154,6 +140,7 @@ function searchSongs(page) {
 function searchStations() {
     const keywords = searchInput.value.trim();
     if (keywords) {
+        hideAllTypeFrames();
         stationsLoading.style.display = 'flex';
         stationsList.innerHTML = '';
         xhr.open('GET', `${stationsAPI}/search?search=${keywords}`);
@@ -201,10 +188,53 @@ function searchStations() {
     };
 };
 
-searchTabs.onchange = () => {
-    if (searchTabs.value === 'stations') {
-        searchStations();
-    } else {
-        searchSongs(1);
+function searchSonglists() {
+    const keywords = searchInput.value.trim();
+    if (keywords) {
+        hideAllTypeFrames();
+        songlistsList.innerHTML = '';
+        xhr.open('GET', `${apiServer}/cloudsearch?keywords=${keywords}&type=1000`);
+        xhr.send();
+        xhr.onload = () => {
+            const data = JSON.parse(xhr.responseText);
+            data.result.playlists.forEach(songlist => {
+                const listitem = document.createElement('mdui-list-item');
+                listitem.headline = songlist.name;
+                listitem.description = songlist.creator.nickname;
+                const coverImg = document.createElement('img');
+                coverImg.src = songlist.coverImgUrl;
+                coverImg.slot = 'icon';
+                coverImg.className = 'playlist__item_cover';
+                listitem.dataset.id = songlist.id;
+                listitem.onclick = (e) => {
+                    switchPage('playlist_details');
+                    loadPlaylistDetails(e.target.dataset.id);
+                };
+                listitem.appendChild(coverImg);
+                songlistsList.appendChild(listitem);
+            });
+        };
     };
+}
+
+searchTabs.onchange = () => {
+    switch (searchTabs.value) {
+        case 'songs':
+            searchSongs(1);
+            break;
+        case 'stations':
+            searchStations();
+            break;
+        case 'songlists':
+            searchSonglists();
+            break;
+        default:
+            break;
+    };
+};
+
+function hideAllTypeFrames() {
+    searchTypeFrames.forEach(frame => {
+        frame.style.display = 'none';
+    });
 };

@@ -34,12 +34,19 @@ xhr.onerror = (e) => {
     mdui.snackbar({ message: `无法连接至服务器。`});
 };
 
-function requestAPI(endpoint, method = 'GET', cacheEnabled = true) {
+function requestAPI(endpoint, method = 'GET', cacheEnabled = true, noCookie = false) {
     let url;
     if (cacheEnabled) {
-        url = `${apiServer}${endpoint}`;
+        if (endpoint.includes('?')) {
+            url = `${apiServer}${endpoint}%26cookie=${authenticator.cookie}`;
+        } else {
+            url = `${apiServer}${endpoint}%3Fcookie=${authenticator.cookie}`;
+        };
     } else {
-        url = `${apiServer}${endpoint}?r=${Date.now()}`;
+        url = `${apiServer}${endpoint}?r=${Date.now()}%26cookie=${authenticator.cookie}`;
+    };
+    if (noCookie) {
+        url = `${apiServer}${endpoint}`;
     };
     xhr.open(method, url);
     xhr.send();
@@ -75,6 +82,7 @@ class Player {
         this.isPlayingFM = false;
     };
     playSong(index) {
+        this.showPlayerFrame(true);
         console.log(index);
         lyrcisAlbumCover.style.display = 'none';
         
@@ -112,6 +120,7 @@ class Player {
         mdui.removeColorScheme();
         this.switchLoadingState('loaded');
         lyricsDisplayer.resetLyrics();
+        this.showPlayerFrame(false);
     };
     switchLoadingState(status) {
         switch (status) {
@@ -152,7 +161,7 @@ class Player {
     };
     playNcmSong(songInfo) {
         let info = songInfo;
-        xhr.open('GET', `${apiServer}/song/url%3Fid=${info.id}`);
+        xhr.open('GET', `${apiServer}/song/url%3Fid=${info.id}%26cookie=${authenticator.cookie}`);
         xhr.send();
         xhr.onload = () => {
             const data = JSON.parse(xhr.responseText);
@@ -292,6 +301,7 @@ const player = new Player({
     playback_mode: 'list_repeat',
 });
 const lyricsDisplayer = new LyricsDisplayer();
+player.showPlayerFrame(false);
 
 
 // assistant functions
@@ -487,3 +497,46 @@ playbackModeBtn.onclick = () => {
 playerCover.onclick = () => {
     switchPage('lyrics');
 };
+
+function appendSongItem(song, listEle) {
+    songInfo = {};
+    songInfo.title = song.name;
+    songInfo.InfoUrl = `${apiServer}/song/url%3Fid=${song.id}`;
+    let artists = [];
+    song.ar.forEach(artist => {
+        artists.push(artist.name);  
+    });
+    songInfo.artist = artists.join(', ');
+    songInfo.album = song.al.name;
+    songInfo.cover = song.al.picUrl;
+    
+    const listitem = document.createElement('mdui-list-item');
+    const coverImg = document.createElement('img');
+    const extraInfo = document.createElement('div');
+    let extra_info = [];
+    if (song.fee) {
+        extra_info.push('付费');
+    };
+    if (song.mv) {
+        extra_info.push('MV 可用');
+    };
+    extraInfo.innerHTML = extra_info.join('　');
+    extraInfo.slot = 'end-icon';
+
+    coverImg.src = song.al.picUrl;
+    coverImg.slot = 'icon';
+    coverImg.className = 'playlist__item_cover';
+    listitem.headline = songInfo.title;
+    listitem.description = songInfo.album ? `${songInfo.artist} - 《${songInfo.album}》` : `${songInfo.artist}`;
+    listitem.appendChild(coverImg);
+    listitem.appendChild(extraInfo);
+    songInfo.id = song.id;
+    songInfo.mvid = song.mv;
+    listitem.dataset.song_info = JSON.stringify(songInfo);
+    listitem.onclick = (e) => {
+        player.switchLoadingState('loading');
+        const info = JSON.parse(e.target.dataset.song_info);
+        player.playNcmSong(info);
+    };
+    listEle.appendChild(listitem);
+}
