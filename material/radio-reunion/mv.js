@@ -1,4 +1,5 @@
 const mvTitle = $('.mv__title');
+const mvDesc = $('.mv__desc');
 let mvidCache;
 
 function loadMV() {
@@ -6,13 +7,14 @@ function loadMV() {
 
     if (!(+mvidCache === mvid)) {
         mvidCache = mvid;
-        xhr.open('GET', `${apiServer}/mv/detail%3Fmvid=${mvid}`);
+        xhr.open('GET', `${apiServer}/mv/detail%3Fmvid=${mvid}%26cookie=${authenticator.cookie}`);
         xhr.send();
         xhr.onload = () => {
             const data = JSON.parse(xhr.responseText);
             mvVideo.poster = data.data.cover;
             mvTitle.innerText = data.data.name;
-            xhr.open('GET', `${apiServer}/mv/url%3Fid=${mvid}`);
+            mvDesc.innerText = data.data.desc ? `MV 简介：${data.data.desc}` : '';
+            xhr.open('GET', `${apiServer}/mv/url%3Fid=${mvid}%26cookie=${authenticator.cookie}`);
             xhr.send();
             xhr.onload = () => {
                 const data = JSON.parse(xhr.responseText);

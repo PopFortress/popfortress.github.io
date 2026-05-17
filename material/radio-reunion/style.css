@@ -594,7 +594,7 @@ mdui-dialog::part(panel) {
 
 .songlist__detail_wrapper {
     display: flex;
-    gap: 1.5em;
+    gap: 1.3em;
     align-items: center;
     padding: 1.1em;
     width: 100%;
@@ -625,4 +625,17 @@ mdui-dialog::part(panel) {
 #app_page__playlist_details main {
     padding-left:  10px;
     padding-right: 10px;
+}
+
+.mv__desc {
+    font-size: .875rem;
+    line-height: 1.5;
+    opacity: .7;
+    max-width: 93%;
+    word-wrap: break-word;
+}
+
+.songlist__play_all_btn {
+    margin-top: 9px;
+    height: 35px;
 }

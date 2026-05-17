@@ -539,4 +539,4 @@ function appendSongItem(song, listEle) {
         player.playNcmSong(info);
     };
     listEle.appendChild(listitem);
-}
+};
