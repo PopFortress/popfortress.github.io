@@ -18,6 +18,7 @@ const headerUsername = $('.header__username');
 const headerAvatar = $('.header__avatar');
 const accountMenu = $('.account__menu');
 const accountLogout = $('.account__logout');
+const headerVipBadge = $('.header__vip_badge');
 
 const loginBox = $('.header__account__login_wrapper');
 const accountBox = $('.header__account__user_wrapper');
@@ -96,6 +97,18 @@ class Authenticator {
                 this.isLoggedIn = false;
                 loginBox.style.display = 'inherit';
                 accountBox.style.display = 'none';
+            };
+
+            xhr.open('GET', `${apiServer}/vip/info%3Fcookie=${this.cookie}`);
+            xhr.send();
+            xhr.onload = () => {
+                const data = JSON.parse(xhr.responseText);
+                if (data.data.redVipLevel) {
+                    headerVipBadge.style.display = 'inherit';
+                    headerVipBadge.src = data.data.redVipLevelIcon;
+                } else {
+                    headerVipBadge.style.display = 'none';
+                };
             };
         };
     };

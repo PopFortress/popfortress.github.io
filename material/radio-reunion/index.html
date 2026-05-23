@@ -29,7 +29,10 @@
                             <mdui-avatar class="header__avatar"></mdui-avatar>
                         </mdui-button-icon>
                         <mdui-menu>
-                            <mdui-menu-item class="header__username" disabled></mdui-menu-item>
+                            <mdui-menu-item class="header__username_frame" disabled>
+                                <div class="header__username"></div>
+                                <img class="header__vip_badge" slot="end-icon"></img>
+                            </mdui-menu-item>
                             <mdui-menu-item class="account__logout" icon="logout--outlined">退出登录</mdui-menu-item>
                         </mdui-menu>
                     </mdui-dropdown>

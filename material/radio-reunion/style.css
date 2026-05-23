@@ -639,3 +639,9 @@ mdui-dialog::part(panel) {
     margin-top: 9px;
     height: 35px;
 }
+
+.header__vip_badge {
+    display: none;
+    width: 40px;
+    height: 12px;
+}
