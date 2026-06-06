@@ -10,12 +10,17 @@ const viewComments = $('.detail__view_comments');
 const viewSongDetails = $('.detail__view_song_details');
 const songDetailsDialog = $('.lyrics__details_dialog');
 const songDetailsText = $('.lyrics__song_details');
+const mainSettBtn = $('.header__settings_btn');
 
 let currentPage = 'main';
 let previousPage;
 let pages_stack = [];
 startOptionSearch.onclick =() => {
     switchPage('search');
+};
+
+mainSettBtn.onclick = () => {
+    switchPage('settings');
 };
 
 startOptionFeatured.onclick = () => {

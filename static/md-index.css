@@ -104,11 +104,17 @@ mdui-card {
     color: #c74545;
 }
 
-.festival-text {
+.festival-text, .holiday-text {
     opacity: .8;
     font-size: .7rem;
     padding-top: .5em;
     display: none;
+}
+
+.festival {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 @media screen and (max-width: 420px) {

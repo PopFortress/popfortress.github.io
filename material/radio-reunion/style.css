@@ -645,3 +645,27 @@ mdui-dialog::part(panel) {
     width: 40px;
     height: 12px;
 }
+
+.header__menu_trigger {
+    font-size: 20px;
+    width: 36px;
+    height: 36px;
+}
+
+.settings__frame {
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.settings__frame>* {
+    padding: 2em;
+    max-width: 490px;
+    width: 100%;
+}
+
+.sett__option_label {
+    font-size: .8rem;
+    opacity: .7;
+}

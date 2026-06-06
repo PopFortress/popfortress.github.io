@@ -63,6 +63,8 @@ const dayEffectSwitch = $('#day-effects');
 const fallbackFontSwitch = $('#second-font-src');
 const festivalText = $('.festival-text');
 const archivedItems = document.querySelectorAll('.hidden-sections[value="archives"] mdui-list-item');
+const holidayText = $('.holiday-text');
+let holidays;
 var sayingsDesc;
 var sha;
 var commitMessage;
@@ -485,7 +487,22 @@ async function fetchFestival() {
     festivalText.innerText = text;
     festivalText.style.display = 'block';
 };
+async function fetchHoliday() {
+    const res = await fetch(`https://seep.eu.org/https://api.jiejiariapi.com/v1/holidays/${new Date().getFullYear()}`);
+    const data = await res.json();
+    const currentDate = new Date().toISOString().slice(0, 10);
+    holidays = Object.values(data);
+    holidays = holidays.filter(item => new Date(item.date) >= new Date(currentDate));
+    if (currentDate === holidays[0].date) {
+        holidayText.innerText = `今天是 ${holidays[0].name} 假期`;
+    } else {
+        holidayText.innerText = `距离 ${holidays[0].name} 假期还有 ${(new Date(holidays[0].date) - new Date(currentDate)) / 1000 / 60 / 60 / 24} 天`;
+    };
+    holidayText.style.display = 'block';
+};
+
 fetchFestival();
+fetchHoliday();
 
 archivedItems.forEach(item => {
     if (item.icon === 'auto_awesome') {

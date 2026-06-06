@@ -47,15 +47,18 @@ function loadHistoryList() {
         };
         entry.onclick = (e) => {
             searchInput.value = item.kw;
+            if (searchTabs.value !== e.target.dataset.type) {
+                searchTabs.value = e.target.dataset.type;
+            };
             switch (e.target.dataset.type) {
                 case 'songs':
-                    searchTabs.value = 'songs';
+                    searchSongs(1);
                     break;
                 case 'stations':
-                    searchTabs.value = 'stations';
+                    searchStations();
                     break;
                 case 'songlists':
-                    searchTabs.value = 'songlists';
+                    searchSonglists();
                     break;
                 default:
                     break;

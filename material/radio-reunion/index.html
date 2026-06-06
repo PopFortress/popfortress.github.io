@@ -17,6 +17,14 @@
     <div class="app_page" id="app_page__main">
         <header>
             <div class="header__title home_page__title">Radio <span style="font-weight: 600;">Reunion</span></div>
+            <div class="header__menu_box">
+                <mdui-dropdown class="header__menu">
+                    <mdui-button-icon icon="menu" slot="trigger" class="header__menu_trigger"></mdui-button-icon>
+                    <mdui-menu>
+                        <mdui-menu-item class="header__settings_btn" icon="settings">设置</mdui-menu-item>
+                    </mdui-menu>
+                </mdui-dropdown>
+            </div>
             <div class="header__account_box">
                 <div class="header__account__login_wrapper">
                     <mdui-tooltip content="登录到网易云账户" placement="bottom-left">
@@ -253,6 +261,21 @@
         </main>
     </div>
 
+    <div class="app_page" id="app_page__settings">
+        <header>
+            <mdui-button-icon icon="arrow_back" class="header__back_btn"></mdui-button-icon>
+            <div class="header__title">设置</div>
+        </header>
+        <main>
+            <div class="settings__frame">
+                <div class="sett__app_frame">
+                    <mdui-slider class="sett__player_volume" value="100"></mdui-slider>
+                    <div class="sett__volume_label sett__option_label">音量 100</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
     <div class="player">
         <div class="player__container">
             <div class="player__loading">
@@ -323,6 +346,7 @@
     <script src="./comments.js"></script>
     <script src="./for_you.js"></script>
     <script src="./songlist.js"></script>
+    <script src="./settings_ui.js"></script>
 
 </body>
 </html>
