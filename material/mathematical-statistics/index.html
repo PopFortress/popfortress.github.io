@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>数学统计</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <header>数学统计</header>
+    <div class="app">
+        <div class="input__wrapper">
+            <mdui-text-field
+                class="input__input"
+                rows="4"
+                autosize
+                max-rows="7"
+                placeholder="键入数据组，用逗号分隔。"
+                variant="outlined">
+            </mdui-text-field>
+        </div>
+
+        <div class="result__wrapper">
+            <div class="result__item">
+                <div class="result__item__title">总和</div>
+                <mdui-text-field class="result__item__value" type="number" readonly id="result__sum" variant="outlined"></mdui-text-field>
+            </div>
+            <div class="result__item">
+                <div class="result__item__title">算术平均数
+                    <img src="https://www.zhihu.com/equation?tex=%5Cbar%7Bx%7D" alt="">
+                </div>
+                <mdui-text-field class="result__item__value" type="number" readonly id="result__average" variant="outlined"></mdui-text-field>
+            </div>
+            <div class="result__item">
+                <div class="result__item__title">25% 分位数
+                    <img src="https://www.zhihu.com/equation?tex=Q_%7B1%7D" alt="">
+                </div>
+                <mdui-text-field class="result__item__value" type="number" readonly id="result__q1" variant="outlined"></mdui-text-field>
+            </div>
+            <div class="result__item">
+                <div class="result__item__title">中位数
+                    <img src="https://www.zhihu.com/equation?tex=Q_%7B2%7D" alt="">
+                </div>
+                <mdui-text-field class="result__item__value" type="number" readonly id="result__median" variant="outlined"></mdui-text-field>
+            </div>
+            <div class="result__item">
+                <div class="result__item__title">75% 分位数
+                    <img src="https://www.zhihu.com/equation?tex=Q_%7B3%7D" alt="">
+                </div>
+                <mdui-text-field class="result__item__value" type="number" readonly id="result__q3" variant="outlined"></mdui-text-field>
+            </div>
+            <div class="result__item">
+                <div class="result__item__title">众数</div>
+                <mdui-text-field class="result__item__value" type="text" readonly id="result__mode" variant="outlined"></mdui-text-field>
+            </div>
+            <div class="result__item">
+                <div class="result__item__title">离差平方和
+                    <img src="https://www.zhihu.com/equation?tex=d%5E2" alt="">
+                </div>
+                <mdui-text-field class="result__item__value" type="number" readonly id="result__ss" variant="outlined"></mdui-text-field>
+            </div>
+            <div class="result__item">
+                <div class="result__item__title">方差
+                    <img src="https://www.zhihu.com/equation?tex=s%5E2" alt="">
+                </div>
+                <mdui-text-field class="result__item__value" type="number" readonly id="result__variance" variant="outlined"></mdui-text-field>
+            </div>
+            <div class="result__item">
+                <div class="result__item__title">标准差
+                    <img src="https://www.zhihu.com/equation?tex=%5Csigma" alt="">
+                </div>
+                <mdui-text-field class="result__item__value" type="number" readonly id="result__sigma" variant="outlined"></mdui-text-field>
+            </div>
+            <div class="result__item">
+                <div class="result__item__title">平均差</div>
+                <mdui-text-field class="result__item__value" type="number" readonly id="result__mean_deviation" variant="outlined"></mdui-text-field>
+            </div>
+            <div class="result__item">
+                <div class="result__item__title">极差
+                    <img src="https://www.zhihu.com/equation?tex=R" alt="">
+                </div>
+                <mdui-text-field class="result__item__value" type="number" readonly id="result__range" variant="outlined"></mdui-text-field>
+            </div>
+            <div class="result__item">
+                <div class="result__item__title">四分位距
+                    <img src="https://www.zhihu.com/equation?tex=IQR" alt="">
+                </div>
+                <mdui-text-field class="result__item__value" type="number" readonly id="result__iqr" variant="outlined"></mdui-text-field>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>
