@@ -356,6 +356,7 @@ playerProgressbar.addEventListener('change', () => {
 });
 
 audio.addEventListener('play', ()=> {
+    audio.playbackRate = settEles.playerPlayrate.slider.value;
     playerPlayback.icon = 'pause';
     player.switchLoadingState('loaded');
 });
