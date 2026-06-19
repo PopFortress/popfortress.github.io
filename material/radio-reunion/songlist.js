@@ -25,6 +25,7 @@ function loadPlaylistDetails(id) {
 };
 
 songlistEles.playAllBtn.onclick = () => {
+    playlist.clearItems();
     const tracks = JSON.parse(xhr.responseText).playlist.tracks;
     tracks.forEach((track) => {
         let artists = [];
@@ -42,6 +43,6 @@ songlistEles.playAllBtn.onclick = () => {
         }));
     });
     lyricsDisplayer.loadLyrics(player.getCurrentSong().id);
-    player.switchLoadingState(true);
+    player.switchLoadingState('loaded');
     player.playSong(0);
 };

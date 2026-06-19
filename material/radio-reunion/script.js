@@ -247,6 +247,41 @@ class Playlist {
     getFilteredList() {
         return this.playlist.filter((item) => item !== null);
     };
+    savePlaylist() {
+        mdui.prompt({
+            headline: '键入播放列表名称',
+            description: '内容将保存在您的设备上。',
+            onConfirm: (value) => {
+                const listObj = {};
+                listObj.name = value;
+                const data = JSON.parse(localStorage.rr_playlists || '[]');
+                const currentPlaylist = this.getFilteredList();
+                currentPlaylist.forEach(song => {
+                    delete song.itemEle;
+                    delete song.index;
+                    if (song.id) {
+                        delete song.url;
+                    };
+                });
+                listObj.tracks = currentPlaylist;
+                data.push(listObj);
+                localStorage.rr_playlists = JSON.stringify(data);
+                mdui.snackbar({ message: '已保存当前播放列表。' });
+            },
+        });
+    };
+    loadPlaylist(tracks) {
+        this.clearItems();
+        tracks.forEach(track => {
+            if (track.id && !track.url) {
+                track.url = `${apiServer}/song/url/v1/302%3Fid=${track.id}%26level=exhigh%26cookie=${authenticator.cookie}`;
+            };
+            playlist.addItem(new Song(track));
+        });
+        lyricsDisplayer.loadLyrics(player.getCurrentSong().id);
+        player.switchLoadingState('loaded');
+        player.playSong(0);
+    };
 };
 
 class LyricsDisplayer {

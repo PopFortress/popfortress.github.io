@@ -21,6 +21,7 @@
                 <mdui-dropdown class="header__menu">
                     <mdui-button-icon icon="menu" slot="trigger" class="header__menu_trigger"></mdui-button-icon>
                     <mdui-menu>
+                        <mdui-menu-item class="header__load_playlist_btn" icon="folder_open--outlined">加载播放列表</mdui-menu-item>
                         <mdui-menu-item class="header__settings_btn" icon="settings">设置</mdui-menu-item>
                     </mdui-menu>
                 </mdui-dropdown>
@@ -314,9 +315,20 @@
             <div class="playlist__title">播放列表<mdui-badge class="playlist__title_badge"></mdui-badge></div>
             <mdui-button-icon icon="repeat" class="playback__ordering_btn"></mdui-button-icon>
             <mdui-button-icon icon="clear_all" class="playlist__clear_btn"></mdui-button-icon>
+            <mdui-dropdown>
+                <mdui-button-icon icon="more_vert" slot="trigger"></mdui-button-icon>
+                <mdui-menu>
+                    <mdui-menu-item class="playlist__save_btn" icon="save--outlined">保存列表</mdui-menu-item>
+                    <mdui-menu-item class="playlist__load_btn" icon="folder_open--outlined">加载列表</mdui-menu-item>
+                </mdui-menu>
+            </mdui-dropdown>
         </div>
         <mdui-list class="playlist__playlist"></mdui-list>
     </mdui-navigation-drawer>
+
+    <mdui-dialog headline="选择播放列表" icon="playlist_add--outlined" class="playlist__load_dialog" description="这将会覆盖当前播放列表。" close-on-esc close-on-overlay-click>
+        <mdui-list class="playlist__playlists_select_list"></mdui-list>
+    </mdui-dialog>
 
     <div class="welcome_overlay">
         <div class="welcome__content">
@@ -354,6 +366,7 @@
     <script src="./for_you.js"></script>
     <script src="./songlist.js"></script>
     <script src="./settings_ui.js"></script>
+    <script src="./playlist_storage.js"></script>
 
 </body>
 </html>

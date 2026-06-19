@@ -168,7 +168,7 @@ main {
 .playlist__header {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 8px;
     padding: 23px;
 }
 .playlist__item_cover {
