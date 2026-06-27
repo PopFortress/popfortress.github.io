@@ -37,6 +37,11 @@ __headers.forEach(ele => {
             menudrawer.close(dialog);
         };
     });
+    dialog.addEventListener('click', (e) => {
+        if (e.target === dialog) {
+            menudrawer.close(dialog);
+        };
+    });
     closeBtn.addEventListener('click', () => {
         menudrawer.close(dialog);
     });

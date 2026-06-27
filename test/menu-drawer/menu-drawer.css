@@ -81,7 +81,7 @@ dialog.fs-mdui-menu-drawer-dialog {
 }
 
 dialog.fs-mdui-menu-drawer-dialog::backdrop {
-    backdrop-filter: brightness(.7);
+    backdrop-filter: brightness(.7) blur(1px);
 }
 
 dialog.fs-mdui-menu-drawer-dialog--open::backdrop {
