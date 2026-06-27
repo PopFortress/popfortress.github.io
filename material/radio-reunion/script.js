@@ -267,6 +267,7 @@ class Playlist {
                 data.push(listObj);
                 localStorage.rr_playlists = JSON.stringify(data);
                 mdui.snackbar({ message: '已保存当前播放列表。' });
+                this.loadPlaylist(currentPlaylist);
             },
         });
     };
