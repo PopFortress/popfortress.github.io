@@ -80,6 +80,7 @@ class Player {
         this.loadingState = 'loaded'; // 'loading' or 'loaded'
         this.hidden = false;
         this.isPlayingFM = false;
+        this.playbackRate = 1;
     };
     playSong(index) {
         this.showPlayerFrame(true);
@@ -392,7 +393,7 @@ playerProgressbar.addEventListener('change', () => {
 });
 
 audio.addEventListener('play', ()=> {
-    audio.playbackRate = settEles.playerPlayrate.slider.value;
+    audio.playbackRate = player.playbackRate;
     playerPlayback.icon = 'pause';
     player.switchLoadingState('loaded');
 });

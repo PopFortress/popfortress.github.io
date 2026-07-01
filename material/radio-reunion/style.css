@@ -230,6 +230,8 @@ mdui-tab::part(icon) {
 
 /* lyrics page */
 .lyrics__container{
+    display: flex;
+    align-items: safe center;
     height: calc(100vh - 200px - 2em);
     overflow-x: hidden;
     overflow-y: auto;
@@ -668,4 +670,22 @@ mdui-dialog::part(panel) {
 .sett__option_label {
     font-size: .8rem;
     opacity: .7;
+}
+
+.sett__player_playrate {
+    width: 121px;
+    height: 37px;
+    margin: 10px 0;
+}
+
+.sett__player_playrate::part(input) {
+    font-size: .875rem;
+}
+
+.search__no_results {
+    font-size: .7rem;
+    opacity: .7;
+    display: none;
+    padding: 40px;
+    text-align: center;
 }

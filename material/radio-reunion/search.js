@@ -23,6 +23,8 @@ function setSearchHistory(object) {
     localStorage.rr_search_history = JSON.stringify(object);
 };
 let search_history = loadSearchHistory();
+let songsCount = 0;
+const noResultsText = $('.search__no_results');
 
 function loadHistoryList() {
     search_history = loadSearchHistory();
@@ -131,10 +133,14 @@ function searchSongs(page) {
             let songInfo = {};
             if (data.code === 200) {
                 songsCount = data.result.songCount;
-                data.result.songs.forEach(song => {
-                    appendSongItem(song, searchList);
-                });
-            searchLoading.style.display = 'none';
+                if (songsCount > 0) {
+                    data.result.songs.forEach(song => {
+                        appendSongItem(song, searchList);
+                    });
+                } else {
+                    noResultsText.style.display = 'block';
+                };
+                searchLoading.style.display = 'none';
             };
         };
     };
@@ -237,6 +243,7 @@ searchTabs.onchange = () => {
 };
 
 function hideAllTypeFrames() {
+    noResultsText.style.display = 'none';
     searchTypeFrames.forEach(frame => {
         frame.style.display = 'none';
     });

@@ -98,6 +98,7 @@
                         <div class="search__loading">
                             <mdui-circular-progress></mdui-circular-progress>
                         </div>
+                        <div class="search__no_results">找到了 0 首歌！</div>
                         <div class="search__result_stats"></div>
                         <div class="search__type_frame">
                             <mdui-icon name='music_note'></mdui-icon>
@@ -275,7 +276,20 @@
                         <div class="sett__volume_label sett__option_label">音量 100</div>
                     </div>
                     <div>
-                        <mdui-slider class="sett__player_playrate" value="1.0" min="0.25" max="16" step="0.25"></mdui-slider>
+                        <mdui-dropdown trigger="click focus">
+                            <mdui-text-field variant="outlined" readonly slot="trigger" class="sett__player_playrate" value="倍速 1.0x" end-icon="keyboard_arrow_down"></mdui-text-field>
+                            <mdui-menu dense class="sett__player_playrate__options">
+                                <mdui-menu-item>0.5</mdui-menu-item>
+                                <mdui-menu-item>0.75</mdui-menu-item>
+                                <mdui-menu-item>1.0</mdui-menu-item>
+                                <mdui-menu-item>1.25</mdui-menu-item>
+                                <mdui-menu-item>1.5</mdui-menu-item>
+                                <mdui-menu-item>1.75</mdui-menu-item>
+                                <mdui-menu-item>2</mdui-menu-item>
+                                <mdui-menu-item>3</mdui-menu-item>
+                                <mdui-menu-item>5</mdui-menu-item>
+                            </mdui-menu>
+                        </mdui-dropdown>
                         <div class="sett__option_label sett__playrate_label">倍速 1.0x</div>
                         <mdui-checkbox class="sett__preserve_pitch_check" checked>保持音调</mdui-checkbox>
                     </div>
