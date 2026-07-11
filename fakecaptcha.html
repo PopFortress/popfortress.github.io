@@ -19,16 +19,31 @@
             align-items: center;
             height: 100vh;
             background-color: #f0f0f0;
+            flex-direction: column;
+            gap: 1.2em;
+        }
+
+        #disable-btn {
+            opacity: .8;
+            text-decoration: none;
+            font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
     
     <div id="captcha"></div>
+    <a href="javascript:;" id="disable-btn">禁用人机验证</a>
     <script>
         const prefers = window.matchMedia('(prefers-color-scheme: dark)');
         const isSystemDark = prefers.matches;
         const body = document.querySelector('body');
+        const disableBtn = document.querySelector('#disable-btn');
+
+        disableBtn.onclick = () => {
+            localStorage.disableCaptcha = true;
+            location.href = '/';
+        };
 
         if (isSystemDark) {
             body.style.background = '#1d1d1f';

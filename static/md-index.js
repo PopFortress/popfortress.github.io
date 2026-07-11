@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // clinet verification
-if (Date.now() - (+localStorage.lastVerified || 0) > 5.76e7) {
+if (Date.now() - (+localStorage.lastVerified || 0) > 5.76e7 && localStorage.disableCaptcha !== 'true') {
     location.href = '/fakecaptcha?r=/cf-challenge?r=/';
 };
 
