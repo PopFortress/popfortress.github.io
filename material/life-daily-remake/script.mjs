@@ -116,7 +116,7 @@ const apis = {
     stock: 'https://hq.stock.sohu.com/zs/006/zs_399006-1.html',
     bilibili: 'https://api.vvhan.com/api/hotlist/bili',
     zhihu: 'https://api.vvhan.com/api/hotlist/zhihuHot',
-    maoyan: 'https://seep.eu.org/https://api.52vmy.cn/api/wl/top/movie',
+    maoyan: 'https://60s.viki.moe/v2/maoyan/realtime/movie',
     epic: 'https://60s-api-cf.viki.moe/v2/epic',
     answer: 'https://60s-api-cf.viki.moe/v2/answer',
     bing: 'https://bing.shangzhenyang.com/api/json',
@@ -518,15 +518,16 @@ function fetchMaoyan() {
         url: apis.maoyan,
         callback: (data) => {
             let rankIndex = 1;
-            maoyanLastUpdate.textContent = `更新时间：${data.data.updateInfo.date}　${data.data.updateInfo.time}`;
-            data.data.list.forEach(item => {
-                maoyanList.innerHTML += `<mdui-list-item data-index=${rankIndex} href="https://www.maoyan.com/films/${item.movieInfo.movieId}" target="_blank">${item.movieInfo.movieName}\
+            let ranks = data.data;
+            maoyanLastUpdate.textContent = `更新时间：${ranks.updated}`;
+            ranks.list.forEach(item => {
+                maoyanList.innerHTML += `<mdui-list-item data-index=${rankIndex} href="https://www.maoyan.com/films/${item.movie_id}" target="_blank">${item.movie_name}\
                 <div slot="icon">#${rankIndex}</div></mdui-list-item>`;
                 const listitem = maoyanList.querySelector(`mdui-list-item[data-index="${rankIndex}"]`);
-                if (item.movieInfo.releaseInfo) {
-                    listitem.innerHTML += `<div slot="end-icon">${item.sumBoxDesc} (${item.movieInfo.releaseInfo})</div>`;
+                if (item.release_info) {
+                    listitem.innerHTML += `<div slot="end-icon">${item.sum_box_desc} (${item.release_info})</div>`;
                 } else {
-                    listitem.innerHTML += `<div slot="end-icon">${item.sumBoxDesc}</div>`;
+                    listitem.innerHTML += `<div slot="end-icon">${item.sum_box_desc}</div>`;
                 };
                 rankIndex++;
             });

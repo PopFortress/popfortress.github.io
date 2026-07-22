@@ -294,11 +294,28 @@ a:hover {
     font-size: .8rem;
 }
 
-.news-item:part(headline) {
+.news-item::part(headline) {
     line-height: 1.7;
 }
 
 .om .date, .om .sayings {
     opacity: .8;
     font-size: .9rem;
+}
+
+.maoyan-list mdui-list-item[data-index="1"] *, .maoyan-list mdui-list-item[data-index="1"]::part(headline) {
+    color: #ef4238;
+}
+
+.maoyan-list mdui-list-item[data-index="2"] *, .maoyan-list mdui-list-item[data-index="2"]::part(headline) {
+    color: #ffb400;
+}
+
+.maoyan-list mdui-list-item[data-index="3"] *, .maoyan-list mdui-list-item[data-index="3"]::part(headline) {
+    color: #42bd56;
+}
+
+.maoyan .content {
+    max-height: 546px;
+    overflow: auto;
 }

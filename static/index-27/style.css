@@ -107,6 +107,7 @@ footer {
 
 .footer__section a {
     opacity: 1;
+    width: fit-content;
 }
 
 .footer__section.logo {
