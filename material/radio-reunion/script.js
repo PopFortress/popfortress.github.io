@@ -29,6 +29,27 @@ const xhr = new XMLHttpRequest();
 let apiServer = 'https://seep.eu.org/https://ncm-api-enhanced-nine.vercel.app';
 const apiServerAlternate = 'https://apis.netstart.cn/music';
 const mediaServer = 'https://music.163.com/song/media/outer/url';
+let appSettings;
+function updateAppSettings() {
+    if (!localStorage.rr_settings) { // 初始化 appSettings.
+        localStorage.rr_settings = JSON.stringify({
+            dynamicLyricsHoverEffect: false,
+        });
+    };
+    appSettings = JSON.parse(localStorage.rr_settings) || '{}';
+};
+
+/**
+ * 修改并更新 appSettings.
+ * @param {*} key 目标键
+ * @param {*} value 目标值
+ */
+function modifyAppSettings(key, value) {
+    appSettings = JSON.parse(localStorage.rr_settings) || '{}';
+    appSettings[key] = value;
+    localStorage.rr_settings = JSON.stringify(appSettings);
+};
+updateAppSettings();
 
 xhr.onerror = (e) => {
     mdui.snackbar({ message: `无法连接至服务器。`});
@@ -303,9 +324,9 @@ class LyricsDisplayer {
                 const data = JSON.parse(xhr.responseText);
                 if (data.lrc) {
                     this.lyrics = data.lrc.lyric;
-                    if (data.tlyric && detailsMenu.value === 'show-translation') {
+                    if (data.tlyric && detailsMenu.value.includes('show-translation')) {
                         lrcData = parseLrc(this.lyrics, data.tlyric.lyric);
-                    } else if (data.romalrc && detailsMenu.value === 'show-notations') {
+                    } else if (data.romalrc && detailsMenu.value.includes('show-notations')) {
                         lrcData = parseLrc(this.lyrics, data.romalrc.lyric);
                     } else {
                         lrcData = parseLrc(this.lyrics);
@@ -326,7 +347,18 @@ class LyricsDisplayer {
 };
 
 // lyrics options logic
-detailsMenu.onchange = () => { if (player.getCurrentSong()) lyricsDisplayer.loadLyrics(player.getCurrentSong().id) };
+detailsMenu.onchange = () => {
+    if (player.getCurrentSong()) {
+        lyricsDisplayer.loadLyrics(player.getCurrentSong().id)
+    };
+    if (detailsMenu.value.includes('show-dynamic-lyrics-hover-effect')) {
+        isDynamicHoverEffect = true;
+        modifyAppSettings('dynamicLyricsHoverEffect', true);
+    } else {
+        isDynamicHoverEffect = false;
+        modifyAppSettings('dynamicLyricsHoverEffect', false);
+    };
+};
 
 
 

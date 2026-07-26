@@ -158,7 +158,7 @@
             <div class="detail__actions">
                 <mdui-dropdown placement="bottom-end" stay-open-on-click>
                     <mdui-button-icon icon="more_vert" slot="trigger" class="detail__more_btn"></mdui-button-icon>
-                    <mdui-menu submenu-trigger="click focus hover" selects="single" value="show-translation" class="details__menu">
+                    <mdui-menu submenu-trigger="click focus hover" selects="multiple" value="show-translation" class="details__menu">
                         <mdui-menu-item class="detail__see_mv" disabled icon="movie--outlined">查看 MV</mdui-menu-item>
                         <mdui-menu-item class="detail__view_comments" icon="rate_review--outlined">评论</mdui-menu-item>
                         <mdui-menu-item class="detail__view_song_details" icon="info--outlined">歌曲详情</mdui-menu-item>
@@ -166,6 +166,9 @@
                             歌词选项
                             <mdui-menu-item slot="submenu" value="show-translation">显示翻译</mdui-menu-item>
                             <mdui-menu-item slot="submenu" value="show-notations">显示注音</mdui-menu-item>
+                        </mdui-menu-item>
+                        <mdui-menu-item value="show-dynamic-lyrics-hover-effect">
+                            显示动态歌词效果
                         </mdui-menu-item>
                     </mdui-menu>
                 </mdui-dropdown>

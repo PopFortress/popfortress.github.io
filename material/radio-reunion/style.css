@@ -231,7 +231,6 @@ mdui-tab::part(icon) {
 /* lyrics page */
 .lyrics__container{
     display: flex;
-    align-items: safe center;
     height: calc(100vh - 200px - 2em);
     overflow-x: hidden;
     overflow-y: auto;
@@ -242,7 +241,7 @@ mdui-tab::part(icon) {
 .lyrics__container ul{
     transition: 0.3s;
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
 }
 .lyrics__container li{
     height: auto;
@@ -493,7 +492,7 @@ mdui-dialog::part(panel) {
 }
 
 
-.lyrics__container li:hover {
+.lyrics__container li:hover, .lyrics__container li.active.hover {
     background: rgba(var(--mdui-color-surface-container), 0.5);
     padding: 4px 8px;
     border-radius: var(--mdui-shape-corner-small);
@@ -503,7 +502,7 @@ mdui-dialog::part(panel) {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .login__qr__img.expired {
@@ -529,6 +528,9 @@ mdui-dialog::part(panel) {
 @media screen and (max-width: 949px) {
     .album__info_wrapper {
         display: none;
+    }
+    .lyrics__container {
+        padding-left: 1em;
     }
 }
 

@@ -6,6 +6,16 @@ var doms = {
     loading: $('.lyrics__loading_wrapper'),
 };
 
+let lastIndex = 0; // 上一次高亮的歌词下标
+let isDynamicHoverEffect = appSettings.dynamicLyricsHoverEffect;
+
+window.addEventListener('load', () => {
+    if (isDynamicHoverEffect) {
+        detailsMenu.value.push('show-dynamic-lyrics-hover-effect');
+    };
+});
+
+
 // 解析时间字符串
 function parseTime(timeStr){
     let parts = timeStr.split(':');
@@ -105,7 +115,7 @@ function createLrcElement(){
         li.innerHTML = lrcData[i].words;
         doms.ul.appendChild(li);
         li.onclick = () => {
-            if (li.className !== 'active' && player.getCurrentSong() && !lyricsDisplayer.isLyricsStatic) {
+            if (!li.className.includes('active') && player.getCurrentSong() && !lyricsDisplayer.isLyricsStatic) {
                 doms.audio.currentTime = lrcData[i].time;
                 audio.play();
             };
@@ -145,11 +155,19 @@ function setOffset(){
     let li2 = doms.ul.children[index];
     if(li2){
         li2.classList.add('active');
-    }
-
-    const activatedLine = $('.lyrics__container li.active')
-    if (activatedLine && !lyricsDisplayer.isLyricsStatic) {
-        activatedLine.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+    const activatedLine = $('.lyrics__container li.active');
+    if (lastIndex !== index) {
+        if (activatedLine && !lyricsDisplayer.isLyricsStatic) {
+            activatedLine.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (isDynamicHoverEffect) {
+                activatedLine.classList.add('hover');
+                if (doms.ul.children[lastIndex]) {
+                    doms.ul.children[lastIndex].classList.remove('hover');
+                };
+            };
+        };
+        lastIndex = index;
     };
 };
 
