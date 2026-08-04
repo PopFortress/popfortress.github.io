@@ -9,6 +9,13 @@ const qrMethodBtn = $('.login__qr_method_btn');
 const emailMethodWrapper = $('.login__email_wrapper');
 const qrMethodWrapper = $('.login__qr_wrapper');
 const accountMethodBtn = $('.login__account_method_btn');
+const captchaMethodBtn = $('.login__captcha_method_btn');
+const captchaMethodDlg = $('.login__captcha_dlg');
+const captchaPhoneInput = $('.login__captcha__phone_input');
+const captchaInput = $('.login__captcha__captcha_input');
+const captchaGetBtn = $('.captcha_btn');
+const captchaLoginBtn = $('.login__captcha_dlg__confirm_btn');
+
 
 const qrImg = $('.login__qr__img');
 const qrLink = $('.login__qr__link');
@@ -38,14 +45,14 @@ class Authenticator {
         const email = options.email;
         const password = options.password;
         submitLoginEmailBtn.disabled = submitLoginEmailBtn.loading = true;
-        xhr.open('GET', `${apiServer}/login%3Femail=${email}&password=${password}`);
+        xhr.open('GET', `${apiServer}/login%3Femail=${email}%26password=${password}`);
         xhr.send();
         xhr.onload = () => {
             const data = JSON.parse(xhr.responseText);
             if (data.code === 501 || data.code === 502) {
                 mdui.snackbar({ message: '账号或密码错误。' });
             } else if (data.code === 200) {
-                this.cookie = data.cookie;
+                this.cookie = localStorage.rr_cookie = encodeURIComponent(data.cookie);
                 mdui.snackbar({ message: '登录成功。' });
                 this.isLoggedIn = true;
                 this.fetchUserInfo();
@@ -78,6 +85,36 @@ class Authenticator {
 
             if (!this.isLoggedIn) {
                 setTimeout(() => { this.loginQrcode(key); }, 2000);
+            };
+        };
+    };
+    loginCaptcha(options) {
+        const phone = options.phone;
+        const captcha = options.captcha;
+        xhr.open('GET', `${apiServer}/captcha/verify?phone=${phone}&captcha=${captcha}`);
+        xhr.send();
+        xhr.onload = () => {
+            const data = JSON.parse(xhr.responseText);
+            if (data.code === 200) {
+                xhr.open('GET', `${apiServer}/login/cellphone?phone=${phone}&captcha=${captcha}`);
+                xhr.send();
+                xhr.onload = () => {
+                    const data = JSON.parse(xhr.responseText);
+                    if (data.code === 501 || data.code === 502) {
+                        mdui.snackbar({ message: '账号或密码错误。' });
+                    } else if (data.code === 200) {
+                        this.cookie = localStorage.rr_cookie = encodeURIComponent(data.cookie);
+                        mdui.snackbar({ message: '登录成功。' });
+                        this.isLoggedIn = true;
+                        this.fetchUserInfo();
+                        switchPage('main');
+                    } else {
+                        mdui.snackbar({ message: `${data.code} ${data.message}` });
+                        if (data.redirectUrl) {
+                            window.open(data.redirectUrl, '_blank');
+                        };
+                    };
+                };
             };
         };
     };
@@ -117,6 +154,7 @@ class Authenticator {
         xhr.send();
         xhr.onload = () => {
             this.isLoggedIn = false;
+            this.cookie = localStorage.rr_cookie = '';
             this.fetchUserInfo();
         };
     };
@@ -189,4 +227,41 @@ accountMethodBtn.onclick = () => {
     qrMethodWrapper.style.display = 'none';
     qrMethodBtn.style.display = 'block';
     accountMethodBtn.style.display = 'none';
+};
+
+captchaMethodBtn.onclick = () => {
+    captchaPhoneInput.value = captchaInput.value = '';
+    captchaMethodDlg.open = true;
+};
+
+captchaGetBtn.onclick = () => {
+    captchaGetBtn.disabled = captchaGetBtn.loading = true;
+    const phone = captchaPhoneInput.value.trim();
+    if (captchaPhoneInput.checkValidity() && phone) {
+        xhr.open('GET', `${apiServer}/captcha/sent%3Fphone=${phone}`);
+        xhr.send();
+        xhr.onload = () => {
+            const data = JSON.parse(xhr.responseText);
+            if (data.code === 200) {
+                captchaGetBtn.innerText = '验证码已发送';
+                setTimeout(() => {
+                    captchaGetBtn.innerText = '获取验证码';
+                    captchaGetBtn.disabled = false;
+                }, 30000);
+            };
+            captchaGetBtn.loading = false;
+        };
+    };
+};
+
+captchaLoginBtn.onclick = () => {
+    captchaMethodDlg.open = false;
+    const phone = captchaPhoneInput.value.trim();
+    const captcha = captchaInput.value.trim();
+    if (captchaPhoneInput.checkValidity() && captchaInput.checkValidity() && phone && captcha) {
+        authenticator.loginCaptcha({
+            phone: captchaPhoneInput.value.trim(),
+            captcha: captchaInput.value.trim()
+        });
+    };
 };

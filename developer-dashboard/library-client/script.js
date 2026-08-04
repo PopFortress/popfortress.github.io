@@ -2,9 +2,14 @@ mdui.setColorScheme('#263238');
 
 const $ = (query) => mdui.$(query)[0];
 const addBtn = $('.add__btn');
+const scanBtn = $('.scan__btn');
 const tbody = $('table tbody');
 const commitBtn = $('.commit__btn');
 const keys = ["书名", "作者", "ISBN", "出版社", "定价", "操作"];
+const scanDialog = $('.scan_dialog');
+const scanDlgCancelBtn = $('.scan_dialog__cancel_btn');
+const scanDlgSubmitBtn = $('.scan_dialog__submit_btn');
+const scanDlgTextField = $('.scan_dialog__text_field');
 
 const access_token = localStorage.github_access_token;
 const endpoint = `https://api.github.com/repos/popfortress/dev-data/contents/library.json`;
@@ -63,6 +68,17 @@ function addBookLine() {
 };
 
 addBtn.addEventListener('click', addBookLine);
+
+scanBtn.addEventListener('click', () => {
+    scanDlgTextField.value = '';
+    scanDlgSubmitBtn.disabled = true;
+    scanDialog.open = true;
+});
+
+scanDialog.addEventListener('opened', () => {
+    scanDlgTextField.focus();
+});
+
 window.onload = addBookLine;
 
 

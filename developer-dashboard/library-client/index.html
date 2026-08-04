@@ -34,10 +34,22 @@
             <mdui-icon name="add"></mdui-icon>
             <div>添加书籍</div>
         </mdui-card>
+        <mdui-card class="scan__btn" variant="filled" clickable>
+            <mdui-icon name="qr_code_scanner"></mdui-icon>
+            <div>扫描书籍信息</div>
+        </mdui-card>
         <div class="commit__form">
             <mdui-button class="commit__btn" icon="publish--outlined" disabled>提交更改</mdui-button>
         </div>
     </main>
+
+
+    <mdui-dialog class="scan_dialog" icon="qr_code_scanner" headline="扫描书籍信息" description="请翻开书籍版权页，在打开的网页中识别文本，并全部复制至下方的输入框中。" close-on-esc close-on-overlay-click>
+        <mdui-text-field variant="outlined" placeholder="在此粘贴文本…" rows="5" class="scan_dialog__text_field"></mdui-text-field>
+        <mdui-button icon="open_in_new" full-width class="scan_dialog__start_btn" href="https://khang119966-deepseek-ocr-demo.hf.space/" target="_blank" variant="tonal">打开 OCR 网页</mdui-button>
+        <mdui-button slot="action" variant="text" class="scan_dialog__cancel_btn" >取消</mdui-button>
+        <mdui-button slot="action" variant="filled" class="scan_dialog__submit_btn" disabled>提交</mdui-button>
+    </mdui-dialog>
 
     
     <script src="./script.js"></script>

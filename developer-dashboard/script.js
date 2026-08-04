@@ -12,9 +12,12 @@ const tokenEditBtn = $('.token_edit_btn');
 const editGhTokenBtn = $('.edit_gh_token__btn');
 const githubTokenText = $('.github_token__token');
 
+// for ds api key
+const dsApiKeyText = $('.ds_api_key');
 
 let ACCESS_TOKEN; // developer token (gitee).
 let GH_TOKEN; // github token
+let DS_API_KEY; // deepseek api key
 function updateAccessToken(value) {
     ACCESS_TOKEN = value;
     localStorage.developer_access_token = value;
@@ -30,6 +33,7 @@ function updateGhToken(value) {
 
 const token = localStorage.developer_access_token; // gitee
 const gh_token = localStorage.github_access_token; // github
+const ds_api_key = localStorage.ds_api_key; // deepseek api key
 
 tokenEditBtn.onclick = editToken;
 
@@ -92,4 +96,9 @@ if (token) {
 
 if (gh_token) {
     updateGhToken(gh_token);
+};
+
+if (ds_api_key) {
+    DS_API_KEY = ds_api_key;
+    dsApiKeyText.innerText = ds_api_key;
 };

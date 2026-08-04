@@ -39,13 +39,22 @@ table thead th {
     text-align: center;
 }
 
-.add__btn {
+.add__btn, .scan__btn {
     width: 100%;
     padding: .9em;
     display: flex;
     justify-content: center;
     gap: 1.2em;
     align-items: center;
+    margin: 20px 0;
+}
+
+.scan__btn {
+    color: rgb(var(--mdui-color-primary));
+}
+
+.scan_dialog__start_btn {
+    margin-top: 1.2em;
 }
 
 .table__input {

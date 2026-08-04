@@ -26,7 +26,7 @@ const appPages = document.querySelectorAll('.app_page');
 
 // essential definitions
 const xhr = new XMLHttpRequest();
-let apiServer = 'https://seep.eu.org/https://ncm-api-enhanced-nine.vercel.app';
+let apiServer = 'https://seep.eu.org/https://ncm-api-enhanced.vercel.app';
 const apiServerAlternate = 'https://apis.netstart.cn/music';
 const mediaServer = 'https://music.163.com/song/media/outer/url';
 let appSettings;

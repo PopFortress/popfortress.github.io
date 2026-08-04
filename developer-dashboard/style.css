@@ -46,7 +46,7 @@ mdui-dialog::part(panel) {
     margin: 1rem;
 }
 
-.token__container, .github_token__container {
+.token__container, .github_token__container, .ds_api_key__container {
     display: flex;
     justify-content: center;
     line-height: 1.5;
@@ -62,7 +62,7 @@ mdui-dialog::part(panel) {
     overflow: auto;
 }
 
-.github_token__wrapper {
+.github_token__wrapper, .ds_api_key__wrapper {
     font-size: .9rem;
     display: flex;
     align-items: center;
@@ -76,7 +76,7 @@ mdui-dialog::part(panel) {
     font-size: 1rem;
 }
 
-.token__token, .github_token__token {
+.token__token, .github_token__token, .ds_api_key {
     color: rgb(var(--mdui-color-primary));
 }
 

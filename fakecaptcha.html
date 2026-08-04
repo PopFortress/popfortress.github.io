@@ -40,11 +40,6 @@
         const body = document.querySelector('body');
         const disableBtn = document.querySelector('#disable-btn');
 
-        disableBtn.onclick = () => {
-            localStorage.disableCaptcha = true;
-            location.href = '/';
-        };
-
         if (isSystemDark) {
             body.style.background = '#1d1d1f';
         }
@@ -59,8 +54,7 @@
             dark: isSystemDark
         };
         const captcha = new CAPTCHA(config);
-    </script>
-    <script>
+
         const params = new URLSearchParams(location.search)
         const url = params.get('r')
 
@@ -73,6 +67,11 @@
                 }
             }, 3000);
         });
+
+        disableBtn.onclick = () => {
+            localStorage.disableCaptcha = true;
+            location.href = url;
+        };
     </script>
 
 </body>
