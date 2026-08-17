@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Watchnow TV - 📺 详情剧集列表</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="./styles/details-page.css">
+</head>
+<body>
+    
+    <main>
+        <div class="details__wrapper">
+            <mdui-card class="details__card" variant="filled">
+                <img class="details__img_cover"></img>
+                <div class="details__text_wrapper">
+                    <div class="details__title"></div>
+                    <div class="details__year"></div>
+                    <div class="details__desc"></div>
+                    <a href="javascript:;" class="details__desc_expand">显示全部</a>
+                </div>
+            </mdui-card>
+        </div>
+
+         <div class="loading_frame">
+            <mdui-circular-progress></mdui-circular-progress>
+            <div class="loading_text">正在加载剧集列表</div>
+        </div>
+
+        <div class="episodes_list__wrapper">
+            <mdui-list class="episodes_list"></mdui-list>
+        </div>
+
+    </main>
+
+    <script src="./script/common.js"></script>
+    <script src="./script/details-page.js"></script>
+
+</body>
+</html>

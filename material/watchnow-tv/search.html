@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Watchnow TV 📺 搜索结果</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="./styles/search-page.css">
+</head>
+<body>
+    
+
+    <main>
+        <div class="search__wrapper">
+            <mdui-text-field variant="outlined" type="search" class="search__input" placeholder="搜索动漫/番剧/电视剧"></mdui-text-field>
+        </div>
+
+        <div class="loading_frame">
+            <mdui-circular-progress></mdui-circular-progress>
+            <div class="loading_text">正在搜索片</div>
+        </div>
+
+        <div class="search_results__wrapper">
+            <mdui-list class="search_results__list"></mdui-list>
+            <div class="bottom_text">已经到底啦~</div>
+        </div>
+    </main>
+    
+    <script src="./script/common.js"></script>
+    <script src="./script/search-page.js"></script>
+
+</body>
+</html>

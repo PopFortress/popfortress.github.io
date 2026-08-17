@@ -1,0 +1,20 @@
+.search__input::part(input) {
+    text-align: center;
+}
+
+.bottom_text {
+    font-size: .7rem;
+    opacity: .7;
+    text-align: center;
+    display: none;
+}
+
+.search_results__list {
+    margin: 1em 0;
+}
+
+.search_results__cover {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}

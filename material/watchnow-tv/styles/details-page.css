@@ -1,0 +1,55 @@
+.details__card {
+    display: flex;
+    gap: 1.2em;
+    padding: 1em;
+}
+
+.details__img_cover {
+    width: 100%;
+    max-width: 24%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.details__title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: rgb(var(--mdui-color-primary));
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.details__year {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.details__desc {
+    font-size: .875rem;
+    font-weight: 400;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-height: 1.75;
+    max-height: 7em;
+    overflow: hidden;
+}
+
+.details__desc--expanded {
+    max-height: inherit;
+}
+
+.details__desc_expand {
+    font-size: .875rem;
+    opacity: .6;
+    text-decoration: none;
+    color: inherit;
+}
+
+.details__desc_expand:active {
+    opacity: 1;
+}
+
+.episodes_list__wrapper {
+    margin: 1em 0;
+}
