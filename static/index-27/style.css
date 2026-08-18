@@ -75,7 +75,7 @@ a:active {
 }
 
 footer {
-    background-color: #d6d6d6;
+    background-color: #eaeaea;
     padding: calc(1.2em + 0.5vw);
     color: #1d1d1f;
 }
@@ -117,4 +117,29 @@ footer {
 
 .footer__section__title {
     font-size: .875rem;
+}
+
+
+.message-board__wrapper {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.message-board__title {
+    font-size: calc(1.4rem + 1vw);
+    opacity: .75;
+    margin-bottom: 1em;
+    color: #1d1d1f;
+    width: 100%;
+    padding: 1em 0 0.5em 1em;
+}
+
+.message-board__giscuss {
+    width: 100%;
+    max-width: 780px;
+    margin-bottom: 3em;
 }
