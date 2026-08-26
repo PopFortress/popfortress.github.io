@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <title>贪吃蛇</title>
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons-outlined.css">
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        main {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 24px 16px 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        /* 棋盘 */
+        .board {
+            position: relative;
+            width: min(100%, 460px);
+            aspect-ratio: 1 / 1;
+            border-radius: var(--mdui-shape-corner-large);
+            overflow: hidden;
+            box-shadow: var(--mdui-elevation-level2);
+            touch-action: manipulation;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 状态遮罩 */
+        .overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            user-select: none;
+            color: rgb(var(--mdui-color-on-surface));
+            background: rgba(var(--mdui-color-scrim), .42);
+            backdrop-filter: blur(2px);
+            transition: opacity 180ms var(--mdui-motion-easing-standard);
+        }
+        .overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .overlay-icon {
+            font-size: 54px;
+        }
+        .overlay-text {
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: .02em;
+        }
+
+        /* 统计 */
+        .stats {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .stats mdui-chip b {
+            font-weight: 700;
+        }
+
+        /* 控制按钮 */
+        .controls {
+            display: flex;
+            gap: 12px;
+        }
+        .controls mdui-tooltip {
+            display: inline-flex;
+            width: auto;
+        }
+
+        /* 速度调节 */
+        .speed-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: min(100%, 460px);
+            color: rgb(var(--mdui-color-on-surface-variant));
+        }
+        .speed-row .material-icons-outlined {
+            font-size: 20px;
+        }
+        .speed-row mdui-slider {
+            flex: 1;
+        }
+        .speed-value {
+            min-width: 58px;
+            font-size: 13px;
+            font-weight: 500;
+            text-align: right;
+        }
+
+        .hint {
+            color: rgb(var(--mdui-color-on-surface-variant));
+            font-size: 12.5px;
+            text-align: center;
+            letter-spacing: .02em;
+        }
+
+        /* 触屏方向键 */
+        .dpad {
+            display: none;
+            grid-template-columns: repeat(3, 52px);
+            grid-template-rows: repeat(3, 52px);
+            gap: 8px;
+        }
+        @media (pointer: coarse) {
+            .dpad {
+                display: grid;
+            }
+        }
+        .dpad .blank {
+            visibility: hidden;
+        }
+
+        .dialog-body {
+            padding: 2px 0 10px;
+            color: rgb(var(--mdui-color-on-surface-variant));
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .dialog-body b {
+            color: rgb(var(--mdui-color-on-surface));
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <mdui-top-app-bar>
+        <mdui-button-icon icon="arrow_back" href="/"></mdui-button-icon>
+        <mdui-top-app-bar-title>贪吃蛇</mdui-top-app-bar-title>
+    </mdui-top-app-bar>
+
+    <main>
+        <div class="board" id="board">
+            <canvas id="game"></canvas>
+            <div class="overlay" id="overlay">
+                <span class="material-icons-outlined overlay-icon" id="overlay-icon">play_arrow</span>
+                <span class="overlay-text" id="overlay-text">点击开始</span>
+            </div>
+        </div>
+
+        <div class="stats">
+            <mdui-chip icon="sports_esports" elevated>得分 <b id="score">0</b></mdui-chip>
+            <mdui-chip icon="emoji_events" elevated>最高分 <b id="best">0</b></mdui-chip>
+        </div>
+
+        <div class="controls">
+            <mdui-tooltip content="开始 / 暂停（空格）">
+                <mdui-button-icon id="btn-toggle" icon="play_arrow" variant="tonal" size="large"></mdui-button-icon>
+            </mdui-tooltip>
+            <mdui-tooltip content="重新开始">
+                <mdui-button-icon id="btn-restart" icon="restart_alt" variant="tonal" size="large"></mdui-button-icon>
+            </mdui-tooltip>
+        </div>
+
+        <div class="speed-row">
+            <span class="material-icons-outlined">speed</span>
+            <mdui-slider id="speed" min="1" max="10" step="1" value="5"></mdui-slider>
+            <span class="speed-value" id="speed-value">速度 5</span>
+        </div>
+
+        <div class="hint">方向键 / WASD 控制移动 · 空格暂停 · 滑动棋盘或使用下方按钮亦可控制</div>
+
+        <div class="dpad" id="dpad">
+            <span class="blank"></span>
+            <mdui-button-icon id="d-up" icon="keyboard_arrow_up" variant="tonal" size="large"></mdui-button-icon>
+            <span class="blank"></span>
+            <mdui-button-icon id="d-left" icon="keyboard_arrow_left" variant="tonal" size="large"></mdui-button-icon>
+            <mdui-button-icon id="d-restart" icon="restart_alt" variant="tonal" size="large"></mdui-button-icon>
+            <mdui-button-icon id="d-right" icon="keyboard_arrow_right" variant="tonal" size="large"></mdui-button-icon>
+            <span class="blank"></span>
+            <mdui-button-icon id="d-down" icon="keyboard_arrow_down" variant="tonal" size="large"></mdui-button-icon>
+            <span class="blank"></span>
+        </div>
+    </main>
+
+    <mdui-dialog id="over-dialog" headline="游戏结束" icon="sports_esports--outlined" close-on-overlay-click close-on-esc>
+        <div class="dialog-body">
+            <p>最终得分 <b id="final-score">0</b></p>
+            <p>最高分 <b id="final-best">0</b></p>
+        </div>
+        <mdui-button slot="action" variant="text" id="dlg-restart">再来一局</mdui-button>
+    </mdui-dialog>
+
+    <script>
+        (() => {
+            'use strict';
+
+            const COLS = 21, ROWS = 21;
+            const BEST_KEY = 'mdui-snake-best';
+
+            const board = document.getElementById('board');
+            const canvas = document.getElementById('game');
+            const ctx = canvas.getContext('2d');
+            const $ = (id) => document.getElementById(id);
+
+            const els = {
+                overlay: $('overlay'), overlayIcon: $('overlay-icon'), overlayText: $('overlay-text'),
+                score: $('score'), best: $('best'),
+                toggleBtn: $('btn-toggle'), restartBtn: $('btn-restart'),
+                speed: $('speed'), speedValue: $('speed-value'),
+                finalScore: $('final-score'), finalBest: $('final-best'),
+                dlg: $('over-dialog'), dlgRestart: $('dlg-restart'),
+            };
+
+            let snake = [], dir = { x: 1, y: 0 }, queue = [], food = null;
+            let score = 0;
+            let high = parseInt(localStorage.getItem(BEST_KEY) || '0', 10) || 0;
+            let state = 'ready'; // ready | running | paused | over
+            let timer = null;
+            let win = false;
+            let cssSize = 0, dpr = 1, cell = 0;
+            let audioCtx = null;
+
+            /* ---------- 颜色工具（读取 MDUI 主题变量，自动适配明暗模式） ---------- */
+            const triplet = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '0,0,0';
+            const rgba = (name, a = 1) => `rgba(${triplet(name)},${a})`;
+
+            /* ---------- 画布 ---------- */
+            function resize() {
+                cssSize = board.clientWidth;
+                dpr = window.devicePixelRatio || 1;
+                canvas.width = Math.round(cssSize * dpr);
+                canvas.height = Math.round(cssSize * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                cell = cssSize / COLS;
+                draw();
+            }
+
+            function rr(x, y, w, h, r) {
+                r = Math.min(r, w / 2, h / 2);
+                ctx.beginPath();
+                ctx.moveTo(x + r, y);
+                ctx.arcTo(x + w, y, x + w, y + h, r);
+                ctx.arcTo(x + w, y + h, x, y + h, r);
+                ctx.arcTo(x, y + h, x, y, r);
+                ctx.arcTo(x, y, x + w, y, r);
+                ctx.closePath();
+            }
+
+            function draw() {
+                // 背景
+                ctx.fillStyle = rgba('--mdui-color-surface-container-lowest');
+                ctx.fillRect(0, 0, cssSize, cssSize);
+
+                // 网格
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = rgba('--mdui-color-outline-variant', 0.22);
+                ctx.beginPath();
+                for (let i = 1; i < COLS; i++) { ctx.moveTo(i * cell + .5, 0); ctx.lineTo(i * cell + .5, cssSize); }
+                for (let j = 1; j < ROWS; j++) { ctx.moveTo(0, j * cell + .5); ctx.lineTo(cssSize, j * cell + .5); }
+                ctx.stroke();
+
+                // 边框
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = rgba('--mdui-color-outline-variant', 0.85);
+                rr(1, 1, cssSize - 2, cssSize - 2, 12);
+                ctx.stroke();
+
+                // 食物
+                if (food) {
+                    const p = cell * 0.14;
+                    ctx.fillStyle = rgba('--mdui-color-tertiary-container');
+                    rr(food.x * cell + p, food.y * cell + p, cell - 2 * p, cell - 2 * p, cell * 0.3);
+                    ctx.fill();
+                    ctx.fillStyle = rgba('--mdui-color-tertiary', 0.9);
+                    rr(food.x * cell + cell * 0.45, food.y * cell + cell * 0.10, cell * 0.1, cell * 0.18, cell * 0.04);
+                    ctx.fill();
+                    ctx.fillStyle = rgba('--mdui-color-on-tertiary-container', 0.28);
+                    ctx.beginPath();
+                    ctx.arc(food.x * cell + cell * 0.38, food.y * cell + cell * 0.36, cell * 0.08, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // 蛇（头 → 尾 由实渐虚）
+                const len = snake.length;
+                for (let i = len - 1; i >= 0; i--) {
+                    const s = snake[i];
+                    const t = len > 1 ? i / (len - 1) : 0;
+                    const inset = cell * 0.08;
+                    ctx.fillStyle = rgba('--mdui-color-primary', 1 - t * 0.55);
+                    rr(s.x * cell + inset, s.y * cell + inset, cell - 2 * inset, cell - 2 * inset, cell * 0.32);
+                    ctx.fill();
+                }
+
+                // 蛇眼
+                if (len) {
+                    const h = snake[0];
+                    const cx = h.x * cell + cell / 2, cy = h.y * cell + cell / 2;
+                    const fx = -dir.y, fy = dir.x;
+                    ctx.fillStyle = rgba('--mdui-color-on-primary', 0.9);
+                    ctx.beginPath();
+                    ctx.arc(cx + dir.x * cell * 0.16 + fx * cell * 0.16, cy + dir.y * cell * 0.16 + fy * cell * 0.16, cell * 0.07, 0, Math.PI * 2);
+                    ctx.arc(cx + dir.x * cell * 0.16 - fx * cell * 0.16, cy + dir.y * cell * 0.16 - fy * cell * 0.16, cell * 0.07, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            /* ---------- 游戏状态 ---------- */
+            function reset() {
+                stopTimer();
+                win = false;
+                score = 0;
+                queue = [];
+                snake = [];
+                const cx = Math.floor(COLS / 2), cy = Math.floor(ROWS / 2);
+                for (let i = 0; i < 4; i++) snake.push({ x: cx - i, y: cy });
+                dir = { x: 1, y: 0 };
+                placeFood();
+                setState('ready');
+                updateStats();
+                draw();
+            }
+
+            function setState(s) {
+                state = s;
+                renderOverlay();
+                updateToggle();
+            }
+
+            function renderOverlay() {
+                if (state === 'running') {
+                    els.overlay.classList.add('hidden');
+                    return;
+                }
+                els.overlay.classList.remove('hidden');
+                if (state === 'paused') {
+                    els.overlayIcon.textContent = 'pause';
+                    els.overlayText.textContent = '已暂停，点击继续';
+                } else if (state === 'over') {
+                    els.overlayIcon.textContent = 'restart_alt';
+                    els.overlayText.textContent = win ? '恭喜通关！' : '游戏结束，点击重来';
+                } else {
+                    els.overlayIcon.textContent = 'play_arrow';
+                    els.overlayText.textContent = '点击开始';
+                }
+            }
+
+            function updateToggle() {
+                els.toggleBtn.icon = state === 'running' ? 'pause' : 'play_arrow';
+            }
+
+            function startGame() {
+                if (state === 'running') return;
+                setState('running');
+                schedule();
+            }
+
+            function pauseGame() {
+                if (state !== 'running') return;
+                setState('paused');
+                stopTimer();
+            }
+
+            function toggleGame() {
+                state === 'running' ? pauseGame() : startGame();
+            }
+
+            function restart() {
+                reset();
+                startGame();
+            }
+
+            /* ---------- 游戏核心 ---------- */
+            function placeFood() {
+                const free = [];
+                for (let x = 0; x < COLS; x++)
+                    for (let y = 0; y < ROWS; y++)
+                        if (!snake.some((s) => s.x === x && s.y === y)) free.push({ x, y });
+                if (!free.length) { win = true; gameOver(); return; }
+                food = free[Math.floor(Math.random() * free.length)];
+            }
+
+            function schedule() {
+                stopTimer();
+                const level = parseInt(els.speed.value, 10) || 5;
+                const base = 240 - (level - 1) * 20;            // 速度等级 1~10 → 220ms ~ 60ms
+                const interval = Math.max(50, base - score * 2); // 吃到的食物越多，走得越快
+                timer = setTimeout(tick, interval);
+            }
+
+            function stopTimer() {
+                if (timer) { clearTimeout(timer); timer = null; }
+            }
+
+            function tick() {
+                timer = null;
+                if (state !== 'running') return;
+
+                if (queue.length) dir = queue.shift();
+                const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+
+                // 撞墙
+                if (head.x < 0 || head.y < 0 || head.x >= COLS || head.y >= ROWS) return gameOver();
+                // 撞到自己
+                if (snake.some((s) => s.x === head.x && s.y === head.y)) return gameOver();
+
+                snake.unshift(head);
+
+                if (head.x === food.x && head.y === food.y) {
+                    score++;
+                    updateStats();
+                    beep(true);
+                    placeFood();
+                    draw();
+                    schedule();
+                    return;
+                }
+                snake.pop();
+                draw();
+                schedule();
+            }
+
+            function gameOver() {
+                stopTimer();
+                setState('over');
+                beep(false);
+                const newBest = score > high;
+                if (newBest) { high = score; localStorage.setItem(BEST_KEY, String(high)); }
+                updateStats();
+                draw();
+                els.dlg.setAttribute('headline', win ? '恭喜通关！' : '游戏结束');
+                els.finalScore.textContent = score;
+                els.finalBest.textContent = high;
+                els.dlg.open = true;
+                if (newBest) mdui.snackbar({ message: '🎉 新纪录！最高分 ' + high });
+            }
+
+            /* ---------- 统计 ---------- */
+            function updateStats() {
+                els.score.textContent = score;
+                els.best.textContent = high;
+            }
+
+            /* ---------- 方向控制 ---------- */
+            function setDir(x, y) {
+                if (state === 'over') return;
+                if (state === 'ready') startGame();
+                if (state !== 'running') return;
+                const cur = queue.length ? queue[queue.length - 1] : dir;
+                if (x === -cur.x && y === -cur.y) return; // 禁止直接掉头
+                queue.push({ x, y });
+                if (queue.length > 2) queue.shift();
+            }
+
+            /* ---------- 音效 ---------- */
+            function beep(ok) {
+                try {
+                    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+                    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+                    o.type = 'sine';
+                    o.frequency.value = ok ? 640 : 190;
+                    const dur = ok ? 0.09 : 0.35;
+                    g.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+                    o.connect(g).connect(audioCtx.destination);
+                    o.start();
+                    o.stop(audioCtx.currentTime + dur + 0.02);
+                } catch (e) { /* 忽略音频错误 */ }
+            }
+
+            /* ---------- 事件 ---------- */
+            window.addEventListener('keydown', (e) => {
+                const k = e.key;
+                if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(k)) e.preventDefault();
+                if (k === 'ArrowUp' || k === 'w' || k === 'W') setDir(0, -1);
+                else if (k === 'ArrowDown' || k === 's' || k === 'S') setDir(0, 1);
+                else if (k === 'ArrowLeft' || k === 'a' || k === 'A') setDir(-1, 0);
+                else if (k === 'ArrowRight' || k === 'd' || k === 'D') setDir(1, 0);
+                else if (k === ' ' || k === 'Spacebar') toggleGame();
+            });
+
+            let touchStart = null;
+            board.addEventListener('touchstart', (e) => {
+                touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            }, { passive: true });
+            board.addEventListener('touchend', (e) => {
+                if (!touchStart) return;
+                const dx = e.changedTouches[0].clientX - touchStart.x;
+                const dy = e.changedTouches[0].clientY - touchStart.y;
+                touchStart = null;
+                if (Math.abs(dx) < 12 && Math.abs(dy) < 12) { toggleGame(); return; } // 轻点 = 开始/暂停
+                if (Math.abs(dx) > Math.abs(dy)) setDir(dx > 0 ? 1 : -1, 0);
+                else setDir(0, dy > 0 ? 1 : -1);
+            }, { passive: true });
+
+            els.overlay.addEventListener('click', () => {
+                if (state === 'over') restart();
+                else startGame();
+            });
+
+            els.toggleBtn.addEventListener('click', toggleGame);
+            els.restartBtn.addEventListener('click', restart);
+
+            const dirButtons = {
+                'd-up': [0, -1], 'd-down': [0, 1], 'd-left': [-1, 0], 'd-right': [1, 0],
+            };
+            for (const [id, [x, y]] of Object.entries(dirButtons)) {
+                $(id).addEventListener('click', () => setDir(x, y));
+            }
+            $('d-restart').addEventListener('click', restart);
+
+            function updateSpeedLabel() {
+                els.speedValue.textContent = '速度 ' + (parseInt(els.speed.value, 10) || 5);
+                if (state === 'running') schedule();
+            }
+            els.speed.addEventListener('input', updateSpeedLabel);
+            els.speed.addEventListener('change', updateSpeedLabel);
+
+            els.dlgRestart.addEventListener('click', () => {
+                els.dlg.open = false;
+                restart();
+            });
+            els.dlg.addEventListener('closed', () => {
+                if (state === 'over') reset();
+            });
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden && state === 'running') pauseGame();
+            });
+
+            window.addEventListener('resize', resize);
+            window.addEventListener('orientationchange', resize);
+            if (window.matchMedia) {
+                matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+            }
+
+            /* ---------- 初始化 ---------- */
+            els.best.textContent = high;
+            updateSpeedLabel();
+            reset();
+            resize();
+        })();
+    </script>
+</body>
+</html>
