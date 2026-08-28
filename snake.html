@@ -187,7 +187,7 @@
             <mdui-button-icon id="d-up" icon="keyboard_arrow_up" variant="tonal" size="large"></mdui-button-icon>
             <span class="blank"></span>
             <mdui-button-icon id="d-left" icon="keyboard_arrow_left" variant="tonal" size="large"></mdui-button-icon>
-            <mdui-button-icon id="d-restart" icon="restart_alt" variant="tonal" size="large"></mdui-button-icon>
+            <span class="blank"></span>
             <mdui-button-icon id="d-right" icon="keyboard_arrow_right" variant="tonal" size="large"></mdui-button-icon>
             <span class="blank"></span>
             <mdui-button-icon id="d-down" icon="keyboard_arrow_down" variant="tonal" size="large"></mdui-button-icon>
@@ -232,6 +232,7 @@
             let win = false;
             let cssSize = 0, dpr = 1, cell = 0;
             let audioCtx = null;
+            let retries = 0;
 
             /* ---------- 颜色工具（读取 MDUI 主题变量，自动适配明暗模式） ---------- */
             const triplet = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '0,0,0';
@@ -239,7 +240,9 @@
 
             /* ---------- 画布 ---------- */
             function resize() {
-                cssSize = board.clientWidth;
+                const w = board.clientWidth;
+                if (!w) return; // 布局尚未就绪，等待 ResizeObserver / load / 逐帧兜底后再设置
+                cssSize = w;
                 dpr = window.devicePixelRatio || 1;
                 canvas.width = Math.round(cssSize * dpr);
                 canvas.height = Math.round(cssSize * dpr);
@@ -249,7 +252,8 @@
             }
 
             function rr(x, y, w, h, r) {
-                r = Math.min(r, w / 2, h / 2);
+                if (w <= 0 || h <= 0) return;
+                r = Math.max(0, Math.min(r, w / 2, h / 2));
                 ctx.beginPath();
                 ctx.moveTo(x + r, y);
                 ctx.arcTo(x + w, y, x + w, y + h, r);
@@ -260,6 +264,7 @@
             }
 
             function draw() {
+                if (!cssSize || !cell) return; // 画布尚无有效尺寸，跳过绘制
                 // 背景
                 ctx.fillStyle = rgba('--mdui-color-surface-container-lowest');
                 ctx.fillRect(0, 0, cssSize, cssSize);
@@ -519,7 +524,6 @@
             for (const [id, [x, y]] of Object.entries(dirButtons)) {
                 $(id).addEventListener('click', () => setDir(x, y));
             }
-            $('d-restart').addEventListener('click', restart);
 
             function updateSpeedLabel() {
                 els.speedValue.textContent = '速度 ' + (parseInt(els.speed.value, 10) || 5);
@@ -542,9 +546,22 @@
 
             window.addEventListener('resize', resize);
             window.addEventListener('orientationchange', resize);
+            window.addEventListener('load', resize);
             if (window.matchMedia) {
                 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
             }
+            // 布局变化（如 iframe 展开、字体加载、自定义元素升级等）时自动重算画布尺寸
+            if (typeof ResizeObserver !== 'undefined') {
+                new ResizeObserver(resize).observe(board);
+            }
+            // 兜底：部分场景脚本执行时布局尚未完成，逐帧重试直到拿到有效尺寸
+            (function retrySize() {
+                if (board.clientWidth || retries++ > 300) {
+                    resize();
+                    return;
+                }
+                requestAnimationFrame(retrySize);
+            })();
 
             /* ---------- 初始化 ---------- */
             els.best.textContent = high;
