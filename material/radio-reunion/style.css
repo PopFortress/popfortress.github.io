@@ -631,6 +631,15 @@ mdui-dialog::part(panel) {
     padding-right: 10px;
 }
 
+#app_page__local_playlist_details main > * {
+    max-width: 790px;
+}
+
+#app_page__local_playlist_details main {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .mv__desc {
     font-size: .875rem;
     line-height: 1.5;
@@ -703,4 +712,65 @@ mdui-dialog::part(panel) {
     display: flex;
     justify-content: flex-end;
     margin-top: 1em;
+}
+
+/* search multi-select mode */
+.search__select_btn {
+    margin-left: auto;
+}
+
+.search__select_btn[selected] {
+    color: rgb(var(--mdui-color-primary));
+}
+
+.search__select_checkbox {
+    display: none !important;
+}
+
+#app_page__search.selecting .search__select_checkbox {
+    display: inline-flex !important;
+}
+
+.search__result_list mdui-list-item::part(icon) {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search__select_bar {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 16px;
+    z-index: 384;
+    display: none;
+    align-items: center;
+    gap: 12px;
+    max-width: 94%;
+    padding: 6px 10px 6px 6px;
+    border-radius: 999px;
+    background: rgb(var(--mdui-color-surface-container-high));
+    box-shadow: var(--mdui-elevation-level3);
+    white-space: nowrap;
+}
+
+.search__select_bar.show {
+    display: flex;
+}
+
+.search__select_count {
+    font-size: .875rem;
+    opacity: .8;
+    min-width: 72px;
+    text-align: center;
+}
+
+.search__select_add_btn {
+    height: 36px;
+}
+
+@media screen and (max-width: 400px) {
+    .search__select_count {
+        display: none;
+    }
 }

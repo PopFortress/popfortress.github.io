@@ -79,6 +79,7 @@ function switchPage(destination) {
                 if (previousPage === 'main') {
                     searchInput.focus();
                 };
+                exitSelectMode();
                 break;
             case 'comments':
                 loadComments();

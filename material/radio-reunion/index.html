@@ -78,6 +78,7 @@
         <header>
             <mdui-button-icon icon="arrow_back" class="header__back_btn"></mdui-button-icon>
             <div class="header__title">搜索</div>
+            <mdui-button-icon icon="playlist_add_check" selected-icon="close" class="search__select_btn"></mdui-button-icon>
         </header>
         <main>
             <div class="search__container">
@@ -126,6 +127,11 @@
                         <mdui-list class="stations__result_list"></mdui-list>
                     </mdui-tab-panel>
                 </mdui-tabs>
+                <div class="search__select_bar">
+                    <mdui-button variant="text" class="search__select_all_btn">全选</mdui-button>
+                    <div class="search__select_count">已选 0 首</div>
+                    <mdui-button variant="filled" icon="playlist_add" class="search__select_add_btn" disabled>添加到播放列表</mdui-button>
+                </div>
             </div>
         </main>
     </div>
@@ -225,6 +231,25 @@
         <main>
             <mdui-card variant="filled" class="songlist__detail_wrapper">
                 <img class="songlist__detail_cover">
+                <div class="songlist__detail_info">
+                    <div class="songlist__detail_title"></div>
+                    <div class="songlist__detail_author"></div>
+                    <div class="songlist__detail_description"></div>
+                    <mdui-button variant="filled" class="songlist__play_all_btn" icon="play_arrow">播放全部</mdui-button>
+                </div>
+            </mdui-card>
+            <mdui-list class="songlist__tracks_list"></mdui-list>
+        </main>
+    </div>
+
+    <div class="app_page" id="app_page__local_playlist_details">
+        <header>
+            <mdui-button-icon icon="arrow_back" class="header__back_btn"></mdui-button-icon>
+            <div class="header__title">播放列表详情</div>
+        </header>
+        <main>
+            <mdui-card variant="filled" class="songlist__detail_wrapper">
+                <img class="songlist__detail_cover" alt="">
                 <div class="songlist__detail_info">
                     <div class="songlist__detail_title"></div>
                     <div class="songlist__detail_author"></div>

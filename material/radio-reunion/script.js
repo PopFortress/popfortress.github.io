@@ -502,8 +502,15 @@ audio.addEventListener('ended', () => {
                     };
                 });
             } else {
-                next_index = player.currentIndex + 1
-                player.playSong(next_index);
+                let founded = false;
+                let currentIndex = player.currentIndex;
+                playlist.playlist.forEach(item => {
+                    if (item && !founded && item.index > currentIndex) {
+                        founded = true;
+                        player.playSong(item.index);
+                        next_index = item.index;
+                    };
+                });
             };
             break;
         case 'shuffle':
@@ -568,7 +575,7 @@ playerCover.onclick = () => {
     switchPage('lyrics');
 };
 
-function appendSongItem(song, listEle) {
+function appendSongItem(song, listEle, selectable = false) {
     songInfo = {};
     songInfo.title = song.name;
     songInfo.InfoUrl = `${apiServer}/song/url%3Fid=${song.id}`;
@@ -582,6 +589,19 @@ function appendSongItem(song, listEle) {
     
     const listitem = document.createElement('mdui-list-item');
     const coverImg = document.createElement('img');
+    if (selectable) {
+        const checkBox = document.createElement('mdui-checkbox');
+        checkBox.classList.add('search__select_checkbox');
+        checkBox.slot = 'icon';
+        checkBox.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+        checkBox.addEventListener('change', (e) => {
+            e.stopPropagation();
+            updateSelectCount();
+        });
+        listitem.appendChild(checkBox);
+    };
     const extraInfo = document.createElement('div');
     let extra_info = [];
     if (song.fee) {
@@ -604,8 +624,12 @@ function appendSongItem(song, listEle) {
     songInfo.mvid = song.mv;
     listitem.dataset.song_info = JSON.stringify(songInfo);
     listitem.onclick = (e) => {
+        if (selectable && selectMode) {
+            toggleSelectSong(checkBox);
+            return;
+        };
         player.switchLoadingState('loading');
-        const info = JSON.parse(e.target.dataset.song_info);
+        const info = JSON.parse((e.target.closest('mdui-list-item') || listitem).dataset.song_info);
         player.playNcmSong(info);
     };
     listEle.appendChild(listitem);

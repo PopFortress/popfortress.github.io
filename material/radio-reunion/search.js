@@ -15,6 +15,110 @@ const stationsAPI = 'https://radio5.cn/api/play';
 const searchHistoryList = $('.search__history_list');
 const searchClearHistory = $('.search__clear_history');
 const searchHIstoryDropdown = $('.search__history_dropdown');
+
+// multi-select mode
+const searchSelectBtn = $('.search__select_btn');
+const searchSelectBar = $('.search__select_bar');
+const searchSelectAllBtn = $('.search__select_all_btn');
+const searchSelectCount = $('.search__select_count');
+const searchSelectAddBtn = $('.search__select_add_btn');
+let selectMode = false;
+let suppressTabSearch = false;
+
+function enterSelectMode() {
+    selectMode = true;
+    if (searchTabs.value !== 'songs') {
+        suppressTabSearch = true;
+        searchTabs.value = 'songs';
+    };
+    $('#app_page__search').classList.add('selecting');
+    searchSelectBar.classList.add('show');
+    searchSelectBar.style.bottom = player.hidden ? '16px' : '116px';
+    searchSelectBtn.selected = true;
+    updateSelectCount();
+};
+
+function exitSelectMode() {
+    selectMode = false;
+    $('#app_page__search').classList.remove('selecting');
+    searchSelectBar.classList.remove('show');
+    searchSelectBtn.selected = false;
+    searchList.querySelectorAll('.search__select_checkbox').forEach(cb => {
+        cb.checked = false;
+    });
+    updateSelectCount();
+};
+
+function toggleSelectSong(checkBox) {
+    checkBox.checked = !checkBox.checked;
+    updateSelectCount();
+};
+
+function updateSelectCount() {
+    const checkboxes = searchList.querySelectorAll('.search__select_checkbox');
+    let count = 0;
+    checkboxes.forEach(cb => {
+        if (cb.checked) {
+            count++;
+        };
+    });
+    searchSelectCount.innerText = `已选 ${count} 首`;
+    searchSelectAddBtn.disabled = count === 0;
+    searchSelectAllBtn.innerText = checkboxes.length > 0 && count === checkboxes.length ? '取消全选' : '全选';
+};
+
+searchSelectBtn.onclick = () => {
+    if (selectMode) {
+        exitSelectMode();
+    } else {
+        enterSelectMode();
+    };
+};
+
+searchSelectAllBtn.onclick = () => {
+    const checkboxes = searchList.querySelectorAll('.search__select_checkbox');
+    const allSelected = [...checkboxes].every(cb => cb.checked);
+    checkboxes.forEach(cb => {
+        cb.checked = !allSelected;
+    });
+    updateSelectCount();
+};
+
+searchSelectAddBtn.onclick = () => {
+    const wasEmpty = playlist.getRealLength() === 0;
+    let added = 0;
+    let firstSong = null;
+    searchList.querySelectorAll('mdui-list-item').forEach(item => {
+        const cb = item.querySelector('.search__select_checkbox');
+        if (cb && cb.checked && item.dataset.song_info) {
+            const info = JSON.parse(item.dataset.song_info);
+            const song = new Song({
+                title: info.title,
+                artist: info.artist,
+                album: info.album,
+                cover: info.cover,
+                id: info.id,
+                mvid: info.mvid,
+                url: `${apiServer}/song/url/v1/302%3Fid=${info.id}%26level=exhigh%26unblcok=true%26cookie=${authenticator.cookie}`,
+            });
+            playlist.addItem(song);
+            if (!firstSong) {
+                firstSong = song;
+            };
+            added++;
+        };
+    });
+    if (added > 0) {
+        if (wasEmpty && firstSong) {
+            player.playSong(firstSong.index);
+            lyricsDisplayer.loadLyrics(firstSong.id);
+        };
+        mdui.snackbar({ message: `已将 ${added} 首歌曲添加到播放列表。` });
+        exitSelectMode();
+    } else {
+        mdui.snackbar({ message: '请先选择要添加的歌曲。' });
+    };
+};
 // search history
 function loadSearchHistory() {
     return JSON.parse(localStorage.rr_search_history || '[]');
@@ -135,12 +239,13 @@ function searchSongs(page) {
                 songsCount = data.result.songCount;
                 if (songsCount > 0) {
                     data.result.songs.forEach(song => {
-                        appendSongItem(song, searchList);
+                        appendSongItem(song, searchList, true);
                     });
                 } else {
                     noResultsText.style.display = 'block';
                 };
                 searchLoading.style.display = 'none';
+                updateSelectCount();
             };
         };
     };
@@ -226,7 +331,18 @@ function searchSonglists() {
     };
 }
 
-searchTabs.onchange = () => {
+searchTabs.onchange = (e) => {
+    // ignore 'change' events bubbled up from child components (e.g. mdui-checkbox)
+    if (e.target !== searchTabs) {
+        return;
+    };
+    if (searchTabs.value !== 'songs') {
+        exitSelectMode();
+    };
+    if (suppressTabSearch) {
+        suppressTabSearch = false;
+        return;
+    };
     switch (searchTabs.value) {
         case 'songs':
             searchSongs(1);
