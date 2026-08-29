@@ -487,8 +487,6 @@ audio.addEventListener('ended', () => {
             let isLastSong;
             if (playlist.playlist[playlist.length - 1] && player.currentIndex === playlist.length - 1) {
                 isLastSong = true;
-            } else if (player.currentIndex === playlist.getRealLength() - 1) {
-                isLastSong = true;
             } else {
                 isLastSong = false;
             };

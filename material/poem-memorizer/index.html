@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>诗歌背记</title>
+    <meta name="description" content="逐句背诵诗歌：支持语音识别与文本输入，提示标点与字数，实时反馈。">
+    <link rel="stylesheet" href="/mdui/mdui.css">
+    <script src="/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="/mdui/material-icons.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <mdui-top-app-bar>
+        <mdui-button-icon icon="arrow_back" href="/"></mdui-button-icon>
+        <mdui-top-app-bar-title>诗歌背记</mdui-top-app-bar-title>
+        <mdui-circular-progress class="top-loading"></mdui-circular-progress>
+    </mdui-top-app-bar>
+
+    <!-- 选诗页 -->
+    <div class="page" id="page-select">
+        <mdui-card class="panel select-panel">
+            <div class="panel-title">选择诗歌</div>
+            <mdui-list class="poem-list" id="poem-list"></mdui-list>
+            <mdui-divider></mdui-divider>
+            <div class="select-actions">
+                <mdui-button variant="tonal" icon="upload_file" id="open-import-btn">导入 JSON</mdui-button>
+            </div>
+        </mdui-card>
+    </div>
+
+    <!-- 背诵页 -->
+    <div class="page hidden" id="page-recite">
+        <mdui-card class="panel head-panel">
+            <div class="poem-title" id="poem-title"></div>
+            <div class="poem-author" id="poem-author"></div>
+            <div class="poem-mode" id="poem-mode"></div>
+        </mdui-card>
+        <mdui-linear-progress id="line-progress" value="0"></mdui-linear-progress>
+        <div class="line-info" id="line-info"></div>
+
+        <mdui-card class="panel hint-panel">
+            <div class="hint-label">本句提示 · 标点与字数</div>
+            <div class="hint-pattern" id="hint-pattern"></div>
+            <div class="hint-meta" id="hint-meta"></div>
+            <div class="hint-actions">
+                <mdui-button variant="text" icon="visibility" id="show-origin-btn">查看原文</mdui-button>
+                <mdui-button variant="text" icon="volume_up" id="speak-btn">朗读</mdui-button>
+            </div>
+            <div class="origin-line hidden" id="origin-line"></div>
+        </mdui-card>
+
+        <div class="mode-switch">
+            <mdui-chip selectable selected icon="mic" id="chip-voice">语音背诵</mdui-chip>
+            <mdui-chip selectable icon="keyboard" id="chip-text">文本输入</mdui-chip>
+        </div>
+
+        <mdui-card class="panel input-panel hidden" id="text-mode">
+            <mdui-text-field id="answer-input" label="默写本句（回车或点击检查提交）" autosize clearable></mdui-text-field>
+            <div class="action-row">
+                <mdui-button variant="tonal" icon="check" id="check-text-btn">检查</mdui-button>
+                <mdui-button variant="text" icon="skip_next" class="skip-btn">跳过</mdui-button>
+            </div>
+        </mdui-card>
+
+        <mdui-card class="panel input-panel" id="voice-mode">
+            <div class="voice-status" id="voice-status"></div>
+            <div class="voice-transcript hidden" id="voice-transcript"></div>
+            <div class="action-row voice-actions">
+                <mdui-fab extended icon="mic" class="mic-btn" id="mic-btn">开始录音</mdui-fab>
+                <mdui-button variant="tonal" icon="check" id="check-voice-btn" disabled>用识别结果检查</mdui-button>
+                <mdui-button variant="text" icon="skip_next" class="skip-btn">跳过</mdui-button>
+            </div>
+        </mdui-card>
+
+        <mdui-card class="panel feedback hidden" id="feedback">
+            <div class="feedback-head">
+                <span class="feedback-score" id="feedback-score"></span>
+                <span class="feedback-verdict" id="feedback-verdict"></span>
+            </div>
+            <div class="feedback-stats" id="feedback-stats"></div>
+            <div class="diff" id="diff"></div>
+            <div class="diff-extras hidden" id="diff-extras"></div>
+            <div class="action-row feedback-actions">
+                <mdui-button variant="tonal" icon="replay" id="retry-btn">重试本句</mdui-button>
+                <mdui-button variant="elevated" icon="arrow_forward" id="next-btn">下一句</mdui-button>
+            </div>
+        </mdui-card>
+
+        <div class="recite-actions">
+            <mdui-button variant="text" icon="refresh" id="restart-btn">重新开始</mdui-button>
+            <mdui-button variant="text" icon="menu_book" id="back-list-btn">返回选诗</mdui-button>
+        </div>
+    </div>
+
+    <!-- 结果页 -->
+    <div class="page hidden" id="page-result">
+        <mdui-card class="panel result-panel">
+            <div class="result-score" id="result-score"></div>
+            <div class="result-title" id="result-title"></div>
+            <div class="stat-row">
+                <div class="stat"><span class="stat-num" id="stat-pass">0</span><span class="stat-label">通过</span></div>
+                <div class="stat"><span class="stat-num" id="stat-review">0</span><span class="stat-label">需复习</span></div>
+                <div class="stat"><span class="stat-num" id="stat-skip">0</span><span class="stat-label">跳过</span></div>
+                <div class="stat"><span class="stat-num" id="stat-best">--</span><span class="stat-label">历史最佳</span></div>
+            </div>
+            <mdui-divider></mdui-divider>
+            <div class="grade-row" id="grade-row"></div>
+        </mdui-card>
+        <mdui-card class="panel weak-panel hidden" id="weak-panel">
+            <div class="panel-title">需复习的句子</div>
+            <div class="weak-list" id="weak-list"></div>
+        </mdui-card>
+        <div class="result-actions">
+            <mdui-button variant="tonal" icon="replay" id="review-btn">再练错句</mdui-button>
+            <mdui-button variant="tonal" icon="refresh" id="redo-btn">重新背诵全诗</mdui-button>
+            <mdui-button variant="text" icon="menu_book" id="result-back-btn">返回选诗</mdui-button>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
