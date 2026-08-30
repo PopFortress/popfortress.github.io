@@ -161,6 +161,8 @@ const reviewBtn = $('#review-btn');
 const redoBtn = $('#redo-btn');
 const resultBackBtn = $('#result-back-btn');
 
+const audioTestBtn = $('#audio-test');
+
 /* ================= 状态 ================= */
 
 let currentPoem = null;   // { title, author, lines, file }
@@ -462,7 +464,7 @@ function playStartSound() {
             startSound.preload = 'auto';
         }
         startSound.currentTime = 0;
-        startSound.play().catch(() => { /* 音频加载失败或播放被拦截时静默忽略 */ });
+        startSound.play().catch((e) => { mdui.snackbar({ message: `${e}`}) });
     } catch (e) { /* 忽略 */ }
 }
 
