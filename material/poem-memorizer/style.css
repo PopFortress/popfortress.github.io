@@ -64,6 +64,19 @@ body {
     margin-top: .15rem;
 }
 
+.poem-item-best {
+    font-size: .8rem;
+    font-weight: 600;
+    color: rgb(var(--mdui-color-tertiary));
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.poem-item-best-empty {
+    color: rgb(var(--mdui-color-on-surface-variant));
+    font-weight: 400;
+}
+
 .select-actions {
     display: flex;
     justify-content: flex-end;

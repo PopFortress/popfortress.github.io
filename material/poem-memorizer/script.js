@@ -173,6 +173,7 @@ let currentLine = '';
 let lastResult = null;
 let currentMode = 'voice';
 let reviewMode = false;
+let poemListData = null;  // 缓存诗歌列表，返回选诗页时重绘以刷新最佳成绩
 
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition = null;
@@ -239,6 +240,20 @@ function renderPoemList(list) {
         wrap.appendChild(title);
         wrap.appendChild(sub);
         item.appendChild(wrap);
+
+        // 右侧：历史最佳成绩
+        const bestEl = document.createElement('span');
+        bestEl.slot = 'end-icon';
+        bestEl.className = 'poem-item-best';
+        const bestVal = parseFloat(localStorage.getItem('poem-memorizer-best-' + (entry.file || deriveTitle(entry.file))));
+        if (isFinite(bestVal)) {
+            bestEl.textContent = '最佳 ' + Math.round(bestVal * 100) + '%';
+        } else {
+            bestEl.textContent = '未背诵';
+            bestEl.classList.add('poem-item-best-empty');
+        }
+        item.appendChild(bestEl);
+
         item.addEventListener('click', () => {
             // 用户点击选诗（属于用户手势）：主动请求麦克风权限，避免开始背诵后才弹授权框
             if (currentMode === 'voice') requestMicPermission().then(applyMicPermission);
@@ -531,7 +546,6 @@ function startListening() {
         };
 
         recognition.start();
-        playStartSound();
         listening = true;
         micBtn.icon = 'stop';
         micBtn.textContent = '停止录音';
@@ -747,12 +761,16 @@ micBtn.addEventListener('click', async () => {
     if (listening) {
         stopRecognition();
         return;
-    }
+    } else {
+        playStartSound();
+    };
     // 点击麦克风时先确保权限已授予，再启动识别
     const perm = await requestMicPermission();
     applyMicPermission(perm);
     if (perm.ok) {
-        startListening();
+        setTimeout(() => {
+            startListening();
+        }, 500);
     } else {
         snackbar(MIC_STATUS_TEXT[perm.state] || '无法使用麦克风');
     }
@@ -820,6 +838,7 @@ backListBtn.addEventListener('click', () => {
         cancelText: '取消',
     }).then(() => {
         switchPage(pageSelect);
+        if (poemListData) renderPoemList(poemListData);
     }).catch(() => {});
 });
 
@@ -840,6 +859,7 @@ redoBtn.addEventListener('click', () => {
 
 resultBackBtn.addEventListener('click', () => {
     switchPage(pageSelect);
+    if (poemListData) renderPoemList(poemListData);
 });
 
 /* ================= 初始化 ================= */
@@ -855,6 +875,7 @@ resultBackBtn.addEventListener('click', () => {
             confirmText: '导入 JSON',
         }).then(() => openImportDialog()).catch(() => openImportDialog());
     } else {
+        poemListData = list;
         renderPoemList(list);
     }
     setMode(currentMode);
