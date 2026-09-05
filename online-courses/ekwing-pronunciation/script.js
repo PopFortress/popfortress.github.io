@@ -59,13 +59,13 @@ pronounceBtn.onclick = () => {
         setTimeout(() => {
             if (isPlaying && currentWordIndex < quesItems.length - 1) {
                 currentWordIndex++;
-                timeElpased += audio.duration + 2.5;
+                timeElpased += audio.duration + 3;
                 updateStatus();
                 pronounce();
             } else {
                 stopPlaying();
             };
-        }, 2500);
+        }, 3000);
     };
 };
 

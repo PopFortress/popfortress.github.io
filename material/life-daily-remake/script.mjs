@@ -69,6 +69,7 @@ const alarmContent = $('.alarm-content');
 const regionInput = $('.region-input');
 const regionSelect = $('.region-select');
 const regionMenu = $('.region-menu');
+const newsCover = $('.news-cover');
 let lunarDate = '';
 
 const preferDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -110,15 +111,15 @@ const apis = {
     zhihuDaily: 'https://seep.eu.org/https://daily.zhihu.com/api/4/news/latest',
     history: 'https://seep.eu.org/https://query.asilu.com/today/list/',
     english: 'https://api.vvhan.com/api/dailyEnglish',
-    oneMin: 'https://60s-api-cf.viki.moe/v2/60s',
+    oneMin: 'https://60s.viki.moe/v2/60s',
     hitokoto: 'https://v1.hitokoto.cn/?c=i&c=d&c=k&encode=json',
-    currency: 'https://60s-api-cf.viki.moe/v2/exchange_rate',
+    currency: 'https://60s.viki.moe/v2/exchange_rate',
     stock: 'https://hq.stock.sohu.com/zs/006/zs_399006-1.html',
     bilibili: 'https://api.vvhan.com/api/hotlist/bili',
     zhihu: 'https://api.vvhan.com/api/hotlist/zhihuHot',
     maoyan: 'https://60s.viki.moe/v2/maoyan/realtime/movie',
-    epic: 'https://60s-api-cf.viki.moe/v2/epic',
-    answer: 'https://60s-api-cf.viki.moe/v2/answer',
+    epic: 'https://60s.viki.moe/v2/epic',
+    answer: 'https://60s.viki.moe/v2/answer',
     bing: 'https://bing.shangzhenyang.com/api/json',
     horoscopes: 'https://v2.xxapi.cn/api/horoscope?type={type}&time=today',
     alarms: 'https://app.gjzwfw.gov.cn/fwmhapp/qixiang/interfaces/findWarnCapByElement.do',
@@ -447,6 +448,7 @@ function fetchOneMin() {
             data.data.news.forEach(news => {
                 oneminNewsList.innerHTML += `<mdui-list-item class="news-item" nonclickable>${news}</mdui-list-item>`;
             });
+            newsCover.src = data.data.image;
             oneminDetailsLink.href = data.data.link;
             oneminSayings.textContent = `【微语】${data.data.tip}`;
             if (lunarDate === '') {

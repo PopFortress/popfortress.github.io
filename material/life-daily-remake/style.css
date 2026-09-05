@@ -319,3 +319,8 @@ a:hover {
     max-height: 546px;
     overflow: auto;
 }
+
+.news-cover {
+    width: 100%;
+    object-fit: cover;
+}
