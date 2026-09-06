@@ -9,6 +9,7 @@ const settEles = {
         preservePitchCheck: $('.sett__preserve_pitch_check'),
         options: document.querySelectorAll('.sett__player_playrate__options mdui-menu-item'),
     },
+    noSleepCheck: $('.sett__no_sleep_check'),
 };
 
 settEles.playerVolume.slider.onchange = () => {
@@ -26,3 +27,18 @@ settEles.playerPlayrate.options.forEach((option) => {
         audio.playbackRate = player.playbackRate = +option.innerText;
     };
 });
+
+settEles.noSleepCheck.onchange = () => {
+    if (settEles.noSleepCheck.checked) {
+        noSleep.enable();
+        modifyAppSettings('keepScreenOn', true);
+    } else {
+        noSleep.disable();
+        modifyAppSettings('keepScreenOn', false);
+    };
+};
+
+if (appSettings.keepScreenOn) {
+    settEles.noSleepCheck.checked = true;
+    noSleep.enable();
+};

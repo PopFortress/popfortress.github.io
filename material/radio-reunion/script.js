@@ -25,15 +25,18 @@ const appPages = document.querySelectorAll('.app_page');
 
 
 // essential definitions
+const APP_TITLE = 'Radio Reunion';
 const xhr = new XMLHttpRequest();
 let apiServer = 'https://seep.eu.org/https://ncm-api-enhanced.vercel.app';
 const apiServerAlternate = 'https://apis.netstart.cn/music';
 const mediaServer = 'https://music.163.com/song/media/outer/url';
 let appSettings;
+const noSleep = new NoSleep();
 function updateAppSettings() {
     if (!localStorage.rr_settings) { // 初始化 appSettings.
         localStorage.rr_settings = JSON.stringify({
             dynamicLyricsHoverEffect: false,
+            keepScreenOn: false,
         });
     };
     appSettings = JSON.parse(localStorage.rr_settings) || '{}';
@@ -48,6 +51,7 @@ function modifyAppSettings(key, value) {
     appSettings = JSON.parse(localStorage.rr_settings) || '{}';
     appSettings[key] = value;
     localStorage.rr_settings = JSON.stringify(appSettings);
+    updateAppSettings();
 };
 updateAppSettings();
 
@@ -124,6 +128,7 @@ class Player {
             lyricsDisplayer.resetLyrics();
         };
         setColorScheme();
+        document.title = `${song.title} - ${song.artist} - 团结电台`;
     };
     getCurrentSong() {
         return this.playlist.playlist[this.currentIndex];
@@ -143,6 +148,7 @@ class Player {
         this.switchLoadingState('loaded');
         lyricsDisplayer.resetLyrics();
         this.showPlayerFrame(false);
+        document.title = APP_TITLE;
     };
     switchLoadingState(status) {
         switch (status) {

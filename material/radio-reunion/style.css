@@ -235,7 +235,7 @@ mdui-tab::part(icon) {
     overflow-x: hidden;
     overflow-y: auto;
     scrollbar-width: none;
-    max-width: 790px;
+    max-width: 417px;
     width: 100%;
 }
 .lyrics__container ul{
@@ -531,6 +531,12 @@ mdui-dialog::part(panel) {
     }
     .lyrics__container {
         padding-left: 1em;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    #app_page__lyrics main {
+        align-items: inherit;
     }
 }
 
