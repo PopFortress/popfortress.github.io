@@ -41,8 +41,26 @@ body {
 }
 
 /* ------- 选诗页 ------- */
+.poem-search {
+    width: 100%;
+}
+
+.search-hint {
+    font-size: .8rem;
+    color: rgb(var(--mdui-color-on-surface-variant));
+    margin: .5rem .25rem 0;
+}
+
+.poem-empty {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    font-size: .9rem;
+    color: rgb(var(--mdui-color-on-surface-variant));
+}
+
 .poem-list {
     border-radius: .75rem;
+    margin-top: .5rem;
 }
 
 .poem-list mdui-list-item {

@@ -113,6 +113,8 @@ const pageRecite = $('#page-recite');
 const pageResult = $('#page-result');
 
 const poemList = $('#poem-list');
+const poemSearch = $('#poem-search');
+const poemSearchHint = $('#poem-search-hint');
 const poemTitle = $('#poem-title');
 const poemAuthor = $('#poem-author');
 const poemMode = $('#poem-mode');
@@ -174,6 +176,7 @@ let lastResult = null;
 let currentMode = 'voice';
 let reviewMode = false;
 let poemListData = null;  // 缓存诗歌列表，返回选诗页时重绘以刷新最佳成绩
+let poemQuery = '';       // 选诗页搜索关键字
 
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition = null;
@@ -226,7 +229,26 @@ async function discoverPoems() {
 
 function renderPoemList(list) {
     poemList.innerHTML = '';
-    list.forEach((entry) => {
+    const q = poemQuery.trim().toLowerCase();
+    const filtered = q
+        ? list.filter((entry) => {
+            const haystack = [entry.title, entry.author, entry.file, entry.file ? deriveTitle(entry.file) : '']
+                .filter(Boolean).join(' ').toLowerCase();
+            return haystack.includes(q);
+        })
+        : list;
+
+    updateSearchHint(filtered.length, list.length);
+
+    if (!filtered.length) {
+        const empty = document.createElement('div');
+        empty.className = 'poem-empty';
+        empty.textContent = q ? `没有找到匹配「${poemQuery.trim()}」的诗歌` : '暂无可背诵的诗歌';
+        poemList.appendChild(empty);
+        return;
+    }
+
+    filtered.forEach((entry) => {
         const item = document.createElement('mdui-list-item');
         item.icon = 'menu_book';
         item.classList.add('poem-item');
@@ -236,9 +258,9 @@ function renderPoemList(list) {
         title.textContent = entry.title || deriveTitle(entry.file);
         const sub = document.createElement('div');
         sub.className = 'poem-item-sub';
-        sub.textContent = [entry.author, '点击开始背诵'].filter(Boolean).join(' · ');
+        sub.textContent = entry.author || '';
         wrap.appendChild(title);
-        wrap.appendChild(sub);
+        if (entry.author) wrap.appendChild(sub);
         item.appendChild(wrap);
 
         // 右侧：历史最佳成绩
@@ -261,6 +283,15 @@ function renderPoemList(list) {
         });
         poemList.appendChild(item);
     });
+}
+
+function updateSearchHint(shown, total) {
+    if (poemQuery.trim()) {
+        poemSearchHint.textContent = shown ? `找到 ${shown} / ${total} 首` : `没有匹配结果（共 ${total} 首）`;
+        poemSearchHint.classList.remove('hidden');
+    } else {
+        poemSearchHint.classList.add('hidden');
+    }
 }
 
 async function loadPoem(entry) {
@@ -843,6 +874,12 @@ backListBtn.addEventListener('click', () => {
 });
 
 $('#open-import-btn').addEventListener('click', openImportDialog);
+
+/* 选诗页搜索 */
+poemSearch.addEventListener('input', () => {
+    poemQuery = poemSearch.value || '';
+    if (poemListData) renderPoemList(poemListData);
+});
 
 reviewBtn.addEventListener('click', () => {
     const weak = [];
