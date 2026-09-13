@@ -10,6 +10,7 @@ const settEles = {
         options: document.querySelectorAll('.sett__player_playrate__options mdui-menu-item'),
     },
     noSleepCheck: $('.sett__no_sleep_check'),
+    titleLyricsCheck: $('.sett__show_title_lyrics'),
 };
 
 settEles.playerVolume.slider.onchange = () => {
@@ -41,4 +42,17 @@ settEles.noSleepCheck.onchange = () => {
 if (appSettings.keepScreenOn) {
     settEles.noSleepCheck.checked = true;
     noSleep.enable();
+};
+
+settEles.titleLyricsCheck.onchange = () => {
+    if (settEles.titleLyricsCheck.checked) {
+        modifyAppSettings('showTitleLyrics', true);
+    } else {
+        modifyAppSettings('showTitleLyrics', false);
+        document.title = APP_TITLE;
+    };
+};
+
+if (appSettings.showTitleLyrics) {
+    settEles.titleLyricsCheck.checked = true;
 };

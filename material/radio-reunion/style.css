@@ -780,3 +780,10 @@ mdui-dialog::part(panel) {
         display: none;
     }
 }
+
+
+small {
+    font-size: .75rem;
+    opacity: .7;
+    line-height: 1.5;
+}

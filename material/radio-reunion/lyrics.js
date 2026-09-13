@@ -167,6 +167,9 @@ function setOffset(){
                 };
             };
         };
+        if (appSettings.showTitleLyrics && activatedLine && !lyricsDisplayer.isLyricsStatic) {
+            document.title = `${activatedLine.innerHTML.split('<br>')[0] || APP_TITLE}`;
+        };
         lastIndex = index;
     };
 };

@@ -23,6 +23,7 @@ const lyrcisAlbumCover = $('.lyrics__album__cover');
 const playerFrame = $('.player');
 const appPages = document.querySelectorAll('.app_page');
 
+const headerPlayqueueDrawerBtn = $('.header__playqueue_drawer_btn');
 
 // essential definitions
 const APP_TITLE = 'Radio Reunion';
@@ -37,6 +38,7 @@ function updateAppSettings() {
         localStorage.rr_settings = JSON.stringify({
             dynamicLyricsHoverEffect: false,
             keepScreenOn: false,
+            showTitleLyrics: false,
         });
     };
     appSettings = JSON.parse(localStorage.rr_settings) || '{}';
@@ -284,18 +286,19 @@ class Playlist {
                 listObj.name = value;
                 const data = JSON.parse(localStorage.rr_playlists || '[]');
                 const currentPlaylist = this.getFilteredList();
+                let savedPlaylist = [];
                 currentPlaylist.forEach(song => {
-                    delete song.itemEle;
-                    delete song.index;
-                    if (song.id) {
-                        delete song.url;
-                    };
+                    savedPlaylist.push({
+                        title: song.title, artist: song.artist,
+                        cover: song.cover, album: song.album,
+                        id: song.id, mvid: song.mvid || '',
+                    });
                 });
-                listObj.tracks = currentPlaylist;
+                listObj.tracks = savedPlaylist;
                 data.push(listObj);
                 localStorage.rr_playlists = JSON.stringify(data);
                 mdui.snackbar({ message: '已保存当前播放列表。' });
-                this.loadPlaylist(currentPlaylist);
+                // this.loadPlaylist(currentPlaylist);
             },
         });
     };
@@ -450,9 +453,9 @@ audio.addEventListener('error', () => {
 
 
 // playlist ui
-playerPlaylistBtn.onclick = () => {
+playerPlaylistBtn.onclick = headerPlayqueueDrawerBtn.onclick = () => {
     playlistContainer.open = playlistContainer.open ? false : true;
-}
+};
 
 // mdui localization
 mdui.loadLocale((locale) => import(`https://unpkg.com/mdui@2/locales/${locale}.js`));
