@@ -28,7 +28,7 @@ const headerPlayqueueDrawerBtn = $('.header__playqueue_drawer_btn');
 // essential definitions
 const APP_TITLE = 'Radio Reunion';
 const xhr = new XMLHttpRequest();
-let apiServer = 'https://seep.eu.org/https://ncm-api-enhanced.vercel.app';
+let apiServer = 'https://seep.eu.org/https://ncm-api-enhanced-nine.vercel.app';
 const apiServerAlternate = 'https://apis.netstart.cn/music';
 const mediaServer = 'https://music.163.com/song/media/outer/url';
 let appSettings;
@@ -39,6 +39,7 @@ function updateAppSettings() {
             dynamicLyricsHoverEffect: false,
             keepScreenOn: false,
             showTitleLyrics: false,
+            showPlayerFrame: true,
         });
     };
     appSettings = JSON.parse(localStorage.rr_settings) || '{}';
@@ -131,6 +132,18 @@ class Player {
         };
         setColorScheme();
         document.title = `${song.title} - ${song.artist} - 团结电台`;
+        if ("mediaSession" in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: song.title,
+                artist: song.artist,
+                album: song.album,
+                artwork: [
+                    {
+                        src: song.cover,
+                    },
+                ]
+            });
+        };
     };
     getCurrentSong() {
         return this.playlist.playlist[this.currentIndex];
@@ -170,7 +183,7 @@ class Player {
         };
     };
     showPlayerFrame(status) {
-        if (status) {
+        if (status && appSettings.showPlayerFrame) {
             playerFrame.style.display = 'inherit';
             setTimeout(() => {
                 playerFrame.classList.remove('hidden');

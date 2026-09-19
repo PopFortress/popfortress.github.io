@@ -787,3 +787,14 @@ small {
     opacity: .7;
     line-height: 1.5;
 }
+
+.sett__switch_wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.sett__switch_wrapper div {
+    font-size: 14px;
+    margin-right: auto;
+}

@@ -11,6 +11,7 @@ const settEles = {
     },
     noSleepCheck: $('.sett__no_sleep_check'),
     titleLyricsCheck: $('.sett__show_title_lyrics'),
+    showPlayerFrameSwitch: $('.sett__switch_player_frame'),
 };
 
 settEles.playerVolume.slider.onchange = () => {
@@ -55,4 +56,18 @@ settEles.titleLyricsCheck.onchange = () => {
 
 if (appSettings.showTitleLyrics) {
     settEles.titleLyricsCheck.checked = true;
+};
+
+settEles.showPlayerFrameSwitch.onchange = () => {
+    if (settEles.showPlayerFrameSwitch.checked) {
+        modifyAppSettings('showPlayerFrame', true);
+        player.showPlayerFrame(true);
+    } else {
+        player.showPlayerFrame(false);
+        modifyAppSettings('showPlayerFrame', false);
+    };
+};
+
+if (appSettings.showPlayerFrame) {
+    settEles.showPlayerFrameSwitch.checked = true;
 };
