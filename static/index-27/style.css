@@ -11,11 +11,16 @@ body {
     letter-spacing: 1px;
 }
 
+:root {
+    scroll-behavior: smooth;
+}
+
 .container {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .title-box {
@@ -142,4 +147,92 @@ footer {
     width: 100%;
     max-width: 780px;
     margin-bottom: 3em;
+}
+
+/* mc server */
+.mc-server {
+    /* margin-top: 4.3em; */
+    position: absolute;
+    bottom: 3.3em;
+}
+
+a.mc-server-btn {
+    display: flex;
+    background-color: #5a8734;
+    border-radius: 49em;
+    gap: 10px;
+    padding: .7em 1em;
+    text-decoration: none;
+    align-items: center;
+    transition: 0.1s;
+}
+
+a.mc-server-btn:active {
+    transform: scale(0.9);
+}
+
+a.mc-server-btn img.mc-server-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: calc(100% - 1em);
+}
+
+a.mc-server-btn span {
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+}
+
+.mc-server-banner {
+    background-color: #748a61;
+    background-image: url(https://pic1.imgdb.cn/i/034VTB6JabrHKSibLqplTF.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.craft-title {
+    letter-spacing: 1px;
+    font-size: 1.3em;
+    margin-bottom: 2.2em;
+}
+
+.craft-intro {
+    text-align: center;
+    line-height: 1.5;
+}
+
+.craft-info {
+    backdrop-filter: blur(3px) brightness(0.8);
+    padding: 10em 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.craft-address {
+    margin-top: 2em;
+}
+
+.craft-address a {
+    color: #fff;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+.craft-address .copy-icon {
+    background-image: url(https://pic1.imgdb.cn/i/034VTN9PPNGpm3zjnoXGl8.png);
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+}
+
+.craft-info small {
+    position: absolute;
+    bottom: 2em;
+    font-size: .7em;
+    opacity: .8;
 }
