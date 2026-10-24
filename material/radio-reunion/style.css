@@ -628,11 +628,11 @@ mdui-dialog::part(panel) {
     line-height: 1.5;
 }
 
-#app_page__playlist_details main > * {
+#app_page__playlist_details main > *, #app_page__my_songlists_details main > * {
     max-width: 790px;
 }
 
-#app_page__playlist_details main {
+#app_page__playlist_details main, #app_page__my_songlists_details main {
     padding-left:  10px;
     padding-right: 10px;
 }
@@ -797,4 +797,27 @@ small {
 .sett__switch_wrapper div {
     font-size: 14px;
     margin-right: auto;
+}
+
+.discover {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.my_music__card {
+    padding: 0.9em;
+    align-content: center;
+    color: rgb(var(--mdui-color-primary));
+}
+
+.header__version__info::part(label) {
+    font-size: .75em;
+}
+
+.my_music__listitem_img {
+    width: 50px;
+    height: 50px;
 }

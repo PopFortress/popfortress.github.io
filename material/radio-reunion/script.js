@@ -129,6 +129,7 @@ class Player {
         song.itemEle.active = true;
         if (!song.id) {
             lyricsDisplayer.resetLyrics();
+            addToMySonglist.disabled = true;
         };
         setColorScheme();
         document.title = `${song.title} - ${song.artist} - 团结电台`;

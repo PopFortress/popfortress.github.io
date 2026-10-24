@@ -11,9 +11,33 @@
     <link rel="stylesheet" href="/mdui/fallback_icons/material-icons-fallback.css">
     <link rel="stylesheet" href="/mdui/fallback_icons/material-icons-outlined-fallback.css">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./dynamic_styles.css">
     <script src="/static/NoSleep.min.js"></script>
+    <link rel="stylesheet" href="/test/menu-drawer/menu-drawer.css">
 </head>
 <body>
+
+    <dialog class="fs-mdui-menu-drawer-dialog" id="menu-drawer__my_music">
+        <fs-mdui-menu-drawer data-title="我的音乐库" data-icon="library_music--outlined">
+            <mdui-card class="fs-mdui-menu-drawer-container">
+                <fs-mdui-menu-drawer-header></fs-mdui-menu-drawer-header>
+                <fs-mdui-menu-drawer-body class="my_music__menu_drawer_container">
+                    <mdui-list class="my_music__songlists_list"></mdui-list>
+                </fs-mdui-menu-drawer-body>
+            </mdui-card>
+        </fs-mdui-menu-drawer>
+    </dialog>
+
+    <dialog class="fs-mdui-menu-drawer-dialog" id="menu-drawer__select_songlist_to_add">
+        <fs-mdui-menu-drawer data-title="添加到歌单" data-icon="playlist_add--outlined">
+            <mdui-card class="fs-mdui-menu-drawer-container">
+                <fs-mdui-menu-drawer-header></fs-mdui-menu-drawer-header>
+                <fs-mdui-menu-drawer-body class="my_music__menu_drawer_container">
+                    <mdui-list class="add_to_songlists_list"></mdui-list>
+                </fs-mdui-menu-drawer-body>
+            </mdui-card>
+        </fs-mdui-menu-drawer>
+    </dialog>
     
     <div class="app_page" id="app_page__main">
         <header>
@@ -25,6 +49,7 @@
                         <mdui-menu-item class="header__load_playlist_btn" icon="folder_open--outlined">加载播放列表</mdui-menu-item>
                         <mdui-menu-item class="header__settings_btn" icon="settings">设置</mdui-menu-item>
                         <mdui-menu-item class="header__playqueue_drawer_btn" icon="playlist_play">打开播放队列</mdui-menu-item>
+                        <mdui-menu-item disabled class="header__version__info">版本：4.31.0</mdui-menu-item>
                     </mdui-menu>
                 </mdui-dropdown>
             </div>
@@ -71,6 +96,12 @@
                     <mdui-button-icon icon="play_circle--outlined" class="personal_fm__start"></mdui-button-icon>
                     <mdui-button-icon icon="skip_next--outlined" class="personal_fm__skip"></mdui-button-icon>
                     <mdui-button-icon icon="stop_circle--outlined" class="personal_fm__stop"></mdui-button-icon>
+                </mdui-card>
+                <mdui-card clickable class="my_music__card">
+                    <div class="content">
+                        <mdui-icon name='library_music--outlined'></mdui-icon>
+                        <span style="vertical-align: super;">我的音乐</span>
+                    </div>
                 </mdui-card>
             </div>
         </main>
@@ -169,6 +200,7 @@
                     <mdui-menu submenu-trigger="click focus hover" selects="multiple" value="show-translation" class="details__menu">
                         <mdui-menu-item class="detail__see_mv" disabled icon="movie--outlined">查看 MV</mdui-menu-item>
                         <mdui-menu-item class="detail__view_comments" icon="rate_review--outlined">评论</mdui-menu-item>
+                        <mdui-menu-item class="detail__add_to_my_songlist" icon="playlist_add--outlined">添加到歌单…</mdui-menu-item>
                         <mdui-menu-item class="detail__view_song_details" icon="info--outlined">歌曲详情</mdui-menu-item>
                         <mdui-menu-item>
                             歌词选项
@@ -252,6 +284,25 @@
         <main>
             <mdui-card variant="filled" class="songlist__detail_wrapper">
                 <img class="songlist__detail_cover" alt="">
+                <div class="songlist__detail_info">
+                    <div class="songlist__detail_title"></div>
+                    <div class="songlist__detail_author"></div>
+                    <div class="songlist__detail_description"></div>
+                    <mdui-button variant="filled" class="songlist__play_all_btn" icon="play_arrow">播放全部</mdui-button>
+                </div>
+            </mdui-card>
+            <mdui-list class="songlist__tracks_list"></mdui-list>
+        </main>
+    </div>
+
+    <div class="app_page" id="app_page__my_songlists_details">
+        <header>
+            <mdui-button-icon icon="arrow_back" class="header__back_btn"></mdui-button-icon>
+            <div class="header__title">我的歌单详情</div>
+        </header>
+        <main class="my_songlist__details_wrapper">
+            <mdui-card variant="filled" class="songlist__detail_wrapper">
+                <img class="songlist__detail_cover">
                 <div class="songlist__detail_info">
                     <div class="songlist__detail_title"></div>
                     <div class="songlist__detail_author"></div>
@@ -436,6 +487,8 @@
     <script src="./songlist.js"></script>
     <script src="./settings_ui.js"></script>
     <script src="./playlist_storage.js"></script>
+    <script src="/test/menu-drawer/menu-drawer.js"></script>
+    <script src="./my_songlists.js"></script>
 
 </body>
 </html>

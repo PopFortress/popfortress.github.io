@@ -124,6 +124,7 @@ fs-mdui-menu-drawer-header {
 fs-mdui-menu-drawer-body {
     font-family: 'Varela Round', sans-serif;
     overflow: auto;
+    padding-bottom: 1.7em;
 }
 
 .fs-mdui-menu-drawer__icon {

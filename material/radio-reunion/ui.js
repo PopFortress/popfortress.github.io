@@ -11,6 +11,8 @@ const viewSongDetails = $('.detail__view_song_details');
 const songDetailsDialog = $('.lyrics__details_dialog');
 const songDetailsText = $('.lyrics__song_details');
 const mainSettBtn = $('.header__settings_btn');
+const myMusicCard = $('.my_music__card');
+const myMusicMenuDrawer = $('#menu-drawer__my_music');
 
 let currentPage = 'main';
 let previousPage;
@@ -25,6 +27,41 @@ mainSettBtn.onclick = () => {
 
 startOptionFeatured.onclick = () => {
     switchPage('featured');
+};
+
+myMusicCard.onclick = () => {
+    menudrawer.open(myMusicMenuDrawer);
+    if (!isSonglistsListLoaded) {
+        loadMySonglists();
+    };
+};
+
+/**
+ * 放置/隐藏加载动画。
+ * @param {object} options 选项
+ * @param {boolean} options.show 是否显示
+ * @param {string} options.text 加载动画文字
+ * @param {object} options.destination 放置加载动画的位置
+ * @param {object} options.frame 要隐藏的加载动画
+ * @returns {object} 加载动画
+ */
+function placeLoadingAnimation(options) {
+    const show = options.show || true;
+    if (show) {
+        const loadingFrame = document.createElement('div');
+        loadingFrame.className = 'dy--loading_frame';
+        const animation = document.createElement('mdui-circular-progress');
+        animation.className = 'dy--loading_animation';
+        const text = document.createElement('div');
+        text.className = 'dy--loading_text';
+        text.innerText = options.text;
+        loadingFrame.append(animation, text);
+
+        options.destination.append(loadingFrame);
+        return loadingFrame;
+    } else {
+        options.frame.remove();
+    };
 };
 
 function switchPage(destination) {

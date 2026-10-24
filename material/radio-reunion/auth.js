@@ -40,6 +40,7 @@ class Authenticator {
         this.cookie;
         this.qrImgUrl = '';
         this.isLoggedIn = false;
+        this.userId = 0;
     };
     loginEmail(options) {
         const email = options.email;
@@ -125,6 +126,7 @@ class Authenticator {
             const data = JSON.parse(xhr.responseText);
             if (data.profile) {
                 this.isLoggedIn = true;
+                this.userId = data.profile.userId;
                 loginBox.style.display = 'none';
                 accountBox.style.display = 'inherit';
 
